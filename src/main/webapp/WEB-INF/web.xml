@@ -7,6 +7,7 @@
 		and Filters -->
 	<!-- <context-param> <param-name>contextConfigLocation</param-name> <param-value>/WEB-INF/spring/root-context.xml</param-value> 
 		</context-param> -->
+	<!-- context config를 xml이 아닌 자바 클래스로 받도록 변경 -->
 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
@@ -14,7 +15,7 @@
 	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>com.kh.config.AppConfig</param-value>
+		<param-value>com.kh.config.RootConfig</param-value>
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
