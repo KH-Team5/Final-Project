@@ -1,4 +1,4 @@
-/* À¯Àú */
+/* ìœ ì € */
 CREATE TABLE member_TB(
 M_id VARCHAR2(50) NOT NULL PRIMARY KEY,
 M_pwd VARCHAR2(200) NOT NULL,
@@ -9,41 +9,34 @@ zipcode NUMBER NOT NULL,
 address VARCHAR2(200) NOT NULL,
 detail_address VARCHAR2(200) NOT NULL,
 joined_date DATE NOT NULL
+role VARCHAR2(8) CHECK (role IN ('ROLE_USER', 'ROLE_ADMIN')) NOT NULL
 );
 
-/* °ü¸®ÀÚ */
-CREATE TABLE manager_TB(
-MGR_id VARCHAR2(50) PRIMARY KEY NOT NULL,
-MGR_pwd VARCHAR2(200) NOT NULL,
-MGR_name VARCHAR2(50) NOT NULL,
-create_date DATE NOT NULL
-);
-
-/* »óÇ° */
+/* ìƒí’ˆ */
 CREATE TABLE product_TB(
-P_index NUMBER PRIMARY KEY, /* ½ÃÄö½º°ª PK */
+P_index NUMBER PRIMARY KEY, /* ì‹œí€€ìŠ¤ê°’ PK */
 P_name VARCHAR2(200) NOT NULL,
 P_price NUMBER NOT NULL,
 P_rest NUMBER NOT NULL,
 P_date DATE NOT NULL
 );
-/* »óÇ° ½ÃÄö½º */
+/* ìƒí’ˆ ì‹œí€€ìŠ¤ */
 CREATE SEQUENCE product_SQ
 START WITH 1
 INCREMENT BY 1;
 
-/* »óÇ° ÀÌ¹ÌÁö */
+/* ìƒí’ˆ ì´ë¯¸ì§€ */
 CREATE TABLE product_image_TB(
-uuid VARCHAR2(100) NOT NULL PRIMARY KEY, /* ÀÌ¹ÌÁö¸¦ ºÒ·¯¿À´Â °íÀ¯ ¾ÆÀÌµğ PK */
+uuid VARCHAR2(100) NOT NULL PRIMARY KEY, /* ì´ë¯¸ì§€ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ” ê³ ìœ  ì•„ì´ë”” PK */
 P_index NUMBER NOT NULL,
 file_path VARCHAR2(300) NOT NULL,
 upload_date DATE NOT NULL,
 FOREIGN KEY(P_index) REFERENCES product_TB(P_index)
 );
 
-/* ÁÖ¹® */
+/* ì£¼ë¬¸ */
 CREATE TABLE order_TB(
-O_index NUMBER PRIMARY KEY, /* ½ÃÄö½º°ª PK */
+O_index NUMBER PRIMARY KEY, /* ì‹œí€€ìŠ¤ê°’ PK */
 M_id VARCHAR2(200) NOT NULL,
 O_name VARCHAR2(50) NOT NULL,
 O_zipcode NUMBER NOT NULL,
@@ -53,15 +46,15 @@ O_state VARCHAR2(50) NOT NULL,
 O_delivery_charge NUMBER NOT NULL,
 FOREIGN KEY(M_id) REFERENCES member_TB(M_id)
 );
-/* ÁÖ¹® ½ÃÄö½º */
+/* ì£¼ë¬¸ ì‹œí€€ìŠ¤ */
 CREATE SEQUENCE ordet_SQ
 START WITH 1
 INCREMENT BY 1;
 
-/* ÁÖ¹®¸ñ·Ï */
+/* ì£¼ë¬¸ëª©ë¡ */
 CREATE TABLE order_list_TB(
-O_index NUMBER NOT NULL, /* order_TBÀÇ FK, PK */
-P_index NUMBER NOT NULL, /* product_TBÀÇ FK, PK */
+O_index NUMBER NOT NULL, /* order_TBì˜ FK, PK */
+P_index NUMBER NOT NULL, /* product_TBì˜ FK, PK */
 OL_qty NUMBER NOT NULL,
 OL_price NUMBER NOT NULL,
 FOREIGN KEY(O_index) REFERENCES order_TB(O_index),
@@ -69,28 +62,28 @@ FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
 CONSTRAINT order_list_TB PRIMARY KEY(O_index, P_index)
 );  
 
-/* Àå¹Ù±¸´Ï */
+/* ì¥ë°”êµ¬ë‹ˆ */
 CREATE TABLE cart_TB(
-M_id VARCHAR2(50) NOT NULL, /* member_TBÀÇ FK, PK */
-P_index NUMBER NOT NULL, /* product_TBÀÇ FK, PK */
+M_id VARCHAR2(50) NOT NULL, /* member_TBì˜ FK, PK */
+P_index NUMBER NOT NULL, /* product_TBì˜ FK, PK */
 C_qty NUMBER NOT NULL,
 FOREIGN KEY(M_id) REFERENCES member_TB(M_id),
 FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
 CONSTRAINT cart_TB PRIMARY KEY(M_id, P_index)
 );
 
-/* Âò¸ñ·Ï */
+/* ì°œëª©ë¡ */
 CREATE TABLE wish_TB(
-M_id VARCHAR2(50) NOT NULL, /* member_TBÀÇ FK, PK */
-P_index NUMBER NOT NULL, /* product_TBÀÇ FK, PK */
+M_id VARCHAR2(50) NOT NULL, /* member_TBì˜ FK, PK */
+P_index NUMBER NOT NULL, /* product_TBì˜ FK, PK */
 FOREIGN KEY(M_id) REFERENCES member_TB(M_id),
 FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
 CONSTRAINT wish_TB PRIMARY KEY(M_id, P_index)
 );
 
-/* ¹®ÀÇ°Ô½ÃÆÇ */
+/* ë¬¸ì˜ê²Œì‹œíŒ */
 CREATE TABLE question_TB(
-Q_index NUMBER PRIMARY KEY, /* ½ÃÄö½º°ª PK */
+Q_index NUMBER PRIMARY KEY, /* ì‹œí€€ìŠ¤ê°’ PK */
 M_id VARCHAR2(50) NOT NULL,
 Q_category VARCHAR2(20) NOT NULL,
 Q_title VARCHAR2(100) NOT NULL,
@@ -99,26 +92,26 @@ Q_date DATE NOT NULL,
 FOREIGN KEY(M_id) REFERENCES member_TB(M_id)
 );
 
-/* ¹®ÀÇ ½ÃÄö½º */
+/* ë¬¸ì˜ ì‹œí€€ìŠ¤ */
 CREATE SEQUENCE question_SQ
 START WITH 1
 INCREMENT BY 1;
 
-/* ¹İÇ° */
+/* ë°˜í’ˆ */
 CREATE TABLE stock_TB(
-O_index NUMBER NOT NULL, /* order_TBÀÇ FK, PK */
-P_index NUMBER NOT NULL, /* product_TBÀÇ FK, PK */
-Q_index NUMBER NOT NULL, /* question_TBÀÇ FK */
+O_index NUMBER NOT NULL, /* order_TBì˜ FK, PK */
+P_index NUMBER NOT NULL, /* product_TBì˜ FK, PK */
+Q_index NUMBER NOT NULL, /* question_TBì˜ FK */
 FOREIGN KEY(O_index) REFERENCES order_TB(O_index),
 FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
 FOREIGN KEY(Q_index) REFERENCES question_TB(Q_index),
 CONSTRAINT stoct_TB PRIMARY KEY(O_index, P_index)
 );
 
-/* ´äº¯ */
+/* ë‹µë³€ */
 CREATE TABLE answer_TB(
-Q_index NUMBER NOT NULL PRIMARY KEY, /* question_TBÀÇ FK, PK */
-MGR_id VARCHAR2(50) NOT NULL, /* manager_TBÀÇ FK */
+Q_index NUMBER NOT NULL PRIMARY KEY, /* question_TBì˜ FK, PK */
+MGR_id VARCHAR2(50) NOT NULL, /* manager_TBì˜ FK */
 A_title VARCHAR2(100) NOT NULL,
 A_content VARCHAR2(600) NOT NULL,
 A_date DATE NOT NULL,
@@ -126,17 +119,17 @@ FOREIGN KEY(Q_index) REFERENCES question_TB(Q_index),
 FOREIGN KEY(MGR_id) REFERENCES manager_TB(MGR_id)
 );
 
-/* °øÁö */
+/* ê³µì§€ */
 CREATE TABLE notice_TB(
-N_index NUMBER PRIMARY KEY, /* ½ÃÄö½º°ª PK */
-MGR_id VARCHAR2(50) NOT NULL, /* manager_TBÀÇ FK */
+N_index NUMBER PRIMARY KEY, /* ì‹œí€€ìŠ¤ê°’ PK */
+MGR_id VARCHAR2(50) NOT NULL, /* manager_TBì˜ FK */
 N_title VARCHAR2(100) NOT NULL,
 N_content VARCHAR2(600) NOT NULL,
 N_date DATE NOT NULL,
 FOREIGN KEY(MGR_id) REFERENCES manager_TB(MGR_id)
 );
 
-/* °øÁö ½ÃÄö½º */
+/* ê³µì§€ ì‹œí€€ìŠ¤ */
 CREATE SEQUENCE notice_SQ
 START WITH 1
 INCREMENT BY 1;
