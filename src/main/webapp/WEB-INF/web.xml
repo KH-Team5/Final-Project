@@ -5,9 +5,17 @@
 
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->
+	<!-- <context-param> <param-name>contextConfigLocation</param-name> <param-value>/WEB-INF/spring/root-context.xml</param-value> 
+		</context-param> -->
+	<!-- context config를 xml이 아닌 자바 클래스로 받도록 변경 -->
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+		</param-value>
+	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>com.kh.config.RootConfig</param-value>
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -34,8 +42,8 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- Spring Security -->
-<!-- 	<filter>
+	Spring Security
+	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
 		</filter-class>
@@ -43,7 +51,7 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	</filter-mapping>
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>
