@@ -8,8 +8,8 @@ contact VARCHAR2(20) NOT NULL,
 zipcode NUMBER NOT NULL,
 address VARCHAR2(200) NOT NULL,
 detail_address VARCHAR2(200) NOT NULL,
-joined_date DATE NOT NULL
-role VARCHAR2(8) CHECK (role IN ('ROLE_USER', 'ROLE_ADMIN')) NOT NULL
+joined_date DATE DEFAULT SYSDATE NOT NULL,
+role VARCHAR2(10) CHECK (role IN ('ROLE_USER', 'ROLE_ADMIN')) NOT NULL
 );
 
 /* 상품 */
