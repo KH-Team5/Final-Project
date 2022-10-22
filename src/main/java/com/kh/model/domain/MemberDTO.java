@@ -14,6 +14,6 @@ public class MemberDTO {
 	private int zipcode;
 	private String address;
 	private String detail_address;
-	private int joined_date;
+	private String joined_date;
 	private String role;
 }

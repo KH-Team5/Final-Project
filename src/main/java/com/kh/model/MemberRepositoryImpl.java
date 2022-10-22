@@ -8,22 +8,22 @@ import com.kh.model.domain.MemberDTO;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
-	/*
-	 * @Autowired private SqlSession sqlSession;
-	 */
+
+	@Autowired
+	private SqlSession sqlSession;
 
 	@Override
 	public MemberDTO get(String userid) {
+		return sqlSession.selectOne("member.getByM_id", userid);
+	}
 
-		MemberDTO member = new MemberDTO();
-		member.setM_id("user");
-		member.setM_name("차라친");
-		member.setM_pwd("1234");
-		member.setEmail("12@34");
-		member.setRole("ROLE_USER");
-		return member;
-
-		/* return sqlSession.selectOne("user.getM_id", userid); */
+	@Override
+	public Boolean insert(MemberDTO memberDTO) {
+		int count = sqlSession.insert("member.insert", memberDTO);
+		if (count == 1)
+			return true;
+		else
+			return false;
 	}
 
 }

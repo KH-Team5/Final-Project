@@ -4,6 +4,8 @@ package com.kh.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -25,16 +27,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * DB 패스워드 암호화 암호를 인코딩하거나, 인코딩된 암호와 사용자가 입력한 암호가 같은지 확인할 때 사용
 	 */
 	@Bean
-	public PasswordEncoder encoder() {
+	public PasswordEncoder passwordencoder() {
 		return new BCryptPasswordEncoder();
+	}
+	
+	/**
+	 * 인코딩된 암호와 사용자가 입력한 암호가 같은지 확인
+	 */
+	@Bean
+	public AuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(UserDetailsServiceImpl);
+		authProvider.setPasswordEncoder(passwordencoder());
+		return authProvider;
 	}
 
 	/**
-	 * UserDetailService 설정 사용자 세부 서비스를 설정
+	 * UserDetailService 설정 
+	 * 사용자 세부 서비스를 설정
+	 * Provider 설정
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(UserDetailsServiceImpl);
+		auth.userDetailsService(UserDetailsServiceImpl)
+		.and()
+		.authenticationProvider(authenticationProvider());
 	}
 
 	@Override

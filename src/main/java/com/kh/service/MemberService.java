@@ -1,5 +1,7 @@
 package com.kh.service;
 
-public interface MemberService {
+import com.kh.model.domain.MemberDTO;
 
+public interface MemberService {
+	boolean joinMember(MemberDTO memberDTO);
 }

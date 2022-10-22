@@ -44,6 +44,11 @@ public class RootConfig {
 	}
 
 	@Bean
+	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
+		return new SqlSessionTemplate(sqlSessionFactory);
+	}
+
+	@Bean
 	public TransactionManager transactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
