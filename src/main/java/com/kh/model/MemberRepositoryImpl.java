@@ -26,4 +26,10 @@ public class MemberRepositoryImpl implements MemberRepository {
 			return false;
 	}
 
+	@Override
+	public int selectById(String M_id) {
+		int count = sqlSession.selectOne("member.selectById", M_id);
+		return count;
+	}
+
 }

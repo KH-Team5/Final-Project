@@ -11,6 +11,14 @@
 		]]>
 	</select>
 	
+	<select id="selectById" resultType="Integer">
+	<![CDATA[
+		select count(*)
+		from member_TB 
+		where M_id = #{M_id }
+	]]>
+	</select> 
+	
 	<insert id="insert" parameterType="memberDTO">
 	<![CDATA[
 		insert into member_TB
