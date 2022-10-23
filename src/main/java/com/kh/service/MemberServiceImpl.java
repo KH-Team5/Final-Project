@@ -20,4 +20,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDTO.setM_pwd(passwordEncoder.encode(memberDTO.getM_pwd()));
 		return memberRepository.insert(memberDTO);
 	}
+
+	@Override
+	public int idChk(String M_id) {
+		return memberRepository.selectById(M_id);
+	}
 }

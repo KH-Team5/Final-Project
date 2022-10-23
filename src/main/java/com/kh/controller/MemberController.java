@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.model.domain.MemberDTO;
 import com.kh.service.MemberService;
@@ -30,10 +31,19 @@ public class MemberController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinPOST(MemberDTO member) throws Exception{
 		logger.info("join Service 시작");
-		// 회원가입 서비스 실행
 		if(memberService.joinMember(member))
 			logger.info("join Service 성공");	
 		return "redirect:/";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/idChk", method = RequestMethod.POST)
+	public String idChkPOST(String M_id) throws Exception{
+		int result = memberService.idChk(M_id);
+		if(result != 0) 
+			return "error";
+		else 
+			return "success";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
