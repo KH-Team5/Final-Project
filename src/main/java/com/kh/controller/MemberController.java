@@ -52,21 +52,10 @@ public class MemberController {
 		return "/member/login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPost() {
-		logger.info("로그인 페이지 진입");
-		return "/member/login";
-	}
-
 	@RequestMapping(value = "/memberTest", method = RequestMethod.GET)
 	public String memberTest() {
 		logger.info("회원 전용 페이지 진입");
 		return "/member/memberTest";
 	}
 
-	@RequestMapping(value = "/memberTest", method = RequestMethod.POST)
-	public String memberTestPost() {
-		logger.info("회원 전용 페이지 진입");
-		return "/member/memberTest";
-	}
 }
