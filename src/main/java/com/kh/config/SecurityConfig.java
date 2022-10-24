@@ -76,9 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// 로그인 설정
 				.formLogin()
 				// 인증필요한 주소로 접속하면 이주소로 이동시킴
-				.loginPage("/member/login").loginProcessingUrl("/login-process")
+				.loginPage("/member/login")
+				// 이 주소로 form 전송
+				.loginProcessingUrl("/login-process")
 				// 로그인이 정상적이면 "/" 로 이동
-				.defaultSuccessUrl("/").failureUrl("/member/login")
+				.defaultSuccessUrl("/")
 				// 로그인 요청시 id용 파라미터 (메소드 이름이 usernameParameter로 무조건써야하지만,
 				// 파라미터는 email이든 id이든 name이든 상관없다.)
 				.usernameParameter("userid")

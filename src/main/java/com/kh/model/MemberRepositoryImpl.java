@@ -8,7 +8,6 @@ import com.kh.model.domain.MemberDTO;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
-
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -18,7 +17,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 
 	@Override
-	public Boolean insert(MemberDTO memberDTO) {
+	public boolean insert(MemberDTO memberDTO) {
 		int count = sqlSession.insert("member.insert", memberDTO);
 		if (count == 1)
 			return true;

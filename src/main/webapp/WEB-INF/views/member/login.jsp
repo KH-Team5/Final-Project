@@ -9,9 +9,9 @@
 <body>
 	<h1>로그인 페이지</h1>
 	<form action="<%= request.getContextPath()%>/login-process" id="loginform" name="loginform" method="post" >
-		<input id="userid" name="userid" type="text" value="">
-		<input id="password" name="password" type="password" value="">
-		<input type="submit" value="로그인">
+		<input id="userid" name="userid" type="text" value=""> <br>
+		<input id="password" name="password" type="password" value=""> <br>
+		<input type="submit" value="로그인"> <br>
 	</form>
 	<a href="<%=request.getContextPath()%>/">홈</a>
 </body>

@@ -6,4 +6,5 @@ public interface MemberService {
 	public boolean joinMember(MemberDTO memberDTO);
 
 	public int idChk(String M_id);
+
 }

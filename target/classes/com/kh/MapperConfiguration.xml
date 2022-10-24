@@ -3,9 +3,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="memberDTO" type="com.kh.model.domain.MemberDTO" />
+		<typeAlias alias="productDTO" type="com.kh.model.domain.ProductDTO" />
 	</typeAliases>
 	<mappers>
-		<mapper
-			resource="com/kh/model/MemberMapper.xml" />
+		<mapper resource="com/kh/model/MemberMapper.xml" />
+		<mapper resource="com/kh/model/ProductMapper.xml" />
 	</mappers>
 </configuration>

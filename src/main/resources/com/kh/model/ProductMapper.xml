@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+	<insert id="insert" parameterType="productDTO">
+	<![CDATA[
+		insert into product_TB
+		values(product_SQ.NEXTVAL, #{P_name }, #{P_price }, #{P_stock }, #{P_category }, sysdate)
+	]]>
+	</insert>
+
+	<select id="selectProductList" resultType="productDTO">
+	  	<![CDATA[
+			select * from(
+			    select /*+INDEX_DESC(product_TB P_index)*/ rownum as rn, P_id, P_name,
+			        (select C_Name 
+			        from category_TB 
+			        where product_TB.P_category = category_TB.C_Code) C_Name, P_stock,P_date
+			    from product_TB 
+			    where 
+		]]>
+		<if test="keyword != null">
+				P_name like '%' || #{keyword} || '%' and
+		</if>  
+		<![CDATA[    
+		    	rownum <= #{pageNum} * #{amount} 
+		    )
+			where rn > (#{pageNum} - 1) * #{amount}		  	
+  		]]>
+	</select>
+
+	<select id="getTotal" resultType="int">
+		select count(*) from product_TB
+		<if test="keyword != null">
+			where P_name like '%' || #{keyword} || '%'
+		</if>
+	</select>
+</mapper>
