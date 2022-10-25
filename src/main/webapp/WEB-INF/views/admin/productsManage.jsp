@@ -60,7 +60,7 @@
    			</c:if>
    			<c:forEach begin="${paging.pageStart }" end="${paging.pageEnd }" var="num">
    				<li id="paging_btn">
-   					<a href="<%=request.getContextPath()%>/admin/productsManage?pageNum=${num }&amount=${paging.cri.amount }">
+   					<a href="<%=request.getContextPath()%>/admin/productsManage?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }">
    						${num }
    					</a>
    				</li>
