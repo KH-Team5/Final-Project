@@ -14,16 +14,28 @@ role VARCHAR2(10) CHECK (role IN ('ROLE_USER', 'ROLE_ADMIN')) NOT NULL
 
 /* 상품 */
 CREATE TABLE product_TB(
-P_index NUMBER PRIMARY KEY, /* 시퀀스값 PK */
+P_id NUMBER PRIMARY KEY,
 P_name VARCHAR2(200) NOT NULL,
 P_price NUMBER NOT NULL,
-P_rest NUMBER NOT NULL,
-P_date DATE NOT NULL
+P_stock NUMBER NOT NULL,
+P_category varchar2(30) NOT NULL,
+P_date DATE default sysdate
 );
+
 /* 상품 시퀀스 */
 CREATE SEQUENCE product_SQ
 START WITH 1
 INCREMENT BY 1;
+-- product_SQ.NEXTVAL 로 사용(자동으로 1씩 증가)
+
+/* 상품 카테고리 */
+create table category_TB(
+    C_Code varchar2(30) PRIMARY KEY,
+    C_tier number(1) not null,
+    C_Name varchar2(30) not null,
+    C_parent varchar(30),
+    foreign key(C_parent) references category_TB(C_Code) 
+);
 
 /* 상품 이미지 */
 CREATE TABLE product_image_TB(
