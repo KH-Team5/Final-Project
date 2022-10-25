@@ -6,7 +6,7 @@
 	<insert id="insert" parameterType="productDTO">
 	<![CDATA[
 		insert into product_TB
-		values(product_SQ.NEXTVAL, #{P_name }, #{P_price }, #{P_stock }, #{P_category }, sysdate)
+		values(product_SQ.NEXTVAL, #{p_name }, #{p_price }, #{p_stock }, #{p_category }, sysdate)
 	]]>
 	</insert>
 

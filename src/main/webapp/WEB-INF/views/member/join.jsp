@@ -5,38 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	#id_input_chk1{
-		display: none;
-	}
-	#id_input_chk2{
-		display: none;
-	}
-	#idCheck{
-		display: none;
-	}
-	#pwCheck{
-		display: none;
-	}
-	#nameCheck{
-		display: none;
-	}
-	#mailCheck{
-		display: none;
-	}
-	#contactCheck{
-		display: none;
-	}
-	#zipcodeCheck{
-		display: none;
-	}
-	#addressCheck{
-		display: none;
-	}
-	#detailaddressCheck{
-		display: none;
-	}
-</style>
 <script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
@@ -45,43 +13,50 @@
 	<h1>회원가입 페이지</h1>
 	<form id="joinform" name="joinform" method="post">
 		아이디: <input id="M_id" name="M_id" type="text"> <br>
-		<span id="id_input_chk1">사용가능</span>
-		<span id="id_input_chk2">중복</span> <br>
-		<span id="idCheck">아이디를 입력해주세요.</span> <br>
+		<span id="idInputChk"></span>
+		<span id="idChk"></span>
+		
 		비밀번호: <input id="M_pwd" name="M_pwd" type="password"> <br>
-		<span id="pwCheck">비밀번호를 입력해주세요.</span> <br>
+		<span id="pwChk"></span>
 	
 		이름: <input id="M_name" name="M_name" type="text"> <br>
-		<span id="nameCheck">이름을 입력해주세요.</span> <br>
+		<span id="nameChk"></span>
 		
 		이메일: <input id="email" name="email" type="email"> <br>
-		<span id="mailCheck">이메일을 입력해주세요.</span> <br>
+		<span id="mailChk"></span>	
+		<div>
+			<input id="authNum" name="authNum" type="text" disabled="disabled">
+			<input id="authNumBtn" name="authNumBtn" type="button" value="인증번호 전송"> <br>
+			<span id="authNumChk"></span>
+		</div>
 		
 		연락처: <input id="contact" name="contact" type="tel"> <br> 
-		<span id="contactCheck">연락처를 입력해주세요.</span> <br>
+		<span id="contactChk"></span>
 		
 		우편번호: <input id="zipcode" name="zipcode" type="number"> <br> 
-		<span id="zipcodeCheck">우편번호를 입력해주세요.</span> <br>
+		<span id="zipcodeChk"></span>
 		
 		주소: <input id="address" name="address" type="text"> <br> 
-		<span id="addressCheck">주소를 입력해주세요.</span> <br>
+		<span id="addressChk"></span>
 		
 		상세주소: <input id="detail_address" name="detail_address" type="text"> <br> 
-		<span id="detailaddressCheck">상세주소를 입력해주세요.</span> <br>
+		<span id="detailaddressChk"></span>
 		
 		<input type="button" id="joinbutton" value="회원가입">
 	</form>
 	<a href="<%=request.getContextPath()%>/">홈</a>
 	<script>
-		var idCheck = false;
-		var idOverlapCheck = false;
-		var pwCheck = false;
-		var nameCheck = false;
-		var mailCheck = false;
-		var contactCheck = false;
-		var zipcodeCheck = false;
-		var addressCheck = false
-		var detailaddressCheck = false
+		var idChk = false;
+		var idOverlapChk = false;
+		var pwChk = false;
+		var nameChk = false;
+		var mailChk = false;
+		var mailAuthChk = false;
+		var contactChk = false;
+		var zipcodeChk = false;
+		var addressChk = false;
+		var detailaddressChk = false;
+		var code = "";
 		$(function() {
 			$("#joinbutton").click(function() {
 				var id = $('#M_id').val();
@@ -93,62 +68,62 @@
 		        var address = $('#address').val();
 		        var detailaddress = $('#detail_address').val();
 		        if(id == "") {
-		            $('#idCheck').css('display','inline-block');
-		            idCheck = false;
+		            $('#idChk').html("필수 항목입니다." + "<br>");
+		            idChk = false;
 		        } else {
-		            $('#idCheck').css('display', 'none');
-		            idCheck = true;
+		            $('#idChk').html("");
+		            idChk = true;
 		        }
 		        if(pw == "") {
-		            $('#pwCheck').css('display','inline-block');
-		            pwCheck = false;
+		            $('#pwChk').html("필수 항목입니다." + "<br>");
+		            pwChk = false;
 		        } else {
-		            $('#pwCheck').css('display', 'none');
-		            pwCheck = true;
+		            $('#pwChk').html("");
+		            pwChk = true;
 		        }
 		        if(name == "") {
-		            $('#nameCheck').css('display','inline-block');
-		            nameCheck = false;
+		            $('#nameChk').html("필수 항목입니다." + "<br>");
+		            nameChk = false;
 		        } else {
-		            $('#nameCheck').css('display', 'none');
-		            nameCheck = true;
+		            $('#nameChk').html("");
+		            nameChk = true;
 		        }
 		        if(mail == "") {
-		            $('#mailCheck').css('display','inline-block');
-		            mailCheck = false;
+		            $('#mailChk').html("필수 항목입니다." + "<br>");
+		            mailChk = false;
 		        } else {
-		            $('#mailCheck').css('display', 'none');
-		            mailCheck = true;
+		            $('#mailChk').html("");
+		            mailChk = true;
 		        }
 		        if(contact == "") {
-		            $('#contactCheck').css('display','inline-block');
-		            contactCheck = false;
+		            $('#contactChk').html("필수 항목입니다." + "<br>");
+		            contactChk = false;
 		        } else {
-		            $('#contactCheck').css('display', 'none');
-		            contactCheck = true;
+		            $('#contactChk').html("");
+		            contactChk = true;
 		        }
 		        if(zipcode == "") {
-		            $('#zipcodeCheck').css('display','inline-block');
-		            zipcodeCheck = false;
+		            $('#zipcodeChk').html("필수 항목입니다." + "<br>");
+		            zipcodeChk = false;
 		        } else {
-		            $('#zipcodeCheck').css('display', 'none');
-		            zipcodeCheck = true;
+		            $('#zipcodeChk').html("");
+		            zipcodeChk = true;
 		        }
 		        if(address == "") {
-		            $('#addressCheck').css('display','inline-block');
-		            addressCheck = false;
+		            $('#addressChk').html("필수 항목입니다." + "<br>");
+		            addressChk = false;
 		        } else {
-		            $('#addressCheck').css('display', 'none');
-		            addressCheck = true;
+		            $('#addressChk').html("");
+		            addressChk = true;
 		        }
 		        if(detailaddress == "") {
-		            $('#detailaddressCheck').css('display','inline-block');
-		            detailaddressCheck = false;
+		            $('#detailaddressChk').html("필수 항목입니다." + "<br>");
+		            detailaddressChk = false;
 		        } else {
-		            $('#detailaddressCheck').css('display', 'none');
-		            detailaddressCheck = true;
+		            $('#detailaddressChk').html("");
+		            detailaddressChk = true;
 		        }
-		        if(idCheck && idOverlapCheck && pwCheck && nameCheck && mailCheck && contactCheck && zipcodeCheck && addressCheck && detailaddressCheck) {
+		        if(idChk && idOverlapChk && pwChk && nameChk && mailChk && contactChk && zipcodeChk && addressChk && detailaddressChk && mailAuthChk) {
 		        	$("#joinform").attr("action", "<%= request.getContextPath()%>/member/join");
 					$("#joinform").submit();
 		        }
@@ -163,24 +138,45 @@
 					url: "<%=request.getContextPath()%>/member/idChk",
 					data: data,
 					success: function(result) {
-						console.log(result);
 						if(result == 'success') {
-							$('#id_input_chk1').css("display", "inline-block");
-							$('#id_input_chk2').css("display", "none");	
-							idOverlapCheck = true;
+							$('#idInputChk').html("사용 가능 " + "<br>");
+							idOverlapChk = true;
 						} else {
-							$('#id_input_chk2').css("display", "inline-block");
-							$('#id_input_chk1').css("display", "none");
-							idOverlapCheck = false;
+							$('#idInputChk').html("중복" + "<br>");
+							idOverlapChk = false;
 						} 
 						if (M_id == "") {
-							$('#id_input_chk1').css("display", "none");	
-							$('#id_input_chk2').css("display", "none");
-							idOverlapCheck = false;
+							idOverlapChk = false;
+							$('#idInputChk').html("");
 						}
 					}
 				});
-			});
+			});					
+		});	
+		
+		$("#authNumBtn").click(function(){
+			var email = $("#email").val();
+			var authNum = $("#authNum");  
+			$.ajax({
+		        type: "GET",
+		        url: "<%=request.getContextPath()%>/member/mailChk?email=" + email,
+		        success:function(data){
+		        	authNum.attr("disabled",false);
+		        	code = data;
+		        }
+		    });
+		});
+		
+		$("#authNum").blur(function(){
+			var inputCode = $("#authNum").val();
+		    var checkResult = $("#authNumChk");
+		    if(inputCode == code) {
+		        checkResult.html("인증 성공");
+		        mailAuthChk = true;
+		    } else {
+		        checkResult.html("인증 실패");
+		        mailAuthChk = false;
+			}
 		});
 	</script>
 </body>

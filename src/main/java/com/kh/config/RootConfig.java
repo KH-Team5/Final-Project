@@ -1,5 +1,7 @@
 package com.kh.config;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -13,6 +15,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.TransactionManager;
 
 @Configuration
@@ -35,7 +39,6 @@ public class RootConfig {
 	@Bean
 	public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource, ApplicationContext applicationContext)
 			throws Exception {
-
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
 		sqlSessionFactoryBean
@@ -51,5 +54,24 @@ public class RootConfig {
 	@Bean
 	public TransactionManager transactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
+	}
+
+	/* 이메일 인증 관련 설정 */
+	@Bean
+	public JavaMailSender javaMailSender() {
+		JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
+		javaMailSenderImpl.setHost("smtp.gmail.com");
+		javaMailSenderImpl.setPort(587);
+		javaMailSenderImpl.setUsername("kh5mailtest@gmail.com");
+		javaMailSenderImpl.setPassword("dukzewvmrprpgxab");
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.transport.protocol", "smtp");
+		properties.put("mail.debug", "true");
+		properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		javaMailSenderImpl.setJavaMailProperties(properties);
+		return javaMailSenderImpl;
 	}
 }
