@@ -144,10 +144,4 @@ public class MemberController {
 	public String memberTest() {
 		return "/member/memberTest";
 	}
-
-	/*
-	 * @RequestMapping(value = "/auth", method = RequestMethod.GET) public void
-	 * auth(Principal principal) { String username = principal.getName();
-	 * logger.info("id : " + username); }
-	 */
 }

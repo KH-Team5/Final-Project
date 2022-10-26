@@ -25,21 +25,25 @@ public class MemberServiceImpl implements MemberService {
 	public int idChk(String M_id) {
 		return memberRepository.selectById(M_id);
 	}
-	
+
 	@Override
 	public int emailOverlapChk(String email) {
 		return memberRepository.selectByEmail(email);
 	}
-	
 
 	@Override
 	public String findId(String email) {
 		return memberRepository.selectIdByEmail(email);
 	}
-	
+
 	@Override
 	public int findPwdChk(String email, String M_id) {
 		return memberRepository.selectByEmailandId(email, M_id);
+	}
+
+	@Override
+	public MemberDTO memberInfo(String M_id) {
+		return memberRepository.get(M_id);
 	}
 
 }
