@@ -25,5 +25,10 @@ public class MemberServiceImpl implements MemberService {
 	public int idChk(String M_id) {
 		return memberRepository.selectById(M_id);
 	}
+	
+	@Override
+	public MemberDTO memberInfo(String M_id) {
+		return memberRepository.get(M_id);
+	}
 
 }

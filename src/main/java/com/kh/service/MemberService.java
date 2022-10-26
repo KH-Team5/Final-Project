@@ -7,4 +7,6 @@ public interface MemberService {
 
 	public int idChk(String M_id);
 
+	MemberDTO memberInfo(String M_id);
+
 }

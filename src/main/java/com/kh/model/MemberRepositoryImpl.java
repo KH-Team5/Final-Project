@@ -24,6 +24,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 		else
 			return false;
 	}
+	
 
 	@Override
 	public int selectById(String M_id) {

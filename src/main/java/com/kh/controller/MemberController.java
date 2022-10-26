@@ -93,5 +93,7 @@ public class MemberController {
 		logger.info("회원 전용 페이지 진입");
 		return "/member/memberTest";
 	}
+	
+	
 
 }

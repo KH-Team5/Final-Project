@@ -18,5 +18,6 @@
 	<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
 	<a href="<%=request.getContextPath()%>/admin/productRegistration">상품등록</a>
 	<a href="<%=request.getContextPath()%>/admin/productsManage">상품관리</a>
+	<a href="<%=request.getContextPath()%>/member/mypage">마이 페이지</a>
 </body>
 </html>
