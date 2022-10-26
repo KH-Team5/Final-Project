@@ -7,4 +7,10 @@ public interface MemberService {
 
 	public int idChk(String M_id);
 
+	public int emailOverlapChk(String email);
+
+	public String findId(String email);
+
+	public int findPwdChk(String email, String M_id);
+
 }

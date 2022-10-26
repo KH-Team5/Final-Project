@@ -3,6 +3,7 @@ package com.kh.config.Auth;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
@@ -11,10 +12,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDetailsImpl implements UserDetails {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 	private String username; // DB에서 PK 값(M_id)
 	private String password; // 비밀번호 (M_pw)
-	private String name; //(M_name)
+	private String name; // (M_name)
 	private Collection<GrantedAuthority> authorities; // 권한 목록
 
 	/**

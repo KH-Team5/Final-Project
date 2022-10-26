@@ -10,19 +10,44 @@
 		where M_id = #{M_id }
 		]]>
 	</select>
-	
-	<select id="selectById" resultType="Integer">
-	<![CDATA[
-		select count(*)
-		from member_TB 
-		where M_id = #{M_id }
-	]]>
-	</select> 
-	
+
 	<insert id="insert" parameterType="memberDTO">
-	<![CDATA[
-		insert into member_TB
-		values(#{M_id }, #{M_pwd }, #{M_name }, #{email }, #{contact }, #{zipcode }, #{address }, #{detail_address }, sysdate, 'ROLE_USER')
-	]]>
-	</insert> 
+		<![CDATA[
+			insert into member_TB
+			values(#{M_id }, #{M_pwd }, #{M_name }, #{email }, #{contact }, #{zipcode }, #{address }, #{detail_address }, sysdate, 'ROLE_USER')
+		]]>
+	</insert>
+
+	<select id="selectById" resultType="Integer">
+		<![CDATA[
+			select count(*)
+			from member_TB 
+			where M_id = #{M_id }
+		]]>
+	</select>
+
+	<select id="selectIdByEmail" resultType="string">
+		<![CDATA[
+			select M_id
+			from member_TB 
+			where email = #{email }
+		]]>
+	</select>
+
+	<select id="selectByEmail" resultType="Integer">
+		<![CDATA[
+			select count(*)
+			from member_TB 
+			where email = #{email }
+		]]>
+	</select>
+	
+	<select id="selectByEmailandId" parameterType="HashMap" resultType="Integer">
+		<![CDATA[
+			select count(*)
+			from member_TB 
+			where email = #{email } AND M_id = #{M_id }
+		]]>
+	</select>
+	
 </mapper>
