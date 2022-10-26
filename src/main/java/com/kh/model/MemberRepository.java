@@ -15,4 +15,6 @@ public interface MemberRepository {
 
 	public int selectByEmailandId(String email, String M_id);
 
+	public int updatePwdById(String M_id, String M_pwd);
+
 }

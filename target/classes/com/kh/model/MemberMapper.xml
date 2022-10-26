@@ -50,4 +50,9 @@
 		]]>
 	</select>
 	
+	<update id="updatePwdById" parameterType="HashMap">
+		<![CDATA[
+			UPDATE member_tb SET M_pwd = #{M_pwd } WHERE M_id = #{M_id }
+		]]>
+	</update>
 </mapper>
