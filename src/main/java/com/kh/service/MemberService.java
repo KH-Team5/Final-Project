@@ -6,6 +6,8 @@ public interface MemberService {
 	public boolean joinMember(MemberDTO memberDTO);
 
 	public int idChk(String M_id);
+	
+	void sendEmail(String toMail, String title, String content);
 
 	public int emailOverlapChk(String email);
 
