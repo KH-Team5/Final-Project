@@ -111,12 +111,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/findPage/pwdReset", method = RequestMethod.POST)
 	public String pwdReset(@RequestParam("email") String email, @RequestParam("id") String id) throws Exception {
-		logger.info("찾기 진입");
-		logger.info(email);
-		logger.info(id);
 		int result = memberService.findPwdChk(email, id);
 		String temp = Integer.toString(result);
-		logger.info(temp);
 		if (result == 1) {
 			String random = UUID.randomUUID().toString().replaceAll("-", "");
 			String setForm = "kh5mailtest@gmail.com";
@@ -135,13 +131,12 @@ public class MemberController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return "success";
+			int resetPwd = memberService.resetPwd(id, random);
+			if (resetPwd == 1)
+				return "success";
+			else
+				return "error";
 		} else
 			return "error";
-	}
-
-	@RequestMapping(value = "/memberTest", method = RequestMethod.GET)
-	public String memberTest() {
-		return "/member/memberTest";
 	}
 }

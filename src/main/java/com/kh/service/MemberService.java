@@ -12,6 +12,9 @@ public interface MemberService {
 	public String findId(String email);
 
 	public int findPwdChk(String email, String M_id);
-	
+
+	public int resetPwd(String M_id, String M_pwd);
+
 	public MemberDTO memberInfo(String M_id);
+
 }

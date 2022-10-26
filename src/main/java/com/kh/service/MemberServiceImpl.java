@@ -42,6 +42,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int resetPwd(String M_id, String M_pwd) {
+		return memberRepository.updatePwdById(M_id, M_pwd);
+	}
+
+	@Override
 	public MemberDTO memberInfo(String M_id) {
 		return memberRepository.get(M_id);
 	}
