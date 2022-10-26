@@ -14,4 +14,5 @@ public interface MemberRepository {
 	public int selectByEmail(String email);
 
 	public int selectByEmailandId(String email, String M_id);
+
 }
