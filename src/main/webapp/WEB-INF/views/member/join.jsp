@@ -5,9 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+</style>
 <script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+</script>
 </head>
 <body>
 	<h1>회원가입 페이지</h1>
@@ -33,7 +41,7 @@
 		연락처: <input id="contact" name="contact" type="tel"> <br> 
 		<span id="contactChk"></span>
 		
-		우편번호: <input id="zipcode" name="zipcode" type="number"> <br> 
+		우편번호: <input id="zipcode" name="zipcode" type="text"> <br> 
 		<span id="zipcodeChk"></span>
 		
 		주소: <input id="address" name="address" type="text"> <br> 
@@ -130,12 +138,11 @@
 			});
 			
 			$('#M_id').on("propertychange change keyup paste input", function() {
-				console.log("keyup test");	
 				var M_id = $('#M_id').val();
 				var data = {M_id : M_id};
 				$.ajax({
 					type: "post",
-					url: "<%=request.getContextPath()%>/member/idChk",
+					url: "<%=request.getContextPath()%>/member/join/idChk",
 					data: data,
 					success: function(result) {
 						if(result == 'success') {
@@ -151,17 +158,40 @@
 						}
 					}
 				});
-			});					
+			});		
+			
+			$("#email").on("propertychange change keyup paste input", function() {
+				var email = $("#email").val();
+				var data = {email : email};
+				$.ajax({
+					type: "post",
+					url: "<%=request.getContextPath()%>/member/join/emailOverlapChk",
+					data: data,
+					success: function(result) {
+						if(result == 'success') {
+							$("#authNumChk").html("사용 가능 " + "<br>");
+							$("#authNumBtn").attr("disabled",false);
+						} else {
+							$("#authNumChk").html("중복" + "<br>");
+							$("#authNumBtn").attr("disabled",true);
+						}
+						if (M_id == "") {
+							$("#authNumBtn").attr("disabled",false);
+						}
+					}
+				});
+			});	
 		});	
 		
 		$("#authNumBtn").click(function(){
 			var email = $("#email").val();
-			var authNum = $("#authNum");  
+			var authNum = $("#authNum");
 			$.ajax({
 		        type: "GET",
-		        url: "<%=request.getContextPath()%>/member/mailChk?email=" + email,
+		        url: "<%=request.getContextPath()%>/member/join/mailChk?email=" + email,
 		        success:function(data){
-		        	authNum.attr("disabled",false);
+		        	$("#authNum").attr("disabled",false);
+		        	$("#authNumBtn").attr("disabled",true);
 		        	code = data;
 		        }
 		    });
