@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.PageDTO;
 import com.kh.model.domain.ProductDTO;
 import com.kh.service.AdminService;
+import com.kh.service.ProductService;
 
 import lombok.AllArgsConstructor;
 
@@ -24,9 +28,18 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired 
+	private ProductService productService;
 
 	@RequestMapping(value = "/productRegistration", method = RequestMethod.GET)
-	public String productRegistration() {
+	public String productRegistration(Model model) throws Exception {
+		
+		List<CategoryDTO> list = productService.categoryList();
+		ObjectMapper obj = new ObjectMapper();
+		String categoryList = obj.writeValueAsString(list);
+		model.addAttribute("categoryList", categoryList);
+		
 		return "/admin/productRegistration";
 	}
 
@@ -39,19 +52,14 @@ public class AdminController {
 
 	@RequestMapping(value = "/productsManage", method = RequestMethod.GET)
 	public void productManage(Criteria cri, Model model) {
-		List<ProductDTO> list = adminService.productGetList(cri);
+		List<ProductDTO> list = productService.productGetList(cri);
 		if (!list.isEmpty())
 			model.addAttribute("list", list);
 		else {
 			model.addAttribute("listCheck", "empty");
 			return;
 		}
-		model.addAttribute("paging", new PageDTO(cri, adminService.productGetTotal(cri)));
-	}
-
-	@RequestMapping(value = "/adminTest", method = RequestMethod.GET)
-	public String adminTest() {
-		return "/admin/adminTest";
+		model.addAttribute("paging", new PageDTO(cri, productService.productGetTotal(cri)));
 	}
 
 }

@@ -2,26 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 관리 페이지</title>
-<style>
-</style>
+<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
 </head>
 </head>
 <body>
-	<h1>상품 관리 페이지</h1>
+	<h1>검색 페이지</h1>
     <c:if test="${listcheck != 'empty'}">
 		<table id="products">
 			<thead>
 				<tr>
-					<td>상품 번호</td>
 					<td>상품 이름</td>
 					<td>상품 가격</td>
 					<td>재고</td>
@@ -34,7 +30,7 @@
 					<td><c:out value="${list.p_name}"></c:out></td>
 					<td><c:out value="${list.p_price}"></c:out></td>
 					<td><c:out value="${list.p_stock}"></c:out></td>
-					<td><c:out value="${list.p_category}"></c:out></td>				
+					<td><c:out value="${list.c_Name}"></c:out></td>				
 					<td>
 						<fmt:parseDate value="${list.p_date}" pattern="yyyy-MM-dd" var="myDate"/>
 						<fmt:formatDate value="${myDate}" pattern="yyyy-MM-dd"/>
@@ -59,7 +55,7 @@
    			</c:if>
    			<c:forEach begin="${paging.pageStart }" end="${paging.pageEnd }" var="num">
    				<li id="paging_btn">
-   					<a href="<%=request.getContextPath()%>/admin/productsManage?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }">
+   					<a href="<%=request.getContextPath()%>/search?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }">
    						${num }
    					</a>
    				</li>
@@ -73,7 +69,7 @@
 	</div>
    	
    	<!-- 검색 -->
-	<form id="search" action="<%=request.getContextPath()%>/admin/productsManage" method="get">
+	<form id="search" action="<%=request.getContextPath()%>/search" method="get">
    		<input type="text" name="keyword" value="${paging.cri.keyword }">
    		<input type="hidden" name="pageNum" value="${paging.cri.pageNum }">
    		<input type="hidden" name="amount" value="${paging.cri.amount }">
@@ -89,22 +85,10 @@
 		$(function(){
 			if(amount == '')
 				$('#paging_btn').css('display','none');
-			e.preventDefault();
-			let eResult = '<c:out value="${registration_result}"/>';
-			checkResult(eResult);
-			function checkResult(result){
-				if(result === '')
-					return;
-				alert("상품'"+ eResult +"'을 등록하였습니다.");
-			}
 		});
 		
  		$("#search button").on("click", function(e){
 			e.preventDefault();
-			if(!search.find("input[name='keyword']").val()){
-				alert("키워드를 입력하십시오");
-				return false;
-			}
 			if(amount == '')
 				search.find("input[name='amount']").val("10");
 			search.find("input[name='pageNum']").val("1");
