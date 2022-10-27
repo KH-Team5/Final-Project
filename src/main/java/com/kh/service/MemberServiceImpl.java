@@ -55,5 +55,6 @@ public class MemberServiceImpl implements MemberService {
 	public int memberDelete(String M_id) {
 		return memberRepository.memberDelete(M_id);
 	}
+	
 
 }

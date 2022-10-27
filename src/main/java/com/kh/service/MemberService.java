@@ -18,4 +18,6 @@ public interface MemberService {
 	public int memberUpdate(String M_id);
 	
 	public int memberDelete(String M_id);
+
+	
 }

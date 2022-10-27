@@ -45,11 +45,12 @@ public class MyPageController {
 	}
 
 	@RequestMapping(value = "/member/memberUpdate", method = RequestMethod.POST)
-	public String memberupdate(Model model, Principal principal) {
-		model.addAttribute("key1", memberservice.memberInfo(principal.getName()));
+	public String memberupdate(Model model, Principal principal, MemberDTO memberDTO) {
+		model.addAttribute("key1", memberservice.memberUpdate(principal.getName()));
 		logger.info("회원정보 수정 진입");
 		
-		memberservice.memberUpdate(principal.getName());
+		
+		memberservice.memberUpdate(principal.getName());//이건 회원 아이디를 가져와서 수정하는거같은데 잘모르겟다..
 		logger.info("회원정보 수정 성공");
 
 		return "redirect:/";
