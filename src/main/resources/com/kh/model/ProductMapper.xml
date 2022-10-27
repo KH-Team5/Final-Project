@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
+
 	<insert id="insert" parameterType="productDTO">
 	<![CDATA[
 		insert into product_TB
@@ -12,13 +13,12 @@
 
 	<select id="selectProductList" resultType="productDTO">
 	  	<![CDATA[
-			select * from(
-			    select /*+INDEX_DESC(product_TB P_index)*/ rownum as rn, P_id, P_name,
-			        (select C_Name 
-			        from category_TB 
-			        where product_TB.P_category = category_TB.C_Code) C_Name, P_stock,P_date
-			    from product_TB 
-			    where 
+			select * from (
+				select /*+INDEX_DESC(product_TB P_index)*/ rownum as rn, P_id, P_name,
+					(select C_Name from category_TB where product_TB.P_category = category_TB.C_Code) 
+				C_Name, p_category, P_stock, P_date, p_price
+			from product_TB 
+			where 
 		]]>
 		<if test="keyword != null">
 				P_name like '%' || #{keyword} || '%' and
@@ -29,6 +29,12 @@
 			where rn > (#{pageNum} - 1) * #{amount}		  	
   		]]>
 	</select>
+	
+	<select id="selectCategoryListSortCode" resultType="categoryDTO">
+	  	<![CDATA[
+	  		select * from category_TB order by C_Code
+	  	]]>
+  	</select>
 
 	<select id="getTotal" resultType="int">
 		select count(*) from product_TB

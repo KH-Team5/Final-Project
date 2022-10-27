@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,9 +25,6 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-
-	@Autowired
-	private JavaMailSender javaMailSender;
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join() {
@@ -54,7 +50,6 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/join/emailOverlapChk", method = RequestMethod.POST)
 	public String emailOverlapChkPost(String email) throws Exception {
-		logger.info("emailOverlapChkPost");
 		int result = memberService.emailOverlapChk(email);
 		if (result != 0)
 			return "error";

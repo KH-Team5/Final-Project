@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.ProductDTO;
 
@@ -24,7 +25,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 	}
 
 	@Override
-	public List<ProductDTO> selectProductList(Criteria cri) {
+	public List<ProductDTO> selectProductList(Criteria cri) {	
 		return sqlSession.selectList("product.selectProductList", cri);
 	}
 
@@ -32,5 +33,9 @@ public class ProductRepositoryImpl implements ProductRepository {
 	public int getTotal(Criteria cri) {
 		return sqlSession.selectOne("product.getTotal", cri);
 	}
-
+	
+	@Override
+	public List<CategoryDTO> selectCategoryListSortCode() {
+		return sqlSession.selectList("selectCategoryListSortCode");
+	};
 }
