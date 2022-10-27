@@ -53,5 +53,19 @@ public class MemberRepositoryImpl implements MemberRepository {
 		map.put("M_id", M_id);
 		return sqlSession.selectOne("member.selectByEmailandId", map);
 	}
+
+	@Override
+	public int memberUpdate(String M_id) {
+		int count = sqlSession.update("member.update", M_id);
+		return count;
+	}
 	
+	@Override
+	public int memberDelete(String M_id) {
+		int count = sqlSession.delete("member.delete", M_id);
+		return count;
+		
+	}
 }
+	
+

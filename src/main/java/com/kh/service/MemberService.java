@@ -14,4 +14,8 @@ public interface MemberService {
 	public int findPwdChk(String email, String M_id);
 	
 	public MemberDTO memberInfo(String M_id);
+	
+	public int memberUpdate(String M_id);
+	
+	public int memberDelete(String M_id);
 }

@@ -50,4 +50,25 @@
 		]]>
 	</select>
 	
+	<update id="update" parameterType="memberDTO">
+		<![CDATA[
+			update member_TB
+			set #{M_pwd }, #{M_name }, #{contact }, #{zipcode }, #{address }, #{detail_address }, sysdate, 'ROLE_USER')
+			where M_id = #{M_id }
+		]]>
+	</update>
+	
+	<update id="delete" parameterType="memberDTO">
+		<![CDATA[
+			delete
+			from member_TB
+			where M_id = #{M_id }
+			
+		]]>
+	</update>
+	
+	
+	
+	
+	
 </mapper>
