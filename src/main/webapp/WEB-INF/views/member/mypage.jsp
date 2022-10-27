@@ -11,6 +11,9 @@
 function agreeFunction() {
 	alert("정말 탈퇴하시겠습니까?");
 }
+function updateAgree(){
+	alert("회원정보를 변경하시겠습니까?")
+}
 </script>
 </head>
 <body>
@@ -50,7 +53,7 @@ function agreeFunction() {
       </tr>
       <tr>
        <td colspan="2">
-       <a href="<%=request.getContextPath()%>/member/memberUpdate" class="btn">정보수정</a>
+       <a href="<%=request.getContextPath()%>/member/memberUpdate" class="btn" onclick="updateAgree()">정보수정</a>
        <a href="<%=request.getContextPath()%>/member/memberDelete" class="btn" onclick="agreeFunction()">회원 탈퇴</a>
       </td>
       </tr>

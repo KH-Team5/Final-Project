@@ -44,17 +44,6 @@ public class MyPageController {
 		return "/member/mypage";
 	}
 
-	@RequestMapping(value = "/member/memberUpdate", method = RequestMethod.POST)
-	public String memberupdate(Model model, Principal principal, MemberDTO memberDTO) {
-		model.addAttribute("key1", memberservice.memberUpdate(principal.getName()));
-		logger.info("회원정보 수정 진입");
-		
-		
-		memberservice.memberUpdate(principal.getName());//이건 회원 아이디를 가져와서 수정하는거같은데 잘모르겟다..
-		logger.info("회원정보 수정 성공");
-
-		return "redirect:/";
-	}
 	@RequestMapping(value = "/member/memberUpdate", method = RequestMethod.GET)
 	public String memberupdateGet(Model model, Principal principal) {
 		model.addAttribute("key1", memberservice.memberInfo(principal.getName()));
@@ -63,11 +52,24 @@ public class MyPageController {
 
 		return "/member/memberUpdate";
 	}
+	
+	@RequestMapping(value = "/member/memberUpdate", method = RequestMethod.POST)
+	public String memberupdatePOST(Model model, Principal principal, MemberDTO member) {
+		model.addAttribute("key1", memberservice.memberInfo(principal.getName()));
+		logger.info("회원정보 수정 진입");
+		memberservice.memberUpdate(member);
+		logger.info("회원정보 수정 성공");
+
+		return "redirect:/logout";
+	}
+	
+	
 
 
 	  @RequestMapping(value = "/member/memberDelete", method = RequestMethod.GET)
-	  public String memberDelete(Principal principal) { String userid =
-	  principal.getName(); logger.info("회원 탈퇴 진입");
+	  public String memberDelete(Principal principal) { 
+		  String userid = principal.getName(); 
+		  logger.info("회원 탈퇴 진입");
 	  
 	  
 	  memberservice.memberDelete(userid); 
