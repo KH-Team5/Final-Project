@@ -4,42 +4,84 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
 
+	<!-- criteria(검색조건) -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="AND">
+					<choose>
+						<when test="type == 'C'.toString()">
+							p_Category like #{c_Code} || '%'
+						</when>
+						<when test="type == 'T'.toString()">
+							p_Name like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+
 	<insert id="insert" parameterType="productDTO">
 	<![CDATA[
 		insert into product_TB
-		values(product_SQ.NEXTVAL, #{p_name }, #{p_price }, #{p_stock }, #{p_category }, sysdate)
+		values(product_SQ.NEXTVAL, #{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate)
 	]]>
 	</insert>
 
 	<select id="selectProductList" resultType="productDTO">
 	  	<![CDATA[
 			select * from (
-				select /*+INDEX_DESC(product_TB P_index)*/ rownum as rn, P_id, P_name,
-					(select C_Name from category_TB where product_TB.P_category = category_TB.C_Code) 
-				C_Name, p_category, P_stock, P_date, p_price
+				select /*+INDEX_DESC(product_TB P_index)*/ rownum as rn, p_Id, p_Name,
+					(select c_Name from category_TB where product_TB.p_Category = category_TB.C_Code) 
+				c_Name, p_Category, p_Stock, p_Date, p_Price
 			from product_TB 
 			where 
 		]]>
-		<if test="keyword != null">
-				P_name like '%' || #{keyword} || '%' and
-		</if>  
+		<include refid="criteria"></include>
 		<![CDATA[    
 		    	rownum <= #{pageNum} * #{amount} 
 		    )
 			where rn > (#{pageNum} - 1) * #{amount}		  	
   		]]>
 	</select>
-	
+
 	<select id="selectCategoryListSortCode" resultType="categoryDTO">
 	  	<![CDATA[
 	  		select * from category_TB order by C_Code
 	  	]]>
-  	</select>
+	</select>
 
 	<select id="getTotal" resultType="int">
 		select count(*) from product_TB
 		<if test="keyword != null">
-			where P_name like '%' || #{keyword} || '%'
+			where p_Name like '%' || #{keyword} || '%'
 		</if>
+	</select>
+
+	<select id="selectInnerCategory" resultType="categoryDTO">
+	  	<![CDATA[
+	  		select * from category_TB where c_Code > 10 and c_Code < 20
+	  	]]>
+	</select>
+
+	<select id="selectPantsCategory" resultType="categoryDTO">
+	  	<![CDATA[
+	  		select * from category_TB where c_Code > 20 and c_Code < 30
+	  	]]>
+	</select>
+
+	<select id="selectOuterCategory" resultType="categoryDTO">
+	  	<![CDATA[
+	  		select * from category_TB where c_Code > 30 and c_Code < 40
+	  	]]>
+	</select>
+	
+	<!-- 상품 정보 -->
+	<select id="selectProductInfo" parameterType="Integer" resultType="productDTO">
+			select p.p_Id, p.p_Name, p.p_Price, p.p_Stock, c.c_Name
+			from product_TB p left outer join category_TB c on p.p_Category = c.c_Code
+			where p_Id = #{p_Id}	
 	</select>
 </mapper>

@@ -46,7 +46,7 @@ public class AdminController {
 	@PostMapping("/productRegistration")
 	public String productRegistrationPOST(ProductDTO productDTO, RedirectAttributes redirec) {
 		adminService.regProduct(productDTO);
-		redirec.addFlashAttribute("registration_result", productDTO.getP_name());
+		redirec.addFlashAttribute("registration_result", productDTO.getP_Name());
 		return "redirect:/admin/productsManage";
 	}
 
