@@ -31,4 +31,24 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.selectCategoryListSortCode();
 	}
 
+	@Override
+	public List<CategoryDTO> getSubInnerCategory() {
+		return productRepository.selectInnerCategory();
+	}
+
+	@Override
+	public List<CategoryDTO> getSubPantsCategory() {
+		return productRepository.selectPantsCategory();
+	}
+
+	@Override
+	public List<CategoryDTO> getSubOuterCategory() {
+		return productRepository.selectOuterCategory();
+	}
+
+	@Override
+	public ProductDTO getProductInfo(int p_Id) {
+		return productRepository.selectProductInfo(p_Id);
+	}
+
 }

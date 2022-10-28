@@ -14,4 +14,12 @@ public interface ProductRepository {
 	public int getTotal(Criteria cri);
 
 	public List<CategoryDTO> selectCategoryListSortCode();
+
+	public List<CategoryDTO> selectInnerCategory();
+
+	public List<CategoryDTO> selectPantsCategory();
+
+	public List<CategoryDTO> selectOuterCategory();
+
+	public ProductDTO selectProductInfo(int p_Id);
 }

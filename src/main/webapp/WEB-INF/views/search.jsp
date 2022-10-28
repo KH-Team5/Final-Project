@@ -27,12 +27,12 @@
 			</thead>	
 			<c:forEach var="list" items="${list}" >
 				<tr>
-					<td><c:out value="${list.p_name}"></c:out></td>
-					<td><c:out value="${list.p_price}"></c:out></td>
-					<td><c:out value="${list.p_stock}"></c:out></td>
-					<td><c:out value="${list.c_Name}"></c:out></td>				
+					<td><a href="<%=request.getContextPath()%>/productInfo/${list.p_Id}"><c:out value="${list.p_Name}"/></a></td>
+					<td><c:out value="${list.p_Price}"/></td>
+					<td><c:out value="${list.p_Stock}"/></td>
+					<td><c:out value="${list.c_Name}"/></td>				
 					<td>
-						<fmt:parseDate value="${list.p_date}" pattern="yyyy-MM-dd" var="myDate"/>
+						<fmt:parseDate value="${list.p_Date}" pattern="yyyy-MM-dd" var="myDate"/>
 						<fmt:formatDate value="${myDate}" pattern="yyyy-MM-dd"/>
 					</td>
 				</tr>
@@ -55,7 +55,7 @@
    			</c:if>
    			<c:forEach begin="${paging.pageStart }" end="${paging.pageEnd }" var="num">
    				<li id="paging_btn">
-   					<a href="<%=request.getContextPath()%>/search?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }">
+   					<a href="<%=request.getContextPath()%>/search?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }&type=T">
    						${num }
    					</a>
    				</li>
@@ -69,10 +69,11 @@
 	</div>
    	
    	<!-- 검색 -->
-	<form id="search" action="<%=request.getContextPath()%>/search" method="get">
+	<form id="search" action="<%=request.getContextPath()%>/search?type=T" method="get">
    		<input type="text" name="keyword" value="${paging.cri.keyword }">
    		<input type="hidden" name="pageNum" value="${paging.cri.pageNum }">
    		<input type="hidden" name="amount" value="${paging.cri.amount }">
+   		<input type="hidden" name="type" value="T">
    		<button id='search_btn'>검색</button>
 	</form>
 	

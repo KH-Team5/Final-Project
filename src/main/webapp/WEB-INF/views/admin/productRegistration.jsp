@@ -12,11 +12,11 @@
 <body>
 	<h1>상품등록 페이지</h1>
 	<form action="<%= request.getContextPath()%>/admin/productRegistration" id="regform" name="regform" method="post">
-		상품 이름: <input id="P_name" name="P_name" type="text"> <br>
+		상품 이름: <input id="p_Name" name="p_Name" type="text"> <br>
 		<span id="nameCheck"></span>
-		상품 가격: <input id="P_price" name="P_price" type="number"> <br>
+		상품 가격: <input id="p_Price" name="p_Price" type="number"> <br>
 		<span id="priceCheck"></span>
-		상품 재고: <input id="P_stock" name="P_stock" type="number"> <br> 
+		상품 재고: <input id="p_Stock" name="p_Stock" type="number"> <br> 
 		<span id="stockCheck"></span>
 		상품 카테고리: 
 		<div id="category">
@@ -25,7 +25,7 @@
 				<option selected value="none">선택</option>
 			</select>
 			<span>소분류</span>
-			<select id="subCategory" name="p_category">
+			<select id="subCategory" name="p_Category">
 				<option selected value="none">선택</option>
 			</select>
 		</div> 
@@ -82,10 +82,10 @@
 			let stockCheck = false;
 			let categoryCheck = false;
 			
-			let name = $('#P_name').val();
-			let price = $('#P_price').val();
-			let stock = $('#P_stock').val();
-			let category = $("select[name='p_category']").val();
+			let name = $('#p_Name').val();
+			let price = $('#p_Price').val();
+			let stock = $('#p_Stock').val();
+			let category = $("select[name='p_Category']").val();
 			
 			if(name == "") {
 	            $('#nameCheck').html("필수 항목입니다." + "<br>");

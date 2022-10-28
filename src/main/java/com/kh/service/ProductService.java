@@ -10,6 +10,14 @@ public interface ProductService {
 	public List<ProductDTO> productGetList(Criteria cri);
 
 	public int productGetTotal(Criteria cri);
-	
+
 	public List<CategoryDTO> categoryList();
+
+	public List<CategoryDTO> getSubInnerCategory();
+
+	public List<CategoryDTO> getSubPantsCategory();
+
+	public List<CategoryDTO> getSubOuterCategory();
+
+	public ProductDTO getProductInfo(int p_id);
 }
