@@ -82,9 +82,10 @@
 			    <div class="dropdown-content">
 			    	<c:forEach items="${Outer}" var="category"> 
 			    		<a href="search?type=C&c_Code=${category.c_Code}">${category.c_Name}</a>
-			    	</c:forEach>    		      
+			    	</c:forEach>
 			    </div>			
 			</div>
+			<button onclick="location.href='search';">전체</button>
 		</div>
 	<a href="<%=request.getContextPath()%>/">홈</a>
 </body>

@@ -35,7 +35,6 @@ public class ProductController {
 		model.addAttribute("paging", new PageDTO(cri, productService.productGetTotal(cri)));
 		return "search";
 	}
-
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model) {
 		model.addAttribute("Inner", productService.getSubInnerCategory());
@@ -44,10 +43,17 @@ public class ProductController {
 		return "/main";
 	}
 
+	/*
+	 * @RequestMapping(value = "/category", method = RequestMethod.GET) public
+	 * String category(Model model) { model.addAttribute("Inner",
+	 * productService.getSubInnerCategory()); model.addAttribute("Pants",
+	 * productService.getSubPantsCategory()); model.addAttribute("Outer",
+	 * productService.getSubOuterCategory()); return "/category"; }
+	 */
+
 	@RequestMapping(value = "/productInfo/{p_Id}", method = RequestMethod.GET)
 	public String productInfo(@PathVariable("p_Id") int p_Id, Model model) {
-		model.addAttribute(" productInfo", productService.getProductInfo(p_Id));
-
+		model.addAttribute("productInfo", productService.getProductInfo(p_Id));
 		return "/productInfo";
 	}
 }
