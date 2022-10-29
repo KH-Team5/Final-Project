@@ -26,7 +26,7 @@
 	<insert id="insert" parameterType="productDTO">
 	<![CDATA[
 		insert into product_TB
-		values(product_SQ.NEXTVAL, #{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate)
+		values(product_SQ.NEXTVAL, #{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro })
 	]]>
 	</insert>
 
@@ -80,8 +80,8 @@
 	
 	<!-- 상품 정보 -->
 	<select id="selectProductInfo" parameterType="Integer" resultType="productDTO">
-			select p.p_Id, p.p_Name, p.p_Price, p.p_Stock, c.c_Name
+			select p.p_Id, p.p_Name, p.p_Price, p.p_Stock, c.c_Name, p.p_Intro, p_Date
 			from product_TB p left outer join category_TB c on p.p_Category = c.c_Code
-			where p_Id = #{p_Id}	
+			where p.p_Id = #{p.p_Id}	
 	</select>
 </mapper>

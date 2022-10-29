@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
 </head>
 <body>
 	<h1>상품등록 페이지</h1>
@@ -30,6 +31,8 @@
 			</select>
 		</div> 
 		<span id="categoryCheck"></span>
+		상품 설명: <textarea id="p_Intro" name="p_Intro"></textarea>
+		<span id="introChk"></span>
 		<button id="regBtn">등록</button>
 	</form>
 	<a href="<%=request.getContextPath()%>/">홈</a>
@@ -81,11 +84,13 @@
 			let priceCheck = false;
 			let stockCheck = false;
 			let categoryCheck = false;
+			let introChk = false;
 			
 			let name = $('#p_Name').val();
 			let price = $('#p_Price').val();
 			let stock = $('#p_Stock').val();
 			let category = $("select[name='p_Category']").val();
+			let intro =$('#.bit p').html();
 			
 			if(name == "") {
 	            $('#nameCheck').html("필수 항목입니다." + "<br>");
@@ -115,11 +120,24 @@
 	            $('#categoryCheck').html("");
 	            categoryCheck = true;
 	        }
+			if(intro == '<br data-cke-filler="true">') {
+	            $('#introChk').html("필수 항목입니다." + "<br>");
+	            introChk = false;
+	        } else {
+	            $('#introChk').html("");
+	            introChk = true;
+	        }
 			
-			if(nameCheck && priceCheck && stockCheck && categoryCheck)
+			if(nameCheck && priceCheck && stockCheck && categoryCheck && introChk)
 				regform.submit();
 			else
 				return false;
+		});
+		
+		ClassicEditor
+		.create(document.querySelector('#p_Intro'))
+		.catch(error=>{
+			console.error(error);
 		});
 	</script>
 </body>
