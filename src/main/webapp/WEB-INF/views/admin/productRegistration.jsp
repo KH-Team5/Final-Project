@@ -31,9 +31,14 @@
 			</select>
 		</div> 
 		<span id="categoryCheck"></span>
-		상품 설명: <textarea id="p_Intro" name="p_Intro"></textarea>
-		<span id="introChk"></span>
-		<button id="regBtn">등록</button>
+		<div id="intro">
+			상품 설명: <textarea id="p_Intro" name="p_Intro"></textarea>
+			<span id="introChk"></span>
+		</div>
+		상품 이미지: <input type="file" multiple="multiple" id ="imageFile" name="imageFile"> <br>
+		<div id="uploadResult">
+		</div>
+		<button id="regBtn" >등록</button>
 	</form>
 	<a href="<%=request.getContextPath()%>/">홈</a>
 	
@@ -78,6 +83,9 @@
 			}
 		});
 		
+		ClassicEditor
+		.create(document.querySelector('#p_Intro'));
+		
 		let regform = $("#regform")
 		$("#regBtn").on("click",function(){
 			let nameCheck = false;
@@ -85,13 +93,11 @@
 			let stockCheck = false;
 			let categoryCheck = false;
 			let introChk = false;
-			
 			let name = $('#p_Name').val();
 			let price = $('#p_Price').val();
 			let stock = $('#p_Stock').val();
 			let category = $("select[name='p_Category']").val();
-			let intro =$('#.bit p').html();
-			
+			let intro = $("#intro p").html();
 			if(name == "") {
 	            $('#nameCheck').html("필수 항목입니다." + "<br>");
 	            nameCheck = false;
@@ -127,18 +133,93 @@
 	            $('#introChk').html("");
 	            introChk = true;
 	        }
-			
-			if(nameCheck && priceCheck && stockCheck && categoryCheck && introChk)
+			if(nameCheck && priceCheck && stockCheck && categoryCheck && introChk) {
 				regform.submit();
+			}	
 			else
 				return false;
 		});
 		
-		ClassicEditor
-		.create(document.querySelector('#p_Intro'))
-		.catch(error=>{
-			console.error(error);
+		$("input[type='file']").on("change", function(e){
+			if($("#imgDeleteBtn").length > 0){
+				deleteFile();
+			}
+			let formData = new FormData();
+			let fileInput = $('input[name="imageFile"]');
+			let fileList = fileInput[0].files;
+			let fileObj = fileList[0];
+			if(!fileCheck(fileObj.name, fileObj.size))
+				return false;
+			for(let i = 0; i < fileList.length; i++){
+				formData.append("imageFile", fileList[i]);
+			}
+			$.ajax({
+				url: "<%=request.getContextPath()%>/admin/productRegistration/fileUpload",
+		    	processData : false,
+		    	contentType : false,
+		    	data : formData,
+		    	type : 'POST',
+		    	dataType : 'json',
+		    	success : function(result){
+			    	showUploadImage(result);
+			    },
+			    error : function(result){
+			    	alert("이미지 파일이 아닙니다.");
+		    	}
+			});
 		});
+		
+		let regex = new RegExp("(.*?)\.(jpg|png)$");
+		let maxSize = 1048576; //1MB
+		
+		function fileCheck(fileName, fileSize){
+			if(fileSize >= maxSize){
+				alert("파일 사이즈 초과");
+				return false;
+			}				  
+			if(!regex.test(fileName)){
+				alert("해당 종류의 파일은 업로드할 수 없습니다.");
+				return false;
+			}			
+			return true;					
+		}
+		
+		function showUploadImage(uploadResultArr){
+			if(!uploadResultArr || uploadResultArr.length == 0){return}
+			let uploadResult = $("#uploadResult");
+			let obj = uploadResultArr[0];
+			let str = "";
+			let filePath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+			str += "<div id='result_card'>";
+			str += "<img src='<%=request.getContextPath()%>/display?fileName=" + filePath +"'>";
+			str += "<div id='imgDeleteBtn' data-file='" + filePath + "'>삭제</div>";
+			str += "</div>";
+			uploadResult.append(str); 
+		}
+		
+		$("#uploadResult").on("click", "#imgDeleteBtn", function(e){
+			deleteFile();
+		});
+		
+		function deleteFile(){
+			let targetFile = $("#imgDeleteBtn").data("file");
+			let targetImage = $("#result_card");
+			$.ajax({
+				url: '<%=request.getContextPath()%>/admin/deleteFile',
+				data : {fileName : targetFile},
+				dataType : 'text',
+				type : 'POST',
+				success : function(result){
+					console.log(result);
+					targetImage.remove();
+					$("input[type='file']").val("");
+				},
+				error : function(result){
+					console.log(result);
+					alert("파일을 삭제하지 못하였습니다.")
+				}
+	       });
+		}
 	</script>
 </body>
 </html>
