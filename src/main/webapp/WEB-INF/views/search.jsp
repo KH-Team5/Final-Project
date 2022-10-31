@@ -14,6 +14,8 @@
 </head>
 <body>
 	<h1>검색 페이지</h1>
+	
+	<jsp:include page="category.jsp" flush="true"/>
     <c:if test="${listcheck != 'empty'}">
 		<table id="products">
 			<thead>

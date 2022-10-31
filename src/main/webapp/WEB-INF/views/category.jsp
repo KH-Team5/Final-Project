@@ -6,12 +6,12 @@
 <html>
 <head>
 <style>
-.navi_bar_area {
+.category {
 	overflow: hidden;
 	height: 100px;
 }
 
-.navi_bar_area a {
+.category a {
 	float: left;
 	text-align: center;
 	text-decoration: none;
@@ -38,7 +38,7 @@
 .dropdown:hover .dropdown-content {
 	display: block;
 }
-.navi_bar_area a:hover, .dropdown:hover .dropbtn {
+.category a:hover, .dropdown:hover .dropbtn {
 	background-color: #475382;
 }
 
@@ -50,7 +50,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="navi_bar_area">
+	<div class="category">
 		<div class="dropdown">
 		    <button id="dropbtn" onclick="location.href='search?type=C&c_Code=1';">상의</button>
 		    <div class="dropdown-content"> 

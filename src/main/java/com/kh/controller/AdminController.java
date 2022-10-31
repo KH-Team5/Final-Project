@@ -1,17 +1,36 @@
 package com.kh.controller;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.model.domain.AttachImageDTO;
 import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.PageDTO;
@@ -20,26 +39,28 @@ import com.kh.service.AdminService;
 import com.kh.service.ProductService;
 
 import lombok.AllArgsConstructor;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping(value = "/admin")
 @AllArgsConstructor
 public class AdminController {
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@Autowired
 	private AdminService adminService;
-	
-	@Autowired 
+
+	@Autowired
 	private ProductService productService;
 
 	@RequestMapping(value = "/productRegistration", method = RequestMethod.GET)
 	public String productRegistration(Model model) throws Exception {
-		
+
 		List<CategoryDTO> list = productService.categoryList();
 		ObjectMapper obj = new ObjectMapper();
 		String categoryList = obj.writeValueAsString(list);
 		model.addAttribute("categoryList", categoryList);
-		
+
 		return "/admin/productRegistration";
 	}
 
@@ -62,4 +83,73 @@ public class AdminController {
 		model.addAttribute("paging", new PageDTO(cri, productService.productGetTotal(cri)));
 	}
 
+	@ResponseBody
+	@PostMapping(value = "/productRegistration/fileUpload")
+	public ResponseEntity<List<AttachImageDTO>> fileUploadPOST(@RequestParam("imageFile") MultipartFile[] uploadFile) {
+		for (MultipartFile multipartFile : uploadFile) {
+			File checkfile = new File(multipartFile.getOriginalFilename());
+			String type = null;
+			try {
+				type = Files.probeContentType(checkfile.toPath());
+				logger.info("MIME TYPE : " + type);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (!type.startsWith("image")) {
+				List<AttachImageDTO> list = null;
+				return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+			}
+		}
+		String uploadFolder = "C:\\upload";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
+		String datePath = str.replace("-", File.separator);
+		File uploadPath = new File(uploadFolder, datePath);
+		if (uploadPath.exists() == false)
+			uploadPath.mkdirs();
+
+		List<AttachImageDTO> list = new ArrayList<>();
+		for (MultipartFile multipartFile : uploadFile) {
+			AttachImageDTO image = new AttachImageDTO();
+			String uploadFileName = multipartFile.getOriginalFilename();
+			String uuid = UUID.randomUUID().toString();
+			uploadFileName = uuid + "_" + uploadFileName;
+
+			image.setFileName(uploadFileName);
+			image.setUploadPath(datePath);
+			image.setUuid(uuid);
+
+			File saveFile = new File(uploadPath, uploadFileName);
+			try {
+				multipartFile.transferTo(saveFile);
+				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+				BufferedImage bo_image = ImageIO.read(saveFile);
+				double ratio = 3;
+				int width = (int) (bo_image.getWidth() / ratio);
+				int height = (int) (bo_image.getHeight() / ratio);
+				Thumbnails.of(saveFile).size(width, height).toFile(thumbnailFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			list.add(image);
+		}
+		return new ResponseEntity<List<AttachImageDTO>>(list, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteFile(String fileName) {
+		File file = null;
+		try {
+			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file.delete();
+			String originFileName = file.getAbsolutePath().replace("s_", "");
+			file = new File(originFileName);
+			file.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("fail", HttpStatus.NOT_IMPLEMENTED);
+		}
+		return new ResponseEntity<String>("success", HttpStatus.OK);
+	}
 }
