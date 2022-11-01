@@ -58,6 +58,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 	@Override
 	public ProductDTO selectProductInfo(int p_Id) {
 		ProductDTO productDTO = sqlSession.selectOne("selectProductInfo", p_Id);
+		productDTO.setImageList(sqlSession.selectList("selectImage", p_Id));
 		return productDTO;
 	}
 

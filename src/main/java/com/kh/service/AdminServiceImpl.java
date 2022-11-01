@@ -17,9 +17,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void regProduct(ProductDTO productDTO) {
 		productRepository.insert(productDTO);
+		if (productDTO.getImageList() == null || productDTO.getImageList().size() <= 0)
+			return;
 		for (AttachImageDTO attach : productDTO.getImageList()) {
-			if (productDTO.getImageList() == null || productDTO.getImageList().size() <= 0)
-				break;
 			attach.setP_Id(productDTO.getP_Id());
 			productRepository.insertImage(attach);
 		}
