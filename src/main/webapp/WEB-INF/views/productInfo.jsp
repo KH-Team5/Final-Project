@@ -26,7 +26,8 @@
 	<script>
 		$(document).ready(function(){
 			const imgView = $("#image");
-			if(imgView.data("p_Id") != ''){
+			var imgChk = imgView.data("path");
+			if(imgChk != ""){
 				const imgView = $("#image");
 				const path = imgView.data("path");
 				const uuid = imgView.data("uuid");
@@ -37,7 +38,7 @@
 				// 이미지 없음
 				// imgView.find("img").attr('src', '');
 			}
-		});	
+		});		
 	</script>
 </body>
 </html>
