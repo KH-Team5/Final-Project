@@ -5,9 +5,12 @@
 		<typeAlias alias="memberDTO" type="com.kh.model.domain.MemberDTO" />
 		<typeAlias alias="productDTO" type="com.kh.model.domain.ProductDTO" />
 		<typeAlias alias="categoryDTO" type="com.kh.model.domain.CategoryDTO" />
+		<typeAlias alias="CartDTO" type="com.kh.model.domain.CartDTO" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/kh/model/MemberMapper.xml" />
 		<mapper resource="com/kh/model/ProductMapper.xml" />
+		<mapper resource="com/kh/model/CartMapper.xml" />
+		
 	</mappers>
 </configuration>

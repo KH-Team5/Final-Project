@@ -3,14 +3,46 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="cart">
-  <select id="getByM_id" resultType="cartDTO" parameterType="string">
+  <!-- 카트 추가 -->
+  <insert id="addCart" parameterType="memberDTO">
 		<![CDATA[
-		select M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
-		from member_TB 
-		where M_id = #{M_id }
+		insert into cart_tb(M_id, P_id, C_qty)
+		values(#{M_id}, #{P_id}, #{C_qty}) 
 		]]>
-	</select>
+	</insert>
+	
+	<!-- 카트 삭제 -->
+	<delete id="deleteCart">
+	<![CDATA[
+		delete from cart_tb
+		where C_id = #{C_id}
+		]]>
+	</delete>
   
+  <!-- 카트 수량 수정 -->
+  <update id="modifyCount">
+  <![CDATA[
+		update cart_tb set C_qty=#{C_qty} where cartId = #{cartId}
+		]]>
+  </update>
+  
+  <!-- 카트 목록 조회 -->
+  <select id="getCart" resultType="CartDTO">
+  
+  <![CDATA[
+		select a.cartId, a.M_id, a.P_id, a.C_qty, b.P_name, b.P_price
+		from cart_tb a left outer join product_tb b on a.P_id = b.P_id
+		where M_id = #{M_id}	
+		]]>
+  </select>
+  
+  <!-- 카트 확인 -->
+  <select id="checkCart" resultType="CartDTO">
+	
+		select * from cart_tb 
+		where M_id = #{M_id} and P_id = #{P_id}
+	
+	</select>
   
   
   
