@@ -7,11 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지</title>
+<script>
+function agreeFunction() {
+	alert("정말 탈퇴하시겠습니까?");
+}
+function updateAgree(){
+	alert("회원정보를 변경하시겠습니까?")
+}
+</script>
 </head>
 <body>
 <h1>가입 정보</h1>
-<table class="container">
-    <table class="table">
+ <table class="table">
       <tr>
          <th>아이디</th>
          <td>${key1.m_id}</td>
@@ -46,8 +53,8 @@
       </tr>
       <tr>
        <td colspan="2">
-       <a href="<%=request.getContextPath()%>/member/memberUpdate" class="btn">정보수정</a>
-       <a href="delete.do" class="btn">회원 탈퇴</a>
+       <a href="<%=request.getContextPath()%>/member/memberUpdate" class="btn" onclick="updateAgree()">정보수정</a>
+       <a href="<%=request.getContextPath()%>/member/memberDelete" class="btn" onclick="agreeFunction()">회원 탈퇴</a>
       </td>
       </tr>
 </table>

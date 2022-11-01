@@ -14,6 +14,10 @@ public interface MemberRepository {
 	public int selectByEmail(String email);
 
 	public int selectByEmailandId(String email, String M_id);
+	
+	public int memberDelete(String M_id);
+
+	int memberUpdate(MemberDTO memberDTO);
 
 	public int updatePwdById(String M_id, String M_pwd);
 

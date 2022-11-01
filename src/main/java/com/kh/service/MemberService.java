@@ -6,7 +6,7 @@ public interface MemberService {
 	public boolean joinMember(MemberDTO memberDTO);
 
 	public int idChk(String M_id);
-	
+
 	void sendEmail(String toMail, String title, String content);
 
 	public int emailOverlapChk(String email);
@@ -19,4 +19,7 @@ public interface MemberService {
 
 	public MemberDTO memberInfo(String M_id);
 
+	public int memberUpdate(MemberDTO memberDTO);
+
+	public int memberDelete(String M_id);
 }

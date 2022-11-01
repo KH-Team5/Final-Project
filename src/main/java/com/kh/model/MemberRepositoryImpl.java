@@ -54,6 +54,18 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 
 	@Override
+	public int memberUpdate(MemberDTO memberDTO) {
+		int count = sqlSession.update("member.update", memberDTO);
+		return count;
+	}
+	
+	@Override
+	public int memberDelete(String M_id) {
+		int count = sqlSession.delete("member.delete", M_id);
+		return count;
+		
+	}
+
 	public int updatePwdById(String M_id, String M_pwd) {
 		Map<String, String> map = new HashMap<>();
 		map.put("M_pwd", M_pwd);
@@ -61,3 +73,5 @@ public class MemberRepositoryImpl implements MemberRepository {
 		return sqlSession.update("member.updatePwdById", map);
 	}
 }
+	
+
