@@ -24,10 +24,13 @@
 
 
 	<insert id="insert" parameterType="productDTO">
-	<![CDATA[
-		insert into product_TB
-		values(product_SQ.NEXTVAL, #{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro })
-	]]>
+		<selectKey resultType="int" keyProperty="p_Id" order="AFTER">
+  			SELECT product_SQ.CURRVAL FROM DUAL
+  		</selectKey>  
+		<![CDATA[
+			insert into product_TB
+			values(product_SQ.NEXTVAL, #{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro })
+		]]>
 	</insert>
 
 	<select id="selectProductList" resultType="productDTO">
@@ -83,5 +86,16 @@
 			select p.p_Id, p.p_Name, p.p_Price, p.p_Stock, c.c_Name, p.p_Intro, p_Date
 			from product_TB p left outer join category_TB c on p.p_Category = c.c_Code
 			where p.p_Id = #{p.p_Id}	
+	</select>
+	
+	<!-- 이미지 등록 -->
+	<insert id="insertImage">
+		insert into product_image_TB
+		values (#{p_Id}, #{fileName}, #{filePath}, #{uuid})
+	</insert>
+	
+		<!-- 지정 상품 이미지 정보 얻기 -->
+	<select id="selectImage" resultType="AttachImageDTO">
+		select * from product_image_TB where p_Id = #{p_Id}
 	</select>
 </mapper>
