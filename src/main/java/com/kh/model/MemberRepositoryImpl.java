@@ -55,8 +55,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 
 	@Override
-	public int memberUpdate(String M_id) {
-		int count = sqlSession.update("member.update", M_id);
+	public int memberUpdate(MemberDTO memberDTO) {
+		int count = sqlSession.update("member.update", memberDTO);
 		return count;
 	}
 	

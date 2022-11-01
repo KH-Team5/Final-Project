@@ -20,7 +20,7 @@
 		<span id="pwChk"></span>
 		
 		가입된 이름: ${key1.m_name}<br>
-		새로운 이름:<input id="name" name="M_name" type="text"><br>
+		새로운 이름:<input id="M_name" name="M_name" type="text"><br>
 		
 		기존 이메일: ${key1.email}<br>
 		

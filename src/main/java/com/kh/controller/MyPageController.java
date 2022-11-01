@@ -54,10 +54,9 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "/member/memberUpdate", method = RequestMethod.POST)
-	public String memberupdatePOST(Model model, Principal principal, MemberDTO member) {
-		model.addAttribute("key1", memberservice.memberInfo(principal.getName()));
-		logger.info("회원정보 수정 진입");
-		memberservice.memberUpdate(member);
+	public String memberupdatePOST(Principal principal, MemberDTO memberDTO) {
+		memberDTO.setM_id(principal.getName());
+		memberservice.memberUpdate(memberDTO);
 		logger.info("회원정보 수정 성공");
 
 		return "redirect:/logout";

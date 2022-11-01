@@ -53,7 +53,7 @@
 	<update id="update" parameterType="memberDTO">
 		<![CDATA[
 			update member_TB
-			set #{M_pwd }, #{M_name }, #{contact }, #{zipcode }, #{address }, #{detail_address }, sysdate, 'ROLE_USER')
+			set M_pwd = #{M_pwd }, M_name = #{M_name }, contact = #{contact }, zipcode=#{zipcode }, address=#{address }, detail_address=#{detail_address }
 			where M_id = #{M_id }
 		]]>
 	</update>

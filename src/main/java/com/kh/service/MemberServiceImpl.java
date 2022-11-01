@@ -47,8 +47,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public int memberUpdate(String M_id) {
-		return memberRepository.memberUpdate(M_id);
+	public int memberUpdate(MemberDTO memberDTO) {
+		return memberRepository.memberUpdate(memberDTO);
 	}
 	
 	@Override

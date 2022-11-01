@@ -15,7 +15,7 @@ public interface MemberService {
 	
 	public MemberDTO memberInfo(String M_id);
 	
-	public int memberUpdate(String M_id);
+	public int memberUpdate(MemberDTO memberDTO);
 	
 	public int memberDelete(String M_id);
 
