@@ -76,13 +76,13 @@ CONSTRAINT order_list_TB PRIMARY KEY(O_index, P_index)
 );  
 
 /* 장바구니 */
-CREATE TABLE cart_TB(
-M_id VARCHAR2(50) NOT NULL, /* member_TB의 FK, PK */
-P_index NUMBER NOT NULL, /* product_TB의 FK, PK */
-C_qty NUMBER NOT NULL,
-FOREIGN KEY(M_id) REFERENCES member_TB(M_id),
-FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
-CONSTRAINT cart_TB PRIMARY KEY(M_id, P_index)
+create table cart_TB(
+    C_id number  primary key,
+    C_qty NUMBER NOT NULL,
+    M_id varchar2(50),
+    P_id number,
+    foreign key (M_id) references member_tb(M_id),
+    foreign key (P_id) references product_tb(P_id)
 );
 
 /* 찜목록 */
