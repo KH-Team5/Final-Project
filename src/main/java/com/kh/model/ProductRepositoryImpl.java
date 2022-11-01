@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.ProductDTO;
 
@@ -33,4 +34,28 @@ public class ProductRepositoryImpl implements ProductRepository {
 		return sqlSession.selectOne("product.getTotal", cri);
 	}
 
+	@Override
+	public List<CategoryDTO> selectCategoryListSortCode() {
+		return sqlSession.selectList("selectCategoryListSortCode");
+	};
+
+	@Override
+	public List<CategoryDTO> selectInnerCategory() {
+		return sqlSession.selectList("selectInnerCategory");
+	}
+
+	@Override
+	public List<CategoryDTO> selectPantsCategory() {
+		return sqlSession.selectList("selectPantsCategory");
+	}
+
+	@Override
+	public List<CategoryDTO> selectOuterCategory() {
+		return sqlSession.selectList("selectOuterCategory");
+	}
+
+	@Override
+	public ProductDTO selectProductInfo(int p_Id) {
+		return sqlSession.selectOne("selectProductInfo", p_Id);
+	}
 }

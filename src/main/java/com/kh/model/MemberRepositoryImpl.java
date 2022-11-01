@@ -27,7 +27,6 @@ public class MemberRepositoryImpl implements MemberRepository {
 		else
 			return false;
 	}
-	
 
 	@Override
 	public int selectById(String M_id) {
@@ -40,15 +39,15 @@ public class MemberRepositoryImpl implements MemberRepository {
 		int count = sqlSession.selectOne("member.selectByEmail", email);
 		return count;
 	}
-	
+
 	@Override
 	public String selectIdByEmail(String email) {
 		return sqlSession.selectOne("member.selectIdByEmail", email);
 	}
-	
+
 	@Override
 	public int selectByEmailandId(String email, String M_id) {
-		Map<String, String>map = new HashMap<>();
+		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
 		map.put("M_id", M_id);
 		return sqlSession.selectOne("member.selectByEmailandId", map);
@@ -67,6 +66,12 @@ public class MemberRepositoryImpl implements MemberRepository {
 		
 	}
 
+	public int updatePwdById(String M_id, String M_pwd) {
+		Map<String, String> map = new HashMap<>();
+		map.put("M_pwd", M_pwd);
+		map.put("M_id", M_id);
+		return sqlSession.update("member.updatePwdById", map);
+	}
 }
 	
 

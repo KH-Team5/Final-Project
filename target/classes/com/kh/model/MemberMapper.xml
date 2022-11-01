@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	<select id="getByM_id" resultType="memberDTO" parameterType="string">
+	<select id="getByM_id" resultType="memberDTO"
+		parameterType="string">
 		<![CDATA[
 		select M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
 		from member_TB 
@@ -41,15 +42,16 @@
 			where email = #{email }
 		]]>
 	</select>
-	
-	<select id="selectByEmailandId" parameterType="HashMap" resultType="Integer">
+
+	<select id="selectByEmailandId" parameterType="HashMap"
+		resultType="Integer">
 		<![CDATA[
 			select count(*)
 			from member_TB 
 			where email = #{email } AND M_id = #{M_id }
 		]]>
 	</select>
-	
+
 	<update id="update" parameterType="memberDTO">
 		<![CDATA[
 			update member_TB
@@ -57,7 +59,7 @@
 			where M_id = #{M_id }
 		]]>
 	</update>
-	
+
 	<update id="delete" parameterType="memberDTO">
 		<![CDATA[
 			delete
@@ -66,9 +68,5 @@
 			
 		]]>
 	</update>
-	
-	
-	
-	
-	
+
 </mapper>

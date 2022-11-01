@@ -19,7 +19,8 @@ P_name VARCHAR2(200) NOT NULL,
 P_price NUMBER NOT NULL,
 P_stock NUMBER NOT NULL,
 P_category varchar2(30) NOT NULL,
-P_date DATE default sysdate
+P_date DATE default sysdate,
+p_Intro clob
 );
 
 /* 상품 시퀀스 */

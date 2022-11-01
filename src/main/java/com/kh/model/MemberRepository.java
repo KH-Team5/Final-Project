@@ -19,4 +19,6 @@ public interface MemberRepository {
 
 	int memberUpdate(MemberDTO memberDTO);
 
+	public int updatePwdById(String M_id, String M_pwd);
+
 }
