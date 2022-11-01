@@ -189,10 +189,13 @@
 			let uploadResult = $("#uploadResult");
 			let obj = uploadResultArr[0];
 			let str = "";
-			let filePath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+			let uploadPath = encodeURIComponent(obj.filePath + "/s_" + obj.fileName);
 			str += "<div id='result_card'>";
-			str += "<img src='<%=request.getContextPath()%>/display?fileName=" + filePath +"'>";
-			str += "<div id='imgDeleteBtn' data-file='" + filePath + "'>삭제</div>";
+			str += "<img src='<%=request.getContextPath()%>/display?fileName=" + uploadPath +"'>";
+			str += "<div id='imgDeleteBtn' data-file='" + uploadPath + "'>삭제</div>";
+			str += "<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
+			str += "<input type='hidden' name='imageList[0].uuid' value='"+ obj.uuid +"'>";
+			str += "<input type='hidden' name='imageList[0].filePath' value='"+ obj.filePath +"'>";
 			str += "</div>";
 			uploadResult.append(str); 
 		}

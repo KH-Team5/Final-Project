@@ -117,7 +117,7 @@ public class AdminController {
 			uploadFileName = uuid + "_" + uploadFileName;
 
 			image.setFileName(uploadFileName);
-			image.setUploadPath(datePath);
+			image.setFilePath(datePath);
 			image.setUuid(uuid);
 
 			File saveFile = new File(uploadPath, uploadFileName);

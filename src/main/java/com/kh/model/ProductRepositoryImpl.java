@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.model.domain.AttachImageDTO;
 import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.ProductDTO;
@@ -56,6 +57,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 
 	@Override
 	public ProductDTO selectProductInfo(int p_Id) {
-		return sqlSession.selectOne("selectProductInfo", p_Id);
+		ProductDTO productDTO = sqlSession.selectOne("selectProductInfo", p_Id);
+		return productDTO;
+	}
+
+	@Override
+	public void insertImage(AttachImageDTO imageDTO) {
+		sqlSession.insert("product.insertImage", imageDTO);
 	}
 }
