@@ -66,4 +66,14 @@ public class ProductRepositoryImpl implements ProductRepository {
 	public void insertImage(AttachImageDTO imageDTO) {
 		sqlSession.insert("product.insertImage", imageDTO);
 	}
+
+	@Override
+	public List<AttachImageDTO> selectImage(int p_Id) {
+		return sqlSession.selectList("product.selectImage", p_Id);
+	}
+
+	@Override
+	public int updateProductStock(ProductDTO ProductDTO) {
+		return sqlSession.update("product.updateProductStock", ProductDTO);
+	}
 }

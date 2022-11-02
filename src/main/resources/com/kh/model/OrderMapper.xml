@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+	<select id="selectByp_Id" resultType="OrderItemDTO">
+		select p_id, p_Name, p_Price
+		from product_TB where p_id = #{p_id}
+	</select>
+	
+	<select id="selectBym_Id" resultType="MemberDTO">
+		SELECT M_id, M_name, email, address, detail_address, zipcode
+  		FROM member_TB 
+  		WHERE M_id = #{M_id}
+	</select>
+	
+	<insert id="insertOrder">
+		insert into order_TB(o_Id, m_Name, m_Id, o_address, o_detail_address, o_Zipcode, o_state, o_delivery_charge)
+    	values(ordet_SQ.NEXTVAL, #{m_Name}, #{m_Id}, #{o_address}, #{o_detail_address}, #{o_Zipcode}, '배송준비', #{o_delivery_charge})
+	</insert>
+	
+	<insert id="insertOrderItem">
+		<selectKey resultType="int" keyProperty="o_Id" order="BEFORE">
+  			SELECT ordet_SQ.CURRVAL FROM DUAL
+  		</selectKey>  
+		insert into order_item_TB
+		values(ordet_item_SQ.NEXTVAL, #{o_Id}, #{p_Id}, #{p_Cnt}, #{p_Price})
+	</insert>
+	
+</mapper>

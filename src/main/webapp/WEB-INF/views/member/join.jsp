@@ -16,6 +16,7 @@
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous">
 </script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 	<h1>회원가입 페이지</h1>
@@ -40,6 +41,8 @@
 		
 		연락처: <input id="contact" name="contact" type="tel"> <br> 
 		<span id="contactChk"></span>
+		
+		<a class="address_search_btn" onclick="execution_daum_address()">주소 찾기</a> <br>
 		
 		우편번호: <input id="zipcode" name="zipcode" type="text"> <br> 
 		<span id="zipcodeChk"></span>
@@ -208,6 +211,34 @@
 		        mailAuthChk = false;
 			}
 		});
+		
+		function execution_daum_address(){
+			new daum.Postcode({
+				oncomplete: function(data) {
+	                var addr = '';
+	                var extraAddr = '';
+	                if (data.userSelectedType === 'R')
+	                    addr = data.roadAddress;
+	                else
+	                    addr = data.jibunAddress;
+	                
+	                if(data.userSelectedType === 'R'){
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname))
+	                        extraAddr += data.bname;
+	                    if(data.buildingName !== '' && data.apartment === 'Y')
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    if(extraAddr !== '')
+	                        extraAddr = ' (' + extraAddr + ')';
+						addr += extraAddr;
+	                } else 
+						addr += ' ';
+	                $("#zipcode").val(data.zonecode);
+	                $("#address").val(addr);				
+	                $("#detail_address").attr("readonly", false);
+	                $("#detail_address").focus();	 
+		        }
+		    }).open();  	
+		}
 	</script>
 </body>
 </html>
