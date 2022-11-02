@@ -3,6 +3,7 @@ package com.kh.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.PageDTO;
 import com.kh.model.domain.ProductDTO;
+import com.kh.service.MemberService;
 import com.kh.service.ProductService;
 
 @Controller
@@ -28,6 +30,8 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private MemberService memberservice;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String productManage(Criteria cri, Model model) {
@@ -54,8 +58,10 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/productInfo/{p_Id}", method = RequestMethod.GET)
-	public String productInfo(@PathVariable("p_Id") int p_Id, Model model) {
+	public String productInfo(@PathVariable("p_Id") int p_Id, Model model, Principal principal) {
 		model.addAttribute("productInfo", productService.getProductInfo(p_Id));
+		if (principal != null)
+			model.addAttribute("member", memberservice.memberInfo(principal.getName()));
 		return "/productInfo";
 	}
 

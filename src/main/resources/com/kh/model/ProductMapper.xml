@@ -98,4 +98,8 @@
 	<select id="selectImage" resultType="AttachImageDTO">
 		select * from product_image_TB where p_Id = #{p_Id}
 	</select>
+	
+	<update id="updateProductStock">
+		update product_TB set p_Stock = #{p_Stock} where p_Id = #{p_Id}
+	</update>
 </mapper>
