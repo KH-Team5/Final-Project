@@ -16,14 +16,17 @@
 </head>
 </head>
 <body>
+<div id="image" data-p_Id="${productInfo.imageList[0].p_Id}" data-path="${productInfo.imageList[0].filePath}" data-uuid="${productInfo.imageList[0].uuid}" data-filename="${productInfo.imageList[0].fileName}">
+		<img>
+		</div>
 	<h1>상품 관리 페이지</h1>
     <c:if test="${listcheck != 'empty'}">
 		<table id="products">
 			<thead>
 				<tr>
-					<td>상품 번호</td>
-					<td>상품 이름</td>
-					<td>상품 가격</td>
+					
+					<td>상품이름</td>
+					<td>상품가격</td>
 					<td>재고</td>
 					<td>카테고리</td>
 					<td>등록날짜</td>
@@ -31,7 +34,7 @@
 			</thead>	
 			<c:forEach var="list" items="${list}" >
 				<tr>
-					<td><c:out value="${list.p_Name}"></c:out></td>
+					<td><a href="<%=request.getContextPath()%>/productInfo/${list.p_Id}"><c:out value="${list.p_Name}"/></a></td> 
 					<td><c:out value="${list.p_Price}"></c:out></td>
 					<td><c:out value="${list.p_Stock}"></c:out></td>
 					<td><c:out value="${list.p_Category}"></c:out></td>				
