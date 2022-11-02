@@ -72,5 +72,16 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO memberInfo(String M_id) {
 		return memberRepository.get(M_id);
 	}
+	
+	@Override
+	public int memberUpdate(MemberDTO memberDTO) {
+		return memberRepository.memberUpdate(memberDTO);
+	}
+	
+	@Override
+	public int memberDelete(String M_id) {
+		return memberRepository.memberDelete(M_id);
+	}
+	
 
 }
