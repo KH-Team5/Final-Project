@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.model.domain.AdminDTO;
 import com.kh.model.domain.AttachImageDTO;
 import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
@@ -42,17 +43,47 @@ import lombok.AllArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin/*")
 @AllArgsConstructor
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-
+	
 	@Autowired
 	private AdminService adminService;
-
+	
 	@Autowired
 	private ProductService productService;
 
+	//관리자 메인페이지로 이동
+		@RequestMapping(value = "/adminMain", method = RequestMethod.GET)
+		public String getpage() throws Exception {
+			return "admin/adminMain";
+		}
+		
+	//회원관리
+		@RequestMapping(value = "/adminUser", method = RequestMethod.GET)
+		public void getlist(Model model) throws Exception {
+//	         List<AdminDTO> list = null;
+//	         list = adminService.list();
+//			model.addAttribute("adminUser", list);
+			}
+		
+		
+	// 상품관리 
+		
+		@RequestMapping(value = "/productsManage", method = RequestMethod.GET)
+		public void productManage(Criteria cri, Model model) {
+			List<ProductDTO> list = productService.productGetList(cri);
+			if (!list.isEmpty())
+				model.addAttribute("list", list);
+			else {
+				model.addAttribute("listCheck", "empty");
+				return;
+			}
+			model.addAttribute("paging", new PageDTO(cri, productService.productGetTotal(cri)));
+		}
+		
+	// 상품 등록
 	@RequestMapping(value = "/productRegistration", method = RequestMethod.GET)
 	public String productRegistration(Model model) throws Exception {
 
@@ -64,24 +95,15 @@ public class AdminController {
 		return "/admin/productRegistration";
 	}
 
+	
 	@PostMapping("/productRegistration")
 	public String productRegistrationPOST(ProductDTO productDTO, RedirectAttributes redirec) {
 		adminService.regProduct(productDTO);
 		redirec.addFlashAttribute("registration_result", productDTO.getP_Name());
 		return "redirect:/admin/productsManage";
 	}
-
-	@RequestMapping(value = "/productsManage", method = RequestMethod.GET)
-	public void productManage(Criteria cri, Model model) {
-		List<ProductDTO> list = productService.productGetList(cri);
-		if (!list.isEmpty())
-			model.addAttribute("list", list);
-		else {
-			model.addAttribute("listCheck", "empty");
-			return;
-		}
-		model.addAttribute("paging", new PageDTO(cri, productService.productGetTotal(cri)));
-	}
+	
+	
 
 	@ResponseBody
 	@PostMapping(value = "/productRegistration/fileUpload")

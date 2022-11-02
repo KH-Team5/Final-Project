@@ -15,9 +15,8 @@
 	<a href="<%=request.getContextPath()%>/member/join">회원가입</a>
 	<a href="<%=request.getContextPath()%>/member/findPage">아이디 비밀번호 찾기</a>
 	<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
-	<a href="<%=request.getContextPath()%>/admin/productRegistration">상품등록</a>
-	<a href="<%=request.getContextPath()%>/admin/productsManage">상품관리</a>
 	<a href="<%=request.getContextPath()%>/member/mypage">마이 페이지</a>
 	<a href="<%=request.getContextPath()%>/main">메인 페이지</a>
+	<a href="<%=request.getContextPath()%>/admin/adminMain">관리자 페이지</a>
 </body>
 </html>
