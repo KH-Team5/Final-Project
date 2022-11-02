@@ -49,7 +49,7 @@ create table product_image_TB(
 
 /* 주문 */
 CREATE TABLE order_TB(
-    O_Id VARCHAR2(200) PRIMARY KEY,
+    O_Id NUMBER PRIMARY KEY,
     M_Id VARCHAR2(200) NOT NULL,
     M_Name VARCHAR2(50) NOT NULL,
     O_Zipcode NUMBER NOT NULL,
@@ -64,13 +64,18 @@ CREATE TABLE order_TB(
 /* 주문 상품 */
 CREATE TABLE order_item_TB(
     OI_id NUMBER PRIMARY KEY,
-    O_id VARCHAR2(200) NOT NULL,
+    O_id NUMBER NOT NULL,
     P_id NUMBER NOT NULL, 
     P_cnt NUMBER NOT NULL,
     P_price NUMBER NOT NULL,
     FOREIGN KEY(O_id) REFERENCES order_TB(O_id),
     FOREIGN KEY(P_id) REFERENCES product_TB(P_id)
 );
+
+/* 주문 시퀀스 */
+CREATE SEQUENCE ordet_SQ
+START WITH 1
+INCREMENT BY 1;
 
 /* 주문 상품 시퀀스 */
 CREATE SEQUENCE order_item_SQ
