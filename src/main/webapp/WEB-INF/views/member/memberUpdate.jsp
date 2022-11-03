@@ -12,7 +12,7 @@
 <body>
 	<h1>회원 정보 수정</h1>
 	<form id="joinform" name="joinform" method="post">
-		아이디: ${key1.m_id}<br>
+		아이디: ${key1.m_Id}<br>
 		
 		새로운 비밀번호: <input id="M_pwd" name="M_pwd" type="password"> <br>
 		<span id="pwChk"></span>

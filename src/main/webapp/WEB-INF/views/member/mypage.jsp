@@ -14,7 +14,7 @@
     <table class="table">
       <tr>
          <th>아이디</th>
-         <td>${key1.m_id}</td>
+         <td>${key1.m_Id}</td>
       </tr>
        <tr>
          <th>이름</th>

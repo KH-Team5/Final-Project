@@ -78,4 +78,12 @@ public class ProductController {
 		}
 		return result;
 	}
+
+	@RequestMapping(value = "/review/reviewEnroll/{m_Id}", method = RequestMethod.GET)
+	public String replyEnrollWindowGET(@PathVariable("m_Id") String m_Id, int p_Id, Model model) {
+		ProductDTO productDTO = productService.getProductInfo(p_Id);
+		model.addAttribute("productInfo", productDTO);
+		model.addAttribute("memberId", m_Id);
+		return "/review/reviewEnroll";
+	}
 }
