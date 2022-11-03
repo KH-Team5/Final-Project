@@ -19,7 +19,8 @@ P_name VARCHAR2(200) NOT NULL,
 P_price NUMBER NOT NULL,
 P_stock NUMBER NOT NULL,
 P_category varchar2(30) NOT NULL,
-P_date DATE default sysdate
+P_date DATE default sysdate,
+p_Intro clob
 );
 
 /* 상품 시퀀스 */
@@ -38,51 +39,97 @@ create table category_TB(
 );
 
 /* 상품 이미지 */
-CREATE TABLE product_image_TB(
-uuid VARCHAR2(100) NOT NULL PRIMARY KEY, /* 이미지를 불러오는 고유 아이디 PK */
-P_index NUMBER NOT NULL,
-file_path VARCHAR2(300) NOT NULL,
-upload_date DATE NOT NULL,
-FOREIGN KEY(P_index) REFERENCES product_TB(P_index)
+create table product_image_TB(
+    p_Id int,
+    fileName varchar2(100) not null,
+    filePath  varchar2(200) not null,
+    uuid varchar2(100)not null primary key,
+    foreign key (p_Id) references product_TB(p_Id)
 );
 
 /* 주문 */
 CREATE TABLE order_TB(
-O_index NUMBER PRIMARY KEY, /* 시퀀스값 PK */
-M_id VARCHAR2(200) NOT NULL,
-O_name VARCHAR2(50) NOT NULL,
-O_zipcode NUMBER NOT NULL,
-O_address VARCHAR2(200) NOT NULL,
-O_detail_address VARCHAR2(200) NOT NULL,
-O_state VARCHAR2(50) NOT NULL,
-O_delivery_charge NUMBER NOT NULL,
-FOREIGN KEY(M_id) REFERENCES member_TB(M_id)
+    O_Id NUMBER PRIMARY KEY,
+    M_Id VARCHAR2(200) NOT NULL,
+    M_Name VARCHAR2(50) NOT NULL,
+    O_Zipcode NUMBER NOT NULL,
+    O_address VARCHAR2(200) NOT NULL,
+    O_detail_address VARCHAR2(200) NOT NULL,
+    O_Date Date default sysdate,
+    O_state VARCHAR2(50) NOT NULL,
+    O_delivery_charge NUMBER NOT NULL,
+    FOREIGN KEY(M_id) REFERENCES member_TB(M_id)
 );
+
+/* 주문 상품 */
+CREATE TABLE order_item_TB(
+    OI_id NUMBER PRIMARY KEY,
+    O_id NUMBER NOT NULL,
+    P_id NUMBER NOT NULL, 
+    P_cnt NUMBER NOT NULL,
+    P_price NUMBER NOT NULL,
+    FOREIGN KEY(O_id) REFERENCES order_TB(O_id),
+    FOREIGN KEY(P_id) REFERENCES product_TB(P_id)
+);
+
 /* 주문 시퀀스 */
 CREATE SEQUENCE ordet_SQ
 START WITH 1
 INCREMENT BY 1;
 
-/* 주문목록 */
-CREATE TABLE order_list_TB(
-O_index NUMBER NOT NULL, /* order_TB의 FK, PK */
-P_index NUMBER NOT NULL, /* product_TB의 FK, PK */
-OL_qty NUMBER NOT NULL,
-OL_price NUMBER NOT NULL,
-FOREIGN KEY(O_index) REFERENCES order_TB(O_index),
-FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
-CONSTRAINT order_list_TB PRIMARY KEY(O_index, P_index)
-);  
+/* 주문 상품 시퀀스 */
+CREATE SEQUENCE order_item_SQ
+START WITH 1
+INCREMENT BY 1;
+
+/* 리뷰 테이블 */
+create table review_TB(
+    r_Id NUMBER primary key,
+    p_Id NUMBER not null,
+    m_Id VARCHAR2(50) not null,
+    r_Date DATE default sysdate,
+    r_Content VARCHAR2(3500),
+    r_Rating NUMBER(2,1) not null,
+    FOREIGN KEY (m_Id)REFERENCES member_TB(m_Id),
+    FOREIGN KEY (p_Id) REFERENCES product_TB(p_Id),
+    UNIQUE(p_Id, m_Id)
+);
+
+/* 리뷰 시퀀스 */
+CREATE SEQUENCE review_TB_SQ
+START WITH 1
+INCREMENT BY 1;
 
 /* 장바구니 */
-CREATE TABLE cart_TB(
-M_id VARCHAR2(50) NOT NULL, /* member_TB의 FK, PK */
-P_index NUMBER NOT NULL, /* product_TB의 FK, PK */
-C_qty NUMBER NOT NULL,
-FOREIGN KEY(M_id) REFERENCES member_TB(M_id),
-FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
-CONSTRAINT cart_TB PRIMARY KEY(M_id, P_index)
+create table cart_TB(
+    C_id number  primary key,
+    C_qty NUMBER NOT NULL,
+    M_id varchar2(50),
+    P_id number,
+    foreign key (M_id) references member_tb(M_id),
+    foreign key (P_id) references product_tb(P_id)
 );
+
+/* 장바구니 상품 */
+create table cart_item_TB(
+CI_id number PRIMARY KEY,
+C_id number not null,
+P_id number not null,
+P_name VARCHAR2(200) not null,
+P_price number not null,
+FOREIGN KEY(C_id) REFERENCES cart_TB(c_id),
+FOREIGN KEY(P_id) REFERENCES product_TB(P_id)
+);
+
+/*장바구니 시퀀스*/
+CREATE SEQUENCE cart_SQ
+start with 1
+INCREMENT BY 1;
+
+/*장바구니 상품 시퀀스*/
+CREATE SEQUENCE cart_item_SQ
+start with 1
+INCREMENT BY 1;
 
 /* 찜목록 */
 CREATE TABLE wish_TB(
