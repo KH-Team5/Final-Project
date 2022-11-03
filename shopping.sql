@@ -110,6 +110,27 @@ create table cart_TB(
     foreign key (P_id) references product_tb(P_id)
 );
 
+/* 장바구니 상품 */
+create table cart_item_TB(
+CI_id number PRIMARY KEY,
+C_id number not null,
+P_id number not null,
+P_name VARCHAR2(200) not null,
+P_price number not null,
+FOREIGN KEY(C_id) REFERENCES cart_TB(c_id),
+FOREIGN KEY(P_id) REFERENCES product_TB(P_id)
+);
+
+/*장바구니 시퀀스*/
+CREATE SEQUENCE cart_SQ
+start with 1
+INCREMENT BY 1;
+
+/*장바구니 상품 시퀀스*/
+CREATE SEQUENCE cart_item_SQ
+start with 1
+INCREMENT BY 1;
+
 /* 찜목록 */
 CREATE TABLE wish_TB(
 M_id VARCHAR2(50) NOT NULL, /* member_TB의 FK, PK */
