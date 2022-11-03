@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<insert id="insertReview">
+		<![CDATA[
+	  		insert into review_TB(r_Id, p_Id, m_Id, r_Date, r_Content, r_Rating) 
+	  		values(review_SQ.NEXTVAL, #{p_Id}, #{m_Id}, SYSDATE, #{r_Content}, #{r_Rating})
+  		]]>	
+  	</insert>
+  	
+  	<select id="selectById" resultType="integer">
+  		<![CDATA[
+			select r_Id from review_TB 
+			where m_Id = #{m_Id} and p_Id = #{p_Id}
+		]]>	
+	</select>
+	
+	<!-- 리뷰 페이징 -->
+  	<select id="selectReviewList" resultType="ReviewDTO">
+  		<![CDATA[
+			select * from(  		
+				select rownum as rn, r_Id, p_Id, m_Id, r_Content, r_Rating, r_Date
+				from review_TB
+				where rownum <= #{pageNum} * #{amount}  and p_Id = #{p_Id}	
+				order by r_Date desc  	
+	  			)
+	  		where rn > (#{pageNum} -1) * #{amount}
+  		]]>	
+  	</select>
+  	
+  	<select id="countReviewTotal" resultType="integer">
+  		<![CDATA[
+	  		select count(*)
+	  		from review_TB
+	  		where p_Id = #{p_Id}
+  		]]>	
+  	</select>
+</mapper>

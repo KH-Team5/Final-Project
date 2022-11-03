@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.addressInfo_input_div{
+.addressInfo_input{
 	display: none;
 }
 </style>
@@ -19,17 +19,17 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-	<div class="member_info_div">
+	<div class="member_info">
 		주문자
 		<span>${memberInfo.m_name} | ${memberInfo.email}</span>
 	</div>
-	<div class="addressInfo_div">
-		<div class="addressInfo_button_div">
-			<button class="address_btn address_btn_1" onclick="showAdress('1')">사용자 정보 주소록</button>
-			<button class="address_btn address_btn_2" onclick="showAdress('2')">직접 입력</button>
+	<div class="addressInfo">
+		<div class="addressInfo_button">
+			<button class="address_btn_1" onclick="showAdress('1')">사용자 정보 주소록</button>
+			<button class="address_btn_2" onclick="showAdress('2')">직접 입력</button>
 		</div>
-		<div class="addressInfo_input_div_wrap">
-			<div class="addressInfo_input_div addressInfo_input_div_1">
+		<div class="addressInfo_input_wrap">
+			<div class="addressInfo_input addressInfo_input_1">
 				<table>
 					<tbody>
 						<tr>
@@ -52,7 +52,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="addressInfo_input_div addressInfo_input_div_2">
+			<div class="addressInfo_input addressInfo_input_2">
 				<table>
 					<tbody>
 						<tr>
@@ -79,9 +79,9 @@
 		</div>
 	</div>
 	
-	<div class="orderGoods_div">
+	<div class="orderProduct">
 		<!-- 상품 테이블 -->
-		<table class="goods_subject_table">
+		<table class="product_subject_table">
 			<tbody>
 				<tr>
 					<th>이미지</th>
@@ -90,7 +90,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<table class="goods_table">				
+		<table class="product_table">				
 			<tbody>
 				<c:forEach items="${orderList}" var="ol">
 					<tr>
@@ -100,7 +100,7 @@
 							</div>	
 						</td>
 						<td>${ol.p_Name}</td>
-						<td class="goods_table_price_td">
+						<td class="price_td">
 							<fmt:formatNumber value="${ol.p_Price}" pattern="#,### 원" /> | 수량 ${ol.p_Cnt}개
 							<br><fmt:formatNumber value="${ol.totalPrice}" pattern="#,### 원" />
 							<br>
@@ -115,21 +115,21 @@
 		</table>
 	</div>
 	
-	<div class="total_info_div">
-		<div class="total_info_price_div">
-			<strong class="price_span_label total_price_label">최종 결제 금액</strong>
+	<div class="total_info">
+		<div class="total_info_price">
+			<strong class="total_price_label">최종 결제 금액</strong>
 			<strong class="strong_red">
-				<span class="total_price_red finalTotalPrice_span"></span>
+				<span class="finalTotalPrice_span"></span>
 			</strong>
 		</div>
-		<div class="total_info_btn_div">
+		<div class="total_info_btn">
 			<a class="order_btn">결제하기</a>
 		</div>
 	</div>
 	
 	<!-- 주문 요청 form -->
 	<form class="order_form" action="<%=request.getContextPath()%>/member/order" method="post">
-		<input name="m_id" value="${memberInfo.m_id}" type="hidden">
+		<input name="m_Id" value="${memberInfo.m_Id}" type="hidden">
 		<input name="m_Name" type="hidden">
 		<input name="o_address" type="hidden">
 		<input name="o_detail_address" type="hidden">
@@ -154,12 +154,12 @@
 			}
 		});
 		function showAdress(className){
-			$(".addressInfo_input_div").css('display', 'none');
-			$(".addressInfo_input_div_" + className).css('display', 'block');
-			$(".addressInfo_input_div").each(function(i, obj){
+			$(".addressInfo_input").css('display', 'none');
+			$(".addressInfo_input_" + className).css('display', 'block');
+			$(".addressInfo_input").each(function(i, obj){
 				$(obj).find(".selectAddress").val("F");
 			});
-			$(".addressInfo_input_div_" + className).find(".selectAddress").val("T");
+			$(".addressInfo_input_" + className).find(".selectAddress").val("T");
 		}
 		
 		function execution_daum_address(){
@@ -192,14 +192,14 @@
 		
 		function setTotalInfo(){
 			let totalPrice = 0;	
-			$(".goods_table_price_td").each(function(index, element){
+			$(".price_td").each(function(index, element){
 				totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
 			});
 			$(".finalTotalPrice_span").text(totalPrice.toLocaleString());
 		}
 		
 		$(".order_btn").on("click", function(){
-			$(".addressInfo_input_div").each(function(i, obj){
+			$(".addressInfo_input").each(function(i, obj){
 				if($(obj).find(".selectAddress").val() === 'T'){
 					$("input[name='m_Name']").val($(obj).find(".m_Name_input").val());
 					$("input[name='o_address']").val($(obj).find(".address_input").val());
@@ -209,7 +209,7 @@
 			});
 			
 			let form_contents = ''; 
-			$(".goods_table_price_td").each(function(index, element){
+			$(".price_td").each(function(index, element){
 				let p_Id = $(element).find(".individual_p_Id_input").val();
 				let p_Cnt = $(element).find(".individual_p_Cnt_input").val();
 				let p_Id_input = "<input name='orders[" + index + "].p_Id' type='hidden' value='" + p_Id + "'>";

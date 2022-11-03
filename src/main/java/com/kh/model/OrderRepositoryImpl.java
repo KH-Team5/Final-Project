@@ -18,7 +18,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 	}
 
 	@Override
-	public OrderItemDTO selectBym_Id(int m_Id) {
+	public OrderItemDTO selectBym_Id(String m_Id) {
 		return sqlSession.selectOne("order.selectBym_Id", m_Id);
 	}
 

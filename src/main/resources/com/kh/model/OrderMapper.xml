@@ -9,9 +9,9 @@
 	</select>
 	
 	<select id="selectBym_Id" resultType="MemberDTO">
-		SELECT M_id, M_name, email, address, detail_address, zipcode
+		SELECT m_Id, M_name, email, address, detail_address, zipcode
   		FROM member_TB 
-  		WHERE M_id = #{M_id}
+  		WHERE M_id = #{m_Id}
 	</select>
 	
 	<insert id="insertOrder">

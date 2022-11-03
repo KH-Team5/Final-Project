@@ -1,37 +1,26 @@
 package com.kh.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kh.controller.MyPageController;
-import com.kh.model.MemberRepository;
 import com.kh.model.OrderRepository;
 import com.kh.model.ProductRepository;
 import com.kh.model.domain.AttachImageDTO;
-import com.kh.model.domain.MemberDTO;
 import com.kh.model.domain.OrderDTO;
 import com.kh.model.domain.OrderItemDTO;
 import com.kh.model.domain.ProductDTO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	@Autowired
 	private OrderRepository orderRepository;
 
 	@Autowired
 	private ProductRepository productRepository;
-
-	@Autowired
-	private MemberRepository memberRepository;
 
 	@Override
 	public List<OrderItemDTO> getProductInfo(List<OrderItemDTO> orders) {
@@ -50,7 +39,6 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public void order(OrderDTO ord) {
-		MemberDTO member = memberRepository.get(ord.getM_Id());
 		List<OrderItemDTO> ords = new ArrayList<>();
 		for (OrderItemDTO oit : ord.getOrders()) {
 			OrderItemDTO orderItem = orderRepository.selectByp_Id(oit.getP_Id());
