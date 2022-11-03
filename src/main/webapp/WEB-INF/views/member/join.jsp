@@ -21,7 +21,7 @@
 <body>
 	<h1>회원가입 페이지</h1>
 	<form id="joinform" name="joinform" method="post">
-		아이디: <input id="M_id" name="M_id" type="text"> <br>
+		아이디: <input id="m_Id" name="m_Id" type="text"> <br>
 		<span id="idInputChk"></span>
 		<span id="idChk"></span>
 		
@@ -70,7 +70,7 @@
 		var code = "";
 		$(function() {
 			$("#joinbutton").click(function() {
-				var id = $('#M_id').val();
+				var id = $('#m_Id').val();
 		        var pw = $('#M_pwd').val();
 		        var name = $('#M_name').val();
 		        var mail = $('#email').val();
@@ -140,9 +140,9 @@
 		        }
 			});
 			
-			$('#M_id').on("propertychange change keyup paste input", function() {
-				var M_id = $('#M_id').val();
-				var data = {M_id : M_id};
+			$('#m_Id').on("propertychange change keyup paste input", function() {
+				var m_Id = $('#m_Id').val();
+				var data = {m_Id : m_Id};
 				$.ajax({
 					type: "post",
 					url: "<%=request.getContextPath()%>/member/join/idChk",
@@ -155,7 +155,7 @@
 							$('#idInputChk').html("중복" + "<br>");
 							idOverlapChk = false;
 						} 
-						if (M_id == "") {
+						if (m_Id == "") {
 							idOverlapChk = false;
 							$('#idInputChk').html("");
 						}
@@ -178,7 +178,7 @@
 							$("#authNumChk").html("중복" + "<br>");
 							$("#authNumBtn").attr("disabled",true);
 						}
-						if (M_id == "") {
+						if (m_Id == "") {
 							$("#authNumBtn").attr("disabled",false);
 						}
 					}

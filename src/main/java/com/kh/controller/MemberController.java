@@ -32,14 +32,15 @@ public class MemberController {
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinPOST(MemberDTO member) throws Exception {
+		System.out.println(member.getM_Id());
 		memberService.joinMember(member);
 		return "redirect:/";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/join/idChk", method = RequestMethod.POST)
-	public String idChkPOST(String M_id) throws Exception {
-		int result = memberService.idChk(M_id);
+	public String idChkPOST(String m_Id) throws Exception {
+		int result = memberService.idChk(m_Id);
 		if (result != 0)
 			return "error";
 		else
