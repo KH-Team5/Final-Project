@@ -82,6 +82,24 @@ CREATE SEQUENCE order_item_SQ
 START WITH 1
 INCREMENT BY 1;
 
+/* 리뷰 테이블 */
+create table review_TB(
+    r_Id NUMBER primary key,
+    p_Id NUMBER not null,
+    m_Id VARCHAR2(50) not null,
+    r_Date DATE default sysdate,
+    r_Content VARCHAR2(3500),
+    r_Rating NUMBER(2,1) not null,
+    FOREIGN KEY (m_Id)REFERENCES member_TB(m_Id),
+    FOREIGN KEY (p_Id) REFERENCES product_TB(p_Id),
+    UNIQUE(p_Id, m_Id)
+);
+
+/* 리뷰 시퀀스 */
+CREATE SEQUENCE review_TB_SQ
+START WITH 1
+INCREMENT BY 1;
+
 /* 장바구니 */
 create table cart_TB(
     C_id number  primary key,
