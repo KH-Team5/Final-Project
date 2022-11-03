@@ -39,12 +39,12 @@ create table category_TB(
 );
 
 /* 상품 이미지 */
-CREATE TABLE product_image_TB(
-uuid VARCHAR2(100) NOT NULL PRIMARY KEY, /* 이미지를 불러오는 고유 아이디 PK */
-P_index NUMBER NOT NULL,
-file_path VARCHAR2(300) NOT NULL,
-upload_date DATE NOT NULL,
-FOREIGN KEY(P_index) REFERENCES product_TB(P_index)
+create table product_image_TB(
+    p_Id int,
+    fileName varchar2(100) not null,
+    filePath  varchar2(200) not null,
+    uuid varchar2(100)not null primary key,
+    foreign key (p_Id) references product_TB(p_Id)
 );
 
 /* 주문 */

@@ -5,9 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세 페이지</title>
+<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
+	crossorigin="anonymous">
+</script>
 </head>
 
 <body>
+	<div id="image" data-p_Id="${productInfo.imageList[0].p_Id}" data-path="${productInfo.imageList[0].filePath}" data-uuid="${productInfo.imageList[0].uuid}" data-filename="${productInfo.imageList[0].fileName}">
+		<img>
+	</div>	
 	상품 번호: ${p_Id } <br>
 	상품 이름: ${productInfo.p_Name } <br>
 	상품 가격: ${productInfo.p_Price } <br>
@@ -49,13 +56,9 @@ const form = {
 }
 
 $(".btn_cart").on("click", function(e){
-
-});
-
-$(".btn_cart").on("click", function(e){
 	form.C_qty = $(".quantity_input").val();
 	$.ajax({
-		url: '/cart/add',
+		url: '<%=request.getContextPath()%>/cart/add',
 		type: 'POST',
 		data: form,
 		success: function(result){
@@ -65,17 +68,25 @@ $(".btn_cart").on("click", function(e){
 });
 
 function cartAlert(result){
-	if(result == '0'){
-		alert("장바구니에 추가를 하지 못하였습니다.");
-	} else if(result == '1'){
-		alert("장바구니에 추가되었습니다.");
-	} else if(result == '2'){
-		alert("장바구니에 이미 추가되어져 있습니다.");
-	} else if(result == '5'){
-		alert("로그인이 필요합니다.");	
-	}
+	alert("장바구니에 추가되었습니다.");
+
 }
 
-</script>
+		$(document).ready(function(){
+			const imgView = $("#image");
+			var imgChk = imgView.data("path");
+			if(imgChk != ""){
+				const imgView = $("#image");
+				const path = imgView.data("path");
+				const uuid = imgView.data("uuid");
+				const fileName = imgView.data("filename");
+				const uploadPath = encodeURIComponent(path + "/s_" + fileName);
+				imgView.find("img").attr('src', '<%=request.getContextPath()%>/display?fileName=' + uploadPath);
+			} else {
+				// 이미지 없음
+				// imgView.find("img").attr('src', '');
+			}
+		});		
+	</script>
 </body>
 </html>

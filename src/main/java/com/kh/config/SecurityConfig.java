@@ -78,6 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			// /member 경로는 USER, ADMIN 롤을 가진 사용자만 접근 가능
 			.antMatchers("/member/**").hasAnyRole("USER", "ADMIN")
+			// /cart 경로는 USER롤을 가진 사용자만 접근 가능
+			.antMatchers("/cart/**").hasAnyRole("USER")
 			// 그게 아닌 모든 주소는 인증 필요 없음
 			.anyRequest().permitAll().and()
 			// 로그인 설정

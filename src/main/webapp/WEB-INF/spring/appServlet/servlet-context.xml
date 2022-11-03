@@ -32,13 +32,7 @@
 	<context:component-scan
 		base-package="com.kh.controller" />
 		
-		<interceptors>
-		<interceptor>
-			<mapping path="/cart/**"/>
-			<exclude-mapping path="/cart/add"/>
-			<beans:bean id="CartIntreceptor" class="com.kh.interceptor.CartInterceptor"></beans:bean>
-		</interceptor>
-		</interceptors>
+
 		
 
 

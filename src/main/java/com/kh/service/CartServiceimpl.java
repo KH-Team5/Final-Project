@@ -19,17 +19,8 @@ public class CartServiceimpl implements CartService{
 	
 	@Override
 	public int addCart(CartDTO cart) {
-		CartDTO checkCart = cartRepository.checkCart(cart);
-		if(checkCart != null) {
-			return 2;
-		}
-		try {
 		return cartRepository.addCart(cart);
-		} catch(Exception e) {
-			return 0;
-		}
 	}
-
 	@Override
 	public List<CartDTO>getCartList(String M_id) {
 		

@@ -7,7 +7,7 @@ import com.kh.model.domain.CartDTO;
 public interface CartRepository {
 	
     //카트 추가
-	public int addCart(CartDTO cart)throws Exception;
+	public int addCart(CartDTO cart);
 	
 	//카트 삭제
 	public int deleteCart(int cartId);
