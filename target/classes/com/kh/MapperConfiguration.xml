@@ -10,5 +10,6 @@
 	<mappers>
 		<mapper resource="com/kh/model/MemberMapper.xml" />
 		<mapper resource="com/kh/model/ProductMapper.xml" />
+		<mapper resource="com/kh/model/AdminMapper.xml" /> 
 	</mappers>
 </configuration>

@@ -1,6 +1,6 @@
 package com.kh.model;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;

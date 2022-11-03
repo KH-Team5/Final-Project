@@ -1,11 +1,12 @@
 package com.kh.controller;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics2D;  
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,11 +32,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kh.model.domain.AdminDTO;
 import com.kh.model.domain.AttachImageDTO;
 import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
+import com.kh.model.domain.MemberDTO;
 import com.kh.model.domain.PageDTO;
 import com.kh.model.domain.ProductDTO;
 import com.kh.service.AdminService;
@@ -41,6 +45,27 @@ import com.kh.service.ProductService;
 
 import lombok.AllArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
+import java.security.Principal;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.kh.model.domain.Criteria;
+import com.kh.model.domain.MemberDTO;
+import com.kh.model.domain.ProductDTO;
+import com.kh.service.MemberService;
+
+
 
 @Controller
 @RequestMapping(value = "/admin/*")
@@ -69,6 +94,17 @@ public class AdminController {
 			}
 		
 		
+		
+		/* 상품조회페이지 */
+		@RequestMapping(value = "/adminProductInfo/{p_Id}", method = RequestMethod.GET)
+		public String productInfo(@PathVariable("p_Id") int p_Id, Model model) {
+			model.addAttribute("productInfo", productService.getProductInfo(p_Id));
+			return "/admin/adminProductInfo";
+			
+		}
+		
+		
+		
 	// 상품관리 
 		
 		@RequestMapping(value = "/productsManage", method = RequestMethod.GET)
@@ -82,6 +118,55 @@ public class AdminController {
 			}
 			model.addAttribute("paging", new PageDTO(cri, productService.productGetTotal(cri)));
 		}
+		
+		
+		/* 상품조회 및 수정 */
+		
+		@RequestMapping(value = "/productModify/{p_Id}", method = RequestMethod.GET)
+		 public String productModify(@PathVariable("p_Id") int p_Id, Model model) {
+			ObjectMapper mapper = new ObjectMapper();
+	
+			
+			/* 조회 페이지 정보 */
+			model.addAttribute("productInfo", productService.getProductInfo(p_Id));
+			return "admin/productModify";
+		}
+		
+		/* 상품 정보 수정 */
+		@RequestMapping(value = "/productModify/{p_Id}", method = RequestMethod.POST)
+		public String productModifyPOST(ProductDTO productDTO) {
+			adminService.productModify(productDTO);
+
+			return "redirect:/logout";
+		}
+		
+		
+		
+		
+		
+		
+			
+		
+	// 상품삭제
+
+//		  @RequestMapping(value = "/member/memberDelete", method = RequestMethod.GET)
+//		  public String memberDelete(Principal principal) { 
+//			  String userid = principal.getName(); 
+//			  logger.info("회원 탈퇴 진입");
+//		  
+//		  
+//		  memberservice.memberDelete(userid); 
+//		  logger.info("회원 탈퇴 성공");
+//		  
+//		  
+//		  
+//		  return "redirect:/logout";
+//		  
+//		  }
+		
+		
+		
+		
 		
 	// 상품 등록
 	@RequestMapping(value = "/productRegistration", method = RequestMethod.GET)

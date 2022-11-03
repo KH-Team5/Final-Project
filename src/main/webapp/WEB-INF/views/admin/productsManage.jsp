@@ -10,11 +10,9 @@
 <title>상품 관리 페이지</title>
 <style>
 </style>
-<script src="https://code.jquery.com/jquery-3.6.1.js" 
-	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
-	crossorigin="anonymous"></script>
 </head>
 </head>
+
 <body>
 <div id="image" data-p_Id="${productInfo.imageList[0].p_Id}" data-path="${productInfo.imageList[0].filePath}" data-uuid="${productInfo.imageList[0].uuid}" data-filename="${productInfo.imageList[0].fileName}">
 		<img>
@@ -34,7 +32,7 @@
 			</thead>	
 			<c:forEach var="list" items="${list}" >
 				<tr>
-					<td><a href="<%=request.getContextPath()%>/productInfo/${list.p_Id}"><c:out value="${list.p_Name}"/></a></td> 
+					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}"><c:out value="${list.p_Name}"/></a></td> 
 					<td><c:out value="${list.p_Price}"></c:out></td>
 					<td><c:out value="${list.p_Stock}"></c:out></td>
 					<td><c:out value="${list.p_Category}"></c:out></td>				
@@ -44,7 +42,10 @@
 					</td>
 				</tr>
 			</c:forEach>
+		
+			
 		</table>
+		
 	</c:if>
 	<c:if test="${listCheck == 'empty'}">
 		<div id="table_empty">
