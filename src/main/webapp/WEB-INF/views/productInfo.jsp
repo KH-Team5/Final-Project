@@ -23,54 +23,57 @@
 	상품 설명: ${productInfo.p_Intro } <br> 
 	등록 날자: ${productInfo.p_Date } <br>
 	<div class="button">
-	 <div class="button_quantity">
-	  주문수량
-	  <input type="text" class="quantity_input" value="1">
-	  <span>
-	    <button class="plus_btn">+</button>
-	    <button class="minus_btn">-</button>
-	  </span>
-	 </div>
-	<div class="button_set">
-	 <a class="btn_cart">장바구니 담기</a>
-	 <a class="btn_buy">바로구매</a>
+		<div class="button_quantity">
+			주문수량
+			<input type="text" class="quantity_input" value="1">
+			<span>
+				<button class="plus_btn">+</button>
+			    <button class="minus_btn">-</button>
+			</span>
+		</div>
+		<div class="button_set">
+			<a class="btn_cart">장바구니 담기</a>
+			<a class="btn_buy">바로구매</a>
+		</div>
 	</div>
-	</div>
-	
+	<form action="<%=request.getContextPath()%>/member/order/${member.m_id}" method="get" class="order_form">
+		<input type="hidden" name="orders[0].p_Id" value="${productInfo.p_Id}">
+		<input type="hidden" name="orders[0].p_Cnt" value="">
+	</form>
 	<a href="<%=request.getContextPath()%>/">홈</a>
-<script>
-let quantity = $(".quantity_input").val();
-$(".plus_btn").on("click", function(){
-$(".quantity_input").val(++quantity);
-});
-$(".minus_btn").on("click", function(){
-if(quantity > 1){
-$(".quantity_input").val(--quantity);
-}
-});
+	<script>
+		let quantity = $(".quantity_input").val();
+		$(".plus_btn").on("click", function(){
+			$(".quantity_input").val(++quantity);
+		});
+		$(".minus_btn").on("click", function(){
+			if(quantity > 1){
+				$(".quantity_input").val(--quantity);
+			}
+		});
 
-const form = {
-		M_id : '${member.M_id}',
-		P_id : '${productInfo.p_Id}',
-		C_qty : ''
-}
-
-$(".btn_cart").on("click", function(e){
-	form.C_qty = $(".quantity_input").val();
-	$.ajax({
-		url: '<%=request.getContextPath()%>/cart/add',
-		type: 'POST',
-		data: form,
-		success: function(result){
-			cartAlert(result);
+		const form = {
+			M_id : '${member.M_id}',
+			P_id : '${productInfo.p_Id}',
+			C_qty : ''
 		}
-	})
-});
 
-function cartAlert(result){
-	alert("장바구니에 추가되었습니다.");
+		$(".btn_cart").on("click", function(e){
+			form.C_qty = $(".quantity_input").val();
+			$.ajax({
+				url: '<%=request.getContextPath()%>/cart/add',
+				type: 'POST',
+				data: form,
+				success: function(result){
+					cartAlert(result);
+				}
+			})
+		});
 
-}
+		function cartAlert(result){
+			alert("장바구니에 추가되었습니다.");
+		
+		}
 
 		$(document).ready(function(){
 			const imgView = $("#image");
@@ -86,7 +89,14 @@ function cartAlert(result){
 				// 이미지 없음
 				// imgView.find("img").attr('src', '');
 			}
-		});		
+		});	
+		
+		/* 바로구매 버튼 */
+		$(".btn_buy").on("click", function(){
+			let productCnt = $(".quantity_input").val();
+			$(".order_form").find("input[name='orders[0].p_Cnt']").val(productCnt);
+			$(".order_form").submit();
+		});
 	</script>
 </body>
 </html>
