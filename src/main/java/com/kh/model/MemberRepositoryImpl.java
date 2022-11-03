@@ -16,7 +16,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 	@Override
 	public MemberDTO get(String userid) {
-		return sqlSession.selectOne("member.getByM_id", userid);
+		return sqlSession.selectOne("member.getByM_Id", userid);
 	}
 
 	@Override
@@ -29,8 +29,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 
 	@Override
-	public int selectById(String M_id) {
-		int count = sqlSession.selectOne("member.selectById", M_id);
+	public int selectById(String m_Id) {
+		int count = sqlSession.selectOne("member.selectById", m_Id);
 		return count;
 	}
 
@@ -46,10 +46,10 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 
 	@Override
-	public int selectByEmailandId(String email, String M_id) {
+	public int selectByEmailandId(String email, String m_Id) {
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
-		map.put("M_id", M_id);
+		map.put("m_Id", m_Id);
 		return sqlSession.selectOne("member.selectByEmailandId", map);
 	}
 
@@ -58,20 +58,18 @@ public class MemberRepositoryImpl implements MemberRepository {
 		int count = sqlSession.update("member.update", memberDTO);
 		return count;
 	}
-	
+
 	@Override
-	public int memberDelete(String M_id) {
-		int count = sqlSession.delete("member.delete", M_id);
+	public int memberDelete(String m_Id) {
+		int count = sqlSession.delete("member.delete", m_Id);
 		return count;
-		
+
 	}
 
-	public int updatePwdById(String M_id, String M_pwd) {
+	public int updatePwdById(String m_Id, String M_pwd) {
 		Map<String, String> map = new HashMap<>();
 		map.put("M_pwd", M_pwd);
-		map.put("M_id", M_id);
+		map.put("m_Id", m_Id);
 		return sqlSession.update("member.updatePwdById", map);
 	}
 }
-	
-

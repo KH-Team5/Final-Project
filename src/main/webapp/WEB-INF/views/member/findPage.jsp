@@ -20,7 +20,7 @@
 	
 	<h4>비밀번호 재설정</h4>
 	<form id="reSetPwdform" name="reSetPwdform">
-		아이디: <input id="M_id" name="M_id" type="text"> <br>
+		아이디: <input id="m_Id" name="m_Id" type="text"> <br>
 		이메일: <input id="email2" name="email2" type="email"> <br>	
 		<input type="button" id="reSetPwdBtn" value="비밀번호 재설정"> <br>
 		<span id="resultPwd"></span>
@@ -45,7 +45,7 @@
 		$("#reSetPwdBtn").click(function(){
 			var data = {
 				email: $("#email2").val(),
-				id: $("#M_id").val()
+				id: $("#m_Id").val()
 				};
 			$.ajax({
 				url: "<%=request.getContextPath()%>/member/findPage/pwdReset",

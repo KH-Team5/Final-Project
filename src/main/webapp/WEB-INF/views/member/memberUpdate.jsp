@@ -13,8 +13,8 @@
 <body>
 	<h1>회원 정보 수정</h1>
 	<form id="updateform" name="updateform" method="post">
-		아이디: ${key1.m_id}<input type="hidden" name="M_id"
-		value=${key1.m_id }>
+		아이디: ${key1.m_Id}<input type="hidden" name="m_Id"
+		value=${key1.m_Id }>
 		
 		새로운 비밀번호: <input id="M_pwd" name="M_pwd" type="password"> <br>
 		<span id="pwChk"></span>
