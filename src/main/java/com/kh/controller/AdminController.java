@@ -137,7 +137,7 @@ public class AdminController {
 		public String productModifyPOST(ProductDTO productDTO) {
 			adminService.productModify(productDTO);
 
-			return "redirect:/logout";
+			return "redirect:/admin/productsManage";
 		}
 		
 		
@@ -149,20 +149,18 @@ public class AdminController {
 		
 	// 상품삭제
 
-//		  @RequestMapping(value = "/member/memberDelete", method = RequestMethod.GET)
-//		  public String memberDelete(Principal principal) { 
-//			  String userid = principal.getName(); 
-//			  logger.info("회원 탈퇴 진입");
-//		  
-//		  
-//		  memberservice.memberDelete(userid); 
-//		  logger.info("회원 탈퇴 성공");
-//		  
-//		  
-//		  
-//		  return "redirect:/logout";
-//		  
-//		  }
+		  @RequestMapping(value = "/productDelete/{p_Id}", method = RequestMethod.GET)
+		  public String productDelete(@PathVariable("p_Id") int p_Id) { 
+			  
+		  adminService.productDelete1(p_Id); 
+		  adminService.productDelete2(p_Id);
+		  logger.info("상품 삭제 성공");
+		  
+		  
+		  
+		  return "redirect:/admin/productsManage";
+		  
+		  }
 		
 		
 		

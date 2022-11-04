@@ -35,8 +35,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int productDelete(String P_id) {
-		return 0;
+	public int productDelete1(int p_Id) {
+		return adminRepository.productDelete1(p_Id);
+	}
+
+	@Override
+	public int productDelete2(int p_Id) {
+		// TODO Auto-generated method stub
+		return adminRepository.productDelete2(p_Id);
 	}
 
 }

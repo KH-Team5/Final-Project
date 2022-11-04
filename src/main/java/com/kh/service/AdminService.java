@@ -11,6 +11,7 @@ public interface AdminService {
 	public int productModify(ProductDTO productDTO);
 	
 	/* 상품 삭제 */
-	public int productDelete(String P_id);
+	public int productDelete1(int p_Id);
+	public int productDelete2(int p_Id);
 	
 }

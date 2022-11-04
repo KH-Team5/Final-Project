@@ -19,4 +19,18 @@ public class AdminRepositoryImpl implements AdminRepository {
 	
 	}
 
+
+	@Override
+	public int productDelete1(int p_Id) {
+		int count = sqlSession.delete("admin.delete1",p_Id);
+		return count;
+	}
+
+
+	@Override
+	public int productDelete2(int p_Id) {
+		int count = sqlSession.delete("admin.delete2",p_Id);
+		return count;
+	}
+
 }

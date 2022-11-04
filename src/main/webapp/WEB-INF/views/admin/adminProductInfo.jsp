@@ -36,7 +36,7 @@ function agreeModify(){
 	<tr>
        <td colspan="2">
        <a href="<%=request.getContextPath()%>/admin/productModify/${p_Id}" class="btn" onclick="agreeModify()">상품수정</a>
-       <a href="<%=request.getContextPath()%>/admin/productDelete" class="btn" onclick="agreeDelete()">상품삭제</a>
+       <a href="<%=request.getContextPath()%>/admin/productDelete/${p_Id}" class="btn" onclick="agreeDelete()">상품삭제</a>
       </td>
       </tr>
 	

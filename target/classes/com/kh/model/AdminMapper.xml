@@ -12,4 +12,24 @@
 		]]>
 	</update>
 
+<update id="delete1" parameterType="productDTO">
+		<![CDATA[
+		 
+				delete
+				from product_image_TB
+				where p_Id = #{p_Id }
+			
+		]]>
+	</update>
+	<update id="delete2" parameterType="productDTO">
+		<![CDATA[
+
+				delete
+				from product_TB
+				where p_Id = #{p_Id }
+
+		]]>
+	</update>
+
+
 </mapper>
