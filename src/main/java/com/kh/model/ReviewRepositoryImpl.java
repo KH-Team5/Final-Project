@@ -33,4 +33,19 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	public int countReviewTotal(int p_Id) {
 		return sqlSession.selectOne("review.countReviewTotal", p_Id);
 	}
+
+	@Override
+	public int updateReview(ReviewDTO reviewDTO) {
+		return sqlSession.update("review.updateReview", reviewDTO);
+	}
+
+	@Override
+	public ReviewDTO selectByR_Id(int r_Id) {
+		return sqlSession.selectOne("review.selectByR_Id", r_Id);
+	}
+
+	@Override
+	public int deleteReview(int r_Id) {
+		return sqlSession.delete("review.deleteReview", r_Id);
+	}
 }

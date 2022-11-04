@@ -22,16 +22,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.PageDTO;
 import com.kh.model.domain.ProductDTO;
+import com.kh.model.domain.ReviewDTO;
 import com.kh.service.MemberService;
 import com.kh.service.ProductService;
+import com.kh.service.ReviewService;
 
 @Controller
 public class ProductController {
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	private ProductService productService;
 	@Autowired
 	private MemberService memberservice;
+	@Autowired
+	private ReviewService reviewService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String productManage(Criteria cri, Model model) {
@@ -80,10 +83,18 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/review/reviewEnroll/{m_Id}", method = RequestMethod.GET)
-	public String replyEnrollWindowGET(@PathVariable("m_Id") String m_Id, int p_Id, Model model) {
+	public String replyEnrollInfoGET(@PathVariable("m_Id") String m_Id, int p_Id, Model model) {
 		ProductDTO productDTO = productService.getProductInfo(p_Id);
 		model.addAttribute("productInfo", productDTO);
 		model.addAttribute("memberId", m_Id);
 		return "/review/reviewEnroll";
+	}
+
+	@RequestMapping(value = "/review/reviewUpdate", method = RequestMethod.GET)
+	public String reviewUpdateInfoGET(ReviewDTO reviewDTO, Model model) {
+		ProductDTO productDTO = productService.getProductInfo(reviewDTO.getP_Id());
+		model.addAttribute("productInfo", productDTO);
+		model.addAttribute("reviewInfo", reviewService.updateReviewInfo(reviewDTO.getR_Id()));
+		return "/review/reviewUpdate";
 	}
 }

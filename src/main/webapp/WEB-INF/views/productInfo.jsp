@@ -132,7 +132,7 @@
 			$(".order_form").find("input[name='orders[0].p_Cnt']").val(productCnt);
 			$(".order_form").submit();
 		});
-		
+		/* 리뷰 작성 */
 		$(".review_button_wrap").on("click", function(e){
 			e.preventDefault();			
 			const m_Id = '${member.m_Id}';
@@ -156,13 +156,13 @@
 				}
 			});
 		});
-		
+		/* 페이징 설정 */
 		const criteria = {
 				p_Id: '${productInfo.p_Id}',
 				pageNum: 1,
 				amount: 10
 			}
-		
+		/* 리뷰 최신화 */
 		$(document).on('click', '.paging_btn a', function(e){
 			e.preventDefault();
 			let page = $(this).attr("href");
@@ -176,6 +176,7 @@
 			});	
 		}
 		
+		/* 리뷰 페이징 */
 		function makeReviewContent(obj){
 			if (obj.list.length === 0) {
 				$(".review_none").html('<span>리뷰가 없습니다.</span>');
@@ -239,6 +240,34 @@
 				$(".paging").html(review_paging);	
 			}
 		}
+	
+		/* 리뷰 수정 */
+		$(document).on('click', '.update_review_btn', function(e){
+			e.preventDefault();
+			let r_Id = $(this).attr("href");
+			let popUrl = "<%=request.getContextPath()%>/review/reviewUpdate?r_Id=" + r_Id + "&p_Id=" + '${productInfo.p_Id}' + "&m_Id=" + '${member.m_Id}';	
+			let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes"
+			window.open(popUrl,"리뷰 수정",popOption);
+		});
+		
+		/* 리뷰 삭제 */
+		$(document).on('click', '.delete_review_btn', function(e){
+			 e.preventDefault();
+				let r_Id = $(this).attr("href");	
+				
+				$.ajax({
+					data : {
+						r_Id : r_Id,
+						p_Id : '${productInfo.p_Id}'
+					},
+					url : '<%=request.getContextPath()%>/review/delete',
+					type : 'POST',
+					success : function(result){
+						reviewListInit();
+						alert('삭제되었습니다.');
+				}
+			});
+		});
 	</script>
 </body>
 </html>
