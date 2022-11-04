@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 작성 페이지</title>
+<title>리뷰 수정 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous">
 </script>
 </head>
-
 <body>
 	<div class="wrapper_div">
 		<div class="subject_div">
-			리뷰 등록
+			리뷰 수정
 		</div>
 	</div>
 	<div class="input_wrap">			
@@ -36,38 +35,53 @@
 		</div>
 		<div class="content_div">
 			<h4>리뷰</h4>
-			<textarea name="content"></textarea>
+			<textarea name="content">
+				${reviewInfo.r_Content}
+			</textarea>
 		</div>
 	</div>
 	<div class="btn_wrap">
-		<a class="cancel_btn">취소</a><a class="enroll_btn">등록</a>
+		<a class="cancel_btn">취소</a><a class="update_btn">수정</a>
 	</div>
 	
 	<script>
+		$(function(){
+			let r_Rating = '${reviewInfo.r_Rating}';
+			$("option").each(function(i,obj){
+				if(r_Rating === $(obj).val())
+					$(obj).attr("selected", "selected");
+				
+			});
+		});
+		
 		$(".cancel_btn").on("click", function(e){
 			window.close();
-		});	
-		$(".enroll_btn").on("click", function(e){
-			const p_Id = '${productInfo.p_Id}';
+		});
+		
+		$(".update_btn").on("click", function(e){
+			const r_Id = '${reviewInfo.r_Id}';
+			const p_Id = '${reviewInfo.p_Id}';
 			const m_Id = '${m_Id}';
 			const r_Rating = $("select").val();
 			const r_Content = $("textarea").val();
 			const data = {
-					p_Id : p_Id,
-					m_Id : m_Id,
-					r_Content : r_Content,
-					r_Rating : r_Rating
+					r_Id: r_Id,
+					p_Id: p_Id,
+					m_Id: m_Id,
+					r_Rating: r_Rating,
+					r_Content: r_Content
 			}
+			
 			$.ajax({
 				data : data,
 				type : 'POST',
-				url : '<%=request.getContextPath()%>/review/enroll',
+				url : '<%=request.getContextPath()%>/review/update',
 				success : function(result){
 					$(opener.location).attr("href", "javascript:reviewListInit();");
 					window.close();
-				}
-			});
-		})
+				}			
+			});	
+		});
 	</script>
 </body>
 </html>

@@ -35,4 +35,19 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewPageDTO.setPageInfo(new PageDTO(criteria, reviewRepository.countReviewTotal(criteria.getP_Id())));
 		return reviewPageDTO;
 	}
+
+	@Override
+	public int updateReview(ReviewDTO reviewDTO) {
+		return reviewRepository.updateReview(reviewDTO);
+	}
+
+	@Override
+	public ReviewDTO updateReviewInfo(int r_Id) {
+		return reviewRepository.selectByR_Id(r_Id);
+	}
+	
+	@Override
+	public int deleteReview(ReviewDTO reviewDTO) {
+		return reviewRepository.deleteReview(reviewDTO.getR_Id());
+	}
 }

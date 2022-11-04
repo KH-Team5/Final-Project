@@ -15,4 +15,10 @@ public interface ReviewRepository {
 
 	int countReviewTotal(int p_Id);
 
+	int updateReview(ReviewDTO reviewDTO);
+
+	ReviewDTO selectByR_Id(int r_Id);
+
+	int deleteReview(int r_Id);
+
 }

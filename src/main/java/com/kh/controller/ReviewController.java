@@ -29,10 +29,17 @@ public class ReviewController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ReviewPageDTO reviewListGET(Criteria criteria) {
-		System.out.println(criteria.getP_Id());
-		System.out.println(criteria.getPageNum());
-		System.out.println(criteria.getAmount());
 		ReviewPageDTO result = reviewService.reviewList(criteria);
 		return result;
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public void updatePOST(ReviewDTO reviewDTO) {
+		reviewService.updateReview(reviewDTO);
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public void deletePOST(ReviewDTO reviewDTO) {
+		reviewService.deleteReview(reviewDTO);
 	}
 }

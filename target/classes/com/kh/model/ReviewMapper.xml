@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
+
+	<!-- 리뷰 작성 -->
 	<insert id="insertReview">
 		<![CDATA[
 	  		insert into review_TB(r_Id, p_Id, m_Id, r_Date, r_Content, r_Rating) 
@@ -10,6 +12,7 @@
   		]]>	
   	</insert>
   	
+  	<!-- 리뷰 중복 체크 -->
   	<select id="selectById" resultType="integer">
   		<![CDATA[
 			select r_Id from review_TB 
@@ -37,4 +40,24 @@
 	  		where p_Id = #{p_Id}
   		]]>	
   	</select>
+  	
+  	<!-- 리뷰 수정 -->
+  	<update id="updateReview">
+  		<![CDATA[
+	  		update review_TB set r_Content = #{r_Content}, r_Rating = #{r_Rating}
+	  		where r_Id = #{r_Id}
+  		]]>	
+  	</update>
+  	
+  	<select id="selectByR_Id" resultType="ReviewDTO">
+		select * from review_TB
+		where r_Id = #{r_Id}
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+  	<delete id="deleteReview">
+  		DELETE FROM review_TB
+  		WHERE r_Id = #{r_Id}
+  	</delete>
+	
 </mapper>

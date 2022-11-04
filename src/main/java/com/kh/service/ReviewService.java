@@ -10,4 +10,10 @@ public interface ReviewService {
 	String checkReview(ReviewDTO reviewDTO);
 
 	ReviewPageDTO reviewList(Criteria criteria);
+
+	int updateReview(ReviewDTO reviewDTO);
+
+	ReviewDTO updateReviewInfo(int r_Id);
+
+	int deleteReview(ReviewDTO reviewDTO);
 }
