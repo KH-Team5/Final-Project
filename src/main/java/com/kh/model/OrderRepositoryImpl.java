@@ -1,9 +1,13 @@
 package com.kh.model;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.model.domain.Criteria;
 import com.kh.model.domain.OrderDTO;
 import com.kh.model.domain.OrderItemDTO;
 
@@ -30,5 +34,20 @@ public class OrderRepositoryImpl implements OrderRepository {
 	@Override
 	public int insertOrderItem(OrderItemDTO orderItemDTO) {
 		return sqlSession.insert("order.insertOrderItem", orderItemDTO);
+	}
+
+	@Override
+	public List<OrderDTO> selectOrderList(Criteria criteria) {
+		return sqlSession.selectList("order.selectOrderList", criteria);
+	}
+	
+	@Override
+	public List<OrderDTO> selectOrderListByM_Id(HashMap<String, Object> map) {
+		return sqlSession.selectList("order.selectOrderListByM_Id", map);
+	}
+
+	@Override
+	public int getOrderTotal(Criteria criteria) {
+		return sqlSession.selectOne("order.getOrderTotal", criteria);
 	}
 }

@@ -19,5 +19,6 @@
 	<a href="<%=request.getContextPath()%>/admin/productsManage">상품관리</a>
 	<a href="<%=request.getContextPath()%>/member/mypage">마이 페이지</a>
 	<a href="<%=request.getContextPath()%>/main">메인 페이지</a>
+	<a href="<%=request.getContextPath()%>/member/orderList">주문 목록</a>
 </body>
 </html>
