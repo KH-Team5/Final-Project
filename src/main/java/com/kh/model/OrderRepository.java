@@ -1,5 +1,9 @@
 package com.kh.model;
 
+import java.util.HashMap;
+import java.util.List;
+
+import com.kh.model.domain.Criteria;
 import com.kh.model.domain.OrderDTO;
 import com.kh.model.domain.OrderItemDTO;
 
@@ -12,5 +16,10 @@ public interface OrderRepository {
 
 	int insertOrderItem(OrderItemDTO orderItemDTO);
 
-	
+	List<OrderDTO> selectOrderList(Criteria criteria);
+
+	int getOrderTotal(Criteria criteria);
+
+	List<OrderDTO> selectOrderListByM_Id(HashMap<String, Object> map);
+
 }

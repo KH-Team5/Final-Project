@@ -26,6 +26,8 @@ public class OrderDTO {
 	private Date o_Date;
 
 	private int o_delivery_charge;
-	
+
 	private int orderSalePrice;
+
+	private String p_Name;
 }
