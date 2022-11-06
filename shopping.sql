@@ -112,13 +112,13 @@ create table cart_TB(
 
 /* 장바구니 상품 */
 create table cart_item_TB(
-CI_id number PRIMARY KEY,
-C_id number not null,
-P_id number not null,
-P_name VARCHAR2(200) not null,
-P_price number not null,
-FOREIGN KEY(C_id) REFERENCES cart_TB(c_id),
-FOREIGN KEY(P_id) REFERENCES product_TB(P_id)
+ci_Id number PRIMARY KEY,
+c_Id number not null,
+p_Id number not null,
+p_Name VARCHAR2(200) not null,
+p_Price number not null,
+FOREIGN KEY(c_Id) REFERENCES cart_TB(c_Id),
+FOREIGN KEY(P_Id) REFERENCES product_TB(p_Id)
 );
 
 /*장바구니 시퀀스*/
