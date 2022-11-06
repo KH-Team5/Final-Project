@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.model.domain.Criteria;
+import com.kh.model.domain.MemberDTO;
+import com.kh.model.domain.OrderCancelDTO;
 import com.kh.model.domain.OrderDTO;
 import com.kh.model.domain.OrderListDTO;
 import com.kh.model.domain.PageDTO;
@@ -45,16 +47,23 @@ public class OrderController {
 	@RequestMapping(value = "/member/orderList", method = RequestMethod.GET)
 	public String orderListGET(Criteria criteria, Model model, HttpServletRequest request) {
 		List<OrderDTO> list;
-		Principal principal = request.getUserPrincipal();	
+		Principal principal = request.getUserPrincipal();
 		if (request.isUserInRole("ROLE_ADMIN"))
 			list = orderService.getOrderList(criteria);
-		else 
+		else
 			list = orderService.getOrderListByM_Id(criteria, principal.getName());
 		if (!list.isEmpty()) {
 			model.addAttribute("list", list);
 			model.addAttribute("paging", new PageDTO(criteria, orderService.getOrderTotal(criteria)));
-		} else 
+		} else
 			model.addAttribute("listCheck", "empty");
 		return "/member/orderList";
+	}
+
+	@RequestMapping(value = "/member/orderCancle", method = RequestMethod.POST)
+	public String orderCanclePost(OrderCancelDTO orderCancelDTO) {
+		orderService.orderCancle(orderCancelDTO);
+		return "redirect:/member/orderList?keyword=" + orderCancelDTO.getKeyword() + "&amount="
+				+ orderCancelDTO.getAmount() + "&pageNum=" + orderCancelDTO.getPageNum();
 	}
 }

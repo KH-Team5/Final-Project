@@ -40,7 +40,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 	public List<OrderDTO> selectOrderList(Criteria criteria) {
 		return sqlSession.selectList("order.selectOrderList", criteria);
 	}
-	
+
 	@Override
 	public List<OrderDTO> selectOrderListByM_Id(HashMap<String, Object> map) {
 		return sqlSession.selectList("order.selectOrderListByM_Id", map);
@@ -50,4 +50,20 @@ public class OrderRepositoryImpl implements OrderRepository {
 	public int getOrderTotal(Criteria criteria) {
 		return sqlSession.selectOne("order.getOrderTotal", criteria);
 	}
+
+	@Override
+	public int updateOrder(String o_Id) {
+		return sqlSession.update("order.updateOrder", o_Id);
+	}
+
+	@Override
+	public List<OrderItemDTO> selectOrderItemByO_Id(String o_Id) {
+		return sqlSession.selectList("order.selectOrderItemByO_Id", o_Id);
+	}
+
+	@Override
+	public OrderDTO selectOrderByO_Id(String o_Id) {
+		return sqlSession.selectOne("order.selectOrderByO_Id", o_Id);
+	}
+
 }

@@ -3,6 +3,7 @@ package com.kh.service;
 import java.util.List;
 
 import com.kh.model.domain.Criteria;
+import com.kh.model.domain.OrderCancelDTO;
 import com.kh.model.domain.OrderDTO;
 import com.kh.model.domain.OrderItemDTO;
 
@@ -16,4 +17,6 @@ public interface OrderService {
 	List<OrderDTO> getOrderListByM_Id(Criteria criteria, String m_Id);
 
 	int getOrderTotal(Criteria criteria);
+
+	void orderCancle(OrderCancelDTO orderCancelDTO);
 }
