@@ -32,8 +32,12 @@
 	       			<td><c:out value="${list.m_Id}"></c:out></td>
 	       			<td><c:out value="${list.p_Name}"></c:out></td>
 	       			<td><fmt:formatDate value="${list.o_Date}" pattern="yyyy-MM-dd"/></td>
-	       			<td><c:out value="${list.o_state}"/></td>
-	       			<td></td>
+	       			<td><c:out value="${list.o_State}"/></td>
+	       			<td>
+	       				<c:if test="${list.o_State == '배송준비'}">
+	       					<button class="cancel_btn" data-xxx="${list.o_Id}" data-yyy="${list.m_Id}">취소</button>
+       					</c:if>
+       				</td>
 	       		</tr>
 			</c:forEach>
 		</table>
@@ -82,28 +86,45 @@
    		<button id='search_btn'>검색</button>
 	</form>
 	
+	<!-- 취소 -->
+	<form id="cancel" action="<%=request.getContextPath()%>/member/orderCancle" method="post">
+       	<input type="hidden" name="o_Id">
+		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">
+		<input type="hidden" name="amount" value="${paging.cri.amount}">
+		<input type="hidden" name="keyword" value="${paging.cri.keyword}">
+		<input type="hidden" name="m_Id">
+	</form>
+	
 	<a href="<%=request.getContextPath()%>/">홈</a>
 	
 	<script>
-	let searchForm = $('#search');
-	let amount = "${paging.cri.amount }";
-	$(function(){
-		if(amount == '')
-			$('#paging_btn').css('display','none');
-		e.preventDefault();
-	});
-	
-	$("#search_btn").on("click", function(e){	
-		e.preventDefault();
-		if(!searchForm.find("input[name='keyword']").val()){
-			alert("키워드를 입력하십시오");
-			return false;
-		}
-		if(amount == '') 
-			searchForm.find("input[name='amount']").val("10");
-		searchForm.find("input[name='pageNum']").val("1");
-		searchForm.submit();
-	});
+		let searchForm = $('#search');
+		let amount = "${paging.cri.amount }";
+		$(function(){
+			if(amount == '')
+				$('#paging_btn').css('display','none');
+		});
+		
+		$("#search_btn").on("click", function(e){	
+			e.preventDefault();
+			if(!searchForm.find("input[name='keyword']").val()){
+				alert("키워드를 입력하십시오");
+				return false;
+			}
+			if(amount == '') 
+				searchForm.find("input[name='amount']").val("10");
+			searchForm.find("input[name='pageNum']").val("1");
+			searchForm.submit();
+		});
+		
+		$(".cancel_btn").on("click", function(e){
+			e.preventDefault();
+			let id = $('.cancel_btn').data("xxx");
+			let id2 = $('.cancel_btn').data("yyy");
+			$("#cancel").find("input[name='o_Id']").val(id);
+			$("#cancel").find("input[name='m_Id']").val(id2);
+			$("#cancel").submit();
+		});
 	</script>
 </body>
 </html>

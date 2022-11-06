@@ -1,6 +1,5 @@
 package com.kh.service;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.model.MemberRepository;
 import com.kh.model.OrderRepository;
 import com.kh.model.ProductRepository;
 import com.kh.model.domain.AttachImageDTO;
 import com.kh.model.domain.Criteria;
+import com.kh.model.domain.OrderCancelDTO;
 import com.kh.model.domain.OrderDTO;
 import com.kh.model.domain.OrderItemDTO;
 import com.kh.model.domain.ProductDTO;
@@ -24,6 +25,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private MemberRepository memberRepository;
 
 	@Override
 	public List<OrderItemDTO> getProductInfo(List<OrderItemDTO> orders) {
@@ -76,7 +80,6 @@ public class OrderServiceImpl implements OrderService {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("m_Id", m_Id);
 		map.put("amount", criteria.getAmount());
-		System.out.println(criteria.getAmount());
 		map.put("pageNum", criteria.getPageNum());
 		if (criteria.getKeyword() != null)
 			map.put("keyword", criteria.getKeyword());
@@ -86,5 +89,23 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int getOrderTotal(Criteria criteria) {
 		return orderRepository.getOrderTotal(criteria);
+	}
+
+	@Override
+	@Transactional
+	public void orderCancle(OrderCancelDTO orderCancelDTO) {
+		List<OrderItemDTO> OrderItems = orderRepository.selectOrderItemByO_Id(orderCancelDTO.getO_Id());
+		for (OrderItemDTO OrderItem : OrderItems)
+			OrderItem.initSaleTotal();
+		OrderDTO Order = orderRepository.selectOrderByO_Id(orderCancelDTO.getO_Id());
+		Order.setOrders(OrderItems);
+		Order.getOrderSalePrice();
+		orderRepository.updateOrder(orderCancelDTO.getO_Id());
+
+		for (OrderItemDTO OrderItem : Order.getOrders()) {
+			ProductDTO productDTO = productRepository.selectProductInfo(OrderItem.getP_Id());
+			productDTO.setP_Stock(productDTO.getP_Stock() + OrderItem.getP_Cnt());
+			productRepository.updateProductStock(productDTO);
+		}
 	}
 }

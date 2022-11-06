@@ -19,7 +19,7 @@ public class OrderDTO {
 
 	private int o_Zipcode;
 
-	private String o_state;
+	private String o_State;
 
 	private List<OrderItemDTO> orders;
 

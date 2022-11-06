@@ -11,7 +11,7 @@ public interface OrderRepository {
 	OrderItemDTO selectByp_Id(int p_Id);
 
 	OrderItemDTO selectBym_Id(String m_Id);
-	
+
 	int insertOrder(OrderDTO orderDTO);
 
 	int insertOrderItem(OrderItemDTO orderItemDTO);
@@ -21,5 +21,11 @@ public interface OrderRepository {
 	int getOrderTotal(Criteria criteria);
 
 	List<OrderDTO> selectOrderListByM_Id(HashMap<String, Object> map);
+
+	int updateOrder(String o_Id);
+
+	List<OrderItemDTO> selectOrderItemByO_Id(String o_Id);
+
+	OrderDTO selectOrderByO_Id(String o_Id);
 
 }
