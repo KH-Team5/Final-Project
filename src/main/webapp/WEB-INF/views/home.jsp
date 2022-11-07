@@ -20,5 +20,6 @@
 	<a href="<%=request.getContextPath()%>/member/mypage">마이 페이지</a>
 	<a href="<%=request.getContextPath()%>/main">메인 페이지</a>
 	<a href="<%=request.getContextPath()%>/member/orderList">주문 목록</a>
+	<a href="<%=request.getContextPath()%>/cart/${member.m_Id}">장바구니</a>
 </body>
 </html>
