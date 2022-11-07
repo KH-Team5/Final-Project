@@ -100,35 +100,20 @@ CREATE SEQUENCE review_TB_SQ
 START WITH 1
 INCREMENT BY 1;
 
-/* 장바구니 */
+/* 장바구니 */       
 create table cart_TB(
-    C_id number  primary key,
-    C_qty NUMBER NOT NULL,
-    M_id varchar2(50),
-    P_id number,
-    foreign key (M_id) references member_tb(M_id),
-    foreign key (P_id) references product_tb(P_id)
+    ca_ID number primary key,
+    m_Id varchar2(50),
+    p_Id number,
+    p_Cnt number,
+    foreign key (m_Id) references member_TB(m_Id),
+    foreign key (p_Id) references product_TB(p_Id ),
+    UNIQUE(p_Id, m_Id)
 );
 
-/* 장바구니 상품 */
-create table cart_item_TB(
-ci_Id number PRIMARY KEY,
-c_Id number not null,
-p_Id number not null,
-p_Name VARCHAR2(200) not null,
-p_Price number not null,
-FOREIGN KEY(c_Id) REFERENCES cart_TB(c_Id),
-FOREIGN KEY(P_Id) REFERENCES product_TB(p_Id)
-);
-
-/*장바구니 시퀀스*/
+/* 장바구니 시퀀스 */
 CREATE SEQUENCE cart_SQ
-start with 1
-INCREMENT BY 1;
-
-/*장바구니 상품 시퀀스*/
-CREATE SEQUENCE cart_item_SQ
-start with 1
+START WITH 1
 INCREMENT BY 1;
 
 /* 찜목록 */
