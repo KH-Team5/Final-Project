@@ -41,7 +41,7 @@ public class OrderController {
 		od.setM_Id(principal.getName());
 		System.out.println(od);
 		orderService.order(od);
-		return "redirect:/main";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/member/orderList", method = RequestMethod.GET)
@@ -53,6 +53,7 @@ public class OrderController {
 		else
 			list = orderService.getOrderListByM_Id(criteria, principal.getName());
 		if (!list.isEmpty()) {
+			model.addAttribute("member", memberService.memberInfo(principal.getName()));
 			model.addAttribute("list", list);
 			model.addAttribute("paging", new PageDTO(criteria, orderService.getOrderTotal(criteria)));
 		} else

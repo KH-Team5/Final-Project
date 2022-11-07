@@ -33,19 +33,22 @@
 		<![CDATA[
 			select * 
 			from(
-			    select rownum rn, o.o_Id, o.m_Id, p.p_Name, o.o_state, o.o_Date
-			    from order_TB o
-			    JOIN order_item_TB oi
-                    on o.o_Id = oi.o_Id
-                    JOIN product_TB p
-                    	on oi.p_id = p.p_Id
+			    select rownum rn, x.*
+				from(
+					select o.o_Id, o.m_Id, p.p_Name, o.o_state, o.o_Date
+                    from order_TB o
+                    JOIN order_item_TB oi
+                        on o.o_Id = oi.o_Id
+                        JOIN product_TB p
+                            on oi.p_id = p.p_Id
+                    order by o.o_Date desc
+				) x
 			    where rownum <= #{pageNum} * #{amount} 
 		]]>    
 		<if test="keyword != null">
-			and o.m_Id like '%'||#{keyword}||'%'
+			and m_Id like '%'||#{keyword}||'%'
 		</if>
 		<![CDATA[
-			    order by o.o_Date desc
 			    )
 			where rn > (#{pageNum} -1) * #{amount}
 		]]>
@@ -56,20 +59,23 @@
 		<![CDATA[
 			select * 
 			from(
-			    select rownum rn, o.o_Id, o.m_Id, p.p_Name, o.o_state, o.o_Date
-			    from order_TB o
-			    JOIN order_item_TB oi
-                    on o.o_Id = oi.o_Id
-                    JOIN product_TB p
-                    	on oi.p_id = p.p_Id
-				where o.m_Id = 'user01' and rownum <= 1 * 10 
+				select rownum rn, x.*
+				from(
+					select o.o_Id, o.m_Id, p.p_Name, o.o_state, o.o_Date
+                    from order_TB o
+                    JOIN order_item_TB oi
+                        on o.o_Id = oi.o_Id
+                        JOIN product_TB p
+                            on oi.p_id = p.p_Id
+                    order by o.o_Date desc
+				) x
+				where m_Id = #{m_Id} and rownum <= #{pageNum} * #{amount}
 		]]>    
 		<if test="keyword != null">
-			and p.p_Name like '%'||#{keyword}||'%'
+			and p_Name like '%'||#{keyword}||'%'
 		</if>
 		<![CDATA[
-		    order by o.o_Date desc
-		    )
+			)
 		where rn > (#{pageNum} -1) * #{amount}
 		]]>
 	</select>

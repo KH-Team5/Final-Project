@@ -13,13 +13,15 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>상품 관리 페이지</h1>
+	<h1>주문 내역 페이지</h1>
     <c:if test="${listcheck != 'empty'}">
 		<table id="products">
 			<thead>
 				<tr>
 					<td>주문 번호</td>
-	                <td>주문 아이디</td>
+					<c:if test = "${member.role == 'ROLE_ADMIN'}">
+	                	<td>주문 아이디</td>
+	                </c:if>
 	                <td>주문 상품</td>
        				<td>주문 날짜</td>
        				<td>주문 상태</td>
@@ -29,13 +31,15 @@
 			<c:forEach var="list" items="${list}" >
 				<tr>
 					<td><c:out value="${list.o_Id}"></c:out> </td>
-	       			<td><c:out value="${list.m_Id}"></c:out></td>
+					<c:if test = "${member.role == 'ROLE_ADMIN'}">
+	       				<td><c:out value="${list.m_Id}"></c:out></td>
+	       			</c:if>
 	       			<td><c:out value="${list.p_Name}"></c:out></td>
 	       			<td><fmt:formatDate value="${list.o_Date}" pattern="yyyy-MM-dd"/></td>
 	       			<td><c:out value="${list.o_State}"/></td>
 	       			<td>
 	       				<c:if test="${list.o_State == '배송준비'}">
-	       					<button class="cancel_btn" data-xxx="${list.o_Id}" data-yyy="${list.m_Id}">취소</button>
+	       					<button class="cancel_btn" data-o_id="${list.o_Id}">취소</button>
        					</c:if>
        				</td>
 	       		</tr>
@@ -92,7 +96,7 @@
 		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">
 		<input type="hidden" name="amount" value="${paging.cri.amount}">
 		<input type="hidden" name="keyword" value="${paging.cri.keyword}">
-		<input type="hidden" name="m_Id">
+		<input type="hidden" name="m_Id" value="${member.m_Id}">
 	</form>
 	
 	<a href="<%=request.getContextPath()%>/">홈</a>
@@ -119,10 +123,8 @@
 		
 		$(".cancel_btn").on("click", function(e){
 			e.preventDefault();
-			let id = $('.cancel_btn').data("xxx");
-			let id2 = $('.cancel_btn').data("yyy");
+			let id = $('.cancel_btn').data("o_id");
 			$("#cancel").find("input[name='o_Id']").val(id);
-			$("#cancel").find("input[name='m_Id']").val(id2);
 			$("#cancel").submit();
 		});
 	</script>

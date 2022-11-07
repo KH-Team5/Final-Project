@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.service.MemberService;
+import com.kh.service.ProductService;
 
 /**
  * Handles requests for the application home page.
@@ -21,24 +22,20 @@ import com.kh.service.MemberService;
 @Controller
 public class HomeController {
 	@Autowired
-	private MemberService memberservice;
+	private ProductService productService;
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@Autowired
+	private MemberService memberService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, Principal principal) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
+	public String home(Model model, Principal principal) {
+		model.addAttribute("Inner", productService.getSubInnerCategory());
+		model.addAttribute("Pants", productService.getSubPantsCategory());
+		model.addAttribute("Outer", productService.getSubOuterCategory());
 		if (principal != null)
-			model.addAttribute("member", memberservice.memberInfo(principal.getName()));
+			model.addAttribute("member", memberService.memberInfo(principal.getName()));
 
-		return "home";
+		return "main";
 	}
 
 }

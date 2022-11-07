@@ -2,23 +2,41 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="cart">
-  <select id="getByM_id" resultType="cartDTO" parameterType="string">
-		<![CDATA[
-		select M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
-		from member_TB 
-		where M_id = #{M_id }
-		]]>
+<mapper namespace="cart">
+	<!-- 장바구니 추가 -->
+	<insert id="insertCart">
+		insert into cart_TB
+		values(cart_SQ.NEXTVAL, #{m_Id}, #{p_Id}, #{p_Cnt})
+	</insert>
+
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCart">
+		delete from cart_TB where ca_Id = #{ca_Id}
+	</delete>
+	
+	<delete id="deleteOrderCart">
+		delete from cart_TB where m_Id = #{m_Id} and p_Id = #{p_Id}
+	</delete>
+
+	<!-- 장바구니 수량 수정 -->
+	<update id="updateCartp_Cnt">
+		update cart_TB
+		set p_Cnt = #{p_Cnt}
+		where ca_Id =
+		#{ca_Id}
+	</update>
+
+	<!-- 장바구니 목록 -->
+	<select id="selectCartInfo" resultType="CartDTO">
+		select c.ca_Id, c.m_Id, c.p_Id, c.p_Cnt, p.p_Name, p.p_Price
+		from cart_TB c left outer join product_TB p on c.p_Id = p.p_Id
+		where m_Id = #{m_Id}
 	</select>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </mapper>
+
+	<!-- 장바구니 확인 -->
+	<select id="selectCartChk" resultType="CartDTO">
+		select * from cart_TB
+		where m_Id = #{m_Id} and p_Id = #{p_Id}
+	</select>
+	
+</mapper>
