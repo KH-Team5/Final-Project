@@ -9,11 +9,13 @@
 		<typeAlias alias="OrderItemDTO" type="com.kh.model.domain.OrderItemDTO" />
 		<typeAlias alias="OrderDTO" type="com.kh.model.domain.OrderDTO" />
 		<typeAlias alias="ReviewDTO" type="com.kh.model.domain.ReviewDTO" />
+		<typeAlias alias="CartDTO" type="com.kh.model.domain.CartDTO" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/kh/model/MemberMapper.xml" />
 		<mapper resource="com/kh/model/ProductMapper.xml" />
 		<mapper resource="com/kh/model/OrderMapper.xml" />
 		<mapper resource="com/kh/model/ReviewMapper.xml" />
+		<mapper resource="com/kh/model/CartMapper.xml" />
 	</mappers>
 </configuration>

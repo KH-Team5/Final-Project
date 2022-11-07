@@ -20,6 +20,21 @@
 		</form>
 	</div>
 	<jsp:include page="category.jsp" flush="true"/>
-	<a href="<%=request.getContextPath()%>/">홈</a>
+	<c:if test = "${member == null}">
+		<a href="<%=request.getContextPath()%>/member/login">로그인</a>
+		<a href="<%=request.getContextPath()%>/member/join">회원가입</a>
+		<a href="<%=request.getContextPath()%>/member/findPage">아이디 비밀번호 찾기</a>
+	</c:if>
+	<c:if test = "${member != null}">
+		<a href="<%=request.getContextPath()%>/member/orderList">주문 목록</a>
+		<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
+	</c:if>
+	<c:if test = "${member.role == 'ROLE_USER'}">
+		<a href="<%=request.getContextPath()%>/member/mypage">마이 페이지</a>
+	</c:if>
+	<c:if test = "${member.role == 'ROLE_ADMIN'}">
+		<a href="<%=request.getContextPath()%>/admin/productRegistration">상품등록</a>
+		<a href="<%=request.getContextPath()%>/admin/productsManage">상품관리</a>
+	</c:if>
 </body>
 </html>

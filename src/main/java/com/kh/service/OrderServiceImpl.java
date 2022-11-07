@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.model.CartRepository;
 import com.kh.model.MemberRepository;
 import com.kh.model.OrderRepository;
 import com.kh.model.ProductRepository;
 import com.kh.model.domain.AttachImageDTO;
+import com.kh.model.domain.CartDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.OrderCancelDTO;
 import com.kh.model.domain.OrderDTO;
@@ -27,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
 	private ProductRepository productRepository;
 
 	@Autowired
-	private MemberRepository memberRepository;
+	private CartRepository cartRepository;
 
 	@Override
 	public List<OrderItemDTO> getProductInfo(List<OrderItemDTO> orders) {
@@ -54,19 +56,28 @@ public class OrderServiceImpl implements OrderService {
 			ords.add(orderItem);
 		}
 		ord.setOrders(ords);
-		if (ord.getOrderSalePrice() >= 30000)
+		if (ord.getTotalPrice() >= 30000)
 			ord.setO_delivery_charge(0);
 		else
 			ord.setO_delivery_charge(3000);
 
 		orderRepository.insertOrder(ord);
+		
 		for (OrderItemDTO oit : ord.getOrders()) {
 			orderRepository.insertOrderItem(oit);
 		}
+		
 		for (OrderItemDTO oit : ord.getOrders()) {
 			ProductDTO productDTO = productRepository.selectProductInfo(oit.getP_Id());
 			productDTO.setP_Stock(productDTO.getP_Stock() - oit.getP_Cnt());
 			productRepository.updateProductStock(productDTO);
+		}
+		
+		for (OrderItemDTO OrderItem : ord.getOrders()) {
+			CartDTO cartDTO = new CartDTO();
+			cartDTO.setM_Id(ord.getM_Id());
+			cartDTO.setP_Id(OrderItem.getP_Id());
+			cartRepository.deleteOrderCart(cartDTO);
 		}
 	}
 
@@ -95,11 +106,12 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	public void orderCancle(OrderCancelDTO orderCancelDTO) {
 		List<OrderItemDTO> OrderItems = orderRepository.selectOrderItemByO_Id(orderCancelDTO.getO_Id());
+		
 		for (OrderItemDTO OrderItem : OrderItems)
 			OrderItem.initSaleTotal();
 		OrderDTO Order = orderRepository.selectOrderByO_Id(orderCancelDTO.getO_Id());
 		Order.setOrders(OrderItems);
-		Order.getOrderSalePrice();
+		Order.getTotalPrice();
 		orderRepository.updateOrder(orderCancelDTO.getO_Id());
 
 		for (OrderItemDTO OrderItem : Order.getOrders()) {

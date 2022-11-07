@@ -95,7 +95,7 @@
 				<c:forEach items="${orderList}" var="ol">
 					<tr>
 						<td>
-							<div id="image" data-p_Id="${ol.imageList[0].p_Id}" data-path="${ol.imageList[0].filePath}" data-uuid="${ol.imageList[0].uuid}" data-filename="${ol.imageList[0].fileName}">
+							<div class="image" data-pid="${ol.imageList[0].p_Id}" data-path="${ol.imageList[0].filePath}" data-uuid="${ol.imageList[0].uuid}" data-filename="${ol.imageList[0].fileName}">
 								<img>
 							</div>	
 						</td>
@@ -139,19 +139,19 @@
 	<script>
 		$(function(){
 			setTotalInfo();
-			const imgView = $("#image");
-			var imgChk = imgView.data("path");
-			if(imgChk != ""){
-				const imgView = $("#image");
-				const path = imgView.data("path");
-				const uuid = imgView.data("uuid");
-				const fileName = imgView.data("filename");
-				const uploadPath = encodeURIComponent(path + "/s_" + fileName);
-				imgView.find("img").attr('src', '<%=request.getContextPath()%>/display?fileName=' + uploadPath);
-			} else {
-				// 이미지 없음
-				// imgView.find("img").attr('src', '');
-			}
+			$(".image").each(function(i, obj){
+				const imgView = $(obj);
+				if(imgView.data("pid")){
+					const path = imgView.data("path");
+					const uuid = imgView.data("uuid");
+					const fileName = imgView.data("filename");
+					const uploadPath = encodeURIComponent(path + "/s_" + fileName);
+					$(this).find("img").attr('src', '<%=request.getContextPath()%>/display?fileName=' + uploadPath);
+				} else {
+					// 이미지 없음
+					// $(this).find("img").attr('src', '');
+				}
+			});
 		});
 		function showAdress(className){
 			$(".addressInfo_input").css('display', 'none');

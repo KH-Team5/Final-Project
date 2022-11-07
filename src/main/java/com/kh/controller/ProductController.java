@@ -52,14 +52,6 @@ public class ProductController {
 		return "search";
 	}
 
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Model model) {
-		model.addAttribute("Inner", productService.getSubInnerCategory());
-		model.addAttribute("Pants", productService.getSubPantsCategory());
-		model.addAttribute("Outer", productService.getSubOuterCategory());
-		return "/main";
-	}
-
 	@RequestMapping(value = "/productInfo/{p_Id}", method = RequestMethod.GET)
 	public String productInfo(@PathVariable("p_Id") int p_Id, Model model, Principal principal) {
 		model.addAttribute("productInfo", productService.getProductInfo(p_Id));
