@@ -11,6 +11,9 @@
 <h1>관리자 페이지 입니다</h1>
 <a href="<%=request.getContextPath()%>/admin/productsManage">상품관리</a>
 <a href="<%=request.getContextPath()%>/admin/productRegistration">상품등록</a>
-<a href="<%=request.getContextPath()%>/admin/usersManage">회원관리</a>
+<a href="<%=request.getContextPath()%>/admin/usersManage">회원관리</a> <br>
+
+	<a href="<%=request.getContextPath()%>/">홈</a>
+
 </body>
 </html>

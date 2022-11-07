@@ -14,9 +14,7 @@
 </head>
 
 <body>
-<div id="image" data-p_Id="${productInfo.imageList[0].p_Id}" data-path="${productInfo.imageList[0].filePath}" data-uuid="${productInfo.imageList[0].uuid}" data-filename="${productInfo.imageList[0].fileName}">
-		<img>
-		</div>
+
 	<h1>상품 관리 페이지</h1>
     <c:if test="${listcheck != 'empty'}">
 		<table id="products">
