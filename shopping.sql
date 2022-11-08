@@ -1,26 +1,26 @@
 /* 유저 */
 CREATE TABLE member_TB(
-M_id VARCHAR2(50) NOT NULL PRIMARY KEY,
-M_pwd VARCHAR2(200) NOT NULL,
-M_name VARCHAR2(50) NOT NULL,
-email VARCHAR2(50) NOT NULL UNIQUE,
-contact VARCHAR2(20) NOT NULL,
-zipcode NUMBER NOT NULL,
-address VARCHAR2(200) NOT NULL,
-detail_address VARCHAR2(200) NOT NULL,
-joined_date DATE DEFAULT SYSDATE NOT NULL,
-role VARCHAR2(10) CHECK (role IN ('ROLE_USER', 'ROLE_ADMIN')) NOT NULL
+    M_id VARCHAR2(50) NOT NULL PRIMARY KEY,
+    M_pwd VARCHAR2(200) NOT NULL,
+    M_name VARCHAR2(50) NOT NULL,
+    email VARCHAR2(50) NOT NULL UNIQUE,
+    contact VARCHAR2(20) NOT NULL,
+    zipcode NUMBER NOT NULL,
+    address VARCHAR2(200) NOT NULL,
+    detail_address VARCHAR2(200) NOT NULL,
+    joined_date DATE DEFAULT SYSDATE NOT NULL,
+    role VARCHAR2(10) CHECK (role IN ('ROLE_USER', 'ROLE_ADMIN')) NOT NULL
 );
 
 /* 상품 */
 CREATE TABLE product_TB(
-P_id NUMBER PRIMARY KEY,
-P_name VARCHAR2(200) NOT NULL,
-P_price NUMBER NOT NULL,
-P_stock NUMBER NOT NULL,
-P_category varchar2(30) NOT NULL,
-P_date DATE default sysdate,
-p_Intro clob
+    P_id NUMBER PRIMARY KEY,
+    P_name VARCHAR2(200) NOT NULL,
+    P_price NUMBER NOT NULL,
+    P_stock NUMBER NOT NULL,
+    P_category varchar2(30) NOT NULL,
+    P_date DATE default sysdate,
+    p_Intro clob
 );
 
 /* 상품 시퀀스 */
@@ -115,15 +115,6 @@ create table cart_TB(
 CREATE SEQUENCE cart_SQ
 START WITH 1
 INCREMENT BY 1;
-
-/* 찜목록 */
-CREATE TABLE wish_TB(
-M_id VARCHAR2(50) NOT NULL, /* member_TB의 FK, PK */
-P_index NUMBER NOT NULL, /* product_TB의 FK, PK */
-FOREIGN KEY(M_id) REFERENCES member_TB(M_id),
-FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
-CONSTRAINT wish_TB PRIMARY KEY(M_id, P_index)
-);
 
 /* 문의게시판 */
 CREATE TABLE question_TB(
