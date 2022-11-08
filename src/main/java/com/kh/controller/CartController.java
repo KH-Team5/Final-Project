@@ -23,14 +23,15 @@ public class CartController {
 	@ResponseBody
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST)
 	public String addCartPOST(CartDTO cartDTO, HttpServletRequest request) {
-		if (!(request.isUserInRole("ROLE_USER") || request.isUserInRole("ROLE_ADMIN")))
+		if (!request.isUserInRole("ROLE_USER"))
 			return "5";
 		int result = cartService.addCart(cartDTO);
 		return result + "";
 	}
 
-	@RequestMapping(value = "/cart/{m_Id}", method = RequestMethod.GET)
-	public String cartPage(@PathVariable("m_Id") String m_Id, Model model) {
+	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+	public String cartPage(Model model, Principal principal) {
+		String m_Id = principal.getName();
 		model.addAttribute("cartInfo", cartService.getCartList(m_Id));
 		model.addAttribute("m_Id", m_Id);
 		return "/cart";
