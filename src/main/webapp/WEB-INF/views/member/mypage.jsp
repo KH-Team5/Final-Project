@@ -58,7 +58,6 @@ function updateAgree(){
       </td>
       </tr>
 </table>
-<a href="<%=request.getContextPath()%>/cart/${key1.m_Id}">장바구니</a>
 <a href="<%=request.getContextPath()%>/">홈</a>
 </body>
 </html>

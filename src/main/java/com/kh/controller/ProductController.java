@@ -38,9 +38,11 @@ public class ProductController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String productManage(Criteria cri, Model model) {
-		model.addAttribute("Inner", productService.getSubInnerCategory());
-		model.addAttribute("Pants", productService.getSubPantsCategory());
-		model.addAttribute("Outer", productService.getSubOuterCategory());
+		/*
+		 * model.addAttribute("Inner", productService.getSubInnerCategory());
+		 * model.addAttribute("Pants", productService.getSubPantsCategory());
+		 * model.addAttribute("Outer", productService.getSubOuterCategory());
+		 */
 		List<ProductDTO> list = productService.productGetList(cri);
 		if (!list.isEmpty())
 			model.addAttribute("list", list);
