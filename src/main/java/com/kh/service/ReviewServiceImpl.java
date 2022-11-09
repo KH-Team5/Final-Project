@@ -61,8 +61,6 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public void setRating(int p_Id) {
 		Double p_RatingAvg = reviewRepository.selectRatingAvg(p_Id);
-		if (p_RatingAvg == null)
-			p_RatingAvg = 0.0;
 		p_RatingAvg = (double) (Math.round(p_RatingAvg * 10));
 		p_RatingAvg = p_RatingAvg / 10;
 		UpdateRatingDTO updateRatingDTO = new UpdateRatingDTO();

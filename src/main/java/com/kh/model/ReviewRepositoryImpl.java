@@ -52,7 +52,10 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
 	@Override
 	public double selectRatingAvg(int p_Id) {
-		return sqlSession.selectOne("review.selectRatingAvg", p_Id);
+		Double p_RatingAvg = sqlSession.selectOne("review.selectRatingAvg", p_Id);
+		if (p_RatingAvg == null)
+			p_RatingAvg = 0.0;
+		return p_RatingAvg;
 	}
 
 	@Override
