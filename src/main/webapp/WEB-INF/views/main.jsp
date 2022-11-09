@@ -43,11 +43,6 @@
 	   								<!-- Product reviews-->
 	   								<div class="d-flex justify-content-center small text-warning mb-2">
 	   									${pi.p_RatingAvg}
-	   									<i class="bi-star-fill"></i>
-	   									<div class="bi bi-star-fill"></div>
-	   									<div class="bi-star-fill"></div>
-	   									<div class="bi-star-fill"></div>
-	   									<div class="bi-star-fill"></div>
 	    							</div>
 	    							<!-- Product category-->
 	   								${pi.c_Name}

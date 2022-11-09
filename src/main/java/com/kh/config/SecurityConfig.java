@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.authorizeRequests()
 			// 페이지 권한 설정
-			.antMatchers("/member/login", "/member/join/**", "/member/findPage/**", "/cart/add").permitAll()
+			.antMatchers("/member/login", "/member/join/**", "/member/findPage/**", "/cart/add", "/review/list").permitAll()
 			// /admin 으로 시작하는 경로는 ADMIN 롤을 가진 사용자만접근 가능
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			// /member 경로는 USER, ADMIN 롤을 가진 사용자만 접근 가능

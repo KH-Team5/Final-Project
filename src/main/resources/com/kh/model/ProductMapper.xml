@@ -29,7 +29,7 @@
   		</selectKey>  
 		<![CDATA[
 			insert into product_TB
-			values(product_SQ.NEXTVAL, #{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro })
+			values(product_SQ.NEXTVAL, #{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro }, 0.0)
 		]]>
 	</insert>
 
@@ -57,10 +57,12 @@
 	</select>
 
 	<select id="getTotal" resultType="int">
-		select count(*) from product_TB
-		<if test="keyword != null">
-			where p_Name like '%' || #{keyword} || '%'
-		</if>
+		<![CDATA[  
+			select count(*) from product_TB
+			where 
+		]]>
+		<include refid="criteria"></include> 
+		1=1
 	</select>
 
 	<select id="selectInnerCategory" resultType="categoryDTO">

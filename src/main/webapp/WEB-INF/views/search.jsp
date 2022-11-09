@@ -57,12 +57,15 @@
    				</li>
    			</c:if>
    			<c:forEach begin="${paging.pageStart }" end="${paging.pageEnd }" var="num">
-   				<li id="paging_btn">
-   					<a href="<%=request.getContextPath()%>/search?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }&type=T">
+   				<li class="paging_btn ${paging.cri.pageNum == num ? 'active':''}">
+   					<a href="
+   						${num }
+					">
    						${num }
    					</a>
    				</li>
    			</c:forEach>
+   			
 			<c:if test="${paging.next }">
 				<li id="next_btn">
 					<a href="${paging.pageEnd + 1 }">다음</a>
@@ -70,6 +73,14 @@
 			</c:if>
 		</ul>
 	</div>
+	
+	<form id="moveForm" action="<%=request.getContextPath()%>/search" method="get" >
+		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">
+		<input type="hidden" name="amount" value="${paging.cri.amount}">
+		<input type="hidden" name="keyword" value="${paging.cri.keyword}">
+		<input type="hidden" name="c_Code" value="${paging.cri.c_Code}">
+		<input type="hidden" name="type" value="${paging.cri.type}">
+	</form>	
 	
 	<a href="<%=request.getContextPath()%>/">홈</a>
 	
@@ -79,7 +90,11 @@
 		
 		$(function(){
 			if(amount == '')
-				$('#paging_btn').css('display','none');
+				$('.paging_btn').css('display','none');
+			const selectedType = '<c:out value="${paging.cri.type}"/>';
+			if(selectedType != ""){
+				moveForm.find("input[name='type']").val(selectedType);	
+			}
 		});
 		
  		$("#search button").on("click", function(e){
@@ -89,6 +104,18 @@
 			search.find("input[name='pageNum']").val("1");
 			search.submit();
 		});
+ 		
+ 		const moveForm = $('#moveForm');
+ 		
+ 		$(".paging_btn a").on("click", function(e){
+ 			
+ 			e.preventDefault();
+ 			
+ 			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+ 			
+ 			moveForm.submit();
+ 			
+ 		});	
 	</script>
 </body>
 </html>
