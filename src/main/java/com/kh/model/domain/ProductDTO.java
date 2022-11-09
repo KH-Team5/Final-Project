@@ -26,4 +26,5 @@ public class ProductDTO {
 	
 	private List<AttachImageDTO> imageList;
 	
+	private double p_RatingAvg;
 }

@@ -76,4 +76,9 @@ public class ProductRepositoryImpl implements ProductRepository {
 	public int updateProductStock(ProductDTO ProductDTO) {
 		return sqlSession.update("product.updateProductStock", ProductDTO);
 	}
+	
+	@Override
+	public List<ProductDTO> selectProductListOrderByRating() {
+		return sqlSession.selectList("product.selectProductListOrderByRating");
+	}
 }

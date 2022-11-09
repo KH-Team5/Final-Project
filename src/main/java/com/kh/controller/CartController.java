@@ -40,12 +40,12 @@ public class CartController {
 	@RequestMapping(value = "/cart/update", method = RequestMethod.POST)
 	public String updateCartPOST(CartDTO cartDTO) {
 		cartService.ChangeP_Cnt(cartDTO);
-		return "redirect:/cart/" + cartDTO.getM_Id();
+		return "redirect:/cart";
 	}
 
 	@RequestMapping(value = "/cart/delete", method = RequestMethod.POST)
 	public String deleteCartPOST(CartDTO cartDTO) {
 		cartService.deleteCart(cartDTO.getCa_Id());
-		return "redirect:/cart/" + cartDTO.getM_Id();
+		return "redirect:/cart";
 	}
 }

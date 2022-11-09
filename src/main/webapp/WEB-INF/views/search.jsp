@@ -21,6 +21,7 @@
 				<tr>
 					<td>상품 이름</td>
 					<td>상품 가격</td>
+					<td>평점</td>
 					<td>재고</td>
 					<td>카테고리</td>
 					<td>등록날짜</td>
@@ -30,6 +31,7 @@
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/productInfo/${list.p_Id}"><c:out value="${list.p_Name}"/></a></td>
 					<td><c:out value="${list.p_Price}"/></td>
+					<td><c:out value="${list.p_RatingAvg}"/></td>
 					<td><c:out value="${list.p_Stock}"/></td>
 					<td><c:out value="${list.c_Name}"/></td>				
 					<td>

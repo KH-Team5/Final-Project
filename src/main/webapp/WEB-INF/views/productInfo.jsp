@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,7 @@
 	상품 가격: ${productInfo.p_Price } <br>
 	상품 재고: ${productInfo.p_Stock } <br>
 	상품 카테고리: ${productInfo.c_Name } <br>
+	평점:  ${productInfo.p_RatingAvg } <br>
 	상품 설명: ${productInfo.p_Intro } <br> 
 	등록 날자: ${productInfo.p_Date } <br>
 	<div class="button">
@@ -42,9 +44,11 @@
 		<h2>리뷰</h2>
 	</div>
 	
-	<div class="review_button_wrap">
-		<button>리뷰 쓰기</button>
-	</div>
+	<sec:authorize access="isAuthenticated()">
+		<div class="review_button_wrap">
+			<button>리뷰 쓰기</button>
+		</div>
+	</sec:authorize>
 	
 	<div class="review_none">
 	</div>
