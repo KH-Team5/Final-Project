@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+
+<update id="modify" parameterType="productDTO">
+      <![CDATA[
+         update product_TB
+         set p_Name = #{p_Name }, p_Price = #{p_Price }, p_Stock = #{p_Stock }, p_Intro=#{p_Intro }, p_Date=#{p_Date }
+         where p_Id = #{p_Id }
+      ]]>
+   </update>
+   
+<!-- 상품이미지 테이블 삭제 -->
+<update id="delete1" parameterType="productDTO">
+      <![CDATA[
+       
+            delete
+            from product_image_TB
+            where p_Id = #{p_Id }
+         
+      ]]>
+   </update>
+   
+<!-- 상품테이블 삭제 -->
+   <update id="delete2" parameterType="productDTO">
+      <![CDATA[
+
+            delete
+            from product_TB
+            where p_Id = #{p_Id }
+
+      ]]>
+   </update>
+
+ 
+ 
+ 
+
+
+<!-- 회원 정보 -->
+  <select id="selectMemberinfo" parameterType="String" resultType="memberDTO">
+      select m_Id, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+      from member_TB 
+      where m_Id = #{m_Id}
+   </select> 
+
+
+<select id="selectMemberList" resultType="memberDTO">
+	  	<![CDATA[
+			select /*+INDEX_DESC(member_TB P_index)*/ rownum as rn, m_Id, M_name,
+					email, contact, zipcode, address, detail_address,joined_date,role
+			from member_TB ]]>
+			</select> 
+ 	<!-- 	<include refid="criteria"></include>
+		<![CDATA[    
+		    	rownum <= #{pageNum} * #{amount} 
+		    )
+			where rn > (#{pageNum} - 1) * #{amount}		  	
+  		]]> -->
+	<!-- </select> --> 
+
+ <select id="getTotal" resultType="int">
+		select count(*) from member_TB
+		<if test="keyword != null">
+			where M_name like '%' || #{keyword} || '%'
+		</if>
+	</select>
+	
+	<select id="getByM_id" resultType="memberDTO"
+		parameterType="string">
+		<![CDATA[
+		select m_Id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+		from member_TB 
+		where m_Id = #{m_Id}
+		]]>
+	</select> 
+	
+	
+	
+	<!--  유저아이디 삭제 -->
+	 <update id="userDelete" parameterType="productDTO">
+      <![CDATA[
+
+            delete
+            from member_TB
+            where m_Id = #{m_Id }
+
+      ]]>
+   </update>
+	
+
+
+
+<!--=======================================================================================================  -->
+  <!-- 회원 가입자 토탈 -->
+  <select id="count" resultType="int">
+  select count(m_Id) from  member_TB
+ </select>
+
+<!--=======================================================================================================  -->
+   
+  <!-- 게시물 총 갯수 -->
+  <select id="listPage" parameterType="hashMap" resultType="memberDTO">
+    SELECT * FROM member_tb
+  </select>
+
+<!--=======================================================================================================  -->
+
+   <!-- 유저 목록 + 페이징 + 검색-->
+  <select id="listPageSearch" parameterType="hashMap" resultType="memberDTO">
+     
+         SELECT * FROM (SELECT rownum rn,T.*FROM (
+      select  m_Id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+         from member_tb 
+          
+    <if test='searchType.equals("email")'>
+        WHERE email LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("contact")'>
+        WHERE contact LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("M_name")'>
+        WHERE M_name LIKE ('%'||#{keyword}||'%') 
+    </if>
+ 
+    <if test='searchType.equals("m_Id")'>
+        WHERE m_Id LIKE ('%'||#{keyword}||'%')
+    </if>
+    order by m_Id desc
+         )T)WHERE RN BETWEEN #{start} AND #{end}
+         
+         
+  </select> 
+	
+	
+	 <!-- 유저 총 인원 + 검색 적용 -->
+    <select id="searchCount" parameterType="hashMap" resultType="int">
+       select count(m_Id) from   member_TB
+       
+              
+  <if test='searchType.equals("m_Id")'>
+        WHERE m_Id LIKE ('%'||#{keyword}||'%')
+    </if>
+    
+    
+    </select> 
+    
+    <select id="list" resultType="memberDTO">
+   select m_Id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+		from member_TB 
+  </select>
+
+
+
+
+
+</mapper>

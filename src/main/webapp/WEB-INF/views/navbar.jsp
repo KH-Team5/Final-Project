@@ -68,8 +68,7 @@
 					<a href="<%=request.getContextPath()%>/cart">장바구니</a> |
 					<a href="<%=request.getContextPath()%>/member/orderList">주문 목록</a> |
 					<sec:authorize access="hasRole('ADMIN')">
-						<a href="<%=request.getContextPath()%>/admin/productRegistration">상품등록</a> |
-						<a href="<%=request.getContextPath()%>/admin/productsManage">상품관리</a> |
+						<a href="<%=request.getContextPath()%>/admin/adminMain">관리자페이지</a> |
 					</sec:authorize>
 					<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
 				</sec:authorize>
