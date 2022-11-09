@@ -20,7 +20,8 @@ CREATE TABLE product_TB(
     P_stock NUMBER NOT NULL,
     P_category varchar2(30) NOT NULL,
     P_date DATE default sysdate,
-    p_Intro clob
+    p_Intro clob,
+    p_RatingAvg number(2,1)
 );
 
 /* 상품 시퀀스 */
