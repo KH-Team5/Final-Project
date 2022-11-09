@@ -1,5 +1,6 @@
 package com.kh.model;
-
+ 
+import java.util.HashMap; 
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,7 +12,8 @@ import com.kh.model.domain.MemberDTO;
 //import com.kh.model.domain.Criteria;
 //import com.kh.model.domain.MemberDTO;
 import com.kh.model.domain.ProductDTO;
-
+import com.kh.model.domain.userPagingDTO;
+ 
 @Repository
 public class AdminRepositoryImpl implements AdminRepository {
 	@Autowired
@@ -52,6 +54,50 @@ public class AdminRepositoryImpl implements AdminRepository {
 		MemberDTO memberView = sqlSession.selectOne("admin.selectMemberinfo", M_id);
 		
 		return memberView;
+	}
+
+	@Override
+	public int searchCount(String searchType, String keyword)  {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("searchType", searchType);
+		data.put("keyword",keyword);
+		return sqlSession.selectOne("admin.searchCount", data);
+	}
+
+	@Override
+	public List<MemberDTO> listPageSearch(userPagingDTO vo, String searchType, String keyword)  {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("start", vo.getStart());
+		data.put("end",vo.getEnd());
+		
+		data.put("searchType",searchType);
+		data.put("keyword", keyword);
+		
+		return sqlSession.selectList("admin.listPageSearch", data);
+	}
+
+	@Override
+	public List<MemberDTO> listPage(userPagingDTO vo) {
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+	      data.put("start", vo.getStart());
+	      data.put("end", vo.getEnd());
+	      return sqlSession.selectList("admin.listPage", data);
+	}
+
+	@Override
+	public int count() {
+		return sqlSession.selectOne("admin.count");
+	}
+
+	@Override
+	public List<MemberDTO> list() {
+		return sqlSession.selectList("admin.list");
+	}
+
+	@Override
+	public int userDelete(String M_id) {
+		int userDelete = sqlSession.delete("admin.userDelete",M_id);
+		return userDelete;
 	}
 
 

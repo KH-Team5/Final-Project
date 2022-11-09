@@ -30,7 +30,8 @@
 			</thead>	
 			<c:forEach var="list" items="${list}" >
 				<tr>
-					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}"><c:out value="${list.p_Name}"/></a></td> 
+					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}">
+					<c:out value="${list.p_Name}"/></a></td> 
 					<td><c:out value="${list.p_Price}"></c:out></td>
 					<td><c:out value="${list.p_Stock}"></c:out></td>
 					<td><c:out value="${list.p_Category}"></c:out></td>				

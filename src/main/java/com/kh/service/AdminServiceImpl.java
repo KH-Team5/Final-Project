@@ -16,6 +16,7 @@ import com.kh.model.domain.MemberDTO;
 //import com.kh.model.domain.Criteria;
 //import com.kh.model.domain.MemberDTO;
 import com.kh.model.domain.ProductDTO;
+import com.kh.model.domain.userPagingDTO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -60,6 +61,36 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public MemberDTO getUserInfo(String M_id) {
 		return adminRepository.selectMemberInfo(M_id);
+	}
+
+	@Override
+	public int searchCount(String searchType, String keyword)  {
+		return adminRepository.searchCount(searchType,keyword);
+	}
+
+	@Override
+	public List<MemberDTO> listPageSearch(userPagingDTO vo, String searchType, String keyword) {
+		return adminRepository.listPageSearch(vo,searchType,keyword);
+	}
+
+	@Override
+	public int count() {
+		return adminRepository.count();
+	}
+
+	@Override
+	public List<MemberDTO> listPage(userPagingDTO vo) {
+		return adminRepository.listPage(vo);
+	}
+
+	@Override
+	public List<MemberDTO> list() {
+		return adminRepository.list();
+	}
+
+	@Override
+	public int userDelete(String M_id) {
+		return adminRepository.userDelete(M_id);
 	}
 
 

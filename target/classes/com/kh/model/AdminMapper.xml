@@ -34,56 +34,33 @@
       ]]>
    </update>
 
-<!-- 	<sql id="criteria">
-		<trim prefix="(" suffix=") AND" prefixOverrides="AND">
-			<foreach item="type" collection="typeArr">
-				<trim prefix="AND">
-					<choose>
-						<when test="type == 'C'.toString()">
-							p_Category like #{c_Code} || '%'
-						</when>
-						<when test="type == 'T'.toString()">
-							p_Name like '%' || #{keyword} || '%'
-						</when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
-	</sql>
- -->
- 
- 
- 
  
  
  
 
 
-<!-- 상품 정보 -->
-    <select id="selectMemberinfo" parameterType="String" resultType="memberDTO">
+<!-- 회원 정보 -->
+  <select id="selectMemberinfo" parameterType="String" resultType="memberDTO">
       select M_id, M_name, email, contact, zipcode, address, detail_address, joined_date, role
       from member_TB 
-      where M_id = #{M_id }
-   </select>
+      where M_id = #{M_id}
+   </select> 
 
 <select id="selectMemberList" resultType="memberDTO">
 	  	<![CDATA[
 			select /*+INDEX_DESC(member_TB P_index)*/ rownum as rn, M_id, M_name,
 					email, contact, zipcode, address, detail_address,joined_date,role
-			from member_TB 
-			
-		
-		
-		]]>
+			from member_TB ]]>
+			</select> 
  	<!-- 	<include refid="criteria"></include>
 		<![CDATA[    
 		    	rownum <= #{pageNum} * #{amount} 
 		    )
 			where rn > (#{pageNum} - 1) * #{amount}		  	
   		]]> -->
-	</select> 
+	<!-- </select> --> 
 
-<select id="getTotal" resultType="int">
+ <select id="getTotal" resultType="int">
 		select count(*) from member_TB
 		<if test="keyword != null">
 			where M_name like '%' || #{keyword} || '%'
@@ -95,10 +72,88 @@
 		<![CDATA[
 		select M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
 		from member_TB 
-		where M_id = #{M_id }
+		where M_id = #{M_id}
 		]]>
-	</select>
+	</select> 
 	
+	
+	
+	<!--  유저아이디 삭제 -->
+	 <update id="userDelete" parameterType="productDTO">
+      <![CDATA[
+
+            delete
+            from member_TB
+            where M_id = #{M_id }
+
+      ]]>
+   </update>
+	
+
+
+
+<!--=======================================================================================================  -->
+  <!-- 회원 가입자 토탈 -->
+  <select id="count" resultType="int">
+  select count(M_id) from  member_TB
+ </select>
+
+<!--=======================================================================================================  -->
+   
+  <!-- 게시물 총 갯수 -->
+  <select id="listPage" parameterType="hashMap" resultType="memberDTO">
+    SELECT * FROM member_tb
+  </select>
+
+<!--=======================================================================================================  -->
+
+   <!-- 유저 목록 + 페이징 + 검색-->
+  <select id="listPageSearch" parameterType="hashMap" resultType="memberDTO">
+     
+         SELECT * FROM (SELECT rownum rn,T.*FROM (
+      select  M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+         from member_tb 
+          
+    <if test='searchType.equals("email")'>
+        WHERE email LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("contact")'>
+        WHERE contact LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("M_name")'>
+        WHERE M_name LIKE ('%'||#{keyword}||'%') 
+    </if>
+ 
+    <if test='searchType.equals("M_id")'>
+        WHERE M_id LIKE ('%'||#{keyword}||'%')
+    </if>
+    order by M_id desc
+         )T)WHERE RN BETWEEN #{start} AND #{end}
+         
+         
+  </select> 
+	
+	
+	 <!-- 유저 총 인원 + 검색 적용 -->
+    <select id="searchCount" parameterType="hashMap" resultType="int">
+       select count(M_id) from   member_TB
+       
+              
+  <if test='searchType.equals("M_id")'>
+        WHERE M_id LIKE ('%'||#{keyword}||'%')
+    </if>
+    
+    
+    </select> 
+    
+    <select id="list" resultType="memberDTO">
+   select M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+		from member_TB 
+  </select>
+
+
 
 
 

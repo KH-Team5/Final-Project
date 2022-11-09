@@ -40,6 +40,7 @@ import com.kh.model.domain.Criteria;
 import com.kh.model.domain.MemberDTO;
 import com.kh.model.domain.PageDTO;
 import com.kh.model.domain.ProductDTO;
+import com.kh.model.domain.userPagingDTO;
 import com.kh.service.AdminService;
 import com.kh.service.ProductService;
 
@@ -81,23 +82,146 @@ public class AdminController {
 
    //관리자 메인페이지로 이동
       @RequestMapping(value = "/adminMain", method = RequestMethod.GET)
-      public String getpage() throws Exception {
+      public String getpage( Model model) throws Exception {
+          
+          //게시물 총 갯수
+          int count = adminService.count();
+
+          
+          //한 페이지에 출력할 게시물 갯수
+          int postNum = 5;
+          
+          //하단 페이징 번호 ([ 게시물 총 갯수 / 한 페이지에 출력할 갯수]의 올림)
+          int pageNum = (int)Math.ceil((double) count/postNum);
+          
+          
+          int num= 1;
+          model.addAttribute("num", num);
+
+          model.addAttribute("pageNum", pageNum);
+          
+          //시작 및 끝 번호
+          
+         
+       
+
          return "admin/adminMain";
-      }
+}
       
-   //회원관리
+     
       
+
       @RequestMapping(value = "/usersManage", method = RequestMethod.GET)
-      public void usersManage(Criteria cri, Model model) {
-         List<MemberDTO> list = adminService.userGetList(cri);
-         if (!list.isEmpty())
-         model.addAttribute("list", list);
-         else {
-         model.addAttribute("listCheck", "empty");
-         return;
+      public void usersManage(Criteria cri, Model model,
+      
+    		@RequestParam("num")int num,
+            @RequestParam(value="searchType",required = false, defaultValue = "M_id") String searchType,
+            @RequestParam(value="keyword",required = false, defaultValue = "") String keyword) throws Exception{      
+         String searchTypeKeyword;
+         
+
+         //게시물 총 갯수
+         int count = adminService.searchCount(searchType, keyword);
+
+
+         if(searchType.equals("") || keyword.equals("")) {
+            searchTypeKeyword = "";
+         }else {
+            searchTypeKeyword = "&searchType=" + searchType + "&keyword=" + keyword;
          }
-         model.addAttribute("paging", new PageDTO(cri, adminService.usersGetTotal(cri)));
+         
+         
+         
+         //한 페이지에 출력할 게시물 갯수
+         int postNum = 5;
+         
+         //하단 페이징 번호 ([ 게시물 총 갯수 / 한 페이지에 출력할 갯수]의 올림)
+         int pageNum = (int)Math.ceil((double) count/postNum);
+         
+         
+         //한 번에 표시할 페이징 번호의 갯수
+         int pageNum_cnt = 5;
+         
+         // 표시되는 페이징 번호 중 마지막 번호
+         int endpageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+      
+         
+         // 표시되는 페이징 번호 중 첫번째 번호
+         int startPageNum = endpageNum - (pageNum_cnt - 1);
+
+         
+          // 마지막 번호 재계산
+         int endpageNum_tmp = (int)(Math.ceil((double)count / (double)pageNum_cnt));
+
+         if(endpageNum > endpageNum_tmp) {
+             endpageNum = endpageNum_tmp;
+         }
+         boolean prev = startPageNum == 1 ? false : true;
+         boolean next = endpageNum * pageNum_cnt >= count ? false : true;
+         
+         userPagingDTO vo = new userPagingDTO(count, num, postNum);
+         List<MemberDTO> userList = null;
+         userList = adminService.listPageSearch(vo, searchType, keyword);   
+         
+         model.addAttribute("list", userList);
+         model.addAttribute("pageNum", pageNum);
+         
+         //시작 및 끝 번호
+         model.addAttribute("startPageNum", startPageNum);
+         model.addAttribute("endPageNum", endpageNum);
+         
+         // 이전 및 다음
+         model.addAttribute("prev", prev);
+         model.addAttribute("next", next);
+         
+         //현재 페이지
+         model.addAttribute("select", num);   
+         //검색 타입과 검색어
+         model.addAttribute("searchTypeKeyword", searchTypeKeyword);   
+         
+         //제목 과 내용 
+         model.addAttribute("searchType", searchType);
+         model.addAttribute("keyword", keyword);
+         model.addAttribute("listCheck","empty");
+         
+         
       }
+      
+      /* 유저조회페이지 */
+         
+         @RequestMapping(value = "/userInfo/{M_id}", method = RequestMethod.GET)
+         public String productInfo(@PathVariable("M_id")String M_id, Model model) {
+            model.addAttribute("u_list", adminService.getUserInfo(M_id));
+
+            return "/admin/userInfo";
+            
+         }
+         
+         
+         
+         
+         
+      
+      /* 유저 아이디 삭제 */
+      @RequestMapping(value = "/userDelete/{M_id}", method = RequestMethod.GET)
+      public String userDelete(@PathVariable("M_id") String M_id) { 
+         
+      adminService.userDelete(M_id); 
+      logger.info("아이디 삭제 성공");
+      
+      
+      
+      return "redirect:/admin/usersManage?num=1";
+      
+      }
+    
+      
+      
+      
+      
+      
+
+      
       
       
       /* 상품조회페이지 */
@@ -107,6 +231,12 @@ public class AdminController {
          return "/admin/adminProductInfo";
          
       }
+      
+     
+      
+      
+      
+      
       
       
       

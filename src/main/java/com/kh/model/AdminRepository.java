@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.MemberDTO;
 import com.kh.model.domain.ProductDTO;
+import com.kh.model.domain.userPagingDTO;
 
 public interface AdminRepository {
 
@@ -19,6 +20,20 @@ public interface AdminRepository {
 	public List<MemberDTO> selectMemberList(Criteria cri);
 
 	public MemberDTO selectMemberInfo(String M_id);
+
+	public int searchCount(String searchType, String keyword) ;
+
+	public List<MemberDTO> listPageSearch(userPagingDTO vo, String searchType, String keyword) ;
+
+	//게시물 목록 + 페이징
+	public List<MemberDTO> listPage(userPagingDTO vo);
+
+	//게시물 총개수
+	public int count();
+
+	public List<MemberDTO> list();
+
+	public int userDelete(String M_id);
 
 
 
