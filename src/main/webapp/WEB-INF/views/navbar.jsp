@@ -18,7 +18,7 @@
 		<div class="container-fluid">
 			<a class="navbar-brand" href="<%=request.getContextPath()%>/">쇼핑몰</a>
 			<form class="d-flex" action="<%=request.getContextPath()%>/search" method="get">
-				<input class="form-control me-sm-2" type="text" placeholder="상품명" name="keyword">
+				<input class="form-control me-sm-2" type="text" placeholder="상품명" name="keyword" value="">
 				<input type="hidden" name="type" value="T">
 				<button class="btn btn-secondary my-2 my-sm-0" type="submit">검색</button>
 			</form>
@@ -29,7 +29,7 @@
 							role="button" aria-haspopup="true" aria-expanded="false">상의</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="search?type=C&c_Code=11">후드</a>
-							<a class="dropdown-item" href="search?type=C&c_Code=12">맨두맨</a>
+							<a class="dropdown-item" href="search?type=C&c_Code=12">맨투맨</a>
 							<%-- <c:forEach items="${Inner}" var="category">
 								<a class="dropdown-item" href="search?type=C&c_Code=${category.c_Code}">${category.c_Name}</a>
 							</c:forEach> --%>
