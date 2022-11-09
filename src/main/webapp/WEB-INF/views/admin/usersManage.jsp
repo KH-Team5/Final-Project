@@ -32,8 +32,8 @@
 			<c:forEach var="list" items="${list}" >
 				<tr>
 	
-				    <td><a href="<%=request.getContextPath()%>/admin/userInfo/${list.m_id}">
-				    <c:out value="${list.m_id}"/></a></td>
+				    <td><a href="<%=request.getContextPath()%>/admin/userInfo/${list.m_Id}">
+				    <c:out value="${list.m_Id}"/></a></td>
 					<td><c:out value="${list.m_name}"></c:out></td>
 					<td><c:out value="${list.email}"></c:out></td>				
 					<td><c:out value="${list.contact}"></c:out></td>

@@ -50,8 +50,8 @@ public class AdminRepositoryImpl implements AdminRepository {
 	}
 
 	@Override
-	public MemberDTO selectMemberInfo(String M_id) {
-		MemberDTO memberView = sqlSession.selectOne("admin.selectMemberinfo", M_id);
+	public MemberDTO selectMemberInfo(String m_Id) {
+		MemberDTO memberView = sqlSession.selectOne("admin.selectMemberinfo", m_Id);
 		
 		return memberView;
 	}
@@ -95,8 +95,8 @@ public class AdminRepositoryImpl implements AdminRepository {
 	}
 
 	@Override
-	public int userDelete(String M_id) {
-		int userDelete = sqlSession.delete("admin.userDelete",M_id);
+	public int userDelete(String m_Id) {
+		int userDelete = sqlSession.delete("admin.userDelete",m_Id);
 		return userDelete;
 	}
 

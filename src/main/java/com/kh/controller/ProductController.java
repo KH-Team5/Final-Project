@@ -3,6 +3,7 @@ package com.kh.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,19 +22,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.PageDTO;
 import com.kh.model.domain.ProductDTO;
+import com.kh.model.domain.ReviewDTO;
+import com.kh.service.MemberService;
 import com.kh.service.ProductService;
+import com.kh.service.ReviewService;
 
 @Controller
 public class ProductController {
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private MemberService memberservice;
+	@Autowired
+	private ReviewService reviewService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String productManage(Criteria cri, Model model) {
-		model.addAttribute("Inner", productService.getSubInnerCategory());
-		model.addAttribute("Pants", productService.getSubPantsCategory());
-		model.addAttribute("Outer", productService.getSubOuterCategory());
+		/*
+		 * model.addAttribute("Inner", productService.getSubInnerCategory());
+		 * model.addAttribute("Pants", productService.getSubPantsCategory());
+		 * model.addAttribute("Outer", productService.getSubOuterCategory());
+		 */
 		List<ProductDTO> list = productService.productGetList(cri);
 		if (!list.isEmpty())
 			model.addAttribute("list", list);
@@ -45,17 +54,11 @@ public class ProductController {
 		return "search";
 	}
 
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Model model) {
-		model.addAttribute("Inner", productService.getSubInnerCategory());
-		model.addAttribute("Pants", productService.getSubPantsCategory());
-		model.addAttribute("Outer", productService.getSubOuterCategory());
-		return "/main";
-	}
-
 	@RequestMapping(value = "/productInfo/{p_Id}", method = RequestMethod.GET)
-	public String productInfo(@PathVariable("p_Id") int p_Id, Model model) {
+	public String productInfo(@PathVariable("p_Id") int p_Id, Model model, Principal principal) {
 		model.addAttribute("productInfo", productService.getProductInfo(p_Id));
+		if (principal != null)
+			model.addAttribute("member", memberservice.memberInfo(principal.getName()));
 		return "/productInfo";
 	}
 
@@ -71,5 +74,21 @@ public class ProductController {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@RequestMapping(value = "/review/reviewEnroll/{m_Id}", method = RequestMethod.GET)
+	public String replyEnrollInfoGET(@PathVariable("m_Id") String m_Id, int p_Id, Model model) {
+		ProductDTO productDTO = productService.getProductInfo(p_Id);
+		model.addAttribute("productInfo", productDTO);
+		model.addAttribute("memberId", m_Id);
+		return "/review/reviewEnroll";
+	}
+
+	@RequestMapping(value = "/review/reviewUpdate", method = RequestMethod.GET)
+	public String reviewUpdateInfoGET(ReviewDTO reviewDTO, Model model) {
+		ProductDTO productDTO = productService.getProductInfo(reviewDTO.getP_Id());
+		model.addAttribute("productInfo", productDTO);
+		model.addAttribute("reviewInfo", reviewService.updateReviewInfo(reviewDTO.getR_Id()));
+		return "/review/reviewUpdate";
 	}
 }

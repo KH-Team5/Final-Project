@@ -13,15 +13,15 @@
 </head>
 </head>
 <body>
+	<jsp:include page="navbar.jsp" flush="true"/>
 	<h1>검색 페이지</h1>
-	
-	<jsp:include page="category.jsp" flush="true"/>
     <c:if test="${listcheck != 'empty'}">
 		<table id="products">
 			<thead>
 				<tr>
 					<td>상품 이름</td>
 					<td>상품 가격</td>
+					<td>평점</td>
 					<td>재고</td>
 					<td>카테고리</td>
 					<td>등록날짜</td>
@@ -31,6 +31,7 @@
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/productInfo/${list.p_Id}"><c:out value="${list.p_Name}"/></a></td>
 					<td><c:out value="${list.p_Price}"/></td>
+					<td><c:out value="${list.p_RatingAvg}"/></td>
 					<td><c:out value="${list.p_Stock}"/></td>
 					<td><c:out value="${list.c_Name}"/></td>				
 					<td>
@@ -69,15 +70,6 @@
 			</c:if>
 		</ul>
 	</div>
-   	
-   	<!-- 검색 -->
-	<form id="search" action="<%=request.getContextPath()%>/search?type=T" method="get">
-   		<input type="text" name="keyword" value="${paging.cri.keyword }">
-   		<input type="hidden" name="pageNum" value="${paging.cri.pageNum }">
-   		<input type="hidden" name="amount" value="${paging.cri.amount }">
-   		<input type="hidden" name="type" value="T">
-   		<button id='search_btn'>검색</button>
-	</form>
 	
 	<a href="<%=request.getContextPath()%>/">홈</a>
 	

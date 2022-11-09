@@ -16,11 +16,12 @@
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous">
 </script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 	<h1>회원가입 페이지</h1>
 	<form id="joinform" name="joinform" method="post">
-		아이디: <input id="M_id" name="M_id" type="text"> <br>
+		아이디: <input id="m_Id" name="m_Id" type="text"> <br>
 		<span id="idInputChk"></span>
 		<span id="idChk"></span>
 		
@@ -40,6 +41,8 @@
 		
 		연락처: <input id="contact" name="contact" type="tel"> <br> 
 		<span id="contactChk"></span>
+		
+		<a class="address_search_btn" onclick="execution_daum_address()">주소 찾기</a> <br>
 		
 		우편번호: <input id="zipcode" name="zipcode" type="text"> <br> 
 		<span id="zipcodeChk"></span>
@@ -67,7 +70,7 @@
 		var code = "";
 		$(function() {
 			$("#joinbutton").click(function() {
-				var id = $('#M_id').val();
+				var id = $('#m_Id').val();
 		        var pw = $('#M_pwd').val();
 		        var name = $('#M_name').val();
 		        var mail = $('#email').val();
@@ -137,9 +140,9 @@
 		        }
 			});
 			
-			$('#M_id').on("propertychange change keyup paste input", function() {
-				var M_id = $('#M_id').val();
-				var data = {M_id : M_id};
+			$('#m_Id').on("propertychange change keyup paste input", function() {
+				var m_Id = $('#m_Id').val();
+				var data = {m_Id : m_Id};
 				$.ajax({
 					type: "post",
 					url: "<%=request.getContextPath()%>/member/join/idChk",
@@ -152,7 +155,7 @@
 							$('#idInputChk').html("중복" + "<br>");
 							idOverlapChk = false;
 						} 
-						if (M_id == "") {
+						if (m_Id == "") {
 							idOverlapChk = false;
 							$('#idInputChk').html("");
 						}
@@ -175,7 +178,7 @@
 							$("#authNumChk").html("중복" + "<br>");
 							$("#authNumBtn").attr("disabled",true);
 						}
-						if (M_id == "") {
+						if (m_Id == "") {
 							$("#authNumBtn").attr("disabled",false);
 						}
 					}
@@ -208,6 +211,34 @@
 		        mailAuthChk = false;
 			}
 		});
+		
+		function execution_daum_address(){
+			new daum.Postcode({
+				oncomplete: function(data) {
+	                var addr = '';
+	                var extraAddr = '';
+	                if (data.userSelectedType === 'R')
+	                    addr = data.roadAddress;
+	                else
+	                    addr = data.jibunAddress;
+	                
+	                if(data.userSelectedType === 'R'){
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname))
+	                        extraAddr += data.bname;
+	                    if(data.buildingName !== '' && data.apartment === 'Y')
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    if(extraAddr !== '')
+	                        extraAddr = ' (' + extraAddr + ')';
+						addr += extraAddr;
+	                } else 
+						addr += ' ';
+	                $("#zipcode").val(data.zonecode);
+	                $("#address").val(addr);				
+	                $("#detail_address").attr("readonly", false);
+	                $("#detail_address").focus();	 
+		        }
+		    }).open();  	
+		}
 	</script>
 </body>
 </html>

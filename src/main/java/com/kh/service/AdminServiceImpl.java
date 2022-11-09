@@ -59,8 +59,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public MemberDTO getUserInfo(String M_id) {
-		return adminRepository.selectMemberInfo(M_id);
+	public MemberDTO getUserInfo(String m_Id) {
+		return adminRepository.selectMemberInfo(m_Id);
 	}
 
 	@Override
@@ -89,8 +89,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int userDelete(String M_id) {
-		return adminRepository.userDelete(M_id);
+	public int userDelete(String m_Id) {
+		return adminRepository.userDelete(m_Id);
 	}
 
 

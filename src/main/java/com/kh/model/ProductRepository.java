@@ -25,4 +25,10 @@ public interface ProductRepository {
 	public ProductDTO selectProductInfo(int p_Id);
 
 	public void insertImage(AttachImageDTO imageDTO);
+
+	public List<AttachImageDTO> selectImage(int p_Id);
+
+	int updateProductStock(ProductDTO ProductDTO);
+
+	List<ProductDTO> selectProductListOrderByRating();
 }

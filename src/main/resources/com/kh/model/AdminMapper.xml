@@ -41,14 +41,15 @@
 
 <!-- 회원 정보 -->
   <select id="selectMemberinfo" parameterType="String" resultType="memberDTO">
-      select M_id, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+      select m_Id, M_name, email, contact, zipcode, address, detail_address, joined_date, role
       from member_TB 
-      where M_id = #{M_id}
+      where m_Id = #{m_Id}
    </select> 
+
 
 <select id="selectMemberList" resultType="memberDTO">
 	  	<![CDATA[
-			select /*+INDEX_DESC(member_TB P_index)*/ rownum as rn, M_id, M_name,
+			select /*+INDEX_DESC(member_TB P_index)*/ rownum as rn, m_Id, M_name,
 					email, contact, zipcode, address, detail_address,joined_date,role
 			from member_TB ]]>
 			</select> 
@@ -70,9 +71,9 @@
 	<select id="getByM_id" resultType="memberDTO"
 		parameterType="string">
 		<![CDATA[
-		select M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+		select m_Id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
 		from member_TB 
-		where M_id = #{M_id}
+		where m_Id = #{m_Id}
 		]]>
 	</select> 
 	
@@ -84,7 +85,7 @@
 
             delete
             from member_TB
-            where M_id = #{M_id }
+            where m_Id = #{m_Id }
 
       ]]>
    </update>
@@ -95,7 +96,7 @@
 <!--=======================================================================================================  -->
   <!-- 회원 가입자 토탈 -->
   <select id="count" resultType="int">
-  select count(M_id) from  member_TB
+  select count(m_Id) from  member_TB
  </select>
 
 <!--=======================================================================================================  -->
@@ -111,7 +112,7 @@
   <select id="listPageSearch" parameterType="hashMap" resultType="memberDTO">
      
          SELECT * FROM (SELECT rownum rn,T.*FROM (
-      select  M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+      select  m_Id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
          from member_tb 
           
     <if test='searchType.equals("email")'>
@@ -126,10 +127,10 @@
         WHERE M_name LIKE ('%'||#{keyword}||'%') 
     </if>
  
-    <if test='searchType.equals("M_id")'>
-        WHERE M_id LIKE ('%'||#{keyword}||'%')
+    <if test='searchType.equals("m_Id")'>
+        WHERE m_Id LIKE ('%'||#{keyword}||'%')
     </if>
-    order by M_id desc
+    order by m_Id desc
          )T)WHERE RN BETWEEN #{start} AND #{end}
          
          
@@ -138,18 +139,18 @@
 	
 	 <!-- 유저 총 인원 + 검색 적용 -->
     <select id="searchCount" parameterType="hashMap" resultType="int">
-       select count(M_id) from   member_TB
+       select count(m_Id) from   member_TB
        
               
-  <if test='searchType.equals("M_id")'>
-        WHERE M_id LIKE ('%'||#{keyword}||'%')
+  <if test='searchType.equals("m_Id")'>
+        WHERE m_Id LIKE ('%'||#{keyword}||'%')
     </if>
     
     
     </select> 
     
     <select id="list" resultType="memberDTO">
-   select M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+   select m_Id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
 		from member_TB 
   </select>
 

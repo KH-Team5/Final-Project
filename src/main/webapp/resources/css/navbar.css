@@ -1,0 +1,13 @@
+.dropdown:hover .dropdown-menu {
+	display: block;
+	margin-top: 0;
+}
+
+.btn {
+	white-space: nowrap;
+}
+
+a {
+	text-decoration: none;
+	color: gray;
+}

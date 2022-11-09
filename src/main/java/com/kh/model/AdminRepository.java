@@ -19,7 +19,7 @@ public interface AdminRepository {
 
 	public List<MemberDTO> selectMemberList(Criteria cri);
 
-	public MemberDTO selectMemberInfo(String M_id);
+	public MemberDTO selectMemberInfo(String m_Id);
 
 	public int searchCount(String searchType, String keyword) ;
 
@@ -33,7 +33,7 @@ public interface AdminRepository {
 
 	public List<MemberDTO> list();
 
-	public int userDelete(String M_id);
+	public int userDelete(String m_Id);
 
 
 

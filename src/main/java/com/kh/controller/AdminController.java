@@ -115,7 +115,7 @@ public class AdminController {
       public void usersManage(Criteria cri, Model model,
       
     		@RequestParam("num")int num,
-            @RequestParam(value="searchType",required = false, defaultValue = "M_id") String searchType,
+            @RequestParam(value="searchType",required = false, defaultValue = "m_Id") String searchType,
             @RequestParam(value="keyword",required = false, defaultValue = "") String keyword) throws Exception{      
          String searchTypeKeyword;
          
@@ -189,9 +189,9 @@ public class AdminController {
       
       /* 유저조회페이지 */
          
-         @RequestMapping(value = "/userInfo/{M_id}", method = RequestMethod.GET)
-         public String productInfo(@PathVariable("M_id")String M_id, Model model) {
-            model.addAttribute("u_list", adminService.getUserInfo(M_id));
+         @RequestMapping(value = "/userInfo/{m_Id}", method = RequestMethod.GET)
+         public String productInfo(@PathVariable("m_Id")String m_Id, Model model) {
+            model.addAttribute("u_list", adminService.getUserInfo(m_Id));
 
             return "/admin/userInfo";
             
@@ -203,10 +203,10 @@ public class AdminController {
          
       
       /* 유저 아이디 삭제 */
-      @RequestMapping(value = "/userDelete/{M_id}", method = RequestMethod.GET)
-      public String userDelete(@PathVariable("M_id") String M_id) { 
+      @RequestMapping(value = "/userDelete/{m_Id}", method = RequestMethod.GET)
+      public String userDelete(@PathVariable("m_Id") String m_Id) { 
          
-      adminService.userDelete(M_id); 
+      adminService.userDelete(m_Id); 
       logger.info("아이디 삭제 성공");
       
       

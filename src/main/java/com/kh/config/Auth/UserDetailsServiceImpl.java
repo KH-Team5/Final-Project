@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		UserDetailsImpl userDetailsImpl = new UserDetailsImpl();
 		if (memberDTO != null) {
 			userDetailsImpl.setName(memberDTO.getM_name());
-			userDetailsImpl.setUsername(memberDTO.getM_id());
+			userDetailsImpl.setUsername(memberDTO.getM_Id());
 			userDetailsImpl.setPassword(memberDTO.getM_pwd());
 			userDetailsImpl.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(memberDTO.getRole())));
 		}

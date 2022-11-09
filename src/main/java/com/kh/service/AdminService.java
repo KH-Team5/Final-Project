@@ -31,7 +31,7 @@ public interface AdminService {
 
 	
 	/* 회원상세정보 */
-	public MemberDTO getUserInfo(String M_id);
+	public MemberDTO getUserInfo(String m_Id);
 
 	
 	/* 게시물 총갯수 */
@@ -47,7 +47,7 @@ public interface AdminService {
 	public List<MemberDTO> listPage(userPagingDTO vo); 
 	
 	/* 유저 아이디 삭제 */
-	public int userDelete(String M_id); 
+	public int userDelete(String m_Id); 
 	
 	
 }

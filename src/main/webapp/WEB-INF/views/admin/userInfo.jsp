@@ -25,7 +25,7 @@ function agreeDelete() {
          <thead>
             <tr>
                <th>회원아이디:</th>
-               <td>${u_list.m_id}</td> 
+               <td>${u_list.m_Id}</td> 
                </tr>
                <tr>
                <th>이름:</th>
@@ -69,7 +69,7 @@ function agreeDelete() {
 	
 	<tr>
        <td colspan="2">
-       <a href="<%=request.getContextPath()%>/admin/userDelete/${M_id}" class="btn" onclick="agreeDelete()">아이디삭제</a>
+       <a href="<%=request.getContextPath()%>/admin/userDelete/${m_Id}" class="btn" onclick="agreeDelete()">아이디삭제</a>
       </td>
       </tr>
 	&nbsp;
