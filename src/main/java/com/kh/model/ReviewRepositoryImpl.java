@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.ReviewDTO;
+import com.kh.model.domain.UpdateRatingDTO;
 
 @Repository
 public class ReviewRepositoryImpl implements ReviewRepository {
@@ -47,5 +48,15 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	@Override
 	public int deleteReview(int r_Id) {
 		return sqlSession.delete("review.deleteReview", r_Id);
+	}
+
+	@Override
+	public double selectRatingAvg(int p_Id) {
+		return sqlSession.selectOne("review.selectRatingAvg", p_Id);
+	}
+
+	@Override
+	public int updateRating(UpdateRatingDTO updateRatingDTO) {
+		return sqlSession.update("review.updateRating", updateRatingDTO);
 	}
 }

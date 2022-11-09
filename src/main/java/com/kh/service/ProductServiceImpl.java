@@ -56,5 +56,15 @@ public class ProductServiceImpl implements ProductService {
 	public ProductDTO getProductInfo(int p_Id) {
 		return productRepository.selectProductInfo(p_Id);
 	}
+	
+	@Override
+	public List<ProductDTO> selectProductListOrderByRating() {
+		List<ProductDTO> products = productRepository.selectProductListOrderByRating();
+		for (ProductDTO productDTO : products) {
+			List<AttachImageDTO> imageList = productRepository.selectImage(productDTO.getP_Id());
+			productDTO.setImageList(imageList);
+		}
+		return products;
+	}
 
 }

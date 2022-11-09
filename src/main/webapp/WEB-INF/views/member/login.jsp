@@ -14,5 +14,6 @@
 		<input type="submit" value="로그인"> <br>
 	</form>
 	<a href="<%=request.getContextPath()%>/">홈</a>
+	<a href="<%=request.getContextPath()%>/member/findPage">아이디 비밀번호 찾기</a>
 </body>
 </html>

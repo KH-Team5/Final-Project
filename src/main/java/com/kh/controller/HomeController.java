@@ -20,7 +20,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		Criteria cri = new Criteria(1, 8);
-		List<ProductDTO> list = productService.productGetList(cri);
+		List<ProductDTO> list = productService.selectProductListOrderByRating();
 		model.addAttribute("productInfo", list);
 		/*
 		 * model.addAttribute("Inner", productService.getSubInnerCategory());

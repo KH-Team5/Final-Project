@@ -60,4 +60,16 @@
   		WHERE r_Id = #{r_Id}
   	</delete>
 	
+	<!-- 평점 -->
+	<select id="selectRatingAvg" resultType="double">
+  		select avg(r_Rating)
+  		from review_TB
+  		where p_Id = #{p_Id}
+  	</select>
+  	
+	<update id="updateRating">
+		update product_TB
+		set p_RatingAvg = #{p_RatingAvg}
+		where p_Id = #{p_Id}
+	</update>
 </mapper>

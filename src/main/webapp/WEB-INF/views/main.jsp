@@ -34,7 +34,7 @@
 					<div class="col mb-5">
 						<div class="card h-100"  data-pid="${pi.imageList[0].p_Id}" data-path="${pi.imageList[0].filePath}" data-uuid="${pi.imageList[0].uuid}" data-filename="${pi.imageList[0].fileName}">
 	   						<!-- Product image-->
-	   						<img class="card-img-top"/>
+	   						<img class="card-img-top img-thumbnail" style="height: 300px"/>
 	   						<!-- Product details-->
 	   						<div class="card-body p-4">
 	   							<div class="text-center">
@@ -42,16 +42,18 @@
 	   								<h5 class="fw-bolder">${pi.p_Name}</h5>
 	   								<!-- Product reviews-->
 	   								<div class="d-flex justify-content-center small text-warning mb-2">
-	   									<div class="bi-star-fill"></div>
-	   									<div class="bi-star-fill"></div>
+	   									${pi.p_RatingAvg}
+	   									<i class="bi-star-fill"></i>
+	   									<div class="bi bi-star-fill"></div>
 	   									<div class="bi-star-fill"></div>
 	   									<div class="bi-star-fill"></div>
 	   									<div class="bi-star-fill"></div>
 	    							</div>
-	   								<!-- Product price-->
-	   								${pi.p_Price}<br>
-	   								<!-- Product category-->
+	    							<!-- Product category-->
 	   								${pi.c_Name}
+	   								<br>
+	   								<!-- Product price-->
+	   								<fmt:formatNumber value="${pi.p_Price}" pattern="#,### 원" />
 	   							</div>
 	   						</div>
 	   						<!-- Product actions-->
@@ -81,7 +83,6 @@
 				const path = bobj.data("path");
 				const uuid = bobj.data("uuid");
 				const fileName = bobj.data("filename");
-				alert(fileName);
 				const uploadPath = encodeURIComponent(path + "/s_" + fileName);
 				$(this).find("img").attr('src', '<%=request.getContextPath()%>/display?fileName=' + uploadPath);
 			} else {
