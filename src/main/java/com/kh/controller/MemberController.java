@@ -1,5 +1,6 @@
 package com.kh.controller;
 
+import java.security.Principal;
 import java.util.Random;
 import java.util.UUID;
 
@@ -73,6 +74,9 @@ public class MemberController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model, HttpServletRequest request) {
+		Principal principal = request.getUserPrincipal();
+		if (principal != null)
+			return "redirect:/";
 		String referrer = request.getHeader("Referer");
 		request.getSession().setAttribute("prevPage", referrer);
 		return "/member/login";
