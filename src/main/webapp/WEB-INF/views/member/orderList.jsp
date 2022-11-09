@@ -112,7 +112,7 @@
 		$("#search_btn").on("click", function(e){	
 			e.preventDefault();
 			if(!searchForm.find("input[name='keyword']").val()){
-				alert("키워드를 입력하십시오");
+				alert("검색어를를 입력하십시오");
 				return false;
 			}
 			if(amount == '') 

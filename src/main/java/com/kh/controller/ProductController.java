@@ -43,6 +43,7 @@ public class ProductController {
 		 * model.addAttribute("Pants", productService.getSubPantsCategory());
 		 * model.addAttribute("Outer", productService.getSubOuterCategory());
 		 */
+		cri.setAmount(12);
 		List<ProductDTO> list = productService.productGetList(cri);
 		if (!list.isEmpty())
 			model.addAttribute("list", list);
