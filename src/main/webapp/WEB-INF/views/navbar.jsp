@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	<link rel="stylesheet" href="resources/css/navbar.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navbar.css">
 	<script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
@@ -27,9 +27,9 @@
 			</form>
 			<div class="collapse navbar-collapse" id="navbarColor03">
 				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link" href="search">모든 상품</a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/search">모든 상품</a></li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="search?type=C&c_Code=1"
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=1"
 							role="button" aria-haspopup="true" aria-expanded="false">상의</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="search?type=C&c_Code=11">후드</a>
@@ -40,7 +40,7 @@
 						</div>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="search?type=C&c_Code=2"
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=2"
 							role="button" aria-haspopup="true" aria-expanded="false">하의</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="search?type=C&c_Code=21">청바지</a>
@@ -51,7 +51,7 @@
 						</div>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="search?type=C&c_Code=3"
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=3"
 							role="button" aria-haspopup="true" aria-expanded="false">아우터</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="search?type=C&c_Code=31">코트</a>
