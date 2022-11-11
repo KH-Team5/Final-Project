@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.model.AdminRepository;
 import com.kh.model.ProductRepository;
 import com.kh.model.domain.AttachImageDTO;
+import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.MemberDTO;
 //import com.kh.model.domain.Criteria;
@@ -29,10 +30,13 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	@Override
 	public void regProduct(ProductDTO productDTO) {
+		System.out.println("AdminServiceImpl regProduct()");
 		productRepository.insert(productDTO);
 		if (productDTO.getImageList() == null || productDTO.getImageList().size() <= 0)
 			return;
+		int idx = 0;
 		for (AttachImageDTO attach : productDTO.getImageList()) {
+			System.out.println("regProduct() ["+(idx++)+"]productDTO.getP_Id() : " + productDTO.getP_Id());
 			attach.setP_Id(productDTO.getP_Id());
 			productRepository.insertImage(attach);
 		}
@@ -40,6 +44,27 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public int productModify(ProductDTO productDTO) {
+		System.out.println("AdminServiceImpl productModify()");
+		if (productDTO != null) {
+			System.out.println("productDTO is not null");
+			if(productDTO.getImageList() != null) System.out.println("productDTO.getImageList().size() : " + productDTO.getImageList().size());
+			else System.out.println("productDTO.getImageList() is null");
+		}else {
+			System.out.println("productDTO is null");
+		}
+				
+		if (productDTO.getImageList() != null & productDTO.getImageList().size() > 0) {
+			System.out.println("productDTO.getImageList() is not null");
+			int idx = 0;
+			
+			for (AttachImageDTO attach : productDTO.getImageList()) {
+				System.out.println("ProductDTO() ["+(idx++)+"]productDTO.getP_Id() : " + productDTO.getP_Id() + "  " + attach.getFileName());
+				attach.setP_Id(productDTO.getP_Id());
+				productRepository.insertImage(attach);
+			}
+		}else {
+			System.out.println("productDTO.getImageList() is null");
+		}
 		return adminRepository.productModify(productDTO);
 	}
 
@@ -91,6 +116,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int userDelete(String m_Id) {
 		return adminRepository.userDelete(m_Id);
+	}
+
+	@Override
+	public int deleteImageAll(int p_Id) {
+		return adminRepository.deleteImageAll(p_Id);
 	}
 
 

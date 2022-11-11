@@ -9,6 +9,16 @@
 <meta charset="UTF-8">
 <title>상품 관리 페이지</title>
 <style>
+ul {
+	list-style-type : none;
+	
+}
+ul li {
+	float: left;
+	margin-right: 5px;
+}
+
+
 </style>
 </head>
 </head>
@@ -20,7 +30,7 @@
 		<table id="products">
 			<thead>
 				<tr>
-					
+					<td>상품번호</td>
 					<td>상품이름</td>
 					<td>상품가격</td>
 					<td>재고</td>
@@ -30,6 +40,7 @@
 			</thead>	
 			<c:forEach var="list" items="${list}" >
 				<tr>
+					<td>${list.p_Id}</td>
 					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}">
 					<c:out value="${list.p_Name}"/></a></td> 
 					<td><c:out value="${list.p_Price}"></c:out></td>

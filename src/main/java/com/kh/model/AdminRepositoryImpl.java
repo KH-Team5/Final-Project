@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.MemberDTO;
 //import com.kh.model.domain.Criteria;
@@ -22,8 +23,9 @@ public class AdminRepositoryImpl implements AdminRepository {
 	
 	@Override
 	public int productModify(ProductDTO productDTO) {
-		int count = sqlSession.update("admin.modify", productDTO);
-		return count;
+		System.out.println("AdminRepositoryImpl productModify()");
+		int p_modify = sqlSession.update("admin.p_modify", productDTO);
+		return p_modify;
 	
 	}
 
@@ -98,6 +100,13 @@ public class AdminRepositoryImpl implements AdminRepository {
 	public int userDelete(String m_Id) {
 		int userDelete = sqlSession.delete("admin.userDelete",m_Id);
 		return userDelete;
+	}
+
+	@Override
+	public int deleteImageAll(int p_Id) {
+		System.out.println("AdminRepositoryImpl deleteImageAll()");
+		int deleteImage = sqlSession.delete("deleteImage", p_Id);
+		return deleteImage;
 	}
 
 
