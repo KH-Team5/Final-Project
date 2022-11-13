@@ -1,47 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
-<!DOCTYPE html>
-<html>
-<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  
 <meta charset="UTF-8">
-<title>상품 관리 페이지</title>
 <style>
+
+#one{
+position: absolute;
+top:2%;
+left:50%;
+font-color:#white;
+}
 ul {
 	list-style-type : none;
 	
 }
 ul li {
+	
 	float: left;
 	margin-right: 5px;
 }
 
 
+
+#products{
+width: 60%;
+ margin-left:auto; 
+    margin-right:auto;
+}
+
+#paging_wrap{
+ margin-left:19%;
+ 
+}
+
+#search{
+ margin-left:24%; 
+    
+}
+
 </style>
-</head>
+
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>상품 관리 페이지</title>
+
 </head>
 
 <body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
-	<h1>상품 관리 페이지</h1>
+<table class="table table-hover">
+
+<tbody>
+ <tr class="table-dark">
+	 <th scope="row" ><h1>상품 관리 페이지</h1></th>
+	 </tr>
+	 </tbody>
     <c:if test="${listcheck != 'empty'}">
-		<table id="products">
+		<table class="table table-hover" id="products">
 			<thead>
-				<tr>
-					<td>상품번호</td>
-					<td>상품이름</td>
-					<td>상품가격</td>
-					<td>재고</td>
-					<td>카테고리</td>
-					<td>등록날짜</td>
+				<tr class = "table-light">
+					<th scope="col">상품번호</th>
+					<th scope="col">상품이름</th>
+					<th scope="col">상품가격</th>
+					<th scope="col">재고</th>
+					<th scope="col">카테고리</th>
+					<th scope="col">등록날짜</th>
 				</tr>
 			</thead>	
+				<tbody>
 			<c:forEach var="list" items="${list}" >
 				<tr>
-					<td>${list.p_Id}</td>
-					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}">
+					<th scope="row">${list.p_Id}</th>
+					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}"  style="color: black">
 					<c:out value="${list.p_Name}"/></a></td> 
 					<td><c:out value="${list.p_Price}"></c:out></td>
 					<td><c:out value="${list.p_Stock}"></c:out></td>
@@ -53,7 +93,7 @@ ul li {
 				</tr>
 			</c:forEach>
 		
-			
+			</tbody>
 		</table>
 		
 	</c:if>
@@ -64,6 +104,7 @@ ul li {
 	</c:if>
 	
    	<!-- 페이징 -->
+   	
    	<div id="paging_wrap">
    		<ul id="paging">
    			<c:if test="${paging.prev }">
@@ -73,7 +114,7 @@ ul li {
    			</c:if>
    			<c:forEach begin="${paging.pageStart }" end="${paging.pageEnd }" var="num">
    				<li id="paging_btn">
-   					<a href="<%=request.getContextPath()%>/admin/productsManage?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }&type=T">
+   					<a href="<%=request.getContextPath()%>/admin/productsManage?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }&type=T" style="color: black">
    						${num }
    					</a>
    				</li>
@@ -85,7 +126,7 @@ ul li {
 			</c:if>
 		</ul>
 	</div>
-   	
+   	<span id="positioning">
    	<!-- 검색 -->
 	<form id="search" action="<%=request.getContextPath()%>/admin/productsManage" method="get">
    		<input type="text" name="keyword" value="${paging.cri.keyword }">
@@ -94,9 +135,10 @@ ul li {
    		<input type="hidden" name="type" value="T">
    		<button id='search_btn'>검색</button>
 	</form>
-	
-	<a href="<%=request.getContextPath()%>/">홈</a>
-	
+	</span>
+	<div class = "button_home" id="one">
+	<a href="<%=request.getContextPath()%>/" style="color: white">홈페이지로고</a>
+	</div>
 	<script>
 		let search = $('#search');
 		let amount = "${paging.cri.amount }";

@@ -89,7 +89,7 @@ public class AdminController {
 
           
           //한 페이지에 출력할 게시물 갯수
-          int postNum = 5;
+          int postNum = 10;
           
           //하단 페이징 번호 ([ 게시물 총 갯수 / 한 페이지에 출력할 갯수]의 올림)
           int pageNum = (int)Math.ceil((double) count/postNum);
@@ -133,14 +133,14 @@ public class AdminController {
          
          
          //한 페이지에 출력할 게시물 갯수
-         int postNum = 5;
+         int postNum = 10;
          
          //하단 페이징 번호 ([ 게시물 총 갯수 / 한 페이지에 출력할 갯수]의 올림)
          int pageNum = (int)Math.ceil((double) count/postNum);
          
          
          //한 번에 표시할 페이징 번호의 갯수
-         int pageNum_cnt = 5;
+         int pageNum_cnt = 10;
          
          // 표시되는 페이징 번호 중 마지막 번호
          int endpageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
