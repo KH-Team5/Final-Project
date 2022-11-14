@@ -89,7 +89,7 @@ public class AdminController {
 
           
           //한 페이지에 출력할 게시물 갯수
-          int postNum = 5;
+          int postNum = 10;
           
           //하단 페이징 번호 ([ 게시물 총 갯수 / 한 페이지에 출력할 갯수]의 올림)
           int pageNum = (int)Math.ceil((double) count/postNum);
@@ -133,14 +133,14 @@ public class AdminController {
          
          
          //한 페이지에 출력할 게시물 갯수
-         int postNum = 5;
+         int postNum = 10;
          
          //하단 페이징 번호 ([ 게시물 총 갯수 / 한 페이지에 출력할 갯수]의 올림)
          int pageNum = (int)Math.ceil((double) count/postNum);
          
          
          //한 번에 표시할 페이징 번호의 갯수
-         int pageNum_cnt = 5;
+         int pageNum_cnt = 10;
          
          // 표시되는 페이징 번호 중 마지막 번호
          int endpageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
@@ -258,8 +258,12 @@ public class AdminController {
       /* 상품조회 및 수정 */
       
       @RequestMapping(value = "/productModify/{p_Id}", method = RequestMethod.GET)
-       public String productModify(@PathVariable("p_Id") int p_Id, Model model) {
-         ObjectMapper mapper = new ObjectMapper();
+       public String productModify(@PathVariable("p_Id") int p_Id, Model model) throws Exception {
+         List<CategoryDTO> list = productService.categoryList();
+         ObjectMapper obj = new ObjectMapper();
+         String categoryList = obj.writeValueAsString(list);
+         model.addAttribute("categoryList", categoryList);
+         
    
          
          /* 조회 페이지 정보 */
@@ -269,11 +273,108 @@ public class AdminController {
       
       /* 상품 정보 수정 */
       @RequestMapping(value = "/productModify/{p_Id}", method = RequestMethod.POST)
-      public String productModifyPOST(ProductDTO productDTO) {
-         adminService.productModify(productDTO);
+      public String productModifyPOST(ProductDTO productDTO, Model model,RedirectAttributes redirect)  {
+    	  
+//    	  if (productDTO.getImageList() != null) {
+    	  
+//    	  }
+    	  adminService.deleteImageAll(productDTO.getP_Id()); //상품번호 이미지 전체삭제
+    	  
+    	  adminService.productModify(productDTO);	//상품정보 업데이트 & 이미지 등록
 
+//    	  int result = adminService.productModify(productDTO);	//상품정보 업데이트 & 이미지 등록
+//    	  
+//    	  if(result == 1 && productDTO.getImageList() != null && productDTO.getImageList().size() > 0) {
+//    		  
+//    		  //adminService.deleteImageAll(productDTO.getP_Id());
+//    		  
+    		  //adminService.regProduct(productDTO);
+//    		  
+//    		  redirect.addFlashAttribute("registration_result", productDTO.getP_Name());
+//    		   		  
+//    	  }else {
+//      
+//          adminService.regProduct(productDTO);
+//		  redirect.addFlashAttribute("registration_result", productDTO.getP_Name());
+//    	  }
          return "redirect:/admin/productsManage";
       }
+   
+    
+      
+
+      @ResponseBody
+      @PostMapping(value = "/productModify/{p_Id}/fileUpload")
+      public ResponseEntity<List<AttachImageDTO>> modifyFileUploadPOST1(@RequestParam("imageFile") MultipartFile[] uploadFile) {
+         
+    	  System.out.println("modifyFileUploadPOST1()");
+    	  for (MultipartFile multipartFile : uploadFile) {
+            File checkfile = new File(multipartFile.getOriginalFilename());
+            String type = null;
+            try {
+               type = Files.probeContentType(checkfile.toPath());
+               logger.info("MIME TYPE : " + type);
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+            if (!type.startsWith("image")) {
+               List<AttachImageDTO> list = null;
+               return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+            }
+         }
+         String uploadFolder = "C:\\upload";
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+         Date date = new Date();
+         String str = sdf.format(date);
+         String datePath = str.replace("-", File.separator);
+         File uploadPath = new File(uploadFolder, datePath);
+         if (uploadPath.exists() == false)
+            uploadPath.mkdirs();
+
+         List<AttachImageDTO> list = new ArrayList<>();
+         for (MultipartFile multipartFile : uploadFile) {
+            AttachImageDTO image = new AttachImageDTO();
+            String uploadFileName = multipartFile.getOriginalFilename();
+            String uuid = UUID.randomUUID().toString();
+            uploadFileName = uuid + "_" + uploadFileName;
+
+            image.setFileName(uploadFileName);
+            image.setFilePath(datePath);
+            image.setUuid(uuid);
+
+            File saveFile = new File(uploadPath, uploadFileName);
+            try {
+               multipartFile.transferTo(saveFile);
+               File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+               BufferedImage bo_image = ImageIO.read(saveFile);
+               double ratio = 3;
+               int width = (int) (bo_image.getWidth() / ratio);
+               int height = (int) (bo_image.getHeight() / ratio);
+               Thumbnails.of(saveFile).size(width, height).toFile(thumbnailFile);
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+            list.add(image);
+         }
+         return new ResponseEntity<List<AttachImageDTO>>(list, HttpStatus.OK);
+      }
+
+      @RequestMapping(value = "/productModify/{p_Id}/deleteFile", method = RequestMethod.POST)
+      public ResponseEntity<String> modifyDeleteFile(String fileName) {
+         File file = null;
+         try {
+            file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+            file.delete();
+            String originFileName = file.getAbsolutePath().replace("s_", "");
+            file = new File(originFileName);
+            file.delete();
+         } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("fail", HttpStatus.NOT_IMPLEMENTED);
+         }
+         return new ResponseEntity<String>("success", HttpStatus.OK);
+      }
+      
       
       
       
@@ -324,6 +425,7 @@ public class AdminController {
    
 
    @ResponseBody
+//   @PostMapping(value = {"/productRegistration/fileUpload","/productModify/{p_Id}/fileUpload"} )
    @PostMapping(value = "/productRegistration/fileUpload")
    public ResponseEntity<List<AttachImageDTO>> fileUploadPOST(@RequestParam("imageFile") MultipartFile[] uploadFile) {
       for (MultipartFile multipartFile : uploadFile) {
