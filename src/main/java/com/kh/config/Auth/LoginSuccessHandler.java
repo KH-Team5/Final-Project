@@ -1,6 +1,5 @@
 package com.kh.config.Auth;
 
-import lombok.extern.java.Log;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 

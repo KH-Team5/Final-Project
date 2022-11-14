@@ -14,6 +14,8 @@
 	</head>
 
 	<body class="bg-light">
+	<jsp:include page="../navbar.jsp" flush="true" />
+	<section class="py-5">
 		<div class="container">
 			<main>
 				<div class="py-5 text-center">
@@ -63,6 +65,8 @@
 				</div>
 			</main>
 		</div>
+	</section>
+	<jsp:include page="../footer.jsp" flush="true" />
 		<script sc="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 			crossorigin="anonymous"></script>
