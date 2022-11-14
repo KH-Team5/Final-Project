@@ -74,7 +74,7 @@ CREATE TABLE order_item_TB(
 );
 
 /* 주문 시퀀스 */
-CREATE SEQUENCE ordet_SQ
+CREATE SEQUENCE order_SQ
 START WITH 1
 INCREMENT BY 1;
 
