@@ -32,8 +32,8 @@
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=1"
 							role="button" aria-haspopup="true" aria-expanded="false">상의</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="search?type=C&c_Code=11">후드</a>
-							<a class="dropdown-item" href="search?type=C&c_Code=12">맨투맨</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=11">후드</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=12">맨투맨</a>
 							<%-- <c:forEach items="${Inner}" var="category">
 								<a class="dropdown-item" href="search?type=C&c_Code=${category.c_Code}">${category.c_Name}</a>
 							</c:forEach> --%>
@@ -43,8 +43,8 @@
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=2"
 							role="button" aria-haspopup="true" aria-expanded="false">하의</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="search?type=C&c_Code=21">청바지</a>
-							<a class="dropdown-item" href="search?type=C&c_Code=22">슬랙스</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=21">청바지</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=22">슬랙스</a>
 							<%-- <c:forEach items="${Pants}" var="category">
 								<a class="dropdown-item" href="search?type=C&c_Code=${category.c_Code}">${category.c_Name}</a>
 							</c:forEach> --%>
@@ -54,14 +54,14 @@
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=3"
 							role="button" aria-haspopup="true" aria-expanded="false">아우터</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="search?type=C&c_Code=31">코트</a>
-							<a class="dropdown-item" href="search?type=C&c_Code=32">점퍼</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=31">코트</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=32">점퍼</a>
 							<%-- <c:forEach items="${Outer}" var="category">
 								<a class="dropdown-item" href="search?type=C&c_Code=${category.c_Code}">${category.c_Name}</a>
 							</c:forEach> --%>
 						</div>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">문의 사항</a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/board/listPageSearch?num=1">문의 사항</a></li>
 				</ul>
 			</div>
 			

@@ -46,8 +46,8 @@ margin-left:auto;
 <body>
    <jsp:include page="../navbar.jsp" flush="true" />
      <div class="linklink"><span>
-     <a type="button"  class="btn btn-light" href="/board/write">글쓰기</a>
-	 <a type="button" class="btn btn-light" href="/board/listPageSearch?num=1">문의 사항</a>
+     <a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write">글쓰기</a>
+	 <a type="button" class="btn btn-light" href="<%=request.getContextPath()%>/board/listPageSearch?num=1">문의 사항</a>
 	 <a type="button"  class="btn btn-light" href="/">Home</a>
      </span>
 <table class="table table-hover">
