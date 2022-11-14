@@ -4,33 +4,40 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-.addressInfo_input{
-	display: none;
-}
-</style>
-<script src="https://code.jquery.com/jquery-3.6.1.js" 
-	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
-	crossorigin="anonymous">
-</script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<title>order page</title>
+	<style>
+	.addressInfo_input{
+		display: none;
+	}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+		integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
+		crossorigin="anonymous">
+	</script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+	<jsp:include page="../navbar.jsp" flush="true" />
+	
 	<div class="member_info">
 		주문자
 		<span>${memberInfo.m_name} | ${memberInfo.email}</span>
 	</div>
+	
 	<div class="addressInfo">
 		<div class="addressInfo_button">
-			<button class="address_btn_1" onclick="showAdress('1')">사용자 정보 주소록</button>
-			<button class="address_btn_2" onclick="showAdress('2')">직접 입력</button>
+			<button class="address_btn_1 btn_buy btn btn-outline-dark flex-shrink-0" onclick="showAdress('1')">사용자 정보 주소록</button>
+			<button class="address_btn_2 btn_buy btn btn-outline-dark flex-shrink-0" onclick="showAdress('2')">직접 입력</button>
 		</div>
+		
 		<div class="addressInfo_input_wrap">
 			<div class="addressInfo_input addressInfo_input_1">
-				<table>
+			
+				<table class="table">
 					<tbody>
 						<tr>
 							<th>이름</th>
@@ -52,8 +59,9 @@
 					</tbody>
 				</table>
 			</div>
+			
 			<div class="addressInfo_input addressInfo_input_2">
-				<table>
+				<table class="table">
 					<tbody>
 						<tr>
 							<th>이름</th>
@@ -65,12 +73,14 @@
 							<th>주소</th>
 							<td>
 								<input class="selectAddress" value="F" type="hidden">
-								<a class="address_search_btn" onclick="execution_daum_address()">주소 찾기</a> <br>
-								<input class="address_input" readonly="readonly"> <br>
-								상세주소
-								<input class="detail_address_input" readonly="readonly"><br>
-								우편번호
-								<input class="zipcode_input" readonly="readonly">
+								<div>
+									<a class="address_search_btn btn btn-primary" onclick="execution_daum_address()">주소 찾기</a>
+									주소
+									<input class="address_input" readonly="readonly">
+									상세주소
+									<input class="detail_address_input" readonly="readonly">									우편번호
+									<input class="zipcode_input" readonly="readonly">
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -81,26 +91,30 @@
 	
 	<div class="orderProduct">
 		<!-- 상품 테이블 -->
-		<table class="product_subject_table">
-			<tbody>
+		
+		<table class="product_table table">
+		  <colgroup>
+		    <col class="col-1"/>
+		    <col class="col-1"/>
+		    <col class="col-2"/>
+		  </colgroup>
+			<thead>
 				<tr>
-					<th>이미지</th>
-					<th>상품 이름</th>
-					<th>판매가</th>
+					<th class="text-center">이미지</th>
+					<th class="text-center">상품 이름</th>
+					<th class="text-center">판매가</th>
 				</tr>
-			</tbody>
-		</table>
-		<table class="product_table">				
+			</thead>	
 			<tbody>
 				<c:forEach items="${orderList}" var="ol">
 					<tr>
-						<td>
+						<td class="text-center">
 							<div class="image" data-pid="${ol.imageList[0].p_Id}" data-path="${ol.imageList[0].filePath}" data-uuid="${ol.imageList[0].uuid}" data-filename="${ol.imageList[0].fileName}">
 								<img>
 							</div>	
 						</td>
-						<td>${ol.p_Name}</td>
-						<td class="price_td">
+						<td class="text-center">${ol.p_Name}</td>
+						<td class="price_td text-center">
 							<fmt:formatNumber value="${ol.p_Price}" pattern="#,### 원" /> | 수량 ${ol.p_Cnt}개
 							<br><fmt:formatNumber value="${ol.totalPrice}" pattern="#,### 원" />
 							<br>
@@ -123,7 +137,7 @@
 			</strong>
 		</div>
 		<div class="total_info_btn">
-			<a class="order_btn">결제하기</a>
+			<a class="order_btn btn btn-primary">결제하기</a>
 		</div>
 	</div>
 	
@@ -135,7 +149,10 @@
 		<input name="o_detail_address" type="hidden">
 		<input name="o_Zipcode" type="hidden">
 	</form>
-	
+	<jsp:include page="../footer.jsp" flush="true" />
+	<script sc="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
 	<script>
 		$(function(){
 			setTotalInfo();
