@@ -27,7 +27,6 @@ public class HomeController {
 		 * model.addAttribute("Pants", productService.getSubPantsCategory());
 		 * model.addAttribute("Outer", productService.getSubOuterCategory());
 		 */
-	
 		return "main";
 	}
 

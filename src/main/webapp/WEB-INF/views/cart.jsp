@@ -6,21 +6,127 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <title>장바구니 페이지</title>
-<script src="https://code.jquery.com/jquery-3.6.1.js" 
-	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
-	crossorigin="anonymous"></script>
+<style type="text/css">
+
+
+#frame{
+  width: 80%;
+  margin: 0 auto;
+  padding: 50px 50px;
+  background-color: #fff;
+}
+
+.home{
+  float:right;
+
+}
+
+table.subject_table{    /* 계산 테이블*/
+  clear: both;
+  border: solid 1px #e0e0eb;
+  border-collapse: collapse;
+  background-color: #f5f5f0;
+  width: 100%;
+  font-size: 10pt;
+}
+ table.subject_table th{  /* 계산 테이블 제목*/
+  border: solid 1px #e0e0eb;
+  padding: 10px 0;
+   
+}
+table.subject_table td{  /* 계산 테이블 내용*/
+  border: solid 1px #e0e0b;
+  text-align: center;
+}
+
+table.cart_table {
+  border: solid 1px #e0e0b;
+  border-collapse: collapse;
+  background-color: #f5f5f0;
+  width: 100%;
+  font-size: 10pt;
+}
+
+table.cart_table th{
+  boder: solid 1px #e0e0eb;
+}
+
+table.cart_table td{
+  border: solid 1px #e0e0eb;
+  text-align: center;
+}
+
+table.list_table{    /* 계산 테이블*/
+  clear: both;
+  border: solid 1px #e0e0eb;
+  border-collapse: collapse;
+  background-color: #f5f5f0;
+  width: 100%;
+  font-size: 10pt;
+}
+table.list_table th{  /* 계산 테이블 제목*/
+  border: solid 1px #e0e0eb;
+  padding: 10px 0;
+  
+}
+table.list_table td{  /* 계산 테이블 내용*/
+  border: solid 1px #e0e0b;
+  text-align: center;
+}
+
+table.list_table td{
+  border: solid 1px #e0e0b;
+  border-collapse: collapse;
+  background-color: #f5f5f0;
+  width: 100%;
+  font-size: 10pt;
+}
+
+
+
+
+
+
+
+
+
+.price{
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+.lifont{ font-size: 10pt; color: gray;}
+
+#boundary_div{
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.default { background-color: #fff; border: solid  1px gray; color: black;}
+.default:hover{ background: #ddd;}
+.backBtn{background: #fff; border: solid 1px gray;}
+
+.btnfloat{float:left;}
+
+</style>
+
 </head>
-<body>
-	<div>
+<body class="cartBody">
+	<div id="frame">
 		<div class="all_check_input_div">
 			<input type="checkbox" class="all_check_input" name="selectall" checked="checked"><span class="all_chcek_span">전체선택</span>
 		</div>
 		<table class="subject_table">
 			<tbody>
 				<tr>
-					<th></th>
-					<th></th>
 					<th>상품명</th>
 					<th>가격</th>
 					<th>수량</th>
@@ -145,6 +251,9 @@
 	<form action="<%=request.getContextPath()%>/member/order/${m_Id}" method="get" class="order_form">
 		
 	</form>
+	<script sc="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(function(){
 			setTotalInfo();

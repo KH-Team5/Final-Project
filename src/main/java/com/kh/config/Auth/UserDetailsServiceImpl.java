@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.kh.model.AdminRepository;
 import com.kh.model.MemberRepository;
 import com.kh.model.domain.MemberDTO;
 
@@ -33,6 +32,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return userDetailsImpl;
 	}
 
-   
-   
 }
