@@ -10,6 +10,8 @@
 		<typeAlias alias="OrderDTO" type="com.kh.model.domain.OrderDTO" />
 		<typeAlias alias="ReviewDTO" type="com.kh.model.domain.ReviewDTO" />
 		<typeAlias alias="CartDTO" type="com.kh.model.domain.CartDTO" />
+		<typeAlias alias="boardDTO" type="com.kh.model.domain.BoardDTO"/>
+        <typeAlias alias="boardReplyDTO" type="com.kh.model.domain.BoardReplyDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/kh/model/MemberMapper.xml" />
@@ -18,5 +20,7 @@
 		<mapper resource="com/kh/model/OrderMapper.xml" />
 		<mapper resource="com/kh/model/ReviewMapper.xml" />
 		<mapper resource="com/kh/model/CartMapper.xml" />
+		<mapper resource="com/kh/model/boardMapper.xml" />
+		<mapper resource="com/kh/model/boardReplyMapper.xml" />
 	</mappers>
 </configuration>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.model.domain.BoardDTO">
+<!--=======================================================================================================  -->
+  
+  <!-- 게시물 목록~! -->
+  <select id="list" resultType="com.kh.model.domain.BoardDTO">
+    select Q_index, M_id, Q_category, Q_title, Q_content, Q_date
+      from question_tb
+  </select>
+
+<!--=======================================================================================================  --> 
+ 
+  <!-- 게시물 작성 -->
+  <insert id="write" parameterType="com.kh.model.domain.BoardDTO">
+    insert into
+       question_tb(Q_index, M_id, Q_category, Q_title, Q_content, Q_date)
+          values(question_SQ.nextval, #{m_Id}, #{q_Category},#{q_Title},#{q_Content}, sysdate)
+  </insert>
+
+<!--=======================================================================================================  --> 
+
+   <!-- 게시물 조회 -->
+  <select id="view" parameterType="int" resultType="com.kh.model.domain.BoardDTO">
+    select
+           Q_index, M_id, Q_category, Q_title, Q_content, Q_date
+    from 
+           question_tb
+    where
+           Q_index = #{q_Index}
+  </select>
+
+<!--=======================================================================================================  -->  
+ 
+  <!-- 게시물 수정 -->
+  <update id="modify" parameterType="com.kh.model.domain.BoardDTO"> 
+      UPDATE question_tb
+         SET 
+           Q_index = #{q_Index},
+              M_id = #{m_Id},
+        Q_category = #{q_Category},
+           Q_title = #{q_Title},
+         Q_content = #{q_Content},
+            Q_date = sysdate
+      WHERE Q_index = #{q_Index} 
+  </update>
+
+<!--=======================================================================================================  --> 
+  
+  <!-- 게시물 삭제 -->
+  <delete id="delete" parameterType="int">
+  DELETE 
+   FROM question_tb
+    WHERE Q_index = #{q_Index}
+  </delete>
+
+<!--=======================================================================================================  -->
+  <!-- 게시물 총 갯수 -->
+  <select id="count" resultType="int">
+  select count(q_Index) from   question_tb
+ </select>
+
+<!--=======================================================================================================  -->
+   
+  <!-- 게시물 총 갯수 -->
+  <select id="listPage" parameterType="hashMap" resultType="com.kh.model.domain.BoardDTO">
+	 SELECT * FROM (SELECT rownum rn,T.*FROM (
+		select q_index, M_id, q_category, q_title, q_content, q_date 
+			from question_tb order by q_index desc
+			)T)WHERE RN BETWEEN #{start} AND #{end}
+  </select>
+
+<!--=======================================================================================================  -->
+
+   <!-- 게시물 목록 + 페이징 + 검색-->
+  <select id="listPageSearch" parameterType="hashMap" resultType="com.kh.model.domain.BoardDTO">
+	 SELECT * FROM (SELECT rownum rn,T.*FROM (
+		select q_index, M_id, q_category, q_title, q_content, q_date 
+			from question_tb 
+			 
+    <if test='searchType.equals("q_title")'>
+        WHERE q_title LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("q_content")'>
+        WHERE q_content LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("q_title_q_content")'>
+        WHERE q_title LIKE ('%'||#{searchType}||'%') 
+        or q_content LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("M_id")'>
+        WHERE M_id LIKE ('%'||#{keyword}||'%')
+    </if>
+			
+			order by q_index desc
+			)T)WHERE RN BETWEEN #{start} AND #{end}
+  </select>
+  
+<!--==============================================================================================================================  -->
+ 
+ <!-- 게시물 총 갯수 + 검색 적용 -->
+    <select id="searchCount" parameterType="hashMap" resultType="int">
+       select count(q_index) from   question_tb
+       
+       		 
+    <if test='searchType.equals("q_title")'>
+        WHERE q_title LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("q_content")'>
+        WHERE q_content LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("q_title_q_content")'>
+        WHERE q_title LIKE ('%'||#{searchType}||'%') 
+        or q_content LIKE ('%'||#{keyword}||'%')
+    </if>
+ 
+    <if test='searchType.equals("M_id")'>
+        WHERE M_id LIKE ('%'||#{keyword}||'%')
+    </if>
+    
+    
+    </select>
+
+
+
+</mapper>
+
+
