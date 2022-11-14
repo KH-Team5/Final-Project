@@ -1,26 +1,27 @@
 /* 유저 */
 CREATE TABLE member_TB(
-M_id VARCHAR2(50) NOT NULL PRIMARY KEY,
-M_pwd VARCHAR2(200) NOT NULL,
-M_name VARCHAR2(50) NOT NULL,
-email VARCHAR2(50) NOT NULL UNIQUE,
-contact VARCHAR2(20) NOT NULL,
-zipcode NUMBER NOT NULL,
-address VARCHAR2(200) NOT NULL,
-detail_address VARCHAR2(200) NOT NULL,
-joined_date DATE DEFAULT SYSDATE NOT NULL,
-role VARCHAR2(10) CHECK (role IN ('ROLE_USER', 'ROLE_ADMIN')) NOT NULL
+    M_id VARCHAR2(50) NOT NULL PRIMARY KEY,
+    M_pwd VARCHAR2(200) NOT NULL,
+    M_name VARCHAR2(50) NOT NULL,
+    email VARCHAR2(50) NOT NULL UNIQUE,
+    contact VARCHAR2(20) NOT NULL,
+    zipcode NUMBER NOT NULL,
+    address VARCHAR2(200) NOT NULL,
+    detail_address VARCHAR2(200) NOT NULL,
+    joined_date DATE DEFAULT SYSDATE NOT NULL,
+    role VARCHAR2(10) CHECK (role IN ('ROLE_USER', 'ROLE_ADMIN')) NOT NULL
 );
 
 /* 상품 */
 CREATE TABLE product_TB(
-P_id NUMBER PRIMARY KEY,
-P_name VARCHAR2(200) NOT NULL,
-P_price NUMBER NOT NULL,
-P_stock NUMBER NOT NULL,
-P_category varchar2(30) NOT NULL,
-P_date DATE default sysdate,
-p_Intro clob
+    P_id NUMBER PRIMARY KEY,
+    P_name VARCHAR2(200) NOT NULL,
+    P_price NUMBER NOT NULL,
+    P_stock NUMBER NOT NULL,
+    P_category varchar2(30) NOT NULL,
+    P_date DATE default sysdate,
+    p_Intro clob,
+    p_RatingAvg number(2,1)
 );
 
 /* 상품 시퀀스 */
@@ -100,24 +101,21 @@ CREATE SEQUENCE review_TB_SQ
 START WITH 1
 INCREMENT BY 1;
 
-/* 장바구니 */
+/* 장바구니 */       
 create table cart_TB(
-    C_id number  primary key,
-    C_qty NUMBER NOT NULL,
-    M_id varchar2(50),
-    P_id number,
-    foreign key (M_id) references member_tb(M_id),
-    foreign key (P_id) references product_tb(P_id)
+    ca_ID number primary key,
+    m_Id varchar2(50),
+    p_Id number,
+    p_Cnt number,
+    foreign key (m_Id) references member_TB(m_Id),
+    foreign key (p_Id) references product_TB(p_Id ),
+    UNIQUE(p_Id, m_Id)
 );
 
-/* 찜목록 */
-CREATE TABLE wish_TB(
-M_id VARCHAR2(50) NOT NULL, /* member_TB의 FK, PK */
-P_index NUMBER NOT NULL, /* product_TB의 FK, PK */
-FOREIGN KEY(M_id) REFERENCES member_TB(M_id),
-FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
-CONSTRAINT wish_TB PRIMARY KEY(M_id, P_index)
-);
+/* 장바구니 시퀀스 */
+CREATE SEQUENCE cart_SQ
+START WITH 1
+INCREMENT BY 1;
 
 /* 문의게시판 */
 CREATE TABLE question_TB(

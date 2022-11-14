@@ -9,9 +9,9 @@
 	</select>
 	
 	<select id="selectBym_Id" resultType="MemberDTO">
-		SELECT M_id, M_name, email, address, detail_address, zipcode
+		SELECT m_Id, M_name, email, address, detail_address, zipcode
   		FROM member_TB 
-  		WHERE M_id = #{M_id}
+  		WHERE m_Id = #{m_Id}
 	</select>
 	
 	<insert id="insertOrder">
@@ -27,4 +27,80 @@
 		values(ordet_item_SQ.NEXTVAL, #{o_Id}, #{p_Id}, #{p_Cnt}, #{p_Price})
 	</insert>
 	
+	<!-- 주문 목록 -->
+	<!-- 관리자 페이지 -->
+	<select id="selectOrderList" resultType="OrderDTO">
+		<![CDATA[
+			select * 
+			from(
+			    select rownum rn, x.*
+				from(
+					select o.o_Id, o.m_Id, p.p_Name, o.o_state, o.o_Date
+                    from order_TB o
+                    JOIN order_item_TB oi
+                        on o.o_Id = oi.o_Id
+                        JOIN product_TB p
+                            on oi.p_id = p.p_Id
+                    order by o.o_Date desc
+				) x
+			    where rownum <= #{pageNum} * #{amount} 
+		]]>    
+		<if test="keyword != null">
+			and m_Id like '%'||#{keyword}||'%'
+		</if>
+		<![CDATA[
+			    )
+			where rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 사용자 페이지 -->
+	<select id="selectOrderListByM_Id" resultType="OrderDTO">
+		<![CDATA[
+			select * 
+			from(
+				select rownum rn, x.*
+				from(
+					select o.o_Id, o.m_Id, p.p_Name, o.o_state, o.o_Date
+                    from order_TB o
+                    JOIN order_item_TB oi
+                        on o.o_Id = oi.o_Id
+                        JOIN product_TB p
+                            on oi.p_id = p.p_Id
+                    order by o.o_Date desc
+				) x
+				where m_Id = #{m_Id} and rownum <= #{pageNum} * #{amount}
+		]]>    
+		<if test="keyword != null">
+			and p_Name like '%'||#{keyword}||'%'
+		</if>
+		<![CDATA[
+			)
+		where rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 상품 총 개수 -->
+	<select id="getOrderTotal" resultType="int">
+		select count(*) from order_TB
+	    <if test="keyword != null">
+	    	where m_Id like '%'||#{keyword}||'%'
+	    </if>
+	</select>
+	
+	<!-- 주문취소 -->
+	<update id="updateOrder">
+		update order_TB set o_State = '주문취소' where o_Id = #{o_Id}
+	</update>
+		
+	<select id="selectOrderItemByO_Id" resultType="OrderItemDTO">
+		select * from order_item_TB
+		where o_Id = #{o_Id}
+	</select>
+	
+	<select id="selectOrderByO_Id" resultType="OrderDTO">
+		select * from order_TB
+		where o_Id = #{o_Id}
+	</select>
+
 </mapper>

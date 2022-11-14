@@ -1,12 +1,16 @@
 package com.kh.controller;
 
+import java.security.Principal;
 import java.util.Random;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,14 +36,15 @@ public class MemberController {
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinPOST(MemberDTO member) throws Exception {
+		System.out.println(member.getM_Id());
 		memberService.joinMember(member);
 		return "redirect:/";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/join/idChk", method = RequestMethod.POST)
-	public String idChkPOST(String M_id) throws Exception {
-		int result = memberService.idChk(M_id);
+	public String idChkPOST(String m_Id) throws Exception {
+		int result = memberService.idChk(m_Id);
 		if (result != 0)
 			return "error";
 		else
@@ -68,7 +73,12 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
+	public String login(Model model, HttpServletRequest request) {
+		Principal principal = request.getUserPrincipal();
+		if (principal != null)
+			return "redirect:/";
+		String referrer = request.getHeader("Referer");
+		request.getSession().setAttribute("prevPage", referrer);
 		return "/member/login";
 	}
 

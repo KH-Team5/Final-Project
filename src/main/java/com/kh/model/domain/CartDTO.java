@@ -1,18 +1,29 @@
 package com.kh.model.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
 
-@Getter
-@Setter
+import lombok.Data;
 
+@Data
 public class CartDTO {
-	private int C_id;
-	private int P_id;
-	private int C_qty;
-	private String P_name;
-	private int P_price;
-	private String M_id;
+
+	private int ca_Id;
+
+	private String m_Id;
+
+	private int p_Id;
+
+	private int p_Cnt;
+
+	private String p_Name;
+
+	private int p_Price;
+
 	private int totalPrice;
 
+	private List<AttachImageDTO> imageList;
+
+	public void initSaleTotal() {
+		this.totalPrice = this.p_Price * this.p_Cnt;
+	}
 }

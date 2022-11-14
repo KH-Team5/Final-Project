@@ -3,19 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	<select id="getByM_id" resultType="memberDTO"
+	<select id="getByM_Id" resultType="memberDTO"
 		parameterType="string">
 		<![CDATA[
-		select M_id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
+		select m_Id, M_pwd, M_name, email, contact, zipcode, address, detail_address, joined_date, role
 		from member_TB 
-		where M_id = #{M_id }
+		where m_Id = #{m_Id }
 		]]>
 	</select>
 
 	<insert id="insert" parameterType="memberDTO">
 		<![CDATA[
 			insert into member_TB
-			values(#{M_id }, #{M_pwd }, #{M_name }, #{email }, #{contact }, #{zipcode }, #{address }, #{detail_address }, sysdate, 'ROLE_USER')
+			values(#{m_Id }, #{M_pwd }, #{M_name }, #{email }, #{contact }, #{zipcode }, #{address }, #{detail_address }, sysdate, 'ROLE_USER')
 		]]>
 	</insert>
 
@@ -23,13 +23,13 @@
 		<![CDATA[
 			select count(*)
 			from member_TB 
-			where M_id = #{M_id }
+			where m_Id = #{m_Id }
 		]]>
 	</select>
 
 	<select id="selectIdByEmail" resultType="string">
 		<![CDATA[
-			select M_id
+			select m_Id
 			from member_TB 
 			where email = #{email }
 		]]>
@@ -48,25 +48,30 @@
 		<![CDATA[
 			select count(*)
 			from member_TB 
-			where email = #{email } AND M_id = #{M_id }
+			where email = #{email } AND m_Id = #{m_Id }
 		]]>
 	</select>
+
+	<update id="updatePwdById" parameterType="HashMap">
+		<![CDATA[
+			UPDATE member_tb SET M_pwd = #{M_pwd } WHERE m_Id = #{m_Id }
+		]]>
+	</update>
 
 	<update id="update" parameterType="memberDTO">
 		<![CDATA[
 			update member_TB
 			set M_pwd = #{M_pwd }, M_name = #{M_name }, contact = #{contact }, zipcode=#{zipcode }, address=#{address }, detail_address=#{detail_address }
-			where M_id = #{M_id }
+			where m_Id = #{m_Id }
 		]]>
 	</update>
 
-	<update id="delete" parameterType="memberDTO">
+	<delete  id="delete" parameterType="memberDTO">
 		<![CDATA[
 			delete
 			from member_TB
-			where M_id = #{M_id }
-			
+			where m_Id = #{m_Id }
 		]]>
-	</update>
+	</delete >
 
 </mapper>

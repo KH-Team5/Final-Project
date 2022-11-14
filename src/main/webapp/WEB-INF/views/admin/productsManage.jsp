@@ -10,20 +10,19 @@
 <title>상품 관리 페이지</title>
 <style>
 </style>
-<script src="https://code.jquery.com/jquery-3.6.1.js" 
-	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
-	crossorigin="anonymous"></script>
 </head>
 </head>
+
 <body>
+
 	<h1>상품 관리 페이지</h1>
     <c:if test="${listcheck != 'empty'}">
 		<table id="products">
 			<thead>
 				<tr>
-					<td>상품 번호</td>
-					<td>상품 이름</td>
-					<td>상품 가격</td>
+					
+					<td>상품이름</td>
+					<td>상품가격</td>
 					<td>재고</td>
 					<td>카테고리</td>
 					<td>등록날짜</td>
@@ -31,7 +30,8 @@
 			</thead>	
 			<c:forEach var="list" items="${list}" >
 				<tr>
-					<td><c:out value="${list.p_Name}"></c:out></td>
+					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}">
+					<c:out value="${list.p_Name}"/></a></td> 
 					<td><c:out value="${list.p_Price}"></c:out></td>
 					<td><c:out value="${list.p_Stock}"></c:out></td>
 					<td><c:out value="${list.p_Category}"></c:out></td>				
@@ -41,7 +41,10 @@
 					</td>
 				</tr>
 			</c:forEach>
+		
+			
 		</table>
+		
 	</c:if>
 	<c:if test="${listCheck == 'empty'}">
 		<div id="table_empty">

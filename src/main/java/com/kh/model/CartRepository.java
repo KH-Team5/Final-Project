@@ -5,21 +5,16 @@ import java.util.List;
 import com.kh.model.domain.CartDTO;
 
 public interface CartRepository {
-	
-    //카트 추가
-	public int addCart(CartDTO cart);
-	
-	//카트 삭제
-	public int deleteCart(int cartId);
-	
-	//카트 수량 수정
-	public int modifyCount(CartDTO cart);
-	
-	//카트 목록
-	public List<CartDTO> getCart(String M_id);
-	
-	//카트 확인
-	public CartDTO checkCart(CartDTO cart);
-	
 
+	public int insertCart(CartDTO cartDTO);
+
+	public int deleteCart(int ca_Id);
+
+	public int updateCartp_Cnt(CartDTO cartDTO);
+
+	public List<CartDTO> selectCartInfo(String m_Id);
+
+	public CartDTO selectCartChk(CartDTO cartDTO);
+	
+	public int deleteOrderCart(CartDTO cartDTO);
 }
