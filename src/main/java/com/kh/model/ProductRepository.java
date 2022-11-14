@@ -29,6 +29,4 @@ public interface ProductRepository {
 	public List<AttachImageDTO> selectImage(int p_Id);
 
 	int updateProductStock(ProductDTO ProductDTO);
-
-	List<ProductDTO> selectProductListOrderByRating();
 }

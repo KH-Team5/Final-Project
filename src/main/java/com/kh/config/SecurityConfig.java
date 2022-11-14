@@ -15,9 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import com.kh.config.Auth.LoginSuccessHandler;
-
 import org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver;
 
 @Configuration
@@ -76,11 +73,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.authorizeRequests()
 			// 페이지 권한 설정
-			.antMatchers("/member/login", "/member/join/**", "/member/findPage/**", "/cart/add", "/review/list").permitAll()
+			.antMatchers("/member/login", "/member/join/**", "/member/findPage/**").permitAll()
 			// /admin 으로 시작하는 경로는 ADMIN 롤을 가진 사용자만접근 가능
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			// /member 경로는 USER, ADMIN 롤을 가진 사용자만 접근 가능
-			.antMatchers("/member/**", "/review/**", "/cart/**").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/member/**").hasAnyRole("USER", "ADMIN")
+			// /cart 경로는 USER롤을 가진 사용자만 접근 가능
+			.antMatchers("/cart/**").hasAnyRole("USER")
 			// 그게 아닌 모든 주소는 인증 필요 없음
 			.anyRequest().permitAll().and()
 			// 로그인 설정
@@ -90,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			// 이 주소로 form 전송
 			.loginProcessingUrl("/login-process")
 			// 로그인이 정상적이면 "/" 로 이동
-			.successHandler(new LoginSuccessHandler("/"))
+			.defaultSuccessUrl("/")
 			// 로그인 요청시 id용 파라미터 (메소드 이름이 usernameParameter로 무조건써야하지만,
 			// 파라미터는 email이든 id이든 name이든 상관없다.)
 			.usernameParameter("userid")

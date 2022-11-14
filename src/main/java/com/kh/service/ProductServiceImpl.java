@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.model.ProductRepository;
-import com.kh.model.domain.AttachImageDTO;
 import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.ProductDTO;
@@ -19,12 +18,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductDTO> productGetList(Criteria cri) {
-		List<ProductDTO> products = productRepository.selectProductList(cri);
-		for (ProductDTO productDTO : products) {
-			List<AttachImageDTO> imageList = productRepository.selectImage(productDTO.getP_Id());
-			productDTO.setImageList(imageList);
-		}
-		return products;
+		return productRepository.selectProductList(cri);
 	}
 
 	@Override
@@ -55,16 +49,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductDTO getProductInfo(int p_Id) {
 		return productRepository.selectProductInfo(p_Id);
-	}
-	
-	@Override
-	public List<ProductDTO> selectProductListOrderByRating() {
-		List<ProductDTO> products = productRepository.selectProductListOrderByRating();
-		for (ProductDTO productDTO : products) {
-			List<AttachImageDTO> imageList = productRepository.selectImage(productDTO.getP_Id());
-			productDTO.setImageList(imageList);
-		}
-		return products;
 	}
 
 }

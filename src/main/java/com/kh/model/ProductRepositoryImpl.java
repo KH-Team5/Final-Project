@@ -25,7 +25,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 			return false;
 	}
 
-	
 	@Override
 	public List<ProductDTO> selectProductList(Criteria cri) {
 		return sqlSession.selectList("product.selectProductList", cri);
@@ -65,9 +64,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
 	@Override
 	public void insertImage(AttachImageDTO imageDTO) {
-		System.out.println("ProductRepositoryImpl insertImage() imageDTO.getP_Id() " + imageDTO.getP_Id());
-		System.out.println("sqlSession.insert : " + sqlSession.insert("product.insertImage", imageDTO) );
-		
+		sqlSession.insert("product.insertImage", imageDTO);
 	}
 
 	@Override
@@ -78,10 +75,5 @@ public class ProductRepositoryImpl implements ProductRepository {
 	@Override
 	public int updateProductStock(ProductDTO ProductDTO) {
 		return sqlSession.update("product.updateProductStock", ProductDTO);
-	}
-	
-	@Override
-	public List<ProductDTO> selectProductListOrderByRating() {
-		return sqlSession.selectList("product.selectProductListOrderByRating");
 	}
 }

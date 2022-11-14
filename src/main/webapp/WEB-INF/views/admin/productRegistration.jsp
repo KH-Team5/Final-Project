@@ -1,99 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
- 
 <title>상품등록 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
-<style>
-
-#one{
-position: absolute;
-top:2%;
-left:50%;
-font-color:#white;
-}
-.form-group {
-position: absolute;
-top:11%;
-left:20%;
-width: 60%;
-}
-
-input{
-width:300px;
-height:30px;
-}
-
-#regBtn{
-position: absolute;
-top: 67%;
-right:20%;
-width:100px;
-height:45px;
-}
-</style>
-
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
-<table class="table table-hover">
-    <tbody>
-    <tr class="table-dark">
-	<th scope="row" ><h1>상품등록 페이지</h1></th>
-	 </tr>
-  </tbody>
-  </table>
-  
+	<h1>상품등록 페이지</h1>
 	<form action="<%= request.getContextPath()%>/admin/productRegistration" id="regform" name="regform" method="post">
-		
-		<fieldset>
-		
-		<div class="form-group">
-		<label for="exampleInputEmail1" class="form-label mt-4">상품 이름:</label><br>
-		     <input type="email" class="from-control" id="p_Name" name="p_Name" type="text" placeholder="상품이름 입력">  <br> 
-		     		<span id="nameCheck"></span>
-			<label for="exampleInputEmail1" class="form-label mt-4">상품 가격:</label><br>
-		 <input type="email" class="from-control id="p_Price" name="p_Price" type="number" placeholder="숫자만 입력"> <br>
+		상품 이름: <input id="p_Name" name="p_Name" type="text"> <br>
+		<span id="nameCheck"></span>
+		상품 가격: <input id="p_Price" name="p_Price" type="number"> <br>
 		<span id="priceCheck"></span>
-		<label for="exampleInputEmail1" class="form-label mt-4">상품 재고:</label><br> 
-		<input type="email" class="from-control id="p_Stock" name="p_Stock" type="number" placeholder="숫자만 입력"> <br> 
+		상품 재고: <input id="p_Stock" name="p_Stock" type="number"> <br> 
 		<span id="stockCheck"></span>
-		<label for="exampleInputEmail1" class="form-label mt-4">상품 카테고리:</label><br> 
+		상품 카테고리: 
 		<div id="category">
 			<span>대분류</span>
 			<select id="mainCategory">
 				<option selected value="none">선택</option>
 			</select>
-			&nbsp;&nbsp;&nbsp;<span>소분류</span>
+			<span>소분류</span>
 			<select id="subCategory" name="p_Category">
 				<option selected value="none">선택</option>
 			</select>
 		</div> 
 		<span id="categoryCheck"></span>
 		<div id="intro">
-			<label for="exampleInputEmail1" class="form-label mt-4">상품 설명:</label><br> 
-			<div id="test1">  <textarea id="p_Intro" name="p_Intro"></textarea></div>
+			상품 설명: <textarea id="p_Intro" name="p_Intro"></textarea>
 			<span id="introChk"></span>
 		</div>
-		<label for="exampleInputEmail1" class="form-label mt-4">상품 이미지:</label><br> <input type="file" multiple="multiple" id ="imageFile" name="imageFile"> <br>
+		상품 이미지: <input type="file" multiple="multiple" id ="imageFile" name="imageFile"> <br>
 		<div id="uploadResult">
 		</div>
-		</div>
-		</fieldset>
-		<button type="button" class="btn btn-dark" id="regBtn" >등록</button>
+		<button id="regBtn" >등록</button>
 	</form>
-	<div class = "button_home" id="one">
-	<a href="<%=request.getContextPath()%>/" style="color: white">홈페이지로고</a>
-	</div>
+	<a href="<%=request.getContextPath()%>/">홈</a>
+	
 	<script>
 		let categoryList = JSON.parse('${categoryList}');
 		let mainCategoryArr = new Array();

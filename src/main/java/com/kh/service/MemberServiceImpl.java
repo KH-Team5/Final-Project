@@ -29,8 +29,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int idChk(String m_Id) {
-		return memberRepository.selectById(m_Id);
+	public int idChk(String M_id) {
+		return memberRepository.selectById(M_id);
 	}
 
 	@Override
@@ -59,28 +59,29 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int findPwdChk(String email, String m_Id) {
-		return memberRepository.selectByEmailandId(email, m_Id);
+	public int findPwdChk(String email, String M_id) {
+		return memberRepository.selectByEmailandId(email, M_id);
 	}
 
 	@Override
-	public int resetPwd(String m_Id, String M_pwd) {
-		return memberRepository.updatePwdById(m_Id, M_pwd);
+	public int resetPwd(String M_id, String M_pwd) {
+		return memberRepository.updatePwdById(M_id, M_pwd);
 	}
 
 	@Override
-	public MemberDTO memberInfo(String m_Id) {
-		return memberRepository.get(m_Id);
+	public MemberDTO memberInfo(String M_id) {
+		return memberRepository.get(M_id);
 	}
-
+	
 	@Override
 	public int memberUpdate(MemberDTO memberDTO) {
 		return memberRepository.memberUpdate(memberDTO);
 	}
-
+	
 	@Override
-	public int memberDelete(String m_Id) {
-		return memberRepository.memberDelete(m_Id);
+	public int memberDelete(String M_id) {
+		return memberRepository.memberDelete(M_id);
 	}
+	
 
 }

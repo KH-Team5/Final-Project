@@ -7,40 +7,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.model.domain.CartDTO;
+import com.kh.model.domain.MemberDTO;
 
 @Repository
-public class CartRepositoryImpl implements CartRepository {
+public class CartRepositoryImpl implements CartRepository{
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
-	public int insertCart(CartDTO cartDTO) {
-		return sqlSession.insert("cart.insertCart", cartDTO);
+	public int addCart(CartDTO cart) {
+		int count = sqlSession.insert("cart.insert", cart);
+		return count;
 	}
 
 	@Override
-	public int deleteCart(int ca_Id) {
-		return sqlSession.delete("cart.deleteCart", ca_Id);
+	public int deleteCart(int cartId) {
+		int count = sqlSession.delete("cart.delete", cartId);
+		return count;
 	}
 
 	@Override
-	public int updateCartp_Cnt(CartDTO cartDTO) {
-		return sqlSession.update("cart.updateCartp_Cnt", cartDTO);
+	public int modifyCount(CartDTO cart) {
+		int count = sqlSession.update("cart.modifyCount", cart);
+		return count;
 	}
 
 	@Override
-	public List<CartDTO> selectCartInfo(String m_Id) {
-		return sqlSession.selectList("cart.selectCartInfo", m_Id);
+	public List<CartDTO> getCart(String M_id) {
+		
+		return sqlSession.selectList("cart.getCart", M_id);
+	
 	}
-
 	@Override
-	public CartDTO selectCartChk(CartDTO cartDTO) {
-		return sqlSession.selectOne("cart.selectCartChk", cartDTO);
+	public CartDTO checkCart(CartDTO cart) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cart.checkCart", cart);
 	}
-
-	@Override
-	public int deleteOrderCart(CartDTO cartDTO) {
-		return sqlSession.delete("cart.deleteOrderCart", cartDTO);
-	}
+	
 
 }

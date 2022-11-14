@@ -48,29 +48,36 @@ public class MyPageController {
 	public String memberupdateGet(Model model, Principal principal) {
 		model.addAttribute("key1", memberservice.memberInfo(principal.getName()));
 		logger.info("회원정보 수정 진입");
+		
 
 		return "/member/memberUpdate";
 	}
-
+	
 	@RequestMapping(value = "/member/memberUpdate", method = RequestMethod.POST)
 	public String memberupdatePOST(Principal principal, MemberDTO memberDTO) {
-		memberDTO.setM_Id(principal.getName());
+		memberDTO.setM_id(principal.getName());
 		memberservice.memberUpdate(memberDTO);
 		logger.info("회원정보 수정 성공");
 
 		return "redirect:/logout";
 	}
+	
+	
 
-	@RequestMapping(value = "/member/memberDelete", method = RequestMethod.GET)
-	public String memberDelete(Principal principal) {
-		String userid = principal.getName();
-		logger.info("회원 탈퇴 진입");
 
-		memberservice.memberDelete(userid);
-		logger.info("회원 탈퇴 성공");
-
-		return "redirect:/logout";
-
-	}
-
+	  @RequestMapping(value = "/member/memberDelete", method = RequestMethod.GET)
+	  public String memberDelete(Principal principal) { 
+		  String userid = principal.getName(); 
+		  logger.info("회원 탈퇴 진입");
+	  
+	  
+	  memberservice.memberDelete(userid); 
+	  logger.info("회원 탈퇴 성공");
+	  
+	  
+	  
+	  return "redirect:/logout";
+	  
+	  }
+	 
 }

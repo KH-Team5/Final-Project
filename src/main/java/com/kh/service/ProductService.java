@@ -20,6 +20,4 @@ public interface ProductService {
 	public List<CategoryDTO> getSubOuterCategory();
 
 	public ProductDTO getProductInfo(int p_id);
-
-	List<ProductDTO> selectProductListOrderByRating();
 }
