@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.model.CartRepository;
-import com.kh.model.MemberRepository;
 import com.kh.model.OrderRepository;
 import com.kh.model.ProductRepository;
 import com.kh.model.domain.AttachImageDTO;
