@@ -59,12 +59,14 @@
 					</li>
 				</ul>
 			</div>
+			
 			<div class="d-flex">
 				<sec:authorize access="isAnonymous()">
 					<a href="<%=request.getContextPath()%>/member/login">로그인</a> |
 					<a href="<%=request.getContextPath()%>/member/join">회원가입</a>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
+				    <a href="<%=request.getContextPath()%>/board/listPageSearch?num=1">문의 사항</a>|
 					<a href="<%=request.getContextPath()%>/cart">장바구니</a> |
 					<a href="<%=request.getContextPath()%>/member/orderList">주문 목록</a> |
 					<sec:authorize access="hasRole('ADMIN')">
