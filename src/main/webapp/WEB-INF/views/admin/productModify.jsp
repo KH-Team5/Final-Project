@@ -1,74 +1,121 @@
+<!doctype html>
+<html lang="en">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<!DOCTYPE html>
-<html>
-<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<title>회원 정보 수정</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.1.js" 
    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
    crossorigin="anonymous"></script>
+<title>상품 정보 수정</title>
+  
+<head>
    
 </head>
 
+<style>
+.form-group{
+position: absolute;
+top:11%;
+left:30%;
+width: 80%;
+}
+.logo{
+position: absolute;
+top:2%;
+left:50%;
+font-color:#white;
+}
+input {
+  width:500px;
+  height:38px;
+}
+/* .intro{
+height:100x; */
+}
+#regBtn{
+position:relative;
+width:150px;
+height:50px;
+}
+</style>
 <body>
-   <h1>상품 정보 수정</h1>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+<table class="table table-hover">
+
+    <tbody>
+    <tr class="table-dark">
+      <th scope="row" ><h1>상품정보수정 페이지</h1></th>
+   
+    </tr>
+  </tbody>
+  </table>
+ 	<div class="form-group">
    <div id="image" data-p_Id="${productInfo.imageList[0].p_Id}" data-path="${productInfo.imageList[0].filePath}" data-uuid="${productInfo.imageList[0].uuid}" data-filename="${productInfo.imageList[0].fileName}">
 		<img>
 	</div>
  <form id="regform" name="modifyform" method="post"> 
    	<%-- <form action="<%= request.getContextPath()%>/admin/adminProductInfo/{p_Id}" id="regform" name="regform" method="post">
  --%>   
-이미지변경: <input type="file" multiple="multiple" id ="imageFile" name="imageFile"> <br>
+ 
+ 
+ <fieldset>
+<label for="exampleInputEmail1" class="form-label mt-4">이미지 변경:</label><br>
+ <input type="file" multiple="multiple" id ="imageFile" name="imageFile"> <br>
 		<div id="uploadResult">
 		</div>
 
                   
-	상품번호: ${productInfo.p_Id} <br>
+	<label for="exampleInputEmail1" class="form-label mt-4"><b>상품 번호:&nbsp;&nbsp; ${productInfo.p_Id}</b></label> <br>
       
-      상품명: ${productInfo.p_Name} <br>
-      상품명 수정:<input id="p_Name" name="p_Name" type="text"><br>
+      <b><label for="exampleInputEmail1" class="form-label mt-4">상품명:&nbsp;&nbsp; ${productInfo.p_Name} </label> <br>
+      <input id="p_Name" name="p_Name" type="text" placeholder="수정할 상품명 입력"></b><br> 
     <span id="nameCheck"></span>
       
-      상품가격: ${productInfo.p_Price} <br>
-      상품가격 수정:<input id="p_Price" name="p_Price" type="text"><br>
+      <b><label for="exampleInputEmail1" class="form-label mt-4">상품 가격:&nbsp;&nbsp; ${productInfo.p_Price} </label> <br>
+      <input id="p_Price" name="p_Price" type="text" placeholder="수정할 상품가격 입력"></b><br>
     <span id="priceCheck"></span>  
       
-      상품재고수량: ${productInfo.p_Stock} <br>
-      상품재고수량 수정:<input id="p_Stock" name="p_Stock" type="text"><br>
+      <b><label for="exampleInputEmail1" class="form-label mt-4">상품 재고:&nbsp;&nbsp; ${productInfo.p_Stock}</label> <br>
+    <input id="p_Stock" name="p_Stock" type="text" placeholder="수정할 상품재고 입력"></b><br>
     <span id="stockCheck"></span>   
    
-	상품카테고리:${productInfo.c_Name} <br>    
-       상품카테고리 수정: 
+	<b><label for="exampleInputEmail1" class="form-label mt-4">상품카테고리:&nbsp;&nbsp;${productInfo.c_Name}</label>  </b><br>   
+       
 		
 		<div id="category">
-			<span>대분류</span>
+			<b><span>카테고리 수정</span></b>
 			<select id="mainCategory">
-				<option selected value="none">선택</option>
+				<option selected value="none">대분류</option>
 			</select>
-			<span>소분류</span>
 			<select id="subCategory" name="p_Category">
-				<option selected value="none">선택</option>
+				<option selected value="none">소분류</option>
 			</select>
 		</div> 
 		<span id="categoryCheck"></span>
 		 
 
-      상품설명: ${productInfo.p_Intro} <br>
-      상품설명 수정:<input id="p_Intro" name="p_Intro" type="text"><br>
+     <b><label for="exampleInputEmail1" class="form-label mt-4">상품 설명:&nbsp;&nbsp; ${productInfo.p_Intro}</label> <br>
+     <input id="p_Intro" name="p_Intro" type="text" placeholder="수정할 상품설명 입력"><br><br><br>
     <span id="introChk"></span>  
+      </b>
       
       <%-- 상품등록일: ${productInfo.p_Date} <br>
       상품등록일 수정:<input id="p_Date" name="p_Date" type="text"><br> --%>
-   
-             
-      <button id="regBtn">정보수정</button>
+      <button type="button" class="btn btn-dark" id="regBtn" >등록</button>
+      
+             </fieldset>
+   </div>
   <input type="hidden" id="p_id" name="p_id" value="${productInfo.p_Id}">
-   </form>
-   <a href="<%=request.getContextPath()%>/">홈</a>
+  <div class = "logo" id="one">
+	<a href="<%=request.getContextPath()%>/" style="color: white">홈페이지로고</a>
+	</div>
    <script>
        function modify(){
         alert("상품정보가 변경되었습니다.");
@@ -131,11 +178,14 @@
 			let stockCheck = false;
 			let categoryCheck = false;
 			let introChk = false;
+			/* let imglistChk = false; */
 			let name = $('#p_Name').val();
 			let price = $('#p_Price').val();
 			let stock = $('#p_Stock').val();
 			let category = $("select[name='p_Category']").val();
 			let intro = $("#intro p").html();
+			/* let imglist = $('imageList').val(); */
+			
 			if(name == "") {
 	            $('#nameCheck').html("필수 항목입니다." + "<br>");
 	            nameCheck = false;
@@ -164,6 +214,12 @@
 	            $('#categoryCheck').html("");
 	            categoryCheck = true;
 	        }
+		/* 	if(imglist == "선택된 파일 없음") {
+	            $('#imglistChk').html("사진등록은 필수 항목입니다." + "<br>");
+	            imglistChk = false;
+	        } else {
+	            $('#imglistChk').html("");
+	            imglistChk = true;} */
 			if(intro == '<br data-cke-filler="true">') {
 	            $('#introChk').html("필수 항목입니다." + "<br>");
 	            introChk = false;
