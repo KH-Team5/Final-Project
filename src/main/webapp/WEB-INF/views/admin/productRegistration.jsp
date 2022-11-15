@@ -9,6 +9,66 @@
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
+<style>
+
+
+.form-group {
+position: relative;
+top:11%;
+left:20%;
+width: 60%;
+}
+
+input{
+width:300px;
+height:30px;
+}
+
+#regBtn{
+position: relative;
+top: 50%;
+left:74%;
+width:100px;
+height:45px;
+}
+ul{
+position:relative;
+left: 38%;
+}
+nav{
+height:100px;
+}
+.navbar-brand{
+position:relative;
+font-size: xx-large;
+}
+
+
+</style>
+
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<span class="whole">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><b>상품등록 페이지</a></b>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="<%=request.getContextPath()%>/" style="color: white">홈페이지 로고
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+       
+      </ul>
+     
+  </div>
+</nav>
+  
 </head>
 <body>
 	<h1>상품등록 페이지</h1>
@@ -32,12 +92,21 @@
 		</div> 
 		<span id="categoryCheck"></span>
 		<div id="intro">
+		<div class="position">
+			<label for="exampleInputEmail1" class="form-label mt-4">상품 설명:</label><br> 
+			<div id="test1">  <textarea id="p_Intro" name="p_Intro"></textarea></div>
 			상품 설명: <textarea id="p_Intro" name="p_Intro"></textarea>
 			<span id="introChk"></span>
 		</div>
 		상품 이미지: <input type="file" multiple="multiple" id ="imageFile" name="imageFile"> <br>
 		<div id="uploadResult">
 		</div>
+		</div>
+		</fieldset>
+		<button type="button" class="btn btn-dark" id="regBtn" >등록</button>
+		</div>
+	</form>
+	</span>
 		<button id="regBtn" >등록</button>
 	</form>
 	<a href="<%=request.getContextPath()%>/">홈</a>

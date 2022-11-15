@@ -2,6 +2,53 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  
+<meta charset="UTF-8">
+<style>
+
+
+ul {
+	list-style-type : none;
+	
+}
+ul li {
+	
+	float: left;
+	margin-right: 5px;
+}
+
+
+
+#products{
+width: 60%;
+ margin-left:auto; 
+    margin-right:auto;
+}
+
+#paging_wrap{
+ margin-left:19%;
+ 
+}
+
+#search{
+ margin-left:24%; 
+    
+}
+.navbar-brand{
+font-size: xx-large;
+}
+nav{
+height:100px;
+}
+#navbarColor02{
+position:absolute;
+left:45%;
+}
+
+</style>
+
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +61,27 @@
 </head>
 
 <body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><b>상품관리 페이지</a></b>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="<%=request.getContextPath()%>/" style="color: white">홈페이지 로고
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+       
+      </ul>
+     
+  </div>
+</nav>
+	 <br><br>
 
 	<h1>상품 관리 페이지</h1>
     <c:if test="${listcheck != 'empty'}">
@@ -28,6 +96,7 @@
 					<td>등록날짜</td>
 				</tr>
 			</thead>	
+				<tbody>
 			<c:forEach var="list" items="${list}" >
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}">
@@ -83,6 +152,7 @@
    		<input type="hidden" name="type" value="T">
    		<button id='search_btn'>검색</button>
 	</form>
+	</span>
 	
 	<a href="<%=request.getContextPath()%>/">홈</a>
 	
