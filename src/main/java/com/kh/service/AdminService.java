@@ -2,7 +2,6 @@ package com.kh.service;
 
 import java.util.List;
 
-import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.MemberDTO;
 
@@ -48,10 +47,7 @@ public interface AdminService {
 	public List<MemberDTO> listPage(userPagingDTO vo); 
 	
 	/* 유저 아이디 삭제 */
-	public int userDelete(String m_Id);
-
-	/*상품수정시 이미지 삭제 */
-	public int deleteImageAll(int p_Id); 
+	public int userDelete(String m_Id); 
 	
 	
 }

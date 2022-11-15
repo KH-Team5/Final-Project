@@ -2,7 +2,6 @@ package com.kh.model;
 
 import java.util.List;
 
-import com.kh.model.domain.CategoryDTO;
 import com.kh.model.domain.Criteria;
 import com.kh.model.domain.MemberDTO;
 import com.kh.model.domain.ProductDTO;
@@ -35,8 +34,6 @@ public interface AdminRepository {
 	public List<MemberDTO> list();
 
 	public int userDelete(String m_Id);
-
-	public int deleteImageAll(int p_Id);
 
 
 

@@ -57,10 +57,12 @@
 	</select>
 
 	<select id="getTotal" resultType="int">
-		select count(*) from product_TB
-		<if test="keyword != null">
-			where p_Name like '%' || #{keyword} || '%'
-		</if>
+		<![CDATA[  
+			select count(*) from product_TB
+			where 
+		]]>
+		<include refid="criteria"></include> 
+		1=1
 	</select>
 
 	<select id="selectInnerCategory" resultType="categoryDTO">

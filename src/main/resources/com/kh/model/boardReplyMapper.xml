@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.model.domain.BoardReplyDTO">
+<!-- 댓글 조회 -->
+<select id="replyList" parameterType="int" resultType="com.kh.model.domain.BoardReplyDTO">
+	select
+		rno, q_Index, m_Id, rp_content, rp_Date
+	from question_replyy
+		where q_Index = #{q_Index}		
+</select>
+
+<!-- 댓글 작성 -->
+<insert id="replyWrite" parameterType="com.kh.model.domain.BoardReplyDTO">		
+     insert into question_replyy(rno, q_Index, m_Id, rp_content, rp_Date)
+    VALUES(question_seq.nextval,#{q_Index},#{m_Id}, #{rp_content}, sysdate)
+</insert>
+	
+<!-- 댓글 수정 -->
+<update id="replyModify" parameterType="com.kh.model.domain.BoardReplyDTO">
+	update question_replyy set
+		m_Id = #{m_Id},
+		rp_content = #{rp_content}
+	where rno = #{rno}
+		and q_Index = #{q_Index}	
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="replyDelete" parameterType="com.kh.model.domain.BoardReplyDTO">
+	delete from question_replyy
+	where rno = #{rno}
+		and q_index = ${q_Index}	
+</delete>
+ <!-- 단일 댓글 조회 -->
+<select id="replySelect" parameterType="com.kh.model.domain.BoardReplyDTO" resultType="com.kh.model.domain.BoardReplyDTO">
+   select
+		rno, q_Index, m_Id, rp_content, rp_Date
+	from question_replyy
+		where q_Index = #{q_Index}
+		and rno = #{rno}	
+</select>
+</mapper>

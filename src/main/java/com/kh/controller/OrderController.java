@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.model.domain.Criteria;
-import com.kh.model.domain.MemberDTO;
 import com.kh.model.domain.OrderCancelDTO;
 import com.kh.model.domain.OrderDTO;
 import com.kh.model.domain.OrderListDTO;
@@ -21,13 +19,14 @@ import com.kh.model.domain.PageDTO;
 import com.kh.service.MemberService;
 import com.kh.service.OrderService;
 
-@Controller
-public class OrderController {
-	@Autowired
-	private OrderService orderService;
+import lombok.RequiredArgsConstructor;
 
-	@Autowired
-	private MemberService memberService;
+@Controller
+@RequiredArgsConstructor
+public class OrderController {
+	
+	private final OrderService orderService;
+	private final MemberService memberService;
 
 	@RequestMapping(value = "/member/order/{M_id}", method = RequestMethod.GET)
 	public String orderPgaeGET(@PathVariable("M_id") String M_id, OrderListDTO orderListDTO, Model model) {

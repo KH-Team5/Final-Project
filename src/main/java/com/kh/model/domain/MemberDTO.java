@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MemberDTO {
-	
 	private String m_Id;
 	private String M_pwd;
 	private String M_name;
@@ -17,5 +16,4 @@ public class MemberDTO {
 	private String detail_address;
 	private String joined_date;
 	private String role;
-
 }
