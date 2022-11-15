@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -42,11 +45,8 @@ left:45%;
 
 </style>
 
-<!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>유저관리페이지</title>
 </head>
 
  <body>
@@ -74,28 +74,27 @@ left:45%;
 </nav>
 <br><br>
   
-
-	<h1>유저 관리 페이지</h1>
     <c:if test="${listcheck != 'empty'}">
-		<table id="usersManage">
+		<table class="table table-hover" id="usersManage">
 			<thead>
-				<tr>
-					<td>회원아이디</td>
-					<td>이름</td>
-					<td>이메일</td>
-					<td>연락처</td>
-					<td>우편번호</td>
-					<td>주소</td>
-					<td>상세주소</td>
-					<td>가입일</td>
-					<td>권한</td>
+				<tr class = "table-light">
+					<th scope="col">회원아이디</th>
+					<th scope="col">이름</th>
+					<th scope="col">이메일</th>
+					<th scope="col">연락처</th>
+					<th scope="col">우편번호</th>
+					<th scope="col">주소</th>
+					<th scope="col">상세주소</th>
+					<th scope="col">가입일</th>
+					<th scope="col">권한</th>
 				</tr>
 			</thead>	
+			<tbody>
 			<c:forEach var="list" items="${list}" >
 				<tr>
 	
-				    <td><a href="<%=request.getContextPath()%>/admin/userInfo/${list.m_Id}">
-				    <c:out value="${list.m_Id}"/></a></td>
+				    <th scope="row"><a href="<%=request.getContextPath()%>/admin/userInfo/${list.m_Id}" style="color: black">
+				    <c:out value="${list.m_Id}"/></a></th>
 					<td><c:out value="${list.m_name}"></c:out></td>
 					<td><c:out value="${list.email}"></c:out></td>				
 					<td><c:out value="${list.contact}"></c:out></td>
@@ -119,16 +118,11 @@ left:45%;
           <a href="<%=request.getContextPath()%>/admin/usersManage?num=${startPageNum - 1}${searchTypeKeyword}">이전</a>
          
          </li>
-      <c:if test="${prev}">
-         <span>[ <a
-            href="<%=request.getContextPath()%>/admin/usersManage?num=${startPageNum - 1}${searchTypeKeyword}">이전</a>]
-         </span>
       </c:if>
 
 
       <c:forEach begin="${startPageNum}" end="${endPageNum}"
          var="num">
-
          <span id="paging_num"> <c:if test="${select != num}">
                <a href="<%=request.getContextPath()%>/admin/usersManage?num=${num}${searchTypeKeyword}" style="color: black">${num}</a>
             </c:if> <c:if test="${select == num}">
@@ -137,13 +131,15 @@ left:45%;
 
          </span>
       </c:forEach>
-
       <c:if test="${next}">
          <a href="<%=request.getContextPath()%>/admin/usersManage?num=${endPageNum + 1}${searchTypeKeyword}">다음</a>
       </c:if>
 
+</ul>
+</div>
 
 <br>
+
 
 
 

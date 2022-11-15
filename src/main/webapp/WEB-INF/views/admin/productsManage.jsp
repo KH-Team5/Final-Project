@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -50,14 +53,10 @@ left:45%;
 </style>
 
 
-<!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
 <title>상품 관리 페이지</title>
-<style>
-</style>
-</head>
+
 </head>
 
 <body>
@@ -82,24 +81,25 @@ left:45%;
   </div>
 </nav>
 	 <br><br>
-
-	<h1>상품 관리 페이지</h1>
     <c:if test="${listcheck != 'empty'}">
-		<table id="products">
+		<table class="table table-hover" id="products">
 			<thead>
-				<tr>
-					
-					<td>상품이름</td>
-					<td>상품가격</td>
-					<td>재고</td>
-					<td>카테고리</td>
-					<td>등록날짜</td>
+				<tr class = "table-light">
+					<th scope="col">상품번호</th>
+					<th scope="col">상품이름</th>
+					<th scope="col">상품가격</th>
+					<th scope="col">재고</th>
+					<th scope="col">카테고리</th>
+					<th scope="col">등록날짜</th>
 				</tr>
 			</thead>	
+	 
+	
 				<tbody>
 			<c:forEach var="list" items="${list}" >
 				<tr>
-					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}">
+					<th scope="row">${list.p_Id}</th>
+					<td><a href="<%=request.getContextPath()%>/admin/adminProductInfo/${list.p_Id}"  style="color: black">
 					<c:out value="${list.p_Name}"/></a></td> 
 					<td><c:out value="${list.p_Price}"></c:out></td>
 					<td><c:out value="${list.p_Stock}"></c:out></td>
@@ -111,7 +111,7 @@ left:45%;
 				</tr>
 			</c:forEach>
 		
-			
+			</tbody>
 		</table>
 		
 	</c:if>
@@ -122,6 +122,7 @@ left:45%;
 	</c:if>
 	
    	<!-- 페이징 -->
+   	
    	<div id="paging_wrap">
    		<ul id="paging">
    			<c:if test="${paging.prev }">
@@ -131,7 +132,7 @@ left:45%;
    			</c:if>
    			<c:forEach begin="${paging.pageStart }" end="${paging.pageEnd }" var="num">
    				<li id="paging_btn">
-   					<a href="<%=request.getContextPath()%>/admin/productsManage?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }&type=T">
+   					<a href="<%=request.getContextPath()%>/admin/productsManage?keyword=${paging.cri.keyword }&pageNum=${num }&amount=${paging.cri.amount }&type=T" style="color: black">
    						${num }
    					</a>
    				</li>
@@ -143,7 +144,7 @@ left:45%;
 			</c:if>
 		</ul>
 	</div>
-   	
+   	<span id="positioning">
    	<!-- 검색 -->
 	<form id="search" action="<%=request.getContextPath()%>/admin/productsManage" method="get">
    		<input type="text" name="keyword" value="${paging.cri.keyword }">
@@ -153,8 +154,6 @@ left:45%;
    		<button id='search_btn'>검색</button>
 	</form>
 	</span>
-	
-	<a href="<%=request.getContextPath()%>/">홈</a>
 	
 	<script>
 		let search = $('#search');
