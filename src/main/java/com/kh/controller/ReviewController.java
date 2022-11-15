@@ -1,6 +1,6 @@
 package com.kh.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,11 +11,14 @@ import com.kh.model.domain.ReviewDTO;
 import com.kh.model.domain.ReviewPageDTO;
 import com.kh.service.ReviewService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/review")
+@RequiredArgsConstructor
 public class ReviewController {
-	@Autowired
-	private ReviewService reviewService;
+
+	private final ReviewService reviewService;
 
 	@RequestMapping(value = "/enroll", method = RequestMethod.POST)
 	public void enrollPOST(ReviewDTO reviewDTO) {
