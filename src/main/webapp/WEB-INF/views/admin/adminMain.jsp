@@ -11,25 +11,32 @@
 <meta charset="UTF-8">
 <style>
 .button_a { 
-position: absolute;
-top:9%;
-left:1%;
+position: relative;
+top: 20px;
+left:2%;
+width:100px;
+height:60px;
 }
 #two{
-position: absolute;
-top:14%;
-left:1%;
+position: relative;
+top:11px;
+left:2%;
 }
 #three{
-position: absolute;
-top:19%;
-left:1%;
+position: relative;
+top:1px;
+left:2%;
 }
-#four{
-position: absolute;
-top:2%;
-left:50%;
-font-color:#white;
+
+ul{
+position:relative;
+left: 40%;
+}
+nav{
+height:100px;
+}
+.navbar-brand{
+font-size: xx-large;
 }
 </style>
 <title>관리자 페이지 입니다</title>
@@ -37,15 +44,24 @@ font-color:#white;
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
-<table class="table table-hover">
-
-    <tbody>
-    <tr class="table-dark">
-      <th scope="row" ><h1>관리자 페이지</h1></th>
-   
-    </tr>
-  </tbody>
-  
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><b>관리자 페이지</a></b>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="<%=request.getContextPath()%>/" style="color: white">홈페이지 로고
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+       
+      </ul>
+     
+  </div>
+</nav>
   	<div class = "button_a" id="one">
 <button type="button" class="btn btn-secondary" onclick="location.href='<%=request.getContextPath()%>/admin/productsManage'">상품관리</a></button>
 </div>
@@ -56,10 +72,6 @@ font-color:#white;
       </c:forEach>
      <div class = "button_a" id="three"> 
 <button type="button" class="btn btn-secondary" onclick="location.href='<%=request.getContextPath()%>/admin/usersManage?num=${num}'">회원관리</a></button> <br>
-	</div>
-	<div class = "button_a" id="four">
-	<a href="<%=request.getContextPath()%>/" style="color: white">홈페이지로고</a>
-	</div>
 </body>
 </html>
 

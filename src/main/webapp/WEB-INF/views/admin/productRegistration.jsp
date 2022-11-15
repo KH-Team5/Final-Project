@@ -14,14 +14,9 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
 <style>
 
-#one{
-position: absolute;
-top:2%;
-left:50%;
-font-color:#white;
-}
+
 .form-group {
-position: absolute;
+position: relative;
 top:11%;
 left:20%;
 width: 60%;
@@ -33,25 +28,49 @@ height:30px;
 }
 
 #regBtn{
-position: absolute;
-top: 67%;
-right:20%;
+position: relative;
+top: 50%;
+left:74%;
 width:100px;
 height:45px;
 }
+ul{
+position:relative;
+left: 38%;
+}
+nav{
+height:100px;
+}
+.navbar-brand{
+position:relative;
+font-size: xx-large;
+}
+
+
 </style>
 
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
-<table class="table table-hover">
-    <tbody>
-    <tr class="table-dark">
-	<th scope="row" ><h1>상품등록 페이지</h1></th>
-	 </tr>
-  </tbody>
-  </table>
+<span class="whole">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><b>상품등록 페이지</a></b>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="<%=request.getContextPath()%>/" style="color: white">홈페이지 로고
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+       
+      </ul>
+     
+  </div>
+</nav>
   
 	<form action="<%= request.getContextPath()%>/admin/productRegistration" id="regform" name="regform" method="post">
 		
@@ -80,6 +99,7 @@ height:45px;
 		</div> 
 		<span id="categoryCheck"></span>
 		<div id="intro">
+		<div class="position">
 			<label for="exampleInputEmail1" class="form-label mt-4">상품 설명:</label><br> 
 			<div id="test1">  <textarea id="p_Intro" name="p_Intro"></textarea></div>
 			<span id="introChk"></span>
@@ -90,10 +110,10 @@ height:45px;
 		</div>
 		</fieldset>
 		<button type="button" class="btn btn-dark" id="regBtn" >등록</button>
+		</div>
 	</form>
-	<div class = "button_home" id="one">
-	<a href="<%=request.getContextPath()%>/" style="color: white">홈페이지로고</a>
-	</div>
+	</span>
+	
 	<script>
 		let categoryList = JSON.parse('${categoryList}');
 		let mainCategoryArr = new Array();

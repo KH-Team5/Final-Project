@@ -11,12 +11,7 @@
 <meta charset="UTF-8">
 <style>
 
-#one{
-position: absolute;
-top:2%;
-left:50%;
-font-color:#white;
-}
+
 ul {
 	list-style-type : none;
 	
@@ -44,11 +39,20 @@ width: 60%;
  margin-left:24%; 
     
 }
+.navbar-brand{
+font-size: xx-large;
+}
+nav{
+height:100px;
+}
+#navbarColor02{
+position:absolute;
+left:45%;
+}
 
 </style>
 
 
-<html>
 <head>
 <meta charset="UTF-8">
 <title>상품 관리 페이지</title>
@@ -58,13 +62,25 @@ width: 60%;
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
-<table class="table table-hover">
-
-<tbody>
- <tr class="table-dark">
-	 <th scope="row" ><h1>상품 관리 페이지</h1></th>
-	 </tr>
-	 </tbody>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><b>상품관리 페이지</a></b>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="<%=request.getContextPath()%>/" style="color: white">홈페이지 로고
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+       
+      </ul>
+     
+  </div>
+</nav>
+	 <br><br>
     <c:if test="${listcheck != 'empty'}">
 		<table class="table table-hover" id="products">
 			<thead>
@@ -77,6 +93,8 @@ width: 60%;
 					<th scope="col">등록날짜</th>
 				</tr>
 			</thead>	
+	 
+	
 				<tbody>
 			<c:forEach var="list" items="${list}" >
 				<tr>
@@ -136,9 +154,7 @@ width: 60%;
    		<button id='search_btn'>검색</button>
 	</form>
 	</span>
-	<div class = "button_home" id="one">
-	<a href="<%=request.getContextPath()%>/" style="color: white">홈페이지로고</a>
-	</div>
+	
 	<script>
 		let search = $('#search');
 		let amount = "${paging.cri.amount }";

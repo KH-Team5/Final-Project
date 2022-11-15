@@ -9,25 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-  </head>
-</html>
 <style>
-#one{
-position: absolute;
-top:2%;
-left:50%;
-font-color:#white;
-}
-#usersManage{
+
+.table-hover{
+margin-right: auto;
+margin-left: auto; 
 width: 60%;
- margin-left:auto; 
-    margin-right:auto;
+ 
 }
 #paging_wrap{
-position: relative;
-top:10%;
-left:19%;
+margin-left:21%;
 }
+
 ul {
 	list-style-type : none;
 	
@@ -38,21 +31,49 @@ ul li {
 	margin-right: 10px;
 }
 
+
+.navbar-brand{
+font-size: xx-large;
+}
+nav{
+height:100px;
+}
+ #navbarColor02{
+position:absolute;
+left:45%;
+} 
+
 </style>
+
 <head>
 <title>유저관리페이지</title>
 </head>
 
-
  <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-<table class="table table-hover">
 
-<tbody>
- <tr class="table-dark">
-	 <th scope="row" ><h1>유저관리 페이지</h1></th>
-	 </tr>
-	 </tbody>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" id="user_1" href="#"><b>유저관리 페이지</a></b>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="<%=request.getContextPath()%>/" style="color: white">홈페이지 로고
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+       
+      </ul>
+     
+  </div>
+</nav>
+<br><br>
+  
     <c:if test="${listcheck != 'empty'}">
 		<table class="table table-hover" id="usersManage">
 			<thead>
@@ -93,9 +114,7 @@ ul li {
 		
 	</c:if>
 	<div id="paging_wrap">
-		<ul id="paging_manage">
       <c:if test="${prev}">
-         <li id="prev_btn">
           <a href="<%=request.getContextPath()%>/admin/usersManage?num=${startPageNum - 1}${searchTypeKeyword}">이전</a>
          
          </li>
@@ -105,9 +124,7 @@ ul li {
       <c:forEach begin="${startPageNum}" end="${endPageNum}"
          var="num">
          <span id="paging_num"> <c:if test="${select != num}">
-         <li id="paging_btn">
                <a href="<%=request.getContextPath()%>/admin/usersManage?num=${num}${searchTypeKeyword}" style="color: black">${num}</a>
-			</li>
             </c:if> <c:if test="${select == num}">
                <b>${num}</b>
             </c:if>
@@ -115,18 +132,14 @@ ul li {
          </span>
       </c:forEach>
       <c:if test="${next}">
-      <li id="next_btn">
          <a href="<%=request.getContextPath()%>/admin/usersManage?num=${endPageNum + 1}${searchTypeKeyword}">다음</a>
-      </li>
       </c:if>
 
 </ul>
 </div>
 
 <br>
-<div class = "button_home" id="one">
-	<a href="<%=request.getContextPath()%>/" style="color: white">홈페이지로고</a>
-	</div>
+
 
 
 
