@@ -64,18 +64,19 @@
 			const m_Id = '${m_Id}';
 			const r_Rating = $("select").val();
 			const r_Content = $("textarea").val();
-			const data = {
+			const data = JSON.stringify({
 					r_Id: r_Id,
 					p_Id: p_Id,
 					m_Id: m_Id,
 					r_Rating: r_Rating,
 					r_Content: r_Content
-			}
+			})
 			
 			$.ajax({
 				data : data,
-				type : 'POST',
-				url : '<%=request.getContextPath()%>/review/update',
+				method : 'PUT',
+				contentType: 'application/json',
+				url : '<%=request.getContextPath()%>/review/' + r_Id ,
 				success : function(result){
 					$(opener.location).attr("href", "javascript:reviewListInit();");
 					window.close();

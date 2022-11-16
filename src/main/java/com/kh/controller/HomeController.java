@@ -2,24 +2,23 @@ package com.kh.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import com.kh.model.domain.Criteria;
 import com.kh.model.domain.ProductDTO;
 import com.kh.service.ProductService;
 
-@Controller
-public class HomeController {
-	@Autowired
-	private ProductService productService;
+import lombok.RequiredArgsConstructor;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+@Controller
+@RequiredArgsConstructor
+public class HomeController {
+
+	private final ProductService productService;
+
+	@GetMapping(value = "/")
 	public String home(Model model) {
-		Criteria cri = new Criteria(1, 8);
 		List<ProductDTO> list = productService.selectProductListOrderByRating();
 		model.addAttribute("productInfo", list);
 		/*
@@ -29,6 +28,5 @@ public class HomeController {
 		 */
 		return "main";
 	}
-
 
 }
