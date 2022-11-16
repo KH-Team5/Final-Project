@@ -97,7 +97,7 @@ create table review_TB(
 );
 
 /* 리뷰 시퀀스 */
-CREATE SEQUENCE review_TB_SQ
+CREATE SEQUENCE review_SQ
 START WITH 1
 INCREMENT BY 1;
 
