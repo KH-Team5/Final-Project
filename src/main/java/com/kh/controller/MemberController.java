@@ -6,9 +6,6 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.model.domain.MemberDTO;
 import com.kh.service.MemberService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping(value = "/member")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MemberController {
 
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join() {

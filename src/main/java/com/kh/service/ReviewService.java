@@ -15,7 +15,7 @@ public interface ReviewService {
 
 	ReviewDTO updateReviewInfo(int r_Id);
 
-	int deleteReview(ReviewDTO reviewDTO);
+	int deleteReview(int r_Id);
 
 	void setRating(int p_Id);
 }

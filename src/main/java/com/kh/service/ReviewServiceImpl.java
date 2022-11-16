@@ -52,9 +52,9 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int deleteReview(ReviewDTO reviewDTO) {
-		int result = reviewRepository.deleteReview(reviewDTO.getR_Id());
-		setRating(reviewDTO.getP_Id());
+	public int deleteReview(int r_Id) {
+		int result = reviewRepository.deleteReview(r_Id);
+		setRating(r_Id);
 		return result;
 	}
 

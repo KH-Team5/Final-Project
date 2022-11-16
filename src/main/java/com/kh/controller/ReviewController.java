@@ -1,7 +1,12 @@
 package com.kh.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,35 +16,38 @@ import com.kh.model.domain.ReviewDTO;
 import com.kh.model.domain.ReviewPageDTO;
 import com.kh.service.ReviewService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/review")
+@RequiredArgsConstructor
 public class ReviewController {
-	@Autowired
-	private ReviewService reviewService;
 
-	@RequestMapping(value = "/enroll", method = RequestMethod.POST)
+	private final ReviewService reviewService;
+
+	@PostMapping
 	public void enrollPOST(ReviewDTO reviewDTO) {
 		reviewService.enrollReview(reviewDTO);
 	}
 
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	@GetMapping
 	public String checkPOST(ReviewDTO reviewDTO) {
 		return reviewService.checkReview(reviewDTO);
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/list")
 	public ReviewPageDTO reviewListGET(Criteria criteria) {
 		ReviewPageDTO result = reviewService.reviewList(criteria);
 		return result;
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void updatePOST(ReviewDTO reviewDTO) {
+	@PutMapping("/{r_Id}")
+	public void updatePOST(@RequestBody ReviewDTO reviewDTO) {
 		reviewService.updateReview(reviewDTO);
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deletePOST(ReviewDTO reviewDTO) {
-		reviewService.deleteReview(reviewDTO);
+	@DeleteMapping("/{r_Id}")
+	public void deletePOST(@PathVariable int r_Id) {
+		reviewService.deleteReview(r_Id);
 	}
 }

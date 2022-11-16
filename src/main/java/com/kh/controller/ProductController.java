@@ -6,9 +6,6 @@ import java.nio.file.Files;
 import java.security.Principal;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +24,15 @@ import com.kh.service.MemberService;
 import com.kh.service.ProductService;
 import com.kh.service.ReviewService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class ProductController {
-	@Autowired
-	private ProductService productService;
-	@Autowired
-	private MemberService memberservice;
-	@Autowired
-	private ReviewService reviewService;
+
+	private final ProductService productService;
+	private final MemberService memberservice;
+	private final ReviewService reviewService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String productManage(Criteria cri, Model model) {
