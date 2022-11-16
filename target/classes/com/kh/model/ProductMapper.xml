@@ -23,13 +23,10 @@
 	</sql>
 
 
-	<insert id="insert" parameterType="productDTO">
-		<selectKey resultType="int" keyProperty="p_Id" order="AFTER">
-  			SELECT product_SQ.CURRVAL FROM DUAL
-  		</selectKey>  
+	<insert id="insert" parameterType="productDTO">  
 		<![CDATA[
-			insert into product_TB
-			values(product_SQ.NEXTVAL, #{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro }, 0.0)
+			insert into product_TB(p_Name, p_Price, p_Stock, p_Category, p_Date, p_Intro, p_RatingAvg)
+			values(#{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro }, 0.0)
 		]]>
 	</insert>
 

@@ -30,9 +30,9 @@ public class RootConfig {
 	public DataSource basicDataSource() {
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		basicDataSource.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:xe");
-		basicDataSource.setUsername("scott");
-		basicDataSource.setPassword("tiger");
+		basicDataSource.setUrl("jdbc:oracle:thin:@khfinaldb_medium?TNS_ADMIN=C:/Users/taekw/Documents/workspace-sts-3.9.12.RELEASE/KHFinalProject/src/main/resources/Wallet_khfinaldb");
+		basicDataSource.setUsername("admin");
+		basicDataSource.setPassword("7j0yEBVdWaUr8y");
 		return basicDataSource;
 	}
 
