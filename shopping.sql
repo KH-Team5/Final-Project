@@ -133,6 +133,19 @@ CREATE SEQUENCE question_SQ
 START WITH 1
 INCREMENT BY 1;
 
+/* 문의 사항 댓글 */
+CREATE TABLE question_replyy (
+   rno number not null,
+   q_index number not null,
+   M_id varchar(30) not null,
+   rp_content varchar(500) not null,
+   rp_date DATE default sysdate,
+   CONSTRAINT question_replyy_PK FOREIGN KEY(q_index) REFERENCES question_tb(q_index) ON DELETE CASCADE);
+/* 댓글 시퀀스 */
+ CREATE SEQUENCE question_seq
+START WITH 1
+INCREMENT BY 1
+
 /* 반품 */
 CREATE TABLE stock_TB(
 O_index NUMBER NOT NULL, /* order_TB의 FK, PK */
