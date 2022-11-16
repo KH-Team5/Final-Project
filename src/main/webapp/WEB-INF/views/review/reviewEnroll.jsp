@@ -61,7 +61,7 @@
 			$.ajax({
 				data : data,
 				type : 'POST',
-				url : '<%=request.getContextPath()%>/review/enroll',
+				url : '<%=request.getContextPath()%>/review',
 				success : function(result){
 					$(opener.location).attr("href", "javascript:reviewListInit();");
 					window.close();

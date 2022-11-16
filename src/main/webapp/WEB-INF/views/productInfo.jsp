@@ -180,8 +180,8 @@
 					m_Id: m_Id,
 					p_Id: p_Id
 				},
-				type: 'POST',
-				url: '<%=request.getContextPath()%>/review/check',
+				type: 'GET',
+				url: '<%=request.getContextPath()%>/review',
 				success: function (result) {
 					if (result === '1') {
 						alert("이미 등록된 리뷰가 존재 합니다.")
@@ -296,10 +296,9 @@
 			$.ajax({
 				data: {
 					r_Id: r_Id,
-					p_Id: '${productInfo.p_Id}'
 				},
-				url: '<%=request.getContextPath()%>/review/delete',
-				type: 'POST',
+				url: '<%=request.getContextPath()%>/review/' + r_Id,
+				method: 'DELETE',
 				success: function (result) {
 					reviewListInit();
 					alert('삭제되었습니다.');
