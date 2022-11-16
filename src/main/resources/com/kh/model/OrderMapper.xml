@@ -16,15 +16,15 @@
 	
 	<insert id="insertOrder">
 		insert into order_TB(o_Id, m_Name, m_Id, o_address, o_detail_address, o_Zipcode, o_state, o_delivery_charge)
-    	values(ordet_SQ.NEXTVAL, #{m_Name}, #{m_Id}, #{o_address}, #{o_detail_address}, #{o_Zipcode}, '배송준비', #{o_delivery_charge})
+    	values(order_SQ.NEXTVAL, #{m_Name}, #{m_Id}, #{o_address}, #{o_detail_address}, #{o_Zipcode}, '배송준비', #{o_delivery_charge})
 	</insert>
 	
 	<insert id="insertOrderItem">
 		<selectKey resultType="int" keyProperty="o_Id" order="BEFORE">
-  			SELECT ordet_SQ.CURRVAL FROM DUAL
+  			SELECT order_SQ.CURRVAL FROM DUAL
   		</selectKey>  
 		insert into order_item_TB
-		values(ordet_item_SQ.NEXTVAL, #{o_Id}, #{p_Id}, #{p_Cnt}, #{p_Price})
+		values(order_item_SQ.NEXTVAL, #{o_Id}, #{p_Id}, #{p_Cnt}, #{p_Price})
 	</insert>
 	
 	<!-- 주문 목록 -->
