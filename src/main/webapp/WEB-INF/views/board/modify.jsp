@@ -15,13 +15,24 @@
 	rel="stylesheet"
 	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
+	    crossorigin="anonymous"></script>	
 <title>문의사항</title>
 <style>
+html,body{
+ height: 100%;
+}
+.footerdown{
+width: 100%;
+position : fixed;
+bottom : 0;
+}
 .modifyForm {
 	width: 20%;
 	margin-left: auto;
 	margin-right: auto;
-	 margin-top: 200px;
+	 margin-top: 110px;
 }
 .linklink{
 width: 20%;
@@ -43,11 +54,11 @@ width: 20%;
 		}
 	}
 </script>
-<body>
+<body class="d-flex flex-column min-vh-100">
+<jsp:include page="../navbar.jsp" flush="true" />
+   <div>
 	<form method="post" name="modify" onSubmit="return Checkform()"
 		class="modifyForm">
-
-
 		<div class="btn-group" role="group"
 			aria-label="Button group with nested dropdown">
 			<button type="button" class="btn btn-primary">카테고리</button>
@@ -78,6 +89,7 @@ width: 20%;
 
 		<button type="submit" class="btn btn-primary" onclick="Checkform()">완료</button>
 	</form>
+	</div>
    <br/>
 	<div class="linklink">
 		<span>
@@ -85,7 +97,9 @@ width: 20%;
 		    <a type="button" class="btn btn-light" href="/">Home</a>
 		</span>
 	</div>
-	</div>
-	</form>
+	<jsp:include page="footer.jsp" flush="true" />
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
 </body>
 </html>
