@@ -5,129 +5,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-<title>장바구니 페이지</title>
-<style type="text/css">
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
+	crossorigin="anonymous"></script>
 
-
-#frame{
-  width: 80%;
-  margin: 0 auto;
-  padding: 50px 50px;
-  background-color: #fff;
-}
-
-.home{
-  float:right;
+<style>
+.content_btn_section{
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 50px;
+   width: 15%;
 
 }
 
-table.subject_table{    /* 계산 테이블*/
-  clear: both;
-  border: solid 1px #e0e0eb;
-  border-collapse: collapse;
-  background-color: #f5f5f0;
-  width: 100%;
-  font-size: 10pt;
+.all_check_input_div{
+  margin-left: auto;
+  margint-right: auto;
+  width: 82%;
+
+
 }
- table.subject_table th{  /* 계산 테이블 제목*/
-  border: solid 1px #e0e0eb;
-  padding: 10px 0;
-   
-}
-table.subject_table td{  /* 계산 테이블 내용*/
-  border: solid 1px #e0e0b;
-  text-align: center;
-}
-
-table.cart_table {
-  border: solid 1px #e0e0b;
-  border-collapse: collapse;
-  background-color: #f5f5f0;
-  width: 100%;
-  font-size: 10pt;
-}
-
-table.cart_table th{
-  boder: solid 1px #e0e0eb;
-}
-
-table.cart_table td{
-  border: solid 1px #e0e0eb;
-  text-align: center;
-}
-
-table.list_table{    /* 계산 테이블*/
-  clear: both;
-  border: solid 1px #e0e0eb;
-  border-collapse: collapse;
-  background-color: #f5f5f0;
-  width: 100%;
-  font-size: 10pt;
-}
-table.list_table th{  /* 계산 테이블 제목*/
-  border: solid 1px #e0e0eb;
-  padding: 10px 0;
-  
-}
-table.list_table td{  /* 계산 테이블 내용*/
-  border: solid 1px #e0e0b;
-  text-align: center;
-}
-
-table.list_table td{
-  border: solid 1px #e0e0b;
-  border-collapse: collapse;
-  background-color: #f5f5f0;
-  width: 100%;
-  font-size: 10pt;
-}
-
-
-
-
-
-
-
-
-
-.price{
-  font-size: 20pt;
-  font-weight: bold;
-}
-
-.lifont{ font-size: 10pt; color: gray;}
-
-#boundary_div{
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  font-size: 13px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.default { background-color: #fff; border: solid  1px gray; color: black;}
-.default:hover{ background: #ddd;}
-.backBtn{background: #fff; border: solid 1px gray;}
-
-.btnfloat{float:left;}
-
 </style>
 
+<title>장바구니 페이지</title>
 </head>
-<body class="cartBody">
+
+<body class="d-flex flex-column min-vh-100">
+<jsp:include page="navbar.jsp" flush="true" />
 	<div id="frame">
 		<div class="all_check_input_div">
 			<input type="checkbox" class="all_check_input" name="selectall" checked="checked"><span class="all_chcek_span">전체선택</span>
 		</div>
-		<table class="subject_table">
+		<table class="subject_table table table-dark" style= "margin: auto;
+   width: 65% !important;">
 			<tbody>
 				<tr>
-					<th>상품명</th>
+					<th class="text-center">상품명</th>
 					<th>가격</th>
 					<th>수량</th>
 					<th>합계</th>
@@ -136,7 +52,8 @@ table.list_table td{
 			</tbody>
 		</table>
 		
-		<table class="cart_table">
+		<table class="cart_table table table-hover" style= "margin: auto;
+   width: 65% !important;">
 			<tbody>
 				<c:forEach items="${cartInfo}" var="ci">
 					<tr>
@@ -161,15 +78,15 @@ table.list_table td{
 							수량
 							<div>
 								<input type="number" value="${ci.p_Cnt}" id="quantity_input">	
-								<button class="plus_btn">+</button>
-								<button class="minus_btn">-</button>
+								<button class="plus_btn btn btn-dark">+</button>
+								<button class="minus_btn btn btn-dark">-</button>
 							</div>
-							<a class="quantity_change_btn" data-cid="${ci.ca_Id}">변경</a>
+							<button class="quantity_change_btn btn btn-dark" data-cid="${ci.ca_Id}">변경</button>
 						</td>
 						<td>
 							<fmt:formatNumber value="${ci.p_Price * ci.p_Cnt}" pattern="#,### 원" />
 						</td>
-						<td><button class="delete_btn" data-caid="${ci.ca_Id}">삭제</button></td>
+						<td><button class="delete_btn btn btn-dark" data-caid="${ci.ca_Id}">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -179,7 +96,8 @@ table.list_table td{
 	</div>
 	<div>
 		<div>
-			<table>
+			<table class="table table-hover" style= "margin: auto;
+   width: 65% !important;">
 				<tr>
 					<td>
 						<table>
@@ -212,7 +130,8 @@ table.list_table td{
 				</tr>
 			</table>
 			<div class="boundary_div"></div>
-			<table>
+			<table class="table table-hover" style= "margin: auto;
+   width: 65% !important;">
 				<tr>
 					<td>
 						<table>
@@ -234,7 +153,8 @@ table.list_table td{
 			</table>
 		</div>
 		<div class="content_btn_section">
-			<a id="order_btn">주문하기</a>
+			<button id="order_btn" class="btn btn-dark">주문하기</button>
+			<a href="<%=request.getContextPath()%>/member/mypage" class="btn btn btn-dark" style="float-right;">돌아가기</a>
 		</div>
 	</div>
 	
@@ -375,5 +295,6 @@ table.list_table td{
 				alert("선택한 상품이 없습니다")
 		});
 	</script>
+	<jsp:include page="footer.jsp" flush="true" />
 </body>
 </html>

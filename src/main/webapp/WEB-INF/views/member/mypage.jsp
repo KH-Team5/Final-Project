@@ -6,19 +6,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <title>마이 페이지</title>
-<script>
-function agreeFunction() {
-	alert("정말 탈퇴하시겠습니까?");
+<style type="text/css">
+.table {
+   margin: auto;
+   width: 65% !important; 
 }
-function updateAgree(){
-	alert("회원정보를 변경하시겠습니까?")
+.abc { caption-side: top;
+       color: black;
+       font-size: 36px;
+
+
 }
-</script>
+   
+   </style>
 </head>
-<body>
-<h1>가입 정보</h1>
- <table class="table">
+
+<body class="d-flex flex-column min-vh-100">
+<jsp:include page="../navbar.jsp" flush="true" />
+ <table class="table table-bordered table-striped text-center">
+ <caption class="abc">회원정보수정</caption>
       <tr>
          <th>아이디</th>
          <td>${key1.m_Id}</td>
@@ -53,11 +63,22 @@ function updateAgree(){
       </tr>
       <tr>
        <td colspan="2">
-       <a href="<%=request.getContextPath()%>/member/memberUpdate" class="btn" onclick="updateAgree()">정보수정</a>
-       <a href="<%=request.getContextPath()%>/member/memberDelete" class="btn" onclick="agreeFunction()">회원 탈퇴</a>
+       <a href="<%=request.getContextPath()%>/member/memberUpdate" class="btn btn btn-dark" onclick="updateAgree()">정보수정</a>
+       <a href="<%=request.getContextPath()%>/cart" class="btn btn btn-dark">장바구니</a>
+       <a href="<%=request.getContextPath()%>/member/orderList" class="btn btn btn-dark">주문목록</a>
+       <a href="<%=request.getContextPath()%>/member/memberDelete" class="btn btn btn-dark" onclick="agreeFunction()">회원 탈퇴</a>
       </td>
       </tr>
 </table>
-<a href="<%=request.getContextPath()%>/">홈</a>
+ <jsp:include page="../footer.jsp" flush="true" />
+<script>
+function agreeFunction() {
+	alert("정말 탈퇴하시겠습니까?");
+}
+function updateAgree(){
+	alert("회원정보를 변경하시겠습니까?")
+}
+</script>
 </body>
+
 </html>
