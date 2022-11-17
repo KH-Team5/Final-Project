@@ -54,7 +54,7 @@ height:45px;
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="<%=request.getContextPath()%>/" style="color: white">홈페이지 로고
+          <a class="nav-link active" href="<%=request.getContextPath()%>/" style="color: white"><img src="<%=request.getContextPath()%>/resources/img/bkh.png">
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
