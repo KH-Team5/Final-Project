@@ -36,7 +36,7 @@ create table category_TB(
     C_tier number(1) not null,
     C_Name varchar2(30) not null,
     C_parent varchar(30),
-    foreign key(C_parent) references category_TB(C_Code) 
+    foreign key(C_parent) references category_TB(C_Code)  ON DELETE CASCADE
 );
 
 /* 상품 이미지 */
@@ -45,7 +45,7 @@ create table product_image_TB(
     fileName varchar2(100) not null,
     filePath  varchar2(200) not null,
     uuid varchar2(100)not null primary key,
-    foreign key (p_Id) references product_TB(p_Id)
+    foreign key (p_Id) references product_TB(p_Id)  ON DELETE CASCADE
 );
 
 /* 주문 */
@@ -59,7 +59,7 @@ CREATE TABLE order_TB(
     O_Date Date default sysdate,
     O_state VARCHAR2(50) NOT NULL,
     O_delivery_charge NUMBER NOT NULL,
-    FOREIGN KEY(M_id) REFERENCES member_TB(M_id)
+    FOREIGN KEY(M_id) REFERENCES member_TB(M_id)  ON DELETE CASCADE
 );
 
 /* 주문 상품 */
@@ -69,12 +69,12 @@ CREATE TABLE order_item_TB(
     P_id NUMBER NOT NULL, 
     P_cnt NUMBER NOT NULL,
     P_price NUMBER NOT NULL,
-    FOREIGN KEY(O_id) REFERENCES order_TB(O_id),
-    FOREIGN KEY(P_id) REFERENCES product_TB(P_id)
+    FOREIGN KEY(O_id) REFERENCES order_TB(O_id)  ON DELETE CASCADE,
+    FOREIGN KEY(P_id) REFERENCES product_TB(P_id)  ON DELETE CASCADE
 );
 
 /* 주문 시퀀스 */
-CREATE SEQUENCE ordet_SQ
+CREATE SEQUENCE order_SQ
 START WITH 1
 INCREMENT BY 1;
 
@@ -91,13 +91,13 @@ create table review_TB(
     r_Date DATE default sysdate,
     r_Content VARCHAR2(3500),
     r_Rating NUMBER(2,1) not null,
-    FOREIGN KEY (m_Id)REFERENCES member_TB(m_Id),
-    FOREIGN KEY (p_Id) REFERENCES product_TB(p_Id),
+    FOREIGN KEY (m_Id)REFERENCES member_TB(m_Id)  ON DELETE CASCADE,
+    FOREIGN KEY (p_Id) REFERENCES product_TB(p_Id)  ON DELETE CASCADE,
     UNIQUE(p_Id, m_Id)
 );
 
 /* 리뷰 시퀀스 */
-CREATE SEQUENCE review_TB_SQ
+CREATE SEQUENCE review_SQ
 START WITH 1
 INCREMENT BY 1;
 
@@ -107,8 +107,8 @@ create table cart_TB(
     m_Id varchar2(50),
     p_Id number,
     p_Cnt number,
-    foreign key (m_Id) references member_TB(m_Id),
-    foreign key (p_Id) references product_TB(p_Id ),
+    foreign key (m_Id) references member_TB(m_Id) ON DELETE CASCADE,
+    foreign key (p_Id) references product_TB(p_Id ) ON DELETE CASCADE,
     UNIQUE(p_Id, m_Id)
 );
 
@@ -125,7 +125,7 @@ Q_category VARCHAR2(20) NOT NULL,
 Q_title VARCHAR2(100) NOT NULL,
 Q_content VARCHAR2(600) NOT NULL,
 Q_date DATE NOT NULL,
-FOREIGN KEY(M_id) REFERENCES member_TB(M_id)
+FOREIGN KEY(M_id) REFERENCES member_TB(M_id)  ON DELETE CASCADE
 );
 
 /* 문의 시퀀스 */
@@ -133,15 +133,28 @@ CREATE SEQUENCE question_SQ
 START WITH 1
 INCREMENT BY 1;
 
+/* 문의 사항 댓글 */
+CREATE TABLE question_replyy (
+   rno number not null,
+   q_index number not null,
+   M_id varchar(30) not null,
+   rp_content varchar(500) not null,
+   rp_date DATE default sysdate,
+   CONSTRAINT question_replyy_PK FOREIGN KEY(q_index) REFERENCES question_tb(q_index) ON DELETE CASCADE);
+/* 댓글 시퀀스 */
+ CREATE SEQUENCE question_seq
+START WITH 1
+INCREMENT BY 1
+
 /* 반품 */
 CREATE TABLE stock_TB(
 O_index NUMBER NOT NULL, /* order_TB의 FK, PK */
 P_index NUMBER NOT NULL, /* product_TB의 FK, PK */
 Q_index NUMBER NOT NULL, /* question_TB의 FK */
-FOREIGN KEY(O_index) REFERENCES order_TB(O_index),
-FOREIGN KEY(P_index) REFERENCES product_TB(P_index),
-FOREIGN KEY(Q_index) REFERENCES question_TB(Q_index),
-CONSTRAINT stoct_TB PRIMARY KEY(O_index, P_index)
+FOREIGN KEY(O_index) REFERENCES order_TB(O_index)  ON DELETE CASCADE,
+FOREIGN KEY(P_index) REFERENCES product_TB(P_index)  ON DELETE CASCADE,
+FOREIGN KEY(Q_index) REFERENCES question_TB(Q_index) ON DELETE CASCADE,
+CONSTRAINT stoct_TB PRIMARY KEY(O_index, P_index)  ON DELETE CASCADE
 );
 
 /* 답변 */
@@ -151,8 +164,8 @@ MGR_id VARCHAR2(50) NOT NULL, /* manager_TB의 FK */
 A_title VARCHAR2(100) NOT NULL,
 A_content VARCHAR2(600) NOT NULL,
 A_date DATE NOT NULL,
-FOREIGN KEY(Q_index) REFERENCES question_TB(Q_index),
-FOREIGN KEY(MGR_id) REFERENCES manager_TB(MGR_id)
+FOREIGN KEY(Q_index) REFERENCES question_TB(Q_index) ON DELETE CASCADE,
+FOREIGN KEY(MGR_id) REFERENCES manager_TB(MGR_id)  ON DELETE CASCADE
 );
 
 /* 공지 */
@@ -162,7 +175,7 @@ MGR_id VARCHAR2(50) NOT NULL, /* manager_TB의 FK */
 N_title VARCHAR2(100) NOT NULL,
 N_content VARCHAR2(600) NOT NULL,
 N_date DATE NOT NULL,
-FOREIGN KEY(MGR_id) REFERENCES manager_TB(MGR_id)
+FOREIGN KEY(MGR_id) REFERENCES manager_TB(MGR_id)  ON DELETE CASCADE
 );
 
 /* 공지 시퀀스 */

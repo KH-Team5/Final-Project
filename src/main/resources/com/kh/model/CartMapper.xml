@@ -5,8 +5,8 @@
 <mapper namespace="cart">
 	<!-- 장바구니 추가 -->
 	<insert id="insertCart">
-		insert into cart_TB
-		values(cart_SQ.NEXTVAL, #{m_Id}, #{p_Id}, #{p_Cnt})
+		insert into cart_TB(m_Id, p_Id, p_Cnt)
+		values(#{m_Id}, #{p_Id}, #{p_Cnt})
 	</insert>
 
 	<!-- 장바구니 삭제 -->

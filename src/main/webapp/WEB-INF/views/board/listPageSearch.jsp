@@ -13,42 +13,49 @@
 <title>문의사항</title>
 <style>
 /* 클레스 */
+html,body{
+ height: 100%;
+}
+.footerdown{
+width: 100%;
+position : fixed;
+bottom : 0;
+}
+
 .table-hover{ 
 width: 100%;
- margin-left:auto; 
-    margin-right:auto;
     margin-top: 10px;
 }
-.d-flex{
+.asdasd{
 width: 25%;
 margin-left:auto; 
  margin-right:auto;
+ 
 }
 .pagination-sm{
-width: 15%;
+width: 10%;
 margin-left:auto; 
  margin-right:auto;
 }
 .linklink{
-width: 50%;
-margin-left:auto; 
- margin-right:auto;
+
  margin-top: 190px;
 
 }
 
+
 /* 아이디 */
-#searchBtn{
-}
+/* #containerg{
+  width: 100vw;
+        height: 80vh;
+} */
 </style>
 </head>
 
-<body>
-   <jsp:include page="../navbar.jsp" flush="true" />
+<body class="d-flex flex-column min-vh-100"> 
+ <jsp:include page="../navbar.jsp" flush="true" />
      <div class="linklink"><span>
-     <a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write">글쓰기</a>
-	 <a type="button" class="btn btn-light" href="<%=request.getContextPath()%>/board/listPageSearch?num=1">문의 사항</a>
-	 <a type="button"  class="btn btn-light" href="/">Home</a>
+     <a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: gray;"><b>글쓰기</b></a>
      </span>
 <table class="table table-hover">
   <thead>
@@ -76,6 +83,7 @@ margin-left:auto;
 		</tbody>
 
 	</table>
+	</div>
 	<div>
         <ul class="pagination pagination-sm">
 		<c:if test="${prev}">
@@ -101,17 +109,16 @@ margin-left:auto;
 		</li>
 		</c:if>
      </ul>
-</div>
-</div>
+   </div>
 
 
 
-
-		 <form name="listPage"  class="d-flex">
+ 
+		 <form name="listPage"  class="d-flex asdasd">
 		 <div  class="btn-group" role="group" aria-label="Button group with nested dropdown">
 		 <button type="button" class="btn btn-primary">keyword</button>
 			<div class="btn-group" role="group">
-			<select  id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchType" style="width: 25px">
+			<select  id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchType" style="width: 25px">
 				<option value="q_title"
 					<c:if test="${searchType eq 'q_title'}">selected</c:if>>제목</option>
 				<option value="q_content"
@@ -124,24 +131,23 @@ margin-left:auto;
 		</div>	
 		</div>
 		&nbsp;
-		<input  class="form-control me-sm-2" type="text" placeholder="Search" name="keyword" value="${keyword}">
+		<input  class="form-control me-sm-2" type="text" placeholder="Search" name="keywordType" value="${keyword}">
 		<button type="button" class="btn btn-primary" id="searchBtn" style="width: 90px">Search</button>	
       </form>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+ <jsp:include page="footer.jsp" flush="true" />
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
-	<script>
+  <script>
      document.getElementById("searchBtn").onclick = function () {		
     	 let searchType = document.getElementsByName("searchType")[0].value;
-    	 let keyword = document.getElementsByName("keyword")[0].value;
+    	 let keyword = document.getElementsByName("keywordType")[0].value;
     	 
     	 location.href = "/board/listPageSearch?num=1" + "&searchType=" + searchType + "&keyword=" + keyword;
 	};
-	
- </script>
+	</script>		
 </body>
+
 </html>
 
 
