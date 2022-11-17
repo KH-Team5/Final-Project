@@ -18,8 +18,11 @@
 		insert into order_TB(m_Name, m_Id, o_address, o_detail_address, o_Zipcode, o_state, o_delivery_charge)
     	values(#{m_Name}, #{m_Id}, #{o_address}, #{o_detail_address}, #{o_Zipcode}, '배송준비', #{o_delivery_charge})
 	</insert>
-	
-	<insert id="insertOrderItem">  
+
+	<insert id="insertOrderItem">
+		<selectKey resultType="int" keyProperty="o_Id" order="BEFORE">
+  			SELECT ISEQ$$_89073.CURRVAL FROM DUAL
+  		</selectKey>  
 		insert into order_item_TB(o_Id, p_Id, p_Cnt, p_Price)
 		values(#{o_Id}, #{p_Id}, #{p_Cnt}, #{p_Price})
 	</insert>
