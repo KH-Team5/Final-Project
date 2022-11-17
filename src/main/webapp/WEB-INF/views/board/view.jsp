@@ -82,8 +82,8 @@ function Checkform() {
   <br/>  
     <div class="linklink">
 		<span>
-		    <a type="button" class="btn btn-light" href="/board/modify?q_index=${view.q_Index}&m_id=${view.m_Id}"><b>게시물 수정</b></a>
-            <a type="button" class="btn btn-light" href="/board/delete?q_index=${view.q_Index}&m_id=${view.m_Id}" onclick="Check()"><b>게시물 삭제</b></a>
+		    <a type="button" class="btn btn-light" href="/board/modify?q_index=${view.q_Index}&m_id=${view.m_Id}" style="font-size: large; color: gray;"><b>게시물 수정</b></a>
+            <a type="button" class="btn btn-light" href="/board/delete?q_index=${view.q_Index}&m_id=${view.m_Id}" onclick="Check()" style="font-size: large; color: gray;"><b>게시물 삭제</b></a>
 		</span>
 	</div>
 	 <br/> 
@@ -92,10 +92,11 @@ function Checkform() {
     <div class="replyCheck">
       <form method="post" action="/reply/write" name="replyFrom" onSubmit="return Checkform()"> 	 
 		 <div>
-			<label for="exampleTextarea" class="form-label mt-4"><b>댓글</b></label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray;"><b>댓글</b></label>
 			 <textarea class="form-control" id="exampleTextarea" rows="3"
-				style="width:100%; height:150px;" name="rp_content" required></textarea>   
-		     <input type="hidden" name="q_Index" value="${view.q_Index}"><button type="submit" onclick="Checkform()" class="btn btn-primary"><b>완료</b></button>
+				style="width:100%; height:150px;" name="rp_content" required placeholder="댓글을 입력하세요."></textarea>   
+		     <input type="hidden" name="q_Index" value="${view.q_Index}">
+		     <button type="submit" onclick="Checkform()" class="btn btn-primary"><b>댓글달기</b></button>
          </div>
       </form>
 

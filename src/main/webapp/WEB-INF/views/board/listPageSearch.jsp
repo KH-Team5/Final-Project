@@ -55,7 +55,7 @@ margin-left:auto;
 <body class="d-flex flex-column min-vh-100"> 
  <jsp:include page="../navbar.jsp" flush="true" />
      <div class="linklink"><span>
-     <a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write">글쓰기</a>
+     <a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: gray;"><b>글쓰기</b></a>
      </span>
 <table class="table table-hover">
   <thead>
