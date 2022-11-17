@@ -41,9 +41,9 @@ function Checkform() {
  <jsp:include page="../navbar.jsp" flush="true" />
 	<form method="post" name="replyCheck" onSubmit="return Checkform()" class="replyForm">
 		<div class="form-group">
-			<label for="exampleTextarea" class="form-label mt-4"><b>댓글수정</b></label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray;"><b>댓글수정</b></label>
 			<textarea class="form-control" id="exampleTextarea" rows="3"
-				style="width:350px; height: 300px;" name="rp_content" required></textarea>
+				style="width:350px; height: 300px;" name="rp_content" placeholder="수정내용을 입력하세요." required></textarea>
 		</div>
          <input type="hidden" name="q_index" value="${reply.q_Index}">
 		 <input type="hidden" name="rno" value="${reply.rno}">
