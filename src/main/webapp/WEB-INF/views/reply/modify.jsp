@@ -37,7 +37,7 @@ function Checkform() {
     }
 }
 </script>
-<body  class="d-flex flex-column min-vh-100">
+<body  class="d-flex flex-column min-vh-100" style="background-color:oldlace">
  <jsp:include page="../navbar.jsp" flush="true" />
 	<form method="post" name="replyCheck" onSubmit="return Checkform()" class="replyForm">
 		<div class="form-group">
@@ -48,7 +48,7 @@ function Checkform() {
          <input type="hidden" name="q_index" value="${reply.q_Index}">
 		 <input type="hidden" name="rno" value="${reply.rno}">
 
-		<button type="submit" class="btn btn-primary"onclick="Checkform()">완료</button>
+		<button type="submit" class="btn btn-success"onclick="Checkform()">완료</button>
 	</form>
  <jsp:include page="../footer.jsp" flush="true" />
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

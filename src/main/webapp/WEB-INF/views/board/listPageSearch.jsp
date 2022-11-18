@@ -33,19 +33,19 @@ margin-left:auto;
  
 }
 .pagination-sm{
-width: 5%;
+width: 15%;
 margin-left:auto; 
  margin-right:auto;
 }
 .linklink{
 
- margin-top: 110px;
+ margin-top: 30px;
 
 }
 .QuestionMain{
 margin-left: auto;
 margin-right: auto;
-margin-top: 70px;
+margin-top: 40px;
 }
 
 
@@ -58,18 +58,18 @@ margin-top: 70px;
 </style>
 </head>
 
-<body class="d-flex flex-column min-vh-100"> 
+<body class="d-flex flex-column min-vh-100" style="background-color:oldlace"> 
  <jsp:include page="../navbar.jsp" flush="true" />
  <div class="QuestionMain"> 
-    <h1><b style="color: gray;">문의 사항</b></h1>
+    <h1><b style="color: black; font-family: san-serif;">문의 사항</b></h1>
   </div> 
      <div class="linklink">
-       <h4>&nbsp;&nbsp;▶총 <b style="color: red">${count}</b>건의 게시물 &nbsp;&nbsp;&nbsp;&nbsp;<a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: gray;"><span><b>글쓰기</b></span></a></h4>
+       <h4 style="font-family: san-serif;">&nbsp;&nbsp;<b>▶총 <b style="color: red">${count}</b>건의 게시물</b> &nbsp;&nbsp;<a type="button"  class="btn btn-success" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: white;"><span><b>글쓰기</b></span></a></h4>
 <table class="table table-hover">
 
 
   <thead>
-			    <tr class="table-active">
+			    <tr class="table-secondary" style="font-family: san-serif; font-size:large;">
 				<th scope="col">번호</th>
 				<th scope="col">아이디</th>
 				<th scope="col">종류</th>
@@ -96,7 +96,7 @@ margin-top: 70px;
 	</div>
 	<div>
         <ul class="pagination pagination-sm">
-		<c:if test="${prev}">
+		<c:if test="${prev}" >
 		 <li class="page-item">
             <a class="page-link" href="/board/listPageSearch?num=${startPageNum - 1}${searchTypeKeyword}">&laquo;</a>
 		  </li>
@@ -126,9 +126,9 @@ margin-top: 70px;
  
 		 <form name="listPage"  class="d-flex asdasd">
 		 <div  class="btn-group" role="group" aria-label="Button group with nested dropdown">
-		 <button type="button" class="btn btn-primary">keyword</button>
+		 <button type="button" class="btn btn-success">keyword</button>
 			<div class="btn-group" role="group">
-			<select  id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchType" style="width: 25px">
+			<select  id="btnGroupDrop1" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchType" style="width: 25px">
 				<option value="q_title"
 					<c:if test="${searchType eq 'q_title'}">selected</c:if>>제목</option>
 				<option value="q_content"
@@ -142,9 +142,13 @@ margin-top: 70px;
 		</div>
 		&nbsp;
 		<input  class="form-control me-sm-2" type="text" placeholder="Search" name="keywordType" value="${keyword}">
-		<button type="button" class="btn btn-primary" id="searchBtn" style="width: 90px">Search</button>	
+		<button type="button" class="btn btn-success" id="searchBtn" style="width: 90px">Search</button>	
       </form>
- <jsp:include page="footer.jsp" flush="true" />
+
+
+
+
+<jsp:include page="footer.jsp" flush="true" />
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
