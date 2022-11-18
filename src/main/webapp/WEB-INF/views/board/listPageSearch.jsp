@@ -33,15 +33,21 @@ margin-left:auto;
  
 }
 .pagination-sm{
-width: 10%;
+width: 5%;
 margin-left:auto; 
  margin-right:auto;
 }
 .linklink{
 
- margin-top: 190px;
+ margin-top: 110px;
 
 }
+.QuestionMain{
+margin-left: auto;
+margin-right: auto;
+margin-top: 70px;
+}
+
 
 
 /* 아이디 */
@@ -54,10 +60,14 @@ margin-left:auto;
 
 <body class="d-flex flex-column min-vh-100"> 
  <jsp:include page="../navbar.jsp" flush="true" />
-     <div class="linklink"><span>
-     <a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: gray;"><b>글쓰기</b></a>
-     </span>
+ <div class="QuestionMain"> 
+    <h1><b style="color: gray;">문의 사항</b></h1>
+  </div> 
+     <div class="linklink">
+       <h4>&nbsp;&nbsp;▶총 <b style="color: red">${count}</b>건의 게시물 &nbsp;&nbsp;&nbsp;&nbsp;<a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: gray;"><span><b>글쓰기</b></span></a></h4>
 <table class="table table-hover">
+
+
   <thead>
 			    <tr class="table-active">
 				<th scope="col">번호</th>
