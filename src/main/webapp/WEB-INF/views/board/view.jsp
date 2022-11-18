@@ -91,15 +91,15 @@ function Checkform() {
 </form>
     <div class="replyCheck">
       <form method="post" action="/reply/write" name="replyFrom" onSubmit="return Checkform()"> 	 
-		 <div>
+
 			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray;"><b>댓글</b></label>
 			 <textarea class="form-control" id="exampleTextarea" rows="3"
-				style="width:100%; height:150px;" name="rp_content" required placeholder="댓글을 입력하세요."></textarea>   
+				style="width:100%; height:120px;" name="rp_content" required placeholder="댓글을 입력하세요."></textarea>   
 		     <input type="hidden" name="q_Index" value="${view.q_Index}">
-		     <button type="submit" onclick="Checkform()" class="btn btn-success" style="font-family: san-serif;"><b>댓글달기</b></button>
-         </div>
+		     <button type="submit" onclick="Checkform()" class="btn btn-success" style="font-family: san-serif; float: right; margin-top: 5px;"><b>댓글달기</b></button>  
       </form>
-
+ <br/>
+ <br/>
  <div class="list-group"> 
   <c:forEach items="${reply}" var="reply">
    <li>
