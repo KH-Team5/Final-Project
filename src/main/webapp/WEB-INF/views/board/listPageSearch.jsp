@@ -58,23 +58,23 @@ margin-top: 40px;
 </style>
 </head>
 
-<body class="d-flex flex-column min-vh-100" style="background-color:oldlace"> 
- <jsp:include page="../navbar.jsp" flush="false" />
+<body class="d-flex flex-column min-vh-100" style="background-color:"> 
+ <jsp:include page="../navbar.jsp" flush="false" /><!-- background-color:oldlace -->
  <div class="QuestionMain"> 
     <h1><b style="color: black; font-family:; text-shadow: 2px 2px 2px gray;" >문의 사항</b></h1>
   </div> 
      <div class="linklink">
-       <h4 style="font-family: san-serif;">&nbsp;&nbsp;<b>▶총 <b style="color: red">${count}</b>건의 게시물</b> &nbsp;&nbsp;<a type="button"  class="btn btn-success" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: white;"><span><b>글쓰기</b></span></a></h4>
+       <h5 style="font-family: san-serif;">&nbsp;&nbsp;<b>▶총 <b style="color: red">${count}</b>건의 게시물</b> &nbsp;&nbsp;<a type="button"  class="btn btn-success" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: white;"><span><b>글쓰기</b></span></a></h5>
 <table class="table table-hover">
 
 
   <thead>
-			    <tr class="table-secondary" style="font-family: san-serif; font-size:large;">
-				<th scope="col">번호</th>
-				<th scope="col">아이디</th>
-				<th scope="col">종류</th>
-				<th scope="col">제목</th>
-				<th scope="col">날짜</th>
+			    <tr style="font-family: san-serif; font-size:large; background-color: #000000">
+				<th scope="col" style="color: white">번호</th>
+				<th scope="col" style="color: white">아이디</th>
+				<th scope="col" style="color: white">종류</th>
+				<th scope="col" style="color: white">제목</th>
+				<th scope="col" style="color: white">날짜</th>
 			</tr>
 		</thead>
 
@@ -85,7 +85,7 @@ margin-top: 40px;
 					<th scope="row">${list.rn}</th>
 					<td>&nbsp;${list.m_Id}</td>
 					<td>&nbsp;${list.q_Category}</td>
-					<td><a href="/board/view?q_index=${list.q_Index}&m_id=${list.m_Id}" style="text-decoration-line: none; color: gray;">&nbsp;<b>${list.q_Title}</b></a></td>
+					<td><a href="/board/view?q_index=${list.q_Index}&m_id=${list.m_Id}" style="text-decoration-line: none; color: #000000;">&nbsp;<b>${list.q_Title}</b></a></td>
 					<td><fmt:formatDate value="${list.q_Date}" pattern="yyyy-MM-dd" /></td>
 				</tr>
 			</c:forEach>
@@ -98,20 +98,20 @@ margin-top: 40px;
         <ul class="pagination pagination-sm">
 		<c:if test="${prev}" >
 		 <li class="page-item">
-            <a class="page-link" href="/board/listPageSearch?num=${startPageNum - 1}${searchTypeKeyword}">&laquo;</a>
+            <a class="page-link " href="/board/listPageSearch?num=${startPageNum - 1}${searchTypeKeyword}">&laquo;</a>
 		  </li>
 		</c:if>
 		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
             <c:if test="${select != num}">
             <li class="page-item">
-					<a class="page-link" href="/board/listPageSearch?num=${num}${searchTypeKeyword}">${num}</a>
+					<a style="color: black;" class="page-link" href="/board/listPageSearch?num=${num}${searchTypeKeyword}">${num}</a>
 			 </li>
 			</c:if> 
-			<c:if test="${select == num}">
+			 <c:if test="${select == num}">
             <li class="page-item active">
                <a class="page-link" href="#">${num}</a>
              </li>
-			</c:if>		 
+			</c:if> 
 		</c:forEach>
 		<c:if test="${next}">
 		<li class="page-item">
@@ -126,9 +126,9 @@ margin-top: 40px;
      <div class="searchbar">
 		 <form name="listPage"  class="d-flex asdasd">
 		 <div  class="btn-group" role="group" aria-label="Button group with nested dropdown">
-		 <button type="button" class="btn btn-success">keyword</button>
+		 <button type="button" class="btn btn-dark">keyword</button>
 			<div class="btn-group" role="group">
-			<select  id="btnGroupDrop1" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchType" style="width: 25px">
+			<select  id="btnGroupDrop1" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchType" style="width: 25px">
 				<option value="q_title"
 					<c:if test="${searchType eq 'q_title'}">selected</c:if>>제목</option>
 				<option value="q_content"
@@ -142,7 +142,7 @@ margin-top: 40px;
 		</div>
 		  &nbsp;
 		  <input  class="form-control me-sm-2" type="text" placeholder="내용을 입력하세요." name="keywordType" value="${keyword}">
-		  <button type="button" class="btn btn-success" id="searchBtn" style="width: 90px">Search</button>	
+		  <button type="button" class="btn btn-dark" id="searchBtn" style="width: 90px">Search</button>	
       </form>
 </div>
 

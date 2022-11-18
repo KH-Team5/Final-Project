@@ -68,10 +68,10 @@ function Checkform() {
     }
 }
 </script>
-<body class="d-flex flex-column min-vh-100" style="background-color:oldlace">
+<body class="d-flex flex-column min-vh-100" style="background-color:">
  <jsp:include page="../navbar.jsp" flush="true" />
  <form method="post"> 
- <div class="card mb-3">
+ <div class="card mb-3" style="border-style: solid;  border-width: 2px;">
   <h6 class="card-header"><span class="badge bg-secondary">글쓴이</span>&nbsp;<b style="font-family: san-serif;">${view.m_Id}</b>&nbsp;<span class="badge bg-secondary" style="font-family: san-serif;">카테고리</span>&nbsp;<b>${view.q_Category}</b></h6>
   <div class="card-body">
     <h5 class="card-title"><span class="badge bg-secondary">제목</span>&nbsp;${view.q_Title}</h5>
@@ -82,8 +82,8 @@ function Checkform() {
   <br/>  
     <div class="linklink">
 		<span>
-		    <a type="button" class="btn btn-success" href="/board/modify?q_index=${view.q_Index}&m_id=${view.m_Id}" style="font-size: large; font-family: san-serif"><b>게시물 수정</b></a>
-            <a type="button" class="btn btn-success" href="/board/delete?q_index=${view.q_Index}&m_id=${view.m_Id}" onclick="Check()" style="font-size: large; font-family: san-serif"><b>게시물 삭제</b></a>
+		    <a type="button" class="btn btn-success" href="/board/modify?q_index=${view.q_Index}&m_id=${view.m_Id}" style="font-size:large; color:white; font-family: san-serif"><b>수정</b></a>
+            <a type="button" class="btn btn-danger" href="/board/delete?q_index=${view.q_Index}&m_id=${view.m_Id}" onclick="Check()" style="font-size: large; font-family: san-serif"><b>삭제</b></a>
 		</span>
 	</div>
 	 <br/> 
@@ -92,7 +92,7 @@ function Checkform() {
     <div class="replyCheck">
       <form method="post" action="/reply/write" name="replyFrom" onSubmit="return Checkform()"> 	 
 
-			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray;"><b>댓글</b></label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: #808080;"><b>댓글</b></label>
 			 <textarea class="form-control" id="exampleTextarea" rows="3"
 				style="width:100%; height:120px;" name="rp_content" required placeholder="댓글을 입력하세요."></textarea>   
 		     <input type="hidden" name="q_Index" value="${view.q_Index}">
@@ -110,7 +110,7 @@ function Checkform() {
     </div>
      <div  style="float: right;">
          <a  type="button" class="btn btn-success" href="/reply/modify?q_index=${view.q_Index}&rno=${reply.rno}&m_id=${reply.m_Id}" style="font-family: san-serif;">수정</a>  /  
-         <a  type="button" class="btn btn-success" href="/reply/delete?q_index=${view.q_Index}&rno=${reply.rno}&m_id=${reply.m_Id}" style="font-family: san-serif;">삭제</a> 
+         <a  type="button" class="btn btn-danger" href="/reply/delete?q_index=${view.q_Index}&rno=${reply.rno}&m_id=${reply.m_Id}" style="font-family: san-serif;">삭제</a> 
      </div>
          <br/>
         <p class="mb-1">${reply.rp_content}</p>
