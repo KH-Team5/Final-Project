@@ -173,6 +173,7 @@ public class BoardController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("count",count);
 		
 		//시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
