@@ -29,7 +29,7 @@ position : fixed;
 bottom : 0;
 }
 .modifyForm {
-	width: 20%;
+	width: 18%;
 	margin-left: auto;
 	margin-right: auto;
 	 margin-top: 110px;
@@ -54,16 +54,16 @@ width: 20%;
 		}
 	}
 </script>
-<body class="d-flex flex-column min-vh-100" style="background-color:oldlace">
+<body class="d-flex flex-column min-vh-100" style="background-color: ">
 <jsp:include page="../navbar.jsp" flush="true" />
    <div>
 	<form method="post" name="modify" onSubmit="return Checkform()"
 		class="modifyForm">
 		<div class="btn-group" role="group"
 			aria-label="Button group with nested dropdown">
-			<button type="button" class="btn btn-success" style="font-family: san-serif;"><b>카테고리</b></button>
+			<button type="button" class="btn btn-dark" style="font-family: san-serif;"><b>Category</b></button>
 			<select id="btnGroupDrop1"
-				class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+				class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false" name="q_Category" style="font-family: san-serif;">
 				<option value="상의">상의</option>
 				<option value="하의">하의</option>
@@ -74,20 +74,20 @@ width: 20%;
 
 
 		<div class="form-group">
-			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray; font-family: san-serif;">제목</label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray; font-family: san-serif;"><b>제목</b></label>
 			<textarea class="form-control" id="exampleTextarea" rows="3"
 				style="width: 350px; height: 25px;" name="q_Title" placeholder="제목을 입력하세요." required>${view.q_Title}</textarea>
 		</div>
 
 
 		<div class="form-group">
-			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray;font-family: san-serif;">내용</label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray;font-family: san-serif;"><b>내용</b></label>
 			<textarea class="form-control" id="exampleTextarea" rows="3"
 				style="width: 350px; height: 300px;" name="q_Content" placeholder="내용을 입력하세요." required>${view.q_Content}</textarea>
 		</div>
 
 
-		<button type="submit" class="btn btn-success" onclick="Checkform()" ><b>완료</b></button>
+		<button type="submit" class="btn btn-success" onclick="Checkform()" style="float: right;"><b>완료</b></button>
 	</form>
 	</div>
    <br/>

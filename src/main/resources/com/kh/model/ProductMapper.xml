@@ -25,8 +25,8 @@
 
 	<insert id="insert" parameterType="productDTO">  
 		<![CDATA[
-			insert into product_TB(p_Name, p_Price, p_Stock, p_Category, p_Date, p_Intro, p_RatingAvg)
-			values(#{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro }, 0.0)
+			insert into product_TB(p_id,p_Name, p_Price, p_Stock, p_Category, p_Date, p_Intro, p_RatingAvg)
+			values(product_SQ.nextval,#{p_Name }, #{p_Price }, #{p_Stock }, #{p_Category }, sysdate, #{p_Intro }, 0.0)
 		]]>
 	</insert>
 
