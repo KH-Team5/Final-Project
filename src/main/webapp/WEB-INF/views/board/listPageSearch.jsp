@@ -26,16 +26,16 @@ bottom : 0;
 width: 100%;
     margin-top: 10px;
 }
-.asdasd{
-width: 25%;
-margin-left:auto; 
- margin-right:auto;
+.searchbar{
+ width:25%;
+margin-left: auto;
+margin-right: auto;
  
 }
-.pagination-sm{
-width: 15%;
+.pagingBar{
+
 margin-left:auto; 
- margin-right:auto;
+margin-right: auto;
 }
 .linklink{
 
@@ -94,7 +94,7 @@ margin-top: 40px;
 
 	</table>
 	</div>
-	<div>
+	<div class="pagingBar">
         <ul class="pagination pagination-sm">
 		<c:if test="${prev}" >
 		 <li class="page-item">
@@ -123,7 +123,7 @@ margin-top: 40px;
 
 
 
- 
+     <div class="searchbar">
 		 <form name="listPage"  class="d-flex asdasd">
 		 <div  class="btn-group" role="group" aria-label="Button group with nested dropdown">
 		 <button type="button" class="btn btn-success">keyword</button>
@@ -140,11 +140,11 @@ margin-top: 40px;
 			</select>
 		</div>	
 		</div>
-		&nbsp;
-		<input  class="form-control me-sm-2" type="text" placeholder="Search" name="keywordType" value="${keyword}">
-		<button type="button" class="btn btn-success" id="searchBtn" style="width: 90px">Search</button>	
+		  &nbsp;
+		  <input  class="form-control me-sm-2" type="text" placeholder="Search" name="keywordType" value="${keyword}">
+		  <button type="button" class="btn btn-success" id="searchBtn" style="width: 90px">Search</button>	
       </form>
-
+</div>
 
 
 
