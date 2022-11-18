@@ -14,12 +14,13 @@
 	<script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
+ 
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/">쇼핑몰</a>
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"><img style="width: 60px;" src="<%=request.getContextPath()%>/resources/img/bkh.png"></a>
 			<form class="search d-flex" action="<%=request.getContextPath()%>/search" method="get">
 				<input class="form-control me-sm-2" type="text" placeholder="상품명" name="keyword">
 				<input type="hidden" name="type" value="T">
@@ -71,15 +72,15 @@
 					<a href="<%=request.getContextPath()%>/member/join">회원가입</a>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<a href="<%=request.getContextPath()%>/cart">장바구니</a> |
-					<a href="<%=request.getContextPath()%>/member/orderList">주문 목록</a> |
+					<a href="<%=request.getContextPath()%>/cart" style="text-decoration-line: none; color: gray;">장바구니</a> |
+					<a href="<%=request.getContextPath()%>/member/orderList" style="text-decoration-line: none; color: gray;">주문 목록</a> |
 					<sec:authorize access="hasRole('USER')">
-						<a href="<%=request.getContextPath()%>/member/mypage">마이페이지</a> |
+						<a href="<%=request.getContextPath()%>/member/mypage" style="text-decoration-line: none; color: gray;">마이페이지</a> |
 					</sec:authorize>
 					<sec:authorize access="hasRole('ADMIN')">
-						<a href="<%=request.getContextPath()%>/admin/adminMain">관리자페이지</a> |
+						<a href="<%=request.getContextPath()%>/admin/adminMain" style="text-decoration-line: none; color: gray;">관리자페이지</a> |
 					</sec:authorize>
-					<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
+					<a href="<%=request.getContextPath()%>/logout" style="text-decoration-line: none; color: gray;">로그아웃</a>
 				</sec:authorize>
 			</div>
 		</div>

@@ -59,9 +59,9 @@ margin-top: 40px;
 </head>
 
 <body class="d-flex flex-column min-vh-100" style="background-color:oldlace"> 
- <jsp:include page="../navbar.jsp" flush="true" />
+ <jsp:include page="../navbar.jsp" flush="false" />
  <div class="QuestionMain"> 
-    <h1><b style="color: black; font-family: san-serif;">문의 사항</b></h1>
+    <h1><b style="color: black; font-family:; text-shadow: 2px 2px 2px gray;" >문의 사항</b></h1>
   </div> 
      <div class="linklink">
        <h4 style="font-family: san-serif;">&nbsp;&nbsp;<b>▶총 <b style="color: red">${count}</b>건의 게시물</b> &nbsp;&nbsp;<a type="button"  class="btn btn-success" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: white;"><span><b>글쓰기</b></span></a></h4>
@@ -81,11 +81,11 @@ margin-top: 40px;
 
 		<tbody>
 			<c:forEach items="${list}" var="list">
-			 <tr class="table-light">
+			 <tr class="table-light" style="">
 					<th scope="row">${list.rn}</th>
 					<td>&nbsp;${list.m_Id}</td>
 					<td>&nbsp;${list.q_Category}</td>
-					<td><a href="/board/view?q_index=${list.q_Index}&m_id=${list.m_Id}">&nbsp;${list.q_Title}</a></td>
+					<td><a href="/board/view?q_index=${list.q_Index}&m_id=${list.m_Id}" style="text-decoration-line: none; color: gray;">&nbsp;<b>${list.q_Title}</b></a></td>
 					<td><fmt:formatDate value="${list.q_Date}" pattern="yyyy-MM-dd" /></td>
 				</tr>
 			</c:forEach>
@@ -141,15 +141,15 @@ margin-top: 40px;
 		</div>	
 		</div>
 		  &nbsp;
-		  <input  class="form-control me-sm-2" type="text" placeholder="Search" name="keywordType" value="${keyword}">
+		  <input  class="form-control me-sm-2" type="text" placeholder="내용을 입력하세요." name="keywordType" value="${keyword}">
 		  <button type="button" class="btn btn-success" id="searchBtn" style="width: 90px">Search</button>	
       </form>
 </div>
 
 
 
-<jsp:include page="footer.jsp" flush="true" />
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+<jsp:include page="footer.jsp" flush="false" />
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
   <script>
