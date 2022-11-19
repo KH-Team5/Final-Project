@@ -44,12 +44,12 @@ function Checkform() {
     }      
 }
 </script>
-<body>
+<body style="background-color:oldlace">
  <jsp:include page="../navbar.jsp" flush="true" />
 	<form method="post" name="writeForm" onSubmit="return Checkform()" class="writeForm">
 		<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-			<button type="button" class="btn btn-primary">카테고리</button>
-			<select id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="q_Category">
+			<button type="button" class="btn btn-success" style="font-family: san-serif;">카테고리</button>
+			<select id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="q_Category">
 				<option value="상의">상의</option>
 				<option value="하의">하의</option>
 				<option value="아우터">아우터</option>
@@ -59,20 +59,20 @@ function Checkform() {
 
 
 		<div class="form-group">
-			<label for="exampleTextarea" class="form-label mt-4">제목</label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray; font-family: san-serif;" ><b>제목</b></label>
 			<textarea class="form-control" id="exampleTextarea" rows="3"
-				style="width:350px; height:25px;" name="q_Title" required></textarea>
+				style="width:350px; height:25px;" name="q_Title" placeholder="제목을 입력하세요." required></textarea>
 		</div>
 
 
 		<div class="form-group">
-			<label for="exampleTextarea" class="form-label mt-4">내용</label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray; font-family: san-serif;"><b>내용</b></label>
 			<textarea class="form-control" id="exampleTextarea" rows="3"
-				style="width:350px; height: 300px;" name="q_Content" required></textarea>
+				style="width:350px; height: 300px;" name="q_Content" placeholder="내용을 입력하세요." required></textarea>
 		</div>
 
 
-		<button type="submit" class="btn btn-primary"onclick="Checkform()">전송</button>
+		<button type="submit" class="btn btn-success"onclick="Checkform()">완료</button>
 	</form>
 	
 </body>

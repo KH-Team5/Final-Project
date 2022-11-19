@@ -26,22 +26,28 @@ bottom : 0;
 width: 100%;
     margin-top: 10px;
 }
-.asdasd{
-width: 25%;
-margin-left:auto; 
- margin-right:auto;
+.searchbar{
+ width:25%;
+margin-left: auto;
+margin-right: auto;
  
 }
-.pagination-sm{
-width: 10%;
+.pagingBar{
+
 margin-left:auto; 
- margin-right:auto;
+margin-right: auto;
 }
 .linklink{
 
- margin-top: 190px;
+ margin-top: 30px;
 
 }
+.QuestionMain{
+margin-left: auto;
+margin-right: auto;
+margin-top: 40px;
+}
+
 
 
 /* 아이디 */
@@ -52,30 +58,34 @@ margin-left:auto;
 </style>
 </head>
 
-<body class="d-flex flex-column min-vh-100"> 
- <jsp:include page="../navbar.jsp" flush="true" />
-     <div class="linklink"><span>
-     <a type="button"  class="btn btn-light" href="<%=request.getContextPath()%>/board/write">글쓰기</a>
-     </span>
+<body class="d-flex flex-column min-vh-100" style="background-color:"> 
+ <jsp:include page="../navbar.jsp" flush="false" /><!-- background-color:oldlace -->
+ <div class="QuestionMain"> 
+    <h1><b style="color: black; font-family:; text-shadow: 2px 2px 2px gray;" >문의 사항</b></h1>
+  </div> 
+     <div class="linklink">
+       <h5 style="font-family: san-serif;">&nbsp;&nbsp;<b>▶총 <b style="color: red">${count}</b>건의 게시물</b> &nbsp;&nbsp;<a type="button"  class="btn btn-success" href="<%=request.getContextPath()%>/board/write" style="font-size: large; color: white;"><span><b>글쓰기</b></span></a></h5>
 <table class="table table-hover">
+
+
   <thead>
-			    <tr class="table-active">
-				<th scope="col">번호</th>
-				<th scope="col">아이디</th>
-				<th scope="col">종류</th>
-				<th scope="col">제목</th>
-				<th scope="col">날짜</th>
+			    <tr style="font-family: san-serif; font-size:large; background-color: #000000">
+				<th scope="col" style="color: white">번호</th>
+				<th scope="col" style="color: white">아이디</th>
+				<th scope="col" style="color: white">종류</th>
+				<th scope="col" style="color: white">제목</th>
+				<th scope="col" style="color: white">날짜</th>
 			</tr>
 		</thead>
 
 
 		<tbody>
 			<c:forEach items="${list}" var="list">
-			 <tr class="table-light">
+			 <tr class="table-light" style="">
 					<th scope="row">${list.rn}</th>
 					<td>&nbsp;${list.m_Id}</td>
 					<td>&nbsp;${list.q_Category}</td>
-					<td><a href="/board/view?q_index=${list.q_Index}&m_id=${list.m_Id}">&nbsp;${list.q_Title}</a></td>
+					<td><a href="/board/view?q_index=${list.q_Index}&m_id=${list.m_Id}" style="text-decoration-line: none; color: #000000;">&nbsp;<b>${list.q_Title}</b></a></td>
 					<td><fmt:formatDate value="${list.q_Date}" pattern="yyyy-MM-dd" /></td>
 				</tr>
 			</c:forEach>
@@ -84,24 +94,24 @@ margin-left:auto;
 
 	</table>
 	</div>
-	<div>
+	<div class="pagingBar">
         <ul class="pagination pagination-sm">
-		<c:if test="${prev}">
+		<c:if test="${prev}" >
 		 <li class="page-item">
-            <a class="page-link" href="/board/listPageSearch?num=${startPageNum - 1}${searchTypeKeyword}">&laquo;</a>
+            <a class="page-link " href="/board/listPageSearch?num=${startPageNum - 1}${searchTypeKeyword}">&laquo;</a>
 		  </li>
 		</c:if>
 		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
             <c:if test="${select != num}">
             <li class="page-item">
-					<a class="page-link" href="/board/listPageSearch?num=${num}${searchTypeKeyword}">${num}</a>
+					<a style="color: black;" class="page-link" href="/board/listPageSearch?num=${num}${searchTypeKeyword}">${num}</a>
 			 </li>
 			</c:if> 
-			<c:if test="${select == num}">
+			 <c:if test="${select == num}">
             <li class="page-item active">
                <a class="page-link" href="#">${num}</a>
              </li>
-			</c:if>		 
+			</c:if> 
 		</c:forEach>
 		<c:if test="${next}">
 		<li class="page-item">
@@ -113,12 +123,12 @@ margin-left:auto;
 
 
 
- 
+     <div class="searchbar">
 		 <form name="listPage"  class="d-flex asdasd">
 		 <div  class="btn-group" role="group" aria-label="Button group with nested dropdown">
-		 <button type="button" class="btn btn-primary">keyword</button>
+		 <button type="button" class="btn btn-dark">keyword</button>
 			<div class="btn-group" role="group">
-			<select  id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchType" style="width: 25px">
+			<select  id="btnGroupDrop1" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchType" style="width: 25px">
 				<option value="q_title"
 					<c:if test="${searchType eq 'q_title'}">selected</c:if>>제목</option>
 				<option value="q_content"
@@ -130,12 +140,16 @@ margin-left:auto;
 			</select>
 		</div>	
 		</div>
-		&nbsp;
-		<input  class="form-control me-sm-2" type="text" placeholder="Search" name="keywordType" value="${keyword}">
-		<button type="button" class="btn btn-primary" id="searchBtn" style="width: 90px">Search</button>	
+		  &nbsp;
+		  <input  class="form-control me-sm-2" type="text" placeholder="내용을 입력하세요." name="keywordType" value="${keyword}">
+		  <button type="button" class="btn btn-dark" id="searchBtn" style="width: 90px">Search</button>	
       </form>
- <jsp:include page="footer.jsp" flush="true" />
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+</div>
+
+
+
+<jsp:include page="footer.jsp" flush="false" />
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
   <script>

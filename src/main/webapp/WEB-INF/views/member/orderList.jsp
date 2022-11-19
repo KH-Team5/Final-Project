@@ -15,7 +15,10 @@
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
 <style>
-
+#table_empty{
+margin-left: auto;
+margin-right: auto;
+}
 .d-flex{
 margin-left: auto;
 margin-right: auto;
@@ -25,6 +28,16 @@ margin-bottom: 10px;
 
 }
 </style>
+<script>
+function CheckSearChForm() {
+	if(SearchForrm.keyword.value == ""){
+		 alert("내용을 입력하세요");  
+		 SearchForrm.keyword.focus(); 
+	        return false;
+	}
+}
+
+</script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <jsp:include page="../navbar.jsp" flush="true" />
@@ -105,11 +118,11 @@ margin-bottom: 10px;
 	</form>
    	
    	<!-- 검색 -->
-	<form class="d-flex" id="search" action="<%=request.getContextPath()%>/member/orderList" method="get">
-   		<input class="form-control me-sm-2" type="text" name="keyword" value="${paging.cri.keyword }">
+	<form onSubmit="return CheckSearChForm()" name="SearchForrm" class="d-flex" id="search" action="<%=request.getContextPath()%>/member/orderList" method="get">
+   		<input class="form-control me-sm-2" type="text" name="keyword" value="${paging.cri.keyword }" required>
    		<input type="hidden" name="pageNum" value="${paging.cri.pageNum }">
    		<input type="hidden" name="amount" value="${paging.cri.amount }">
-   		<button id='search_btn btn' class= "btn btn-dark">검색</button> &nbsp;
+   		<button id='search_btn btn' class= "btn btn-dark" onclick="CheckSearChForm()">검색</button> &nbsp;
    		<a href="<%=request.getContextPath()%>/member/mypage" class="btn btn btn-dark" style="float-right;">돌아가기</a>
 	</form>
 	
@@ -132,7 +145,7 @@ margin-bottom: 10px;
 		$("#search_btn").on("click", function(e){	
 			e.preventDefault();
 			if(!searchForm22.find("input[name='keyword']").val()){
-				alert("검색어를를 입력하십시오");
+				alert("검색어를 입력하십시오");
 				return false;
 			}
 			if(amount == '') 

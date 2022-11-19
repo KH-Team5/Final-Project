@@ -29,7 +29,7 @@ position : fixed;
 bottom : 0;
 }
 .modifyForm {
-	width: 20%;
+	width: 18%;
 	margin-left: auto;
 	margin-right: auto;
 	 margin-top: 110px;
@@ -54,17 +54,17 @@ width: 20%;
 		}
 	}
 </script>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="background-color: ">
 <jsp:include page="../navbar.jsp" flush="true" />
    <div>
 	<form method="post" name="modify" onSubmit="return Checkform()"
 		class="modifyForm">
 		<div class="btn-group" role="group"
 			aria-label="Button group with nested dropdown">
-			<button type="button" class="btn btn-primary">카테고리</button>
-			<select id="btnGroupDrop1" type="button"
-				class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false" name="q_Category">
+			<button type="button" class="btn btn-dark" style="font-family: san-serif;"><b>Category</b></button>
+			<select id="btnGroupDrop1"
+				class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false" name="q_Category" style="font-family: san-serif;">
 				<option value="상의">상의</option>
 				<option value="하의">하의</option>
 				<option value="아우터">아우터</option>
@@ -74,29 +74,23 @@ width: 20%;
 
 
 		<div class="form-group">
-			<label for="exampleTextarea" class="form-label mt-4">제목</label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray; font-family: san-serif;"><b>제목</b></label>
 			<textarea class="form-control" id="exampleTextarea" rows="3"
-				style="width: 350px; height: 25px;" name="q_Title" required>${view.q_Title}</textarea>
+				style="width: 350px; height: 25px;" name="q_Title" placeholder="제목을 입력하세요." required>${view.q_Title}</textarea>
 		</div>
 
 
 		<div class="form-group">
-			<label for="exampleTextarea" class="form-label mt-4">내용</label>
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: gray;font-family: san-serif;"><b>내용</b></label>
 			<textarea class="form-control" id="exampleTextarea" rows="3"
-				style="width: 350px; height: 300px;" name="q_Content" required>${view.q_Content}</textarea>
+				style="width: 350px; height: 300px;" name="q_Content" placeholder="내용을 입력하세요." required>${view.q_Content}</textarea>
 		</div>
 
 
-		<button type="submit" class="btn btn-primary" onclick="Checkform()">완료</button>
+		<button type="submit" class="btn btn-success" onclick="Checkform()" style="float: right;"><b>완료</b></button>
 	</form>
 	</div>
    <br/>
-	<div class="linklink">
-		<span>
-		    <a type="button" class="btn btn-light" href="/board/listPageSearch?num=1">문의 사항</a> 
-		    <a type="button" class="btn btn-light" href="/">Home</a>
-		</span>
-	</div>
 	<jsp:include page="footer.jsp" flush="true" />
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"

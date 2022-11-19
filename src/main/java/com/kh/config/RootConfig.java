@@ -29,10 +29,12 @@ public class RootConfig {
 	@Bean
 	public DataSource basicDataSource() {
 		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		basicDataSource.setUrl("jdbc:oracle:thin:@khfinaldb_medium?TNS_ADMIN=C:/Users/bidet/git/Final-Project/src/main/webapp/resources/Wallet_khfinaldb");
-		basicDataSource.setUsername("admin");
-		basicDataSource.setPassword("7j0yEBVdWaUr8y");
+
+		  basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+		  basicDataSource.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:xe");
+		      basicDataSource.setUsername("scott");
+		      basicDataSource.setPassword("tiger");
+
 		return basicDataSource;
 	}
 
