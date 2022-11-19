@@ -137,7 +137,7 @@
 			</strong>
 		</div>
 		<div class="total_info_btn">
-			<a class="order_btn btn btn-primary">결제하기</a>
+			<button type="button" class="order_btn btn btn-primary" onclick="requestPay()">결제하기</button>
 		</div>
 	</div>
 	
@@ -145,6 +145,8 @@
 	<form class="order_form" action="<%=request.getContextPath()%>/member/order" method="post">
 		<input name="m_Id" value="${memberInfo.m_Id}" type="hidden">
 		<input name="m_Name" type="hidden">
+		<input name="contact" value="${memberInfo.contact }" type="hidden">
+		<input name="email" value="${memberInfo.email }" type="hidden">
 		<input name="o_address" type="hidden">
 		<input name="o_detail_address" type="hidden">
 		<input name="o_Zipcode" type="hidden">
@@ -153,8 +155,14 @@
 	<script sc="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
+		
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 	<script>
 		$(function(){
+			var IMP = window.IMP;
+			IMP.init("imp50806222");
 			setTotalInfo();
 			$(".image").each(function(i, obj){
 				const imgView = $(obj);
@@ -222,6 +230,7 @@
 					$("input[name='o_address']").val($(obj).find(".address_input").val());
 					$("input[name='o_detail_address']").val($(obj).find(".detail_address_input").val());
 					$("input[name='o_Zipcode']").val($(obj).find(".zipcode_input").val());
+					requsetPay();
 				}
 			});
 			
@@ -237,6 +246,63 @@
 			$(".order_form").append(form_contents);	
 			$(".order_form").submit();
 		});
-	</script>
+		
+		function requestPay() {
+			var info = {
+					orderNum : createOrderNum(),
+					price : parseInt($(".individual_totalPrice_input").val()),
+					name : $(".m_Name_input").val(),
+					address : $(".address_input").val(),
+					email : $("input[name=email]").val(),
+					tel : $("input[name=contact]").val(),
+					zipcode : parseInt($("input[name=o_Zipcode]").val())
+			}
+			
+		      IMP.request_pay({ 
+		          pg: "html5_inicis",
+		          pay_method: "card",
+		          merchant_uid:info.orderNum, 
+		          name: "의류",
+		          amount: info.price,                   
+		          buyer_email: info.email,
+		          buyer_name: info.name,
+		          buyer_tel: info.tel,
+		          buyer_addr: info.address,
+		          buyer_postcode: info.zipcode,
+		      }, function (rsp) { 
+		    	  	console.log(rsp);
+		    	  	$.ajax({
+		    	  		type : "POST",
+		    	  		url : "/controller/verifyIamport/" + rsp.imp_uid,
+		    	  		dataType: "json",
+		    	  		data:{
+		    	  			imp_uid : rsp.imp_uid,
+		    	  			amount : rsp.amount
+		    	  		}
+		    	  	}).done(function(data){
+		    	  		console.log(data);
+		    	  		
+		    	  		if(rsp.paid_amount == data.response.amount){
+		    	  			alert("결제가 완료되었습니다.");
+			    	  		location.href="http://localhost:8081/controller/member/orderList";
+		    	  		} else{
+		    	  			alert("결제를 실패하였습니다.");
+		    	  		}
+		    	  	});
+		      });
+		    }
+		
+		function createOrderNum(){
+			const date = new Date();
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, "0");
+			const day = String(date.getDate()).padStart(2, "0");
+			
+			let orderNum = year + month + day;
+			for (let i=0;i<10;i++){
+				orderNum += Math.floor(Math.random() * 8);
+			}
+		};
+</script>
 </body>
 </html>
