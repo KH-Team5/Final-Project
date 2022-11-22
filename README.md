@@ -1,5 +1,4 @@
 # Final-Project
-![KH몰](https://user-images.githubusercontent.com/113189713/203384850-076a2bbd-8623-452d-aa25-5707598d2948.png)
 #🏪 프로젝트소개
 
 <p align="center">
@@ -22,7 +21,9 @@ KH몰은 대중성 있는 여성의류 중심의 고감도 쇼핑몰입니다.
 ## 🧑‍🤝‍🧑 멤버 구성
 
 
-
+<p align="center">
+  <img src="./Readme_IMG/3.member.png">
+<p>
 
 
 ## 🧰 개발 환경 
@@ -54,19 +55,19 @@ KH몰은 대중성 있는 여성의류 중심의 고감도 쇼핑몰입니다.
 
 ### 1. 로그인  로그인/회원가입/마이페이지/게시글페이지/상품페이지/결제/관리자
 <p align="center">
-  <img src="./Readme_assets/login.jpg">
+  <img src="./Readme_assets/4.login.png">
 <p>
 <br>
 
 ### 2. 회원가입
 <p align="center">
-  <img src="./Readme_assets/join.jpg">
+  <img src="./Readme_assets/5.join.png">
 <p>
 <br>
 
 ### 3. 마이페이지	
 <p align="center">
-  <img src="./Readme_assets/mypage123.png">
+  <img src="./Readme_assets/6.mypage.png">
 <p>
 <br>
 
@@ -77,30 +78,25 @@ KH몰은 대중성 있는 여성의류 중심의 고감도 쇼핑몰입니다.
 
 ### 5. 상품페이지 (조회 / 평점 / 구매 / 리뷰)
 <p align="center">
-<img src="./Readme_assets/pensionDetail.jpg">
+<img src="./Readme_assets/7.product.png">
 </p>
 
-<p align="center">
-<img src="./Readme_assets/map.png">
-</p>
 
-<p align="center">
-<img src="./Readme_assets/pensionDetail2.jpg">
-</p>
 
 ### 6. 결제	
 <p align="center">
-<img src="./Readme_assets/reservation.jpg">
+<img src="./Readme_assets/8.payment.png">
 </p>
 
 ### 7. 관리자 (유저관리:  조회,삭제 / 상품관리: 등록,조회,수정,삭제) 	
 
 <p align="center">
-<img src="./Readme_assets/openChat.jpg">
+<img src="./Readme_assets/9.manage1.png">
+</p>
+
+<p align="center">
+<img src="./Readme_assets/10.manage2.png">
 </p>
 
 
 
-<!--Readme 참고 사이트-->
-<!--https://github.com/n0hack/readme-template/blob/main/README.md-->
-<!--https://github.com/n0hack/readme-template-->
