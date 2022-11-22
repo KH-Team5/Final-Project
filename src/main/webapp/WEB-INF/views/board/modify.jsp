@@ -87,7 +87,7 @@ width: 20%;
 		</div>
 
 
-		<button type="submit" class="btn btn-success" onclick="Checkform()" style="float: right;"><b>완료</b></button>
+		<button type="submit" class="btn btn-success" onclick="Checkform()"><b>완료</b></button>
 	</form>
 	</div>
    <br/>
