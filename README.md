@@ -1,4 +1,2 @@
 # Final-Project
-## Final 
-## final
-![KakaoTalk_20221123_010434306](https://user-images.githubusercontent.com/113189713/203382429-060d142a-aa6e-4489-b9ac-344756a9a27d.png)
+![KH몰](https://user-images.githubusercontent.com/113189713/203384681-9bc8ed13-cd3f-43a0-96ed-803594c3c946.png)
