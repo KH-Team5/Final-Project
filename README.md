@@ -53,49 +53,57 @@ KH몰은 대중성 있는 여성의류 중심의 고감도 쇼핑몰입니다.
 |검색||
 |보안| XSS, sql injection, CSRF 등 공격 방지
 
-### 1. 로그인  로그인/회원가입/마이페이지/게시글페이지/상품페이지/결제/관리자
+  ### 1. 메인페이지  네비게이션바/상품노출/푸터
 <p align="center">
-  <img src="./Readme_assets/4.login.png">
+  <img src="./Readme_IMG/main.png">
 <p>
 <br>
 
-### 2. 회원가입
+  
+  
+### 2. 로그인  로그인/회원가입/마이페이지/게시글페이지/상품페이지/결제/관리자
 <p align="center">
-  <img src="./Readme_assets/5.join.png">
+  <img src="./Readme_IMG/login.png">
 <p>
 <br>
 
-### 3. 마이페이지	
+### 3. 회원가입
 <p align="center">
-  <img src="./Readme_assets/6.mypage.png">
+  <img src="./Readme_IMG/join.png">
 <p>
 <br>
 
-### 4. 게시글페이지 (등록 / 조회 / 수정 / 삭제 / 댓글)	
+### 4. 마이페이지	
 <p align="center">
-<img src="./Readme_assets/pensionList.jpg">
+  <img src="./Readme_IMG/mypage.png">
+<p>
+<br>
+
+### 5. 게시글페이지 (등록 / 조회 / 수정 / 삭제 / 댓글)	
+<p align="center">
+<img src="./Readme_IMG/pensionList.jpg">
 </p>
 
-### 5. 상품페이지 (조회 / 평점 / 구매 / 리뷰)
+### 6. 상품페이지 (조회 / 평점 / 구매 / 리뷰)
 <p align="center">
-<img src="./Readme_assets/7.product.png">
+<img src="./Readme_IMG/product.png">
 </p>
 
 
 
-### 6. 결제	
+### 7. 결제	
 <p align="center">
-<img src="./Readme_assets/8.payment.png">
+<img src="./Readme_IMG/payment.png">
 </p>
 
-### 7. 관리자 (유저관리:  조회,삭제 / 상품관리: 등록,조회,수정,삭제) 	
+### 8. 관리자 (유저관리:  조회,삭제 / 상품관리: 등록,조회,수정,삭제) 	
 
 <p align="center">
-<img src="./Readme_assets/9.manage1.png">
+<img src="./Readme_IMG/manage1.png">
 </p>
 
 <p align="center">
-<img src="./Readme_assets/10.manage2.png">
+<img src="./Readme_IMG/manage2.png">
 </p>
 
 
