@@ -15,12 +15,13 @@
 	<script src="https://code.jquery.com/jquery-3.6.1.js" 
 	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
 	crossorigin="anonymous"></script>
+ 
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/">쇼핑몰</a>
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"><img style="width: 60px;" src="<%=request.getContextPath()%>/resources/img/bkh.png"></a>
 			<form class="search d-flex" action="<%=request.getContextPath()%>/search" method="get">
 				<input class="form-control me-sm-2" type="text" placeholder="상품명" name="keyword">
 				<input type="hidden" name="type" value="T">
@@ -28,13 +29,13 @@
 			</form>
 			<div class="collapse navbar-collapse" id="navbarColor03">
 				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/search">모든 상품</a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/search"><b>모든 상품</b></a></li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=1"
 							role="button" aria-haspopup="true" aria-expanded="false">상의</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=11">후드</a>
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=12">맨투맨</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=11"><b>후드</b></a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=12"><b>맨투맨</b></a>
 							<%-- <c:forEach items="${Inner}" var="category">
 								<a class="dropdown-item" href="search?type=C&c_Code=${category.c_Code}">${category.c_Name}</a>
 							</c:forEach> --%>
@@ -44,8 +45,8 @@
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=2"
 							role="button" aria-haspopup="true" aria-expanded="false">하의</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=21">청바지</a>
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=22">슬랙스</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=21"><b>청바지</b></a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=22"><b>슬랙스</b></a>
 							<%-- <c:forEach items="${Pants}" var="category">
 								<a class="dropdown-item" href="search?type=C&c_Code=${category.c_Code}">${category.c_Name}</a>
 							</c:forEach> --%>
@@ -55,14 +56,14 @@
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="<%=request.getContextPath()%>/search?type=C&c_Code=3"
 							role="button" aria-haspopup="true" aria-expanded="false">아우터</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=31">코트</a>
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=32">점퍼</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=31"><b>코트</b></a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/search?type=C&c_Code=32"><b>점퍼</b></a>
 							<%-- <c:forEach items="${Outer}" var="category">
 								<a class="dropdown-item" href="search?type=C&c_Code=${category.c_Code}">${category.c_Name}</a>
 							</c:forEach> --%>
 						</div>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/board/listPageSearch?num=1">문의 사항</a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/board/listPageSearch?num=1"><b>문의 사항</b></a></li>
 				</ul>
 			</div>
 			
@@ -72,16 +73,15 @@
 					<a href="<%=request.getContextPath()%>/member/join">회원가입</a>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-				    <a href="<%=request.getContextPath()%>/board/listPageSearch?num=1">문의 사항</a>|
-					<a href="<%=request.getContextPath()%>/cart">장바구니</a> |
-					<a href="<%=request.getContextPath()%>/member/orderList">주문 목록</a> |
+					<a href="<%=request.getContextPath()%>/cart" style="text-decoration-line: none; color: gray;"><b>장바구니</b></a> |
+					<a href="<%=request.getContextPath()%>/member/orderList" style="text-decoration-line: none; color: gray;"><b>주문 목록</b></a> |
 					<sec:authorize access="hasRole('USER')">
-						<a href="<%=request.getContextPath()%>/member/mypage">마이페이지</a> |
+						<a href="<%=request.getContextPath()%>/member/mypage" style="text-decoration-line: none; color: gray;"><b>마이페이지</b></a> |
 					</sec:authorize>
 					<sec:authorize access="hasRole('ADMIN')">
-						<a href="<%=request.getContextPath()%>/admin/adminMain">관리자페이지</a> |
+						<a href="<%=request.getContextPath()%>/admin/adminMain" style="text-decoration-line: none; color: gray;"><b>관리자페이지</b></a> |
 					</sec:authorize>
-					<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
+					<a href="<%=request.getContextPath()%>/logout" style="text-decoration-line: none; color: gray;"><b>로그아웃</b></a>
 				</sec:authorize>
 			</div>
 		</div>

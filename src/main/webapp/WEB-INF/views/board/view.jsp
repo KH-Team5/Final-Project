@@ -9,34 +9,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-	crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
+	    crossorigin="anonymous"></script>
 <title>문의사항</title>
 <style>
+html,body{
+ height: 100%;
+}
+.footerdown{
+width: 100%;
+position : fixed;
+bottom : 0;
+}
 .mb-3{
 width: 35%;
  margin-left:auto; 
     margin-right:auto;
-    margin-top: 60px;
+    margin-top: 30px;
 
 }
 .replyCheck{
 width: 35%;
  margin-left:auto; 
-    margin-right:auto
+    margin-right:auto;
 }
 .list-group-flush{
- height: 350px;
+ height: 320px;
 }
 .linklink{
-  width: 65%;
  margin-left:auto; 
     margin-right:auto
 }
 li{ list-style-type : none }
+body{
+  height: 100%;
+}
 </style>
 </head>
 <script type="text/javascript">
@@ -59,10 +68,11 @@ function Checkform() {
     }
 }
 </script>
-<body>
+<body class="d-flex flex-column min-vh-100" style="background-color:">
+ <jsp:include page="../navbar.jsp" flush="true" />
  <form method="post"> 
- <div class="card mb-3">
-  <h6 class="card-header"><span class="badge bg-secondary">글쓴이</span>&nbsp;<b>${view.m_Id}</b>&nbsp;<span class="badge bg-secondary">카테고리</span>&nbsp;<b>${view.q_Category}</b></h6>
+ <div class="card mb-3" style="border-style: solid;  border-width: 2px;">
+  <h6 class="card-header"><span class="badge bg-secondary">글쓴이</span>&nbsp;<b style="font-family: san-serif;">${view.m_Id}</b>&nbsp;<span class="badge bg-secondary" style="font-family: san-serif;">카테고리</span>&nbsp;<b>${view.q_Category}</b></h6>
   <div class="card-body">
     <h5 class="card-title"><span class="badge bg-secondary">제목</span>&nbsp;${view.q_Title}</h5>
   </div>
@@ -72,10 +82,8 @@ function Checkform() {
   <br/>  
     <div class="linklink">
 		<span>
-		    <a type="button" class="btn btn-light" href="/board/modify?q_index=${view.q_Index}&m_id=${view.m_Id}"><b>게시물 수정</b></a>
-            <a type="button" class="btn btn-light" href="/board/delete?q_index=${view.q_Index}&m_id=${view.m_Id}" onclick="Check()"><b>게시물 삭제</b></a>
-		    <a type="button" class="btn btn-light" href="/board/listPageSearch?num=1"><b>문의 사항</b></a> 
-		    <a type="button" class="btn btn-light" href="/"><b>Home</b></a>
+		    <a type="button" class="btn btn-success" href="/board/modify?q_index=${view.q_Index}&m_id=${view.m_Id}" style="font-size:large; color:white; font-family: san-serif"><b>수정</b></a>
+            <a type="button" class="btn btn-danger" href="/board/delete?q_index=${view.q_Index}&m_id=${view.m_Id}" onclick="Check()" style="font-size: large; font-family: san-serif"><b>삭제</b></a>
 		</span>
 	</div>
 	 <br/> 
@@ -83,17 +91,15 @@ function Checkform() {
 </form>
     <div class="replyCheck">
       <form method="post" action="/reply/write" name="replyFrom" onSubmit="return Checkform()"> 	 
-		  <div class="form-group">
-			<label for="exampleTextarea" class="form-label mt-4"><b>댓글</b></label>
-			<textarea class="form-control" id="exampleTextarea" rows="3"
-				style="width:100%; height:150px;" name="rp_content" required></textarea>
-		</div>
-	  <p>
-		 <input type="hidden" name="q_Index" value="${view.q_Index}">
-		  <button type="submit" onclick="Checkform()" class="btn btn-primary"><b>완료</b></button>
-	  </p>
- </form>
- 
+
+			<label for="exampleTextarea" class="form-label mt-4" style="font-size: large; color: #808080;"><b>댓글</b></label>
+			 <textarea class="form-control" id="exampleTextarea" rows="3"
+				style="width:100%; height:120px;" name="rp_content" required placeholder="댓글을 입력하세요."></textarea>   
+		     <input type="hidden" name="q_Index" value="${view.q_Index}">
+		     <button type="submit" onclick="Checkform()" class="btn btn-success" style="font-family: san-serif; float: right; margin-top: 5px;"><b>댓글달기</b></button>  
+      </form>
+ <br/>
+ <br/>
  <div class="list-group"> 
   <c:forEach items="${reply}" var="reply">
    <li>
@@ -103,8 +109,8 @@ function Checkform() {
      <small class="text-muted"><fmt:formatDate value="${reply.rp_Date}" pattern="yyyy-MM-dd"/></small>
     </div>
      <div  style="float: right;">
-         <a  type="button" class="btn btn-light" href="/reply/modify?q_index=${view.q_Index}&rno=${reply.rno}&m_id=${reply.m_Id}">수정</a>  /  
-         <a  type="button" class="btn btn-light" href="/reply/delete?q_index=${view.q_Index}&rno=${reply.rno}&m_id=${reply.m_Id}">삭제</a> 
+         <a  type="button" class="btn btn-success" href="/reply/modify?q_index=${view.q_Index}&rno=${reply.rno}&m_id=${reply.m_Id}" style="font-family: san-serif;">수정</a>  /  
+         <a  type="button" class="btn btn-danger" href="/reply/delete?q_index=${view.q_Index}&rno=${reply.rno}&m_id=${reply.m_Id}" style="font-family: san-serif;">삭제</a> 
      </div>
          <br/>
         <p class="mb-1">${reply.rp_content}</p>
@@ -112,6 +118,10 @@ function Checkform() {
      </li> 
    </c:forEach>
   </div>
-</div>   
+</div>
+<jsp:include page="footer.jsp" flush="true" />
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
  </body>
 </html>

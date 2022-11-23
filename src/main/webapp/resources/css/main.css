@@ -1,0 +1,13 @@
+.slide_div img {
+	margin: auto;
+}
+
+.slick-prev {
+	left: 160px;
+	z-index: 1;
+}
+
+.slick-next {
+	right: 160px;
+	z-index: 1;
+}
