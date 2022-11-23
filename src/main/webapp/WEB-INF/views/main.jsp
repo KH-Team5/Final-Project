@@ -7,7 +7,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" 
+	
 		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<title>main page</title>
 	<script src="https://code.jquery.com/jquery-3.6.1.js" 
@@ -19,8 +20,8 @@
 	<header class="bg-dark py-5">
 		<div class="container px-4 px-lg-5 my-5">
 			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">메인페이지</h1>
-				<p class="lead fw-normal text-white-50 mb-0">대충 쇼핑몰</p>
+				<h1 class="display-4 fw-bolder">KH 쇼핑몰</h1>
+				
 			</div>
 		</div>
 	</header>
