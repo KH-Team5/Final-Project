@@ -79,7 +79,13 @@ KH몰은 대중성 있는 여성의류 중심의 고감도 쇼핑몰입니다.
 
 ### 5. 게시글페이지 (등록 / 조회 / 수정 / 삭제 / 댓글)	
 <p align="center">
-<img src="./Readme_IMG/pensionList.jpg">
+<img src="./Readme_IMG/board.png">
+</p>
+<br><br>
+
+
+<p align="center">
+<img src="./Readme_IMG/list.png">
 </p>
 <br><br>
 
