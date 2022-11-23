@@ -89,6 +89,9 @@
 	
 	<!-- 이미지 등록 -->
 	<insert id="insertImage">
+		<selectKey resultType="int" keyProperty="p_Id" order="BEFORE">
+  			SELECT ISEQ$$_89064.CURRVAL FROM DUAL
+  		</selectKey>
 		insert into product_image_TB
 		values (#{p_Id}, #{fileName}, #{filePath}, #{uuid})
 	</insert>
