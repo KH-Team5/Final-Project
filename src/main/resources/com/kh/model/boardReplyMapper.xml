@@ -14,7 +14,7 @@
 <!-- 댓글 작성 -->
 <insert id="replyWrite" parameterType="com.kh.model.domain.BoardReplyDTO">		
      insert into question_replyy(rno, q_Index, m_Id, rp_content, rp_Date)
-    VALUES(question_seq.nextval,#{q_Index},#{m_Id}, #{rp_content}, sysdate)
+    VALUES(question_sq.nextval,#{q_Index},#{m_Id}, #{rp_content}, sysdate)
 </insert>
 	
 <!-- 댓글 수정 -->

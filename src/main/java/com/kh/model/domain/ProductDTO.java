@@ -2,11 +2,10 @@ package com.kh.model.domain;
 
 import java.util.List;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
-@Getter
-@Setter
+@Data
 public class ProductDTO {
 	private int p_Id;
 	

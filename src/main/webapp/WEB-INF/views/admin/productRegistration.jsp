@@ -2,6 +2,9 @@
 <html lang="en">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+  String p_id = request.getParameter("p_id");
+%>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,11 +75,11 @@ font-size: xx-large;
   </div>
 </nav>
   
-	<form action="<%= request.getContextPath()%>/admin/productRegistration" id="regform" name="regform" method="post">
+	<form class="form-group"<%= request.getContextPath()%>/admin/productRegistration" id="regform" name="regform" method="post">
 		
 		<fieldset>
 		
-		<div class="form-group">
+
 		<label for="exampleInputEmail1" class="form-label mt-4">상품 이름:</label><br>
 		     <input type="email" class="from-control" id="p_Name" name="p_Name" type="text" placeholder="상품이름 입력">  <br> 
 		     		<span id="nameCheck"></span>
@@ -109,7 +112,7 @@ font-size: xx-large;
 		</div>
 		</div>
 		</fieldset>
-		<button type="button" class="btn btn-dark" id="regBtn" >등록</button>
+		<button type="button" class="btn btn-dark" id="regBtn">등록</button>
 		</div>
 	</form>
 	</span>
