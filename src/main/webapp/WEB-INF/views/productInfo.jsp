@@ -233,7 +233,7 @@
 					/* 아이디 */
 					review_list += '<div class="id_span">' + obj.m_Id + '</div>';
 					if (obj.m_Id === m_Id) {
-						review_list += '<div class="d-flex" style="float: right"><a class="update_review_btn" href="' + obj.r_Id + '">수정</a> | <a class="delete_review_btn" href="' + obj.r_Id + '">삭제</a></div>';
+						review_list += '<div class="d-flex" style="float: right"><button type="submit" style="text-decoration-line: none;" class="update_review_btn btn btn-success" href="' + obj.r_Id + '">수정</button> | <button type="submit" style="text-decoration-line: none;" class="delete_review_btn btn btn-danger" href="' + obj.r_Id + '">삭제</button></div>';
 					}
 					review_list += '</div>';
 					review_list += '<div class="card-subtitle">';
