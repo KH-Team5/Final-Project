@@ -33,12 +33,10 @@
 			</div>
 			<br>
 			<div class="form-group text-center">
-				<textarea name="content" class="form-control">
-					${reviewInfo.r_Content}
-				</textarea>
+				<textarea name="content" class="form-control">${reviewInfo.r_Content}</textarea>
 			</div>
 			<div>
-				<a style="color:gray; " class="update_btn" >수정</a> <a class="cancel_btn btn btn-outline-dark">취소</a>
+				<button type="submit" style="text-decoration-line: none;" class="update_btn  btn btn-success" >수정</button> <button type="submit" style="text-decoration-line: none;" class="cancel_btn btn btn-danger">취소</button>
 			</div>
 		</div>
 	</section>
