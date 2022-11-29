@@ -22,13 +22,13 @@
 <body class="d-flex flex-column min-vh-100">
 	<jsp:include page="navbar.jsp" flush="true" />
 
-	<header class="bg-dark py-5">
+	<!-- <header class="bg-white py-5">
 		<div class="container px-4 px-lg-5 my-5">
 			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">KH 쇼핑몰</h1>
+				<h1 class="display-4 fw-bolder">KH 쇼핑몰</h1> -->
 				
 
-	<header class="bg-dark">
+	<header >
 		<div class="slide_div">
 			<div>
 				<a>
