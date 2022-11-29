@@ -17,6 +17,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
 	@Override
 	public int insertReview(ReviewDTO reviewDTO) {
+		System.out.println("진짜 왜 그러는거냐 :" + reviewDTO);
 		return sqlSession.insert("review.insertReview", reviewDTO);
 	}
 

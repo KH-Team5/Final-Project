@@ -38,7 +38,7 @@
 				</textarea>
 			</div>
 			<div>
-				<a class="update_btn btn btn-outline-dark">수정</a> <a class="cancel_btn btn btn-outline-dark">취소</a>
+				<a style="color:gray; " class="update_btn" >수정</a> <a class="cancel_btn btn btn-outline-dark">취소</a>
 			</div>
 		</div>
 	</section>

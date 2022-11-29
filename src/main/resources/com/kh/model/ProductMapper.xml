@@ -88,7 +88,7 @@
    </select>
    
    <!-- 이미지 등록     keyProperty="p_Id"-->
-   <insert id="insertImage" parameterType="productDTO">
+   <insert id="insertImage">
       <selectKey resultType="int"  keyProperty="p_Id" order="BEFORE">
           SELECT p_id FROM
 (SELECT *FROM product_tb ORDER BY p_id DESC)

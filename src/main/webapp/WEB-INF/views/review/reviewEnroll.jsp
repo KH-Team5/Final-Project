@@ -39,7 +39,7 @@
 				</textarea>
 			</div>
 			<div>
-				<a class="enroll_btn btn btn-outline-dark">등록</a> <a class="cancel_btn btn btn-outline-dark">취소</a>
+				<a type="submit" class="enroll_btn btn btn-outline-dark">등록</a> <a class="cancel_btn btn btn-outline-dark">취소</a>
 			</div>
 		</div>
 	</section>
