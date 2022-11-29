@@ -17,17 +17,20 @@
 </script>	
 <title>문의사항</title>
 <style>
-.footerdown{
-width: 100%;
-position : fixed;
-bottom : 0;
+html,body{
+ width: 100%;
+ height: 100%;
 }
-.writeForm{
-width: 20%;
- margin-left:auto; 
-    margin-right:auto;
-    margin-top: 110px;
+.writeFormTotal{
+width:20%;
+ margin-left: auto;
+ margin-right: auto;
+ margin-top: 110px;
 
+}
+.writeForm,form-group{
+margin-left: auto;
+ margin-right: auto;
 }
 </style>
 </head>
@@ -44,12 +47,13 @@ function Checkform() {
     }      
 }
 </script>
-<body style="background-color:oldlace">
+<body style="background-color:">
  <jsp:include page="../navbar.jsp" flush="true" />
+ <div class="writeFormTotal">
 	<form method="post" name="writeForm" onSubmit="return Checkform()" class="writeForm">
 		<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-			<button type="button" class="btn btn-success" style="font-family: san-serif;">카테고리</button>
-			<select id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="q_Category">
+			<button type="button" class="btn btn-dark" style="font-family: san-serif;">Cartegoty</button>
+			<select id="btnGroupDrop1" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="q_Category">
 				<option value="상의">상의</option>
 				<option value="하의">하의</option>
 				<option value="아우터">아우터</option>
@@ -72,9 +76,9 @@ function Checkform() {
 		</div>
 
 
-		<button type="submit" class="btn btn-success"onclick="Checkform()">완료</button>
+		<button type="submit" class="btn btn-success"onclick="Checkform()" >완료</button>
 	</form>
-	
+   </div>	
 </body>
 
 </html>

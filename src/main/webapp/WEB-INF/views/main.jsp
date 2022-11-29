@@ -7,7 +7,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" 
+	
 		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -20,12 +21,20 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 	<jsp:include page="navbar.jsp" flush="true" />
+
+	<header class="bg-dark py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="text-center text-white">
+				<h1 class="display-4 fw-bolder">KH 쇼핑몰</h1>
+				
+
 	<header class="bg-dark">
 		<div class="slide_div">
 			<div>
 				<a>
 					<img src="resources/img/slick1.jpg">
 				</a>
+
 			</div>
 			<div>
 				<a>
