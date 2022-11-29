@@ -286,7 +286,6 @@ public class AdminController {
 
         @RequestMapping(value = "/productDelete/{p_Id}", method = RequestMethod.GET)
         public String productDelete(@PathVariable("p_Id") int p_Id) { 
-           
         adminService.productDelete(p_Id); 
         logger.info("상품 삭제 성공");
         
@@ -320,9 +319,6 @@ public class AdminController {
       return "redirect:/admin/productsManage";
    }
    
-   
-   
-
    @ResponseBody
    @PostMapping(value = "/productRegistration/fileUpload")
    public ResponseEntity<List<AttachImageDTO>> fileUploadPOST(@RequestParam("imageFile") MultipartFile[] uploadFile) {
@@ -359,6 +355,11 @@ public class AdminController {
          image.setFileName(uploadFileName);
          image.setFilePath(datePath);
          image.setUuid(uuid);
+         
+         System.out.println("파일 이름 :" +image.getFileName());
+         System.out.println("파일 경로 :" +image.getFilePath());
+         System.out.println("파일 아이디 :" +image.getUuid());
+         System.out.println("파일 번호 :" +image.getP_Id());
 
          File saveFile = new File(uploadPath, uploadFileName);
          try {
