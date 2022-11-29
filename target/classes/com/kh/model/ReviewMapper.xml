@@ -7,8 +7,8 @@
 	<!-- 리뷰 작성 -->
 	<insert id="insertReview">
 		<![CDATA[
-	  		insert into review_TB(p_Id, m_Id, r_Date, r_Content, r_Rating) 
-	  		values(#{p_Id}, #{m_Id}, SYSDATE, #{r_Content}, #{r_Rating})
+	  		insert into review_TB(r_Id,p_Id, m_Id, r_Date, r_Content, r_Rating) 
+	  		values(REVIEW_TB_SQ.nextval,#{p_Id},#{m_Id}, SYSDATE,#{r_Content},#{r_Rating})
   		]]>	
   	</insert>
   	

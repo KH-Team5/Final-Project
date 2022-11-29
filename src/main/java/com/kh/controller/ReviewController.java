@@ -30,12 +30,14 @@ public class ReviewController {
 
 	@GetMapping
 	public String checkPOST(ReviewDTO reviewDTO) {
-		return reviewService.checkReview(reviewDTO);
+
+		return reviewService.checkReview(reviewDTO);		
 	}
 
 	@GetMapping("/list")
 	public ReviewPageDTO reviewListGET(Criteria criteria) {
 		ReviewPageDTO result = reviewService.reviewList(criteria);
+
 		return result;
 	}
 
