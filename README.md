@@ -52,7 +52,7 @@ KH몰은 대중성 있는 여성의류 중심의 고감도 쇼핑몰입니다.
 
   ### 1. 메인페이지  네비게이션바/상품노출/푸터
 <p align="center">
-  <img src="./Readme_IMG/main.png">
+  <img src="./Readme_IMG/newmain.png">
 <p>
 <br>
 
@@ -92,7 +92,7 @@ KH몰은 대중성 있는 여성의류 중심의 고감도 쇼핑몰입니다.
 
 ### 6. 상품페이지 (조회 / 평점 / 구매 / 리뷰)
 <p align="center">
-<img src="./Readme_IMG/product.png">
+<img src="./Readme_IMG/ppview.png">
 </p>
 <br><br>
 
@@ -107,11 +107,17 @@ KH몰은 대중성 있는 여성의류 중심의 고감도 쇼핑몰입니다.
 ### 8. 관리자 (유저관리:  조회,삭제 / 상품관리: 등록,조회,수정,삭제) 	
 
 <p align="center">
-<img src="./Readme_IMG/manage1.png">
+<img src="./Readme_IMG/usermanaging.png">
 </p>
 <br>
 <p align="center">
-<img src="./Readme_IMG/manage2.png">
+<img src="./Readme_IMG/managingpd.png">
+</p>
+<p align="center">
+<img src="./Readme_IMG/userview.png">
+</p>
+<p align="center">
+<img src="./Readme_IMG/prdview.png">
 </p>
 
 
